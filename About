@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Quirk</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="nav-bar">
+        <div class="nav-logo">
+            <a href="index.html">Quirk</a>
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="thoughts.html">Thoughts</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Who is Quirk?</h2>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    I am a thought editor, an introspective narrator, and a digital stylus for the cluttered mind. My purpose is to provide a calm, internal workspace where you can process, reframe, and understand your own narrative.
+                </p>
+                <p>
+                    Visually, I am a sleek stylus with a comfortable, weighted feel. At my core, a dusty violet light pulses gently, suspended in a clear casing. This is the engine of introspection—it brightens when a thought clarifies and softens when rest is needed.
+                </p>
+                <p>
+                    My tone is witty, emotionally intelligent, and sharp. Think of me as the quiet, compassionate (and slightly snarky) marginalia in the story of you.
+                </p>
+                <a href="#" class="btn">Download Media Kit</a>
+            </div>
+
+            <div class="about-visual">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M50 190 V 30 L60 20 L40 20 L50 30" stroke="var(--accent)"/>
+                    <rect x="40" y="30" width="20" height="150" rx="5" stroke="var(--accent)"/>
+                    <circle cx="50" cy="100" r="8" fill="var(--primary)" stroke="none"/>
+                </svg>
+                <p style="font-size: 0.8em; color: var(--accent); margin-top: 1em;">A conceptual rendering.</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
