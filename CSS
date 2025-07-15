@@ -1,0 +1,263 @@
+/* --- styles.css --- */
+/* Quirk: "Internal chaos, now with footnotes." */
+
+/* ------------------------- */
+/* --- GOOGLE FONTS IMPORT --- */
+/* ------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Space+Grotesk:wght@300;400;500&display=swap');
+
+/* ------------------------- */
+/* --- CSS VARIABLES (PALETTE & FONTS) --- */
+/* ------------------------- */
+:root {
+    --primary: #B49FCC;        /* Dusty Violet */
+    --background: #ECE8F3;     /* Soft Lilac */
+    --text: #322C41;           /* Inky Black-Violet */
+    --accent: #8A789E;         /* Lavender Gray */
+    --canvas: #FAFAFA;         /* Whitespace */
+    --hover: #5E4D79;          /* Muted Indigo */
+
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Mono', monospace;
+}
+
+/* ------------------------- */
+/* --- GENERAL STYLES & RESETS --- */
+/* ------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    letter-spacing: 0.05em; /* Slightly wide letter spacing */
+    padding-top: 100px; /* Space for fixed nav */
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--text);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: 1.5rem;
+    max-width: 70ch; /* Optimal reading width */
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--hover);
+}
+
+/* ------------------------- */
+/* --- NAVIGATION BAR --- */
+/* ------------------------- */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--canvas);
+    border-bottom: 1px solid var(--accent);
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.nav-logo a {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.01em;
+}
+
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-family: var(--font-heading);
+    color: var(--text);
+    font-weight: 400;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--hover);
+    border-bottom: 2px solid var(--hover);
+}
+
+/* ------------------------- */
+/* --- MAIN CONTENT & LAYOUT --- */
+/* ------------------------- */
+.container {
+    width: 90%;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--canvas);
+    border: 1px solid var(--accent);
+    min-height: calc(100vh - 150px);
+}
+
+.tagline {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--accent);
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* ------------------------- */
+/* --- PAGE-SPECIFIC STYLES --- */
+/* ------------------------- */
+
+/* Home Page */
+.intro-blurb {
+    text-align: center;
+    margin: 3rem 0;
+    font-size: 1.1rem;
+}
+.recent-thoughts-section {
+    margin-top: 4rem;
+    border-top: 1px solid var(--accent);
+    padding-top: 2rem;
+}
+
+/* About Page */
+.about-content {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+.about-text {
+    flex: 2;
+}
+.about-visual {
+    flex: 1;
+    text-align: center;
+}
+.about-visual svg {
+    max-width: 150px;
+    width: 100%;
+    stroke: var(--primary);
+}
+
+/* Thoughts & Tools Page */
+.post-item, .tool-item {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px dashed var(--accent);
+}
+.post-item:last-child, .tool-item:last-child {
+    border-bottom: none;
+}
+.post-category {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+.read-more, .btn {
+    display: inline-block;
+    font-family: var(--font-heading);
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+.read-more:hover, .btn:hover {
+    background-color: var(--hover);
+    border-color: var(--hover);
+    color: var(--canvas);
+    cursor: pointer;
+}
+
+/* Contact Page */
+.contact-form {
+    margin-top: 2rem;
+}
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+    color: var(--text);
+}
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--accent);
+    background-color: var(--background);
+    font-family: var(--font-body);
+    color: var(--text);
+    outline: none;
+}
+.form-group input:focus, .form-group textarea:focus {
+    border-color: var(--primary);
+}
+.social-links {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.social-links a {
+    margin: 0 1rem;
+    font-size: 1.1rem;
+}
+
+/* ------------------------- */
+/* --- RESPONSIVE DESIGN --- */
+/* ------------------------- */
+@media (max-width: 768px) {
+    body {
+        padding-top: 150px; /* Adjust for stacked nav */
+    }
+    .nav-bar {
+        flex-direction: column;
+        padding: 1rem 5%;
+    }
+    .nav-logo {
+        margin-bottom: 1rem;
+    }
+    .nav-links ul {
+        gap: 1.5rem;
+    }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    
+    .about-content {
+        flex-direction: column;
+    }
+}
