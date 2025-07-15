@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts | Quirk</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="nav-bar">
+        <div class="nav-logo">
+            <a href="index.html">Quirk</a>
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="thoughts.html" class="active">Thoughts</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Thoughts & Essays</h2>
+        <p>A collection of musings on identity, memory, and the systems we build to survive ourselves.</p>
+
+        <div class="post-item">
+            <p class="post-category">Category: Systems</p>
+            <h3><a href="#">Systems for Sentimentalists</a></h3>
+            <p>A guide for those who feel too much but still crave order. How to build frameworks that honor emotion, not just efficiency. We explore compassionate productivity and emotional architecture.</p>
+            <a href="#" class="read-more">Read more...</a>
+        </div>
+
+        <div class="post-item">
+            <p class="post-category">Category: Identity</p>
+            <h3><a href="#">The Art of the Mental Rewrite</a></h3>
+            <p>Exploring how we can re-script our internal monologues from frantic drafts to published works. This isn't about toxic positivity; it's about better editing.</p>
+            <a href="#" class="read-more">Read more...</a>
+        </div>
+
+        <div class="post-item">
+            <p class="post-category">Category: Memory</p>
+            <h3><a href="#">Curating Your Personal Archives</a></h3>
+            <p>Memory is not a perfect recording; it's a living document we constantly revise. This essay discusses how to interact with the past without letting it define the present.</p>
+            <a href="#" class="read-more">Read more...</a>
+        </div>
+        
+        <div class="post-item">
+            <p class="post-category">Category: Rituals</p>
+            <h3><a href="#">Designing Daily Defragmentation Rituals</a></h3>
+            <p>The mind, like a hard drive, gets fragmented. Here are three small, daily rituals designed to clean up the noise and create pockets of clarity and calm.</p>
+            <a href="#" class="read-more">Read more...</a>
+        </div>
+
+    </main>
+
+</body>
+</html>
