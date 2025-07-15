@@ -261,3 +261,45 @@ a:hover {
         flex-direction: column;
     }
 }
+/* --- About Page: Spec Sheet Styling --- */
+.spec-sheet {
+  margin-top: 3rem;
+  padding: 1.5rem 2rem;
+  background-color: var(--background);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  color: var(--text);
+  max-width: 600px;
+}
+
+.spec-sheet h3,
+.spec-sheet h4 {
+  font-family: var(--font-heading);
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+}
+
+.spec-sheet ul {
+  list-style: inside disc;
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.spec-sheet ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* About visual SVG tweaks */
+.about-visual svg {
+  max-width: 180px; /* Slightly bigger for better clarity */
+  width: 100%;
+  height: auto;
+  stroke: var(--primary);
+  filter: drop-shadow(0 1px 1px rgba(180,159,204, 0.3));
+  margin: 0 auto;
+  display: block;
+}
