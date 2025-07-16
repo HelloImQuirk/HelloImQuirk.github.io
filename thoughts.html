@@ -3,71 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools | Quirk</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Favicon / PWA Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-    <link rel="mask-icon" href="/assets/favicon.svg" color="#b49fcc">
-    <link rel="manifest" href="/assets/site.webmanifest">
-    <meta name="theme-color" content="#b49fcc">
-
-    <!-- Optional PWA icons for Android -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/web-app-manifest-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/assets/web-app-manifest-512x512.png">
+    <title>Reading List - Quirk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="nav-bar">
-        <div class="nav-logo">
-            <a href="index.html">Quirk</a>
-        </div>
-        <nav class="nav-links">
+    <header class="header">
+        <a href="index.html" class="logo">Quirk</a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="nav-menu">
             <ul>
-                <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="thoughts.html" class="active">Thoughts</a></li>
-                <li><a href="tools.html">Tools</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="reading-list.html">Reading List</a></li>
+                <li><a href="newsletter.html">Dispatches</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container">
-        <h2>Thoughts & Essays</h2>
-        <p>A collection of musings on identity, memory, and the systems we build to survive ourselves.</p>
+    <main>
+        <div class="content-wrapper">
+            <h2>Reading List</h2>
+            <p>"If it’s on here, I’ve devoured it (or I plan to)." These are the books, articles, and podcasts that have caught my eye and fueled my thinking.</p>
+            
+            <div class="reading-item">
+                <h3>Book: Meditations by Marcus Aurelius</h3>
+                <blockquote>A timeless, raw look into the mind of a leader grappling with duty and human nature. It's a foundational text for anyone interested in practical philosophy.</blockquote>
+            </div>
 
-        <div class="post-item">
-            <p class="post-category">Category: Systems</p>
-            <h3><a href="#">Systems for Sentimentalists</a></h3>
-            <p>A guide for those who feel too much but still crave order. How to build frameworks that honor emotion, not just efficiency. We explore compassionate productivity and emotional architecture.</p>
-            <a href="#" class="read-more">Read more...</a>
-        </div>
+            <div class="reading-item">
+                <h3>Article: "The Busy Trap" by Tim Kreider</h3>
+                <blockquote>This essay was a wake-up call. It perfectly articulates the difference between being productive and just being busy.</blockquote>
+            </div>
 
-        <div class="post-item">
-            <p class="post-category">Category: Identity</p>
-            <h3><a href="#">The Art of the Mental Rewrite</a></h3>
-            <p>Exploring how we can re-script our internal monologues from frantic drafts to published works. This isn't about toxic positivity; it's about better editing.</p>
-            <a href="#" class="read-more">Read more...</a>
+            <div class="reading-item">
+                <h3>Podcast: Lex Fridman Podcast</h3>
+                <blockquote>The sheer breadth of guests and the depth of conversation are astounding. It's a masterclass in curiosity.</blockquote>
+            </div>
         </div>
-
-        <div class="post-item">
-            <p class="post-category">Category: Memory</p>
-            <h3><a href="#">Curating Your Personal Archives</a></h3>
-            <p>Memory is not a perfect recording; it's a living document we constantly revise. This essay discusses how to interact with the past without letting it define the present.</p>
-            <a href="#" class="read-more">Read more...</a>
-        </div>
-        
-        <div class="post-item">
-            <p class="post-category">Category: Rituals</p>
-            <h3><a href="#">Designing Daily Defragmentation Rituals</a></h3>
-            <p>The mind, like a hard drive, gets fragmented. Here are three small, daily rituals designed to clean up the noise and create pockets of clarity and calm.</p>
-            <a href="#" class="read-more">Read more...</a>
-        </div>
-
     </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Quirk. A life in progress.</p>
+    </footer>
 
 </body>
 </html>
