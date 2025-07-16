@@ -192,6 +192,7 @@ a:hover { color: var(--primary-accent); }
 
 .hero .gradient-accent-1 { top: -50px; right: -80px; }
 .hero .gradient-accent-2 { bottom: -70px; left: -100px; }
+
 /* ========== SCROLL‐REVEAL SECTION ========== */
 .scroll-section {
   position: relative;
@@ -199,21 +200,21 @@ a:hover { color: var(--primary-accent); }
   padding: 4rem 2rem;
   background-attachment: fixed;
   background-size: cover;
-  
-  /* Layer 1: white → transparent fade to let hero bleed through */
-  background-color: #FCFCFC;
-  
-  /* Layer 2: subtle linear ramp of your accent colors */
+
+  /* Layer 1: transparent fade to let hero bleed through, blending from the hero's background color */
+  /* Using --bg-color for a smoother transition from the body's background */
   background-image:
     linear-gradient(
       to bottom,
-      rgba(252,252,252,0) 0%,          /* fully transparent top */
+      var(--bg-color) 0%,              /* Start with the body's background color */
+      rgba(243,188,171,0.05) 10%,      /* Very subtle hint of primary-accent early */
       rgba(243,188,171,0.1) 20%,       /* tiny hint of primary-accent */
       rgba(243,188,171,0.2) 35%,       /* more warmth */
       rgba(160,210,201,0.3) 60%,       /* mix in secondary-accent */
       rgba(107,229,211,0.5) 80%,       /* mid-scroll intensity */
       rgba(190,174,226,0.8) 100%       /* full secondary glow at bottom */
     );
+}
 
 /* GRID OF PANELS */
 .intro-grid {
@@ -253,9 +254,9 @@ a:hover { color: var(--primary-accent); }
   background: rgba(255,255,255,0.85);
   padding: 1.5rem;
   border-radius: 8px;
-  transition: 
-    transform 0.3s ease, 
-    box-shadow 0.3s ease, 
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
     border-color 0.3s ease,
     background 0.3s ease;
 }
