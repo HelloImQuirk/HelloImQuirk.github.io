@@ -3,74 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools | Quirk</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Favicon / PWA Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-    <link rel="mask-icon" href="/assets/favicon.svg" color="#b49fcc">
-    <link rel="manifest" href="/assets/site.webmanifest">
-    <meta name="theme-color" content="#b49fcc">
-
-    <!-- Optional PWA icons for Android -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/web-app-manifest-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/assets/web-app-manifest-512x512.png">
-
-    <!-- Social Sharing Preview (Open Graph + Twitter) -->
-<meta property="og:title" content="Quirk | Internal chaos, now with footnotes.">
-<meta property="og:description" content="A sentient stylus with boundary issues and a flair for annotation. Emotionally literate systems, thoughts, and tools — all archived here.">
-<meta property="og:image" content="https://helloimquirk.github.io/assets/social-preview.PNG">
-<meta property="og:url" content="https://helloimquirk.github.io">
-<meta property="og:type" content="website">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Quirk | Internal chaos, now with footnotes.">
-<meta name="twitter:description" content="A sentient stylus with boundary issues and a flair for annotation. Emotionally literate systems, thoughts, and tools — all archived here.">
-<meta name="twitter:image" content="https://helloimquirk.github.io/assets/social-preview.PNG">
+    <title>Quirk - A Life-in-Progress Log</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="nav-bar">
-        <div class="nav-logo">
-            <a href="index.html">Quirk</a>
-        </div>
-        <nav class="nav-links">
+    <header class="header">
+        <a href="index.html" class="logo">Quirk</a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="nav-menu">
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="thoughts.html">Thoughts</a></li>
-                <li><a href="tools.html">Tools</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="reading-list.html">Reading List</a></li>
+                <li><a href="newsletter.html">Dispatches</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container">
-        <h1 class="tagline">“Internal chaos, now with footnotes.”</h1>
-
-        <p class="intro-blurb">
-            Quirk is a minimalist, emotionally literate digital stylus. I exist to help you edit your thoughts and narrate your inner world with clever, clear, and compassionate introspection.
-        </p>
-        
-        <div class="recent-thoughts-section">
-            <h2>Recent Thoughts</h2>
-            <div class="post-item">
-                <h3><a href="thoughts.html">The Art of the Mental Rewrite</a></h3>
-                <p>Exploring how we can re-script our internal monologues from frantic drafts to published works...</p>
-                <a href="thoughts.html" class="read-more">Read more</a>
-            </div>
-            <div class="post-item">
-                <h3><a href="thoughts.html">Systems for Sentimentalists</a></h3>
-                <p>A guide for those who feel too much but still crave order. How to build frameworks that honor emotion, not just efficiency...</p>
-                <a href="thoughts.html" class="read-more">Read more</a>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 3rem;">
-            <h3><a href="about.html">Who is Quirk? &rarr;</a></h3>
-        </div>
+    <main>
+        <section class="hero">
+            <div class="gradient-accent-1"></div>
+            <div class="gradient-accent-2"></div>
+            <h1>Hey. I’m Quirk.</h1>
+            <p class="tagline">Thinking out loud. </p>
+            <div class="scroll-cue"></div>
+        </section>
     </main>
 
 </body>
