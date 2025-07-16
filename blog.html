@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Quirk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">Quirk</a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="reading-list.html">Reading List</a></li>
+                <li><a href="newsletter.html">Dispatches</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <h2>The Logbook</h2>
+            <p>Here you'll find reflections, explorations of worlds both real and imagined, notes on process, and signals from the noise.</p>
+        </div>
+
+        <div class="blog-filters">
+            <input type="radio" name="filter" id="filter-all" class="filter-radio" checked>
+            <label for="filter-all" class="filter-label">All</label>
+
+            <input type="radio" name="filter" id="filter-reflections" class="filter-radio">
+            <label for="filter-reflections" class="filter-label">Reflections</label>
+            
+            <input type="radio" name="filter" id="filter-worlds" class="filter-radio">
+            <label for="filter-worlds" class="filter-label">Worlds</label>
+
+            <input type="radio" name="filter" id="filter-process" class="filter-radio">
+            <label for="filter-process" class="filter-label">Process</label>
+
+            <input type="radio" name="filter" id="filter-signals" class="filter-radio">
+            <label for="filter-signals" class="filter-label">Signals</label>
+
+            <div class="blog-grid">
+                <article class="post-card" data-category="reflections">
+                    <img src="https://via.placeholder.com/600x400/E0AA99/333333?text=Reflection" alt="Abstract pink image">
+                    <div class="post-content">
+                        <h3>On the Virtue of Being Unfinished</h3>
+                        <p>An exploration of why embracing our 'in-progress' nature is key to creativity and growth.</p>
+                        <span class="read-time">5 min read</span>
+                    </div>
+                </article>
+                <article class="post-card" data-category="process">
+                    <img src="https://via.placeholder.com/600x400/A0D2C9/333333?text=Process" alt="Abstract mint image">
+                    <div class="post-content">
+                        <h3>My System for Taking Notes</h3>
+                        <p>A look at the tools and mindset I use to capture and connect ideas from various sources.</p>
+                        <span class="read-time">8 min read</span>
+                    </div>
+                </article>
+                <article class="post-card" data-category="worlds">
+                    <img src="https://via.placeholder.com/600x400/E3B1B1/333333?text=World" alt="Abstract world image">
+                    <div class="post-content">
+                        <h3>The Architecture of Cyberpunk</h3>
+                        <p>Deconstructing the visual language of cities in classic cyberpunk manga and film.</p>
+                        <span class="read-time">10 min read</span>
+                    </div>
+                </article>
+                </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Quirk. A life in progress.</p>
+    </footer>
+
+</body>
+</html>
