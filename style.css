@@ -551,14 +551,19 @@ main {
     gap: 2rem;
 }
 .post-card {
-    border: 1px solid #eee;
+    background-color: var(--bg-color);
+
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* This creates a subtle, consistent lift */
 }
+
 .post-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
 }
 .post-card img { max-width: 100%; height: auto; display: block; }
 .post-content { padding: 1.5rem; }
