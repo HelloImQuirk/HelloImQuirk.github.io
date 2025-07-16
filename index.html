@@ -38,44 +38,106 @@
             <p class="tagline">Thinking out loud. </p>
             <div class="scroll-cue"></div>
         </section>
-        <!-- ▼ Add this right after your </section> for .hero -->
-<section class="scroll-section">
-  <div class="intro-grid">
-    <div class="panel reflections">
-      🪞<br>
-      <strong>Reflections</strong><br>
-      <small>Exploring identity, contradiction, self-worth, love, friendship, and everything in between.</small>
-    </div>
-    <div class="panel worlds">
-      🌍<br>
-      <strong>Worlds</strong><br>
-      <small>Narratives for thinkers — settings that question everything, and systems built from first principles.</small>
-    </div>
-    <div class="panel process">
-      🧩<br>
-      <strong>Process</strong><br>
-      <small>Outthinking chaos with structure, discipline, and frameworks that actually work.</small>
-    </div>
-    <div class="panel signals">
-      📡<br>
-      <strong>Signals</strong><br>
-      <small>Decoding culture, media, and masculinity — and how they shape our sense of self.</small>
-    </div>
-  </div>
+        <section class="scroll-section">
+    <section class="quirks-compass-section">
+        <h2 class="compass-heading">My Guiding Questions</h2>
+        <p class="compass-intro">These are the fundamental inquiries that shape my explorations of identity, reality, process, and external influence. Click a question to delve deeper.</p>
 
-  <div class="manifesto">
-    <h2>A Place to Stand</h2>
-    <p>I don’t write because I need to be heard — I write because I exist.</p>
+        <div class="compass-grid">
 
-    <p>This is a space to hold my thoughts up to the light. To see what’s true.<br>
-    To integrate what I’ve fractured. To grow into someone I can live with.</p>
+            <div class="compass-point">
+                <input type="checkbox" id="compass-reflections" class="compass-toggle" hidden>
+                <label for="compass-reflections" class="compass-bubble">
+                    <div class="compass-icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M50 10 C 70 10, 90 30, 90 50 S 70 90, 50 90 S 10 70, 10 50 S 30 10, 50 10 Z" />
+                            <path d="M50 30 C 60 30, 70 40, 70 50 S 60 70, 50 70 S 30 60, 30 50 S 40 30, 50 30 Z" />
+                        </svg>
+                    </div>
+                    <p class="compass-question">How do we reconcile the fragmented parts of ourselves to forge a cohesive identity?</p>
+                    <span class="compass-category">Reflections</span>
+                </label>
+                <div class="compass-content">
+                    <p class="compass-elaboration">Here, I explore the nuanced layers of self-perception, the inherent contradictions within our personal narratives, and the ongoing journey to integrate our disparate experiences into a unified sense of being.</p>
+                    <a href="#blog-reflections-post-1" class="compass-link">Explore My Thoughts on Identity</a>
+                    </div>
+            </div>
 
-    <p>I’m not here to brand myself or polish a persona.<br>
-    I’m not here to lecture, perform, or escape the mess.</p>
+            <div class="compass-point">
+                <input type="checkbox" id="compass-worlds" class="compass-toggle" hidden>
+                <label for="compass-worlds" class="compass-bubble">
+                    <div class="compass-icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="25" cy="25" r="10" />
+                            <circle cx="75" cy="25" r="10" />
+                            <circle cx="50" cy="75" r="10" />
+                            <line x1="25" y1="25" x2="50" y2="75" />
+                            <line x1="75" y1="25" x2="50" y2="75" />
+                            <line x1="25" y1="25" x2="75" y2="25" />
+                        </svg>
+                    </div>
+                    <p class="compass-question">What could a better world look like — and what would it ask of us?</p>
+                    <span class="compass-category">Worlds</span>
+                </label>
+                <div class="compass-content">
+                    <p class="compass-elaboration">This journey ventures into speculative narratives and thought experiments, deconstructing existing systems to imagine alternative realities built on new first principles, and considering the implications for human experience.</p>
+                    <a href="#blog-worlds-post-1" class="compass-link">Discover New Worlds</a>
+                    </div>
+            </div>
 
-    <p>This isn’t a how-to manual. It’s a signal in the dark,<br>
-    in case someone like me is out there looking for one.</p>
-  </div>
+            <div class="compass-point">
+                <input type="checkbox" id="compass-process" class="compass-toggle" hidden>
+                <label for="compass-process" class="compass-bubble">
+                    <div class="compass-icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="20" y="70" width="60" height="20" />
+                            <rect x="20" y="45" width="60" height="20" />
+                            <rect x="20" y="20" width="60" height="20" />
+                        </svg>
+                    </div>
+                    <p class="compass-question">How do we cut through chaos to build a life that truly fits?</p>
+                    <span class="compass-category">Process</span>
+                </label>
+                <div class="compass-content">
+                    <p class="compass-elaboration">Here, I share frameworks, disciplines, and strategies for navigating complexity, organizing thought, and constructing intentional systems that help bring clarity and purpose to a life in progress.</p>
+                    <a href="#blog-process-post-1" class="compass-link">Unpack the Process</a>
+                    </div>
+            </div>
+
+            <div class="compass-point">
+                <input type="checkbox" id="compass-signals" class="compass-toggle" hidden>
+                <label for="compass-signals" class="compass-bubble">
+                    <div class="compass-icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="50" cy="50" r="10" />
+                            <circle cx="50" cy="50" r="25" />
+                            <circle cx="50" cy="50" r="40" />
+                        </svg>
+                    </div>
+                    <p class="compass-question">What unseen signals shape us, and why do we consent to their influence?</p>
+                    <span class="compass-category">Signals</span>
+                </label>
+                <div class="compass-content">
+                    <p class="compass-elaboration">This section decodes the subtle, pervasive messages within culture, media, and societal norms, examining their impact on our perception, behavior, and overall sense of self.</p>
+                    <a href="#blog-signals-post-1" class="compass-link">Decode the Signals</a>
+                    </div>
+            </div>
+
+        </div>
+    </section>
+    <div class="manifesto">
+        <h2>A Place to Stand</h2>
+        <p>I don’t write because I need to be heard — I write because I exist.</p>
+
+        <p>This is a space to hold my thoughts up to the light. To see what’s true.<br>
+        To integrate what I’ve fractured. To grow into someone I can live with.</p>
+
+        <p>I’m not here to brand myself or polish a persona.<br>
+        I’m not here to lecture, perform, or escape the mess.</p>
+
+        <p>This isn’t a how-to manual. It’s a signal in the dark,<br>
+        in case someone like me is out there looking for one.</p>
+    </div>
 </section>
 <!-- ▲ End scroll‐reveal block -->
     </main>
