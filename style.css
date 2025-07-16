@@ -192,6 +192,68 @@ a:hover { color: var(--primary-accent); }
 
 .hero .gradient-accent-1 { top: -50px; right: -80px; }
 .hero .gradient-accent-2 { bottom: -70px; left: -100px; }
+/* ========== SCROLL‐REVEAL SECTION ========== */
+.scroll-section {
+  position: relative;
+  /* Make it twice viewport height so scrolling reveals deeper gradient */
+  height: 200vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(252,252,252,1) 0%,
+    rgba(253,203,130,0.2) 30%,
+    rgba(107,229,211,0.6) 80%,
+    rgba(190,174,226,0.8) 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  padding: 4rem 2rem;
+}
+
+/* GRID OF PANELS */
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 30vh; /* so it appears after some scroll */
+}
+.panel {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+.panel strong {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+}
+.panel small {
+  display: block;
+  margin-top: 0.25rem;
+  color: #555;
+}
+
+/* MANIFESTO BLOCK */
+.manifesto {
+  max-width: 700px;
+  margin: 8rem auto 0;
+  background: rgba(255,255,255,0.9);
+  padding: 2rem;
+  border-radius: 8px;
+  line-height: 1.5;
+}
+.manifesto h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+.manifesto p {
+  margin-top: 1rem;
+}
 
 /* 6. Layout & General Content */
 main {
