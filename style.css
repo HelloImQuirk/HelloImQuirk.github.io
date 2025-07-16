@@ -31,6 +31,18 @@ body {
     line-height: 1.7;
     margin: 0;
     padding: 0;
+ background-image:
+        linear-gradient(
+            to bottom,
+            var(--bg-color) 0%,
+            rgba(243,188,171,0.05) 10%,
+            rgba(243,188,171,0.1) 20%,
+            rgba(243,188,171,0.2) 35%,
+            rgba(160,210,201,0.3) 60%,
+            rgba(107,229,211,0.5) 80%,
+            rgba(190,174,226,0.8) 100%
+        );
+    background-attachment: fixed; /* Ensures the gradient scrolls with the page in a fixed manner */
 }
 
 /* 2. Grainy Texture & Gradients */
@@ -198,23 +210,8 @@ a:hover { color: var(--primary-accent); }
   position: relative;
   height: 200vh;                       /* same scroll depth */
   padding: 4rem 2rem;
-  background-attachment: fixed;
-  background-size: cover;
 
   /* Layer 1: transparent fade to let hero bleed through, blending from the hero's background color */
-  /* Using --bg-color for a smoother transition from the body's background */
-  background-image:
-    linear-gradient(
-      to bottom,
-      var(--bg-color) 0%,              /* Start with the body's background color */
-      rgba(243,188,171,0.05) 10%,      /* Very subtle hint of primary-accent early */
-      rgba(243,188,171,0.1) 20%,       /* tiny hint of primary-accent */
-      rgba(243,188,171,0.2) 35%,       /* more warmth */
-      rgba(160,210,201,0.3) 60%,       /* mix in secondary-accent */
-      rgba(107,229,211,0.5) 80%,       /* mid-scroll intensity */
-      rgba(190,174,226,0.8) 100%       /* full secondary glow at bottom */
-    );
-}
 
 /* --- Quirk's Compass Section --- */
 .quirks-compass-section {
