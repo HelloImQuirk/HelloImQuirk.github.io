@@ -406,21 +406,39 @@ a:hover { color: var(--primary-accent); }
 
 
 /* --- Checkbox Hack: When checkbox is checked (clicked/tapped) --- */
+
+/* Common styles for checked state */
 .compass-toggle:checked + .compass-bubble {
-    background-color: var(--primary-accent); /* Stays activated primary accent color */
-    border-color: var(--primary-accent);
     transform: translateY(-5px); /* Stays slightly lifted */
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     animation: none; /* Stop pulsation when expanded */
 }
 
-.compass-toggle:checked + .compass-bubble .compass-icon {
-    color: var(--bg-color); /* Icon becomes light */
-}
-
+.compass-toggle:checked + .compass-bubble .compass-icon,
 .compass-toggle:checked + .compass-bubble .compass-question,
 .compass-toggle:checked + .compass-bubble .compass-category {
-    color: var(--bg-color); /* Text becomes light */
+    color: var(--bg-color); /* Text and icon become light for contrast */
+}
+
+/* Specific colors for each category when checked */
+#compass-reflections:checked + .compass-bubble {
+    background-color: #ff99aa; /* Rose */
+    border-color: #ff99aa;
+}
+
+#compass-worlds:checked + .compass-bubble {
+    background-color: #91e5c4; /* Mint */
+    border-color: #91e5c4;
+}
+
+#compass-process:checked + .compass-bubble {
+    background-color: #ffc285; /* Soft Orange */
+    border-color: #ffc285;
+}
+
+#compass-signals:checked + .compass-bubble {
+    background-color: #c2b6f7; /* Lavender */
+    border-color: #c2b6f7;
 }
 
 .compass-toggle:checked ~ .compass-content {
