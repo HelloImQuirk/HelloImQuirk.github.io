@@ -212,7 +212,7 @@ a:hover { color: var(--primary-accent); }
   padding: 4rem 2rem;
 
   /* Layer 1: transparent fade to let hero bleed through, blending from the hero's background color */
-
+}
 /* --- Quirk's Compass Section --- */
 .quirks-compass-section {
     max-width: 1000px; /* Adjust max-width as needed to fit your overall design */
