@@ -37,9 +37,33 @@ body {
 main#homepage-main {
     position: relative; /* Essential for positioning the absolute gradients */
     overflow: hidden; /* Ensures gradients stay within this container */
-    /* Adjust this min-height to ensure it covers both hero and scroll sections,
-       and potentially more if you have content below the scroll section */
     min-height: 300vh; /* Example: 80vh (hero) + 200vh (scroll) + buffer */
+}
+
+main#homepage-main {
+    position: relative; /* Essential for positioning the absolute gradients */
+    overflow: hidden;   /* Keeps expanded gradients contained within this main */
+    min-height: 280vh; /* This should ensure it spans both sections */
+
+    /* The new seamless gradient for the home page */
+    background: linear-gradient(
+        to bottom,
+        var(--bg-color) 0%,        /* Start with your default background color */
+        #FCE4EC 25%,             /* Light pink (similar to your primary-accent vibe) */
+        #E0BBE4 50%,             /* Soft lavender/purple */
+        #957DAD 75%,             /* Muted violet */
+        var(--bg-color) 100%       /* End with your default background color */
+    );
+    background-size: 100% 300%; /* Makes the gradient 3 times taller than the container */
+    background-position: 0% 0%; /* Start position */
+    background-repeat: no-repeat;
+    animation: homepageGradientShift 15s ease-in-out infinite alternate; /* Apply animation */
+}
+
+/* Keyframe animation for the background gradient shift */
+@keyframes homepageGradientShift {
+  0% { background-position: 0% 0%; } /* Start at the top of the large background */
+  100% { background-position: 0% 100%; } /* Shift to the bottom of the large background */
 }
 
 /* 2. Grainy Texture & Gradients */
@@ -211,41 +235,41 @@ a:hover { color: var(--primary-accent); }
     position: relative;
     z-index: 2; /* Ensure hero content remains above gradients */
 }
-
+/* --- UPDATED: Gradient Accent positioning and sizing (now relative to main#homepage-main) --- */
+/* These will now be subtle, blurred accents on top of the main gradient */
 .gradient-accent-1,
 .gradient-accent-2,
 .gradient-accent-3 {
     position: absolute;
     border-radius: 50%;
-    filter: blur(50px); /* Creates a soft, glowing effect */
-    opacity: 0.7;
-    z-index: 0; /* Place behind hero content */
-    /* Optional: Add a transition if you plan to animate their positions later */
-    /* transition: transform 0.5s ease-out; */
+    filter: blur(80px); 
+    opacity: 0.6; 
+    z-index: 0; 
+    transition: transform 0.8s ease-out, opacity 0.5s ease; /* Add transition for future dynamic effects if desired */
 }
 
 .gradient-accent-1 {
     background: radial-gradient(circle at center, var(--primary-accent), transparent 70%);
-    width: 900px;  
-    height: 900px; 
-    top: -250px;   
-    left: -250px;
+    width: 600px;  
+    height: 600px; 
+    top: 10%;     
+    left: 5%;
 }
 
 .gradient-accent-2 {
     background: radial-gradient(circle at center, var(--secondary-accent), transparent 70%);
-    width: 1200px; 
-    height: 1200px; 
-    bottom: -400px; 
-    right: -400px;
+    width: 700px;  
+    height: 700px; 
+    bottom: 20%;  
+    right: 10%;
 }
 
 .gradient-accent-3 {
     background: radial-gradient(circle at center, var(--tertiary-accent, #6BE5D3), transparent 70%);
-    width: 700px; 
-    height: 700px; 
-    top: 150vh; 
-    left: 50%;
+    width: 500px; 
+    height: 500px; 
+    top: 80%;     
+    left: 20%;
     transform: translate(-50%, -50%); /* Keeps it horizontally centered based on its own width */
 }
 
