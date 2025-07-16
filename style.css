@@ -216,62 +216,259 @@ a:hover { color: var(--primary-accent); }
     );
 }
 
-/* GRID OF PANELS */
-.intro-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  margin-top: 30vh; /* so it appears after some scroll */
-}
-.panel {
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 8px;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-}
-.panel strong {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 1.25rem;
-}
-.panel small {
-  display: block;
-  margin-top: 0.25rem;
-  color: #555;
-}
-/* ===== Color-Coded Left Borders ===== */
-.panel.reflections { border-left: 4px solid #ff99aa; } /* rose */
-.panel.worlds      { border-left: 4px solid #91e5c4; } /* mint */
-.panel.process     { border-left: 4px solid #ffc285; } /* soft orange */
-.panel.signals     { border-left: 4px solid #c2b6f7; } /* lavender */
-
-/* ===== Base Panel Styling & Hover Bloom ===== */
-.panel {
-  background: rgba(255,255,255,0.85);
-  padding: 1.5rem;
-  border-radius: 8px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease,
-    background 0.3s ease;
+/* --- Quirk's Compass Section --- */
+.quirks-compass-section {
+    max-width: 1000px; /* Adjust max-width as needed to fit your overall design */
+    margin: 4em auto; /* Top/bottom margin, auto for horizontal centering */
+    padding: 2em;
+    text-align: center; /* Center the heading and intro text */
+    background-color: var(--bg-color); /* Use your global background color */
+    border-radius: 8px; /* Soft corners for the section */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
-.panel:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
-  background: rgba(255,255,255,0.95);
+.compass-heading {
+    font-family: var(--serif-font); /* Use your serif font for headings */
+    font-size: 2.2rem; /* Matches your h2 size */
+    margin-bottom: 0.5em;
+    color: var(--text-color); /* Use your text color, or a darker variant */
 }
 
-/* ===== Lighten Border on Hover ===== */
-.panel.reflections:hover { border-left-color: #ffb2c0; }
-.panel.worlds:hover      { border-left-color: #b7f2d9; }
-.panel.process:hover     { border-left-color: #ffd6a7; }
-.panel.signals:hover     { border-left-color: #dacaf9; }
+.compass-intro {
+    font-family: var(--sans-font); /* Use your sans-serif font */
+    font-size: 1.1em;
+    margin-bottom: 3em;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-color); /* Matches text color */
+}
+
+/* --- Compass Grid Layout --- */
+.compass-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    justify-content: center; /* Centers items if there aren't enough to fill a row */
+    gap: 30px; /* Space between compass points */
+}
+
+/* --- Individual Compass Point --- */
+.compass-point {
+    flex: 1 1 calc(50% - 30px); /* 2 items per row on larger screens, minus gap */
+    max-width: calc(50% - 30px); /* Ensures max 2 per row */
+    min-width: 280px; /* Minimum width before wrapping */
+    box-sizing: border-box; /* Include padding and border in element's total width/height */
+    cursor: pointer; /* Indicate clickable area */
+    text-align: center;
+    position: relative; /* For content positioning */
+}
+
+/* Hide the actual checkbox */
+.compass-toggle {
+    display: none;
+}
+
+/* --- Compass Bubble (The clickable question area) --- */
+.compass-bubble {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5em;
+    background-color: #fcfcfc; /* A slightly off-white for distinction */
+    border: 2px solid #eee;
+    border-radius: 15px; /* Softer rounded corners */
+    min-height: 200px; /* Ensures consistent height before expansion */
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.compass-icon {
+    width: 60px; /* Size of the SVG icon */
+    height: 60px;
+    margin-bottom: 0.8em;
+    color: var(--text-color); /* Default icon color */
+    transition: color 0.3s ease;
+}
+
+.compass-question {
+    font-family: var(--sans-font); /* Use your sans-serif font */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 0.5em;
+    line-height: 1.4;
+    flex-grow: 1; /* Allows question to take up available space */
+}
+
+.compass-category {
+    font-family: var(--sans-font); /* Use your sans-serif font */
+    font-size: 0.9em;
+    color: #888; /* A muted color for the category label */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- Hover/Focus/Active Effects (Desktop & Mobile Tap Feedback) --- */
+
+/* Hover (Desktop only) */
+.compass-point:hover .compass-bubble {
+    background-color: var(--primary-accent); /* Dusty Pink accent color */
+    border-color: var(--primary-accent);
+    transform: translateY(-5px) scale(1.02); /* Slight lift and scale */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.compass-point:hover .compass-icon {
+    color: var(--bg-color); /* Icon becomes light on hover */
+}
+
+.compass-point:hover .compass-question,
+.compass-point:hover .compass-category {
+    color: var(--bg-color); /* Text becomes light on hover */
+}
+
+/* Active (Tap/Click Feedback for both desktop & mobile) */
+.compass-point .compass-bubble:active {
+    background-color: var(--secondary-accent); /* Mint Green accent for active feedback */
+    border-color: var(--secondary-accent);
+    transform: translateY(-2px) scale(1.01); /* Immediate feedback */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.compass-point .compass-bubble:active .compass-icon,
+.compass-point .compass-bubble:active .compass-question,
+.compass-point .compass-bubble:active .compass-category {
+    color: var(--text-color); /* Text darkens slightly on active */
+}
+
+
+/* Pulsation Animation (for desktop hover) */
+@keyframes pulse {
+    0% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.01) translateY(-2px); } /* Subtle pulse with lift */
+    100% { transform: scale(1) translateY(0); }
+}
+
+.compass-point:hover .compass-bubble {
+    animation: pulse 1.5s infinite ease-in-out; /* Apply on hover */
+}
+
+/* --- Expanded Content --- */
+.compass-content {
+    max-height: 0; /* Initially hidden */
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out, opacity 0.5s ease-out;
+    opacity: 0;
+    padding-top: 0; /* No padding when collapsed */
+    text-align: left; /* Text alignment within expanded content */
+    background-color: #fff; /* White background for expanded content */
+    border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05); /* Shadow for expanded content */
+    margin-top: -15px; /* Pulls it up slightly under the bubble */
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-bottom: 1.5em;
+    position: relative;
+    z-index: -1; /* To ensure it sits 'behind' or below the bubble visually */
+}
+
+.compass-content .compass-elaboration {
+    font-family: var(--sans-font); /* Use your sans-serif font */
+    font-size: 1em;
+    color: #666;
+    margin-top: 1em; /* Space from question bubble */
+    margin-bottom: 1em;
+}
+
+.compass-content .compass-link {
+    display: inline-block;
+    background-color: var(--primary-accent); /* Your primary accent color for button */
+    color: var(--bg-color); /* Text color for button */
+    padding: 0.8em 1.5em;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.compass-content .compass-link:hover {
+    background-color: #c78f7e; /* Slightly darker primary accent on hover */
+}
+
+.compass-content .compass-placeholder {
+    font-family: var(--sans-font); /* Use your sans-serif font */
+    font-style: italic;
+    color: #888;
+    margin-top: 1em;
+    font-size: 0.9em;
+}
+
+
+/* --- Checkbox Hack: When checkbox is checked (clicked/tapped) --- */
+.compass-toggle:checked + .compass-bubble {
+    background-color: var(--primary-accent); /* Stays activated primary accent color */
+    border-color: var(--primary-accent);
+    transform: translateY(-5px); /* Stays slightly lifted */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    animation: none; /* Stop pulsation when expanded */
+}
+
+.compass-toggle:checked + .compass-bubble .compass-icon {
+    color: var(--bg-color); /* Icon becomes light */
+}
+
+.compass-toggle:checked + .compass-bubble .compass-question,
+.compass-toggle:checked + .compass-bubble .compass-category {
+    color: var(--bg-color); /* Text becomes light */
+}
+
+.compass-toggle:checked ~ .compass-content {
+    max-height: 300px; /* Sufficient height to show content. Adjust as needed */
+    padding-top: 1.5em; /* Add padding when expanded */
+    opacity: 1;
+    z-index: 1; /* Bring to front when expanded */
+}
+
+
+/* --- Responsive Adjustments for Smaller Screens --- */
+@media (max-width: 768px) {
+    .compass-point {
+        flex: 1 1 90%; /* One item per row on smaller screens */
+        max-width: 90%;
+    }
+
+    .quirks-compass-section {
+        margin: 2em auto;
+        padding: 1em;
+    }
+
+    .compass-heading {
+        font-size: 2em;
+    }
+
+    .compass-intro {
+        font-size: 1em;
+        margin-bottom: 2em;
+    }
+
+    .compass-bubble {
+        min-height: 180px; /* Slightly smaller bubbles on mobile */
+    }
+
+    .compass-question {
+        font-size: 1.1em;
+    }
+
+    /* For mobile, the active state acts as the "hover" visual feedback, but it's momentary.
+       The checked state provides persistent visual change. */
+    .compass-point .compass-bubble:active {
+        background-color: var(--secondary-accent);
+        border-color: var(--secondary-accent);
+        transform: scale(1.01);
+        /* You can adjust active colors specifically for a brief tap visual */
+    }
+}
 
 /* MANIFESTO BLOCK */
 .manifesto {
