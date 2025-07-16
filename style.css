@@ -20,6 +20,7 @@
     --text-color: #333333;
     --primary-accent: #E0AA99; /* Dusty Pink */
     --secondary-accent: #A0D2C9; /* Mint Green */
+    --tertiary-accent: #6BE5D3; /* Optional: A third accent if needed, used in gradient-accent-3 */
     --serif-font: 'Playfair Display', serif;
     --sans-font: 'Inter', sans-serif;
 }
@@ -31,18 +32,14 @@ body {
     line-height: 1.7;
     margin: 0;
     padding: 0;
- background-image:
-        linear-gradient(
-            to bottom,
-            var(--bg-color) 0%,
-            rgba(243,188,171,0.05) 10%,
-            rgba(243,188,171,0.1) 20%,
-            rgba(243,188,171,0.2) 35%,
-            rgba(160,210,201,0.3) 60%,
-            rgba(107,229,211,0.5) 80%,
-            rgba(190,174,226,0.8) 100%
-        );
-    background-attachment: fixed; /* Ensures the gradient scrolls with the page in a fixed manner */
+}
+
+main#homepage-main {
+    position: relative; /* Essential for positioning the absolute gradients */
+    overflow: hidden; /* Ensures gradients stay within this container */
+    /* Adjust this min-height to ensure it covers both hero and scroll sections,
+       and potentially more if you have content below the scroll section */
+    min-height: 300vh; /* Example: 80vh (hero) + 200vh (scroll) + buffer */
 }
 
 /* 2. Grainy Texture & Gradients */
@@ -53,10 +50,19 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
-    opacity: 0.04;
-    z-index: 1;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="6.5" numOctaves="3" stitchTiles="stitch" /></filter><rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.03" /></svg>');
     pointer-events: none;
+    z-index: 1000;
+}
+
+/* --- NEW: Rule for the home page's main container --- */
+/* This container will now manage the positioning and containment of the expanded gradients */
+main#homepage-main {
+    position: relative; /* Essential for absolutely positioning gradients within it */
+    overflow: hidden;   /* Keeps the expanded gradients contained within this main element */
+    /* Set a minimum height to ensure it covers both the hero and scroll sections,
+       and any other content you want the gradients to extend over. */
+    min-height: 300vh; /* Example: Hero (approx 80vh) + Scroll Section (200vh) + some buffer */
 }
 
 .gradient-accent-1 {
@@ -186,24 +192,63 @@ a:hover { color: var(--primary-accent); }
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 2rem;
+    padding: 6rem 2rem; 
     position: relative;
-    overflow: hidden;
+    z-index: 1; /* Ensure hero content is above background elements */
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: 3.5rem; /* Adjusted font size based on your snippet */
     margin: 0;
+    position: relative;
+    z-index: 2; /* Ensure hero content remains above gradients */
 }
 
 .hero .tagline {
     font-size: 1.1rem;
     margin-top: 0.5rem;
     color: #555;
+    position: relative;
+    z-index: 2; /* Ensure hero content remains above gradients */
 }
 
-.hero .gradient-accent-1 { top: -50px; right: -80px; }
-.hero .gradient-accent-2 { bottom: -70px; left: -100px; }
+.gradient-accent-1,
+.gradient-accent-2,
+.gradient-accent-3 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px); /* Creates a soft, glowing effect */
+    opacity: 0.7;
+    z-index: 0; /* Place behind hero content */
+    /* Optional: Add a transition if you plan to animate their positions later */
+    /* transition: transform 0.5s ease-out; */
+}
+
+.gradient-accent-1 {
+    background: radial-gradient(circle at center, var(--primary-accent), transparent 70%);
+    width: 900px;  
+    height: 900px; 
+    top: -250px;   
+    left: -250px;
+}
+
+.gradient-accent-2 {
+    background: radial-gradient(circle at center, var(--secondary-accent), transparent 70%);
+    width: 1200px; 
+    height: 1200px; 
+    bottom: -400px; 
+    right: -400px;
+}
+
+.gradient-accent-3 {
+    background: radial-gradient(circle at center, var(--tertiary-accent, #6BE5D3), transparent 70%);
+    width: 700px; 
+    height: 700px; 
+    top: 150vh; 
+    left: 50%;
+    transform: translate(-50%, -50%); /* Keeps it horizontally centered based on its own width */
+}
+
 
 /* ========== SCROLL‐REVEAL SECTION ========== */
 .scroll-section {
