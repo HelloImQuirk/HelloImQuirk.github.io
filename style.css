@@ -20,9 +20,17 @@
     --text-color: #333333;
     --primary-accent: #E0AA99; /* Dusty Pink */
     --secondary-accent: #A0D2C9; /* Mint Green */
-    --tertiary-accent: #6BE5D3; /* Optional: A third accent if needed, used in gradient-accent-3 */
     --serif-font: 'Playfair Display', serif;
     --sans-font: 'Inter', sans-serif;
+    --header-height: 5rem;
+}
+
+html {
+    box-sizing: border-box; 
+}
+
+*, *::before, *::after {
+    box-sizing: inherit; 
 }
 
 body {
@@ -32,16 +40,7 @@ body {
     line-height: 1.7;
     margin: 0;
     padding: 0;
-}
-
-main#homepage-main {
-    position: relative; 
-    overflow: hidden;   /* Keeps content contained within the main area */
-    min-height: 300vh;  /* Ensures it covers your content vertically */
-    background-image: url('assets/gradient-background.webp');
-    background-size: cover; /* This is key! It ensures the image always covers the container */
-    background-position: center center; /* Centers the image */
-    background-repeat: no-repeat;
+    padding-top: var(--header-height);
 }
 
 /* 2. Grainy Texture & Gradients */
@@ -52,9 +51,30 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="6.5" numOctaves="3" stitchTiles="stitch" /></filter><rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.03" /></svg>');
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+    opacity: 0.04;
+    z-index: 1;
     pointer-events: none;
-    z-index: 1000;
+}
+
+.gradient-accent-1 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--primary-accent) 0%, rgba(243, 188, 171, 0) 70%);
+    border-radius: 50%;
+    filter: blur(50px);
+    z-index: 0;
+}
+
+.gradient-accent-2 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--secondary-accent) 0%, rgba(160, 210, 201, 0) 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 0;
 }
 
 /* 3. Typography */
@@ -158,40 +178,54 @@ a:hover { color: var(--primary-accent); }
 
 /* 5. Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: calc(100vh - var(--header-height));
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 6rem 2rem; 
+    padding: 2rem;
     position: relative;
-    z-index: 1; /* Ensure hero content is above background elements */
+    overflow: hidden;
 }
 
 .hero h1 {
-    font-size: 3.5rem; /* Adjusted font size based on your snippet */
+    font-size: 3.5rem;
     margin: 0;
-    position: relative;
-    z-index: 2; /* Ensure hero content remains above gradients */
 }
 
 .hero .tagline {
     font-size: 1.1rem;
     margin-top: 0.5rem;
     color: #555;
-    position: relative;
-    z-index: 2; /* Ensure hero content remains above gradients */
 }
+
+.hero .gradient-accent-1 { top: -50px; right: -80px; }
+.hero .gradient-accent-2 { bottom: -70px; left: -100px; }
 
 /* ========== SCROLL‐REVEAL SECTION ========== */
 .scroll-section {
   position: relative;
   height: 200vh;                       /* same scroll depth */
   padding: 4rem 2rem;
+  background-attachment: fixed;
+  background-size: cover;
 
   /* Layer 1: transparent fade to let hero bleed through, blending from the hero's background color */
+  /* Using --bg-color for a smoother transition from the body's background */
+  background-image:
+    linear-gradient(
+      to bottom,
+      var(--bg-color) 0%,              /* Start with the body's background color */
+      rgba(243,188,171,0.05) 10%,      /* Very subtle hint of primary-accent early */
+      rgba(243,188,171,0.1) 20%,       /* tiny hint of primary-accent */
+      rgba(243,188,171,0.2) 35%,       /* more warmth */
+      rgba(160,210,201,0.3) 60%,       /* mix in secondary-accent */
+      rgba(107,229,211,0.5) 80%,       /* mid-scroll intensity */
+      rgba(190,174,226,0.8) 100%       /* full secondary glow at bottom */
+    );
 }
+
 /* --- Quirk's Compass Section --- */
 .quirks-compass-section {
     max-width: 1000px; /* Adjust max-width as needed to fit your overall design */
@@ -424,6 +458,7 @@ a:hover { color: var(--primary-accent); }
     z-index: 1; /* Bring to front when expanded */
 }
 
+
 /* --- Responsive Adjustments for Smaller Screens --- */
 @media (max-width: 768px) {
     .compass-point {
@@ -529,19 +564,14 @@ main {
     gap: 2rem;
 }
 .post-card {
-    background-color: var(--bg-color);
-
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* This creates a subtle, consistent lift */
 }
-
 .post-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 .post-card img { max-width: 100%; height: auto; display: block; }
 .post-content { padding: 1.5rem; }
@@ -628,8 +658,6 @@ main {
 .scroll-cue {
     position: absolute;
     bottom: 3rem;
-    left: 50%; /* <-- ENSURE THIS LINE IS PRESENT */
-    transform: translateX(-50%);
     width: 24px;
     height: 40px;
     border: 2px solid var(--text-color);
