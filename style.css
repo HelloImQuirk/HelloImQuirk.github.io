@@ -38,8 +38,7 @@ main#homepage-main {
     position: relative; 
     overflow: hidden;   /* Keeps content contained within the main area */
     min-height: 300vh;  /* Ensures it covers your content vertically */
-
-    background-image: url('../assets/gradient-background.webp'); 
+    background-image: url('assets/gradient-background.webp');
     background-size: cover; /* This is key! It ensures the image always covers the container */
     background-position: center center; /* Centers the image */
     background-repeat: no-repeat;
