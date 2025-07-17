@@ -35,12 +35,13 @@ body {
 }
 
 main#homepage-main {
-    position: relative; 
-    overflow: hidden;   /* Keeps content contained within the main area */
-    min-height: 300vh;  /* Ensures it covers your content vertically */
+    min-height: 100vh; /* Reduced from 300vh */
+    padding-top: 4.8rem; /* Account for fixed header */
+    position: relative;
+    overflow: visible; /* Allow content to flow naturally */
     background-image: url('assets/gradient-background.webp');
-    background-size: cover; /* This is key! It ensures the image always covers the container */
-    background-position: center center; /* Centers the image */
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
 }
 
@@ -60,11 +61,12 @@ a:hover { color: var(--primary-accent); }
 
 /* 4. Header & Navigation (Mobile First) */
 .header {
-    position: relative;
-    padding: 1.5rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: fixed; /* Fix header to top to avoid pushing hero down */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 5%; /* Slightly reduced padding */
+    background-color: var(--bg-color); /* Ensure background is solid */
     z-index: 1000;
 }
 
@@ -145,15 +147,15 @@ a:hover { color: var(--primary-accent); }
 
 /* 5. Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: calc(100vh - 4.8rem); /* Subtract header height (approx 1.5rem padding + 1.8rem logo font-size + margins) */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 6rem 2rem; 
+    padding: 4rem 2rem; /* Reduce top padding slightly for mobile */
     position: relative;
-    z-index: 1; /* Ensure hero content is above background elements */
+    z-index: 1;
 }
 
 .hero h1 {
@@ -171,14 +173,14 @@ a:hover { color: var(--primary-accent); }
     z-index: 2; /* Ensure hero content remains above gradients */
 }
 
-/* ========== SCROLLâ€REVEAL SECTION ========== */
+/* ========== SCROLLREVEAL SECTION ========== */
 .scroll-section {
-  position: relative;
-  height: 200vh;                       /* same scroll depth */
-  padding: 4rem 2rem;
-
-  /* Layer 1: transparent fade to let hero bleed through, blending from the hero's background color */
+    position: relative;
+    height: auto; /* Let content determine height */
+    min-height: 100vh; /* Ensure at least one viewport height */
+    padding: 4rem 2rem;
 }
+
 /* --- Quirk's Compass Section --- */
 .quirks-compass-section {
     max-width: 1000px; /* Adjust max-width as needed to fit your overall design */
@@ -452,13 +454,16 @@ a:hover { color: var(--primary-accent); }
 
 /* MANIFESTO BLOCK */
 .manifesto {
-  max-width: 700px;
-  margin: 8rem auto 0;
-  background: rgba(255,255,255,0.9);
-  padding: 2rem;
-  border-radius: 8px;
-  line-height: 1.5;
+    max-width: 700px;
+    margin: 4rem auto; /* Reduced top margin for better mobile placement */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 8px;
+    line-height: 1.5;
+    position: relative;
+    z-index: 2; /* Ensure manifesto is above other elements */
 }
+
 .manifesto h2 {
   font-family: 'Playfair Display', serif;
   margin-bottom: 1rem;
@@ -667,6 +672,59 @@ main {
     .blog-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Mobile Styles */
+@media (max-width: 768px) {
+    /* Existing mobile styles */
+    .compass-point {
+        flex: 1 1 90%; /* One item per row on smaller screens */
+        max-width: 90%;
+    }
+
+    .quirks-compass-section {
+        margin: 2em auto;
+        padding: 1em;
+    }
+
+    .compass-heading {
+        font-size: 2em;
+    }
+
+    .compass-intro {
+        font-size: 1em;
+        margin-bottom: 2em;
+    }
+
+    .compass-bubble {
+        min-height: 180px; /* Slightly smaller bubbles on mobile */
+    }
+
+    .compass-question {
+        font-size: 1.1em;
+    }
+
+    /* For mobile, the active state acts as the "hover" visual feedback, but it's momentary.
+       The checked state provides persistent visual change. */
+    .compass-point .compass-bubble:active {
+        background-color: var(--secondary-accent);
+        border-color: var(--secondary-accent);
+        transform: scale(1.01);
+        /* You can adjust active colors specifically for a brief tap visual */
+    }
+
+    /* New hero section mobile adjustments */
+    .hero {
+        min-height: calc(100vh - 4rem); /* Adjust for smaller header on mobile */
+        padding: 3rem 1.5rem; /* Further reduce padding */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem; /* Smaller font for mobile */
+    }
+
+    .hero .tagline {
+        font-size: 1rem;
+    }
+  
 /* Desktop Styles */
 @media (min-width: 1024px) {
     h1 { font-size: 5rem; }
