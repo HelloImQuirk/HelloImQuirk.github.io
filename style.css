@@ -658,6 +658,8 @@ main {
 .scroll-cue {
     position: absolute;
     bottom: 3rem;
+    left: 50%; 
+    transform: translateX(-50%);
     width: 24px;
     height: 40px;
     border: 2px solid var(--text-color);
