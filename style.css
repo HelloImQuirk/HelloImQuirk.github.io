@@ -36,34 +36,20 @@ body {
 
 main#homepage-main {
     position: relative; /* Essential for positioning the absolute gradients */
-    overflow: hidden; /* Ensures gradients stay within this container */
-    min-height: 300vh; /* Example: 80vh (hero) + 200vh (scroll) + buffer */
-}
+    overflow: hidden;  
+    min-height: 300vh;  
 
-main#homepage-main {
-    position: relative; /* Essential for positioning the absolute gradients */
-    overflow: hidden;   /* Keeps expanded gradients contained within this main */
-    min-height: 280vh; /* This should ensure it spans both sections */
-
-    /* The new seamless gradient for the home page */
-    background: linear-gradient(
-        to bottom,
-        var(--bg-color) 0%,        /* Start with your default background color */
-        #FCE4EC 25%,             /* Light pink (similar to your primary-accent vibe) */
-        #E0BBE4 50%,             /* Soft lavender/purple */
-        #957DAD 75%,             /* Muted violet */
-        var(--bg-color) 100%       /* End with your default background color */
-    );
-    background-size: 100% 300%; /* Makes the gradient 3 times taller than the container */
-    background-position: 0% 0%; /* Start position */
+    /* --- BACKGROUND IMAGE FOR HOMEPAGE ONLY --- */
+    background-image: url('assets/gradient-background.webp'); 
+    background-size: 100% 300%; /* Makes the background 3 times taller than the container */
+    background-position: 0% 0%; 
     background-repeat: no-repeat;
-    animation: homepageGradientShift 15s ease-in-out infinite alternate; /* Apply animation */
+    animation: homepageGradientMove 20s ease-in-out infinite alternate; 
 }
 
-/* Keyframe animation for the background gradient shift */
-@keyframes homepageGradientShift {
-  0% { background-position: 0% 0%; } /* Start at the top of the large background */
-  100% { background-position: 0% 100%; } /* Shift to the bottom of the large background */
+@keyframes homepageGradientMove {
+  0% { background-position: 0% 0%; }   /* Start at the top of the large background image */
+  100% { background-position: 0% 100%; } /* Shift to the bottom of the large background image */
 }
 
 /* 2. Grainy Texture & Gradients */
@@ -235,42 +221,42 @@ a:hover { color: var(--primary-accent); }
     position: relative;
     z-index: 2; /* Ensure hero content remains above gradients */
 }
-/* --- UPDATED: Gradient Accent positioning and sizing (now relative to main#homepage-main) --- */
-/* These will now be subtle, blurred accents on top of the main gradient */
+/* UPDATED: Gradient Accent positioning and sizing (now relative to main#homepage-main) */
+/* Make these very subtle, almost ambient glows on top of the main gradient */
 .gradient-accent-1,
 .gradient-accent-2,
 .gradient-accent-3 {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px); 
-    opacity: 0.6; 
-    z-index: 0; 
-    transition: transform 0.8s ease-out, opacity 0.5s ease; /* Add transition for future dynamic effects if desired */
+    filter: blur(100px); /* Increased blur significantly */
+    opacity: 0.3; /* Reduced opacity even further */
+    z-index: 0;
+    transition: transform 0.8s ease-out, opacity 0.5s ease;
 }
 
 .gradient-accent-1 {
     background: radial-gradient(circle at center, var(--primary-accent), transparent 70%);
-    width: 600px;  
-    height: 600px; 
-    top: 10%;     
-    left: 5%;
+    width: 800px;  /* Can be larger if they are very blurred */
+    height: 800px;
+    top: 5%;
+    left: 0%;
 }
 
 .gradient-accent-2 {
     background: radial-gradient(circle at center, var(--secondary-accent), transparent 70%);
-    width: 700px;  
-    height: 700px; 
-    bottom: 20%;  
-    right: 10%;
+    width: 1000px;
+    height: 1000px;
+    bottom: 5%;
+    right: 0%;
 }
 
 .gradient-accent-3 {
     background: radial-gradient(circle at center, var(--tertiary-accent, #6BE5D3), transparent 70%);
-    width: 500px; 
-    height: 500px; 
-    top: 80%;     
-    left: 20%;
-    transform: translate(-50%, -50%); /* Keeps it horizontally centered based on its own width */
+    width: 700px;
+    height: 700px;
+    top: 50%; /* Center vertically within the whole main#homepage-main */
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
