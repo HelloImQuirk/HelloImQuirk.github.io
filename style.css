@@ -20,15 +20,15 @@
     --text-color: #333333;
     --primary-accent: #E0AA99; /* Dusty Pink */
     --secondary-accent: #A0D2C9; /* Mint Green */
+    --tertiary-accent: #6BE5D3; /* 
     --serif-font: 'Playfair Display', serif;
     --sans-font: 'Inter', sans-serif;
-    --header-height: 5rem;
+    --header-height: 5rem; 
 }
 
 html {
     box-sizing: border-box; 
 }
-
 *, *::before, *::after {
     box-sizing: inherit; 
 }
@@ -178,15 +178,15 @@ a:hover { color: var(--primary-accent); }
 
 /* 5. Hero Section */
 .hero {
-    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100vh - var(--header-height)); 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 2rem;
+    padding: 6rem 2rem;
     position: relative;
-    overflow: hidden;
+    z-index: 1; 
 }
 
 .hero h1 {
