@@ -628,6 +628,7 @@ main {
 .scroll-cue {
     position: absolute;
     bottom: 3rem;
+    left: 50%; /* <-- ENSURE THIS LINE IS PRESENT */
     transform: translateX(-50%);
     width: 24px;
     height: 40px;
