@@ -158,7 +158,7 @@ a:hover { color: var(--primary-accent); }
 
 /* 5. Hero Section */
 .hero {
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -424,7 +424,6 @@ a:hover { color: var(--primary-accent); }
     z-index: 1; /* Bring to front when expanded */
 }
 
-
 /* --- Responsive Adjustments for Smaller Screens --- */
 @media (max-width: 768px) {
     .compass-point {
@@ -629,6 +628,7 @@ main {
 .scroll-cue {
     position: absolute;
     bottom: 3rem;
+    transform: translateX(-50%);
     width: 24px;
     height: 40px;
     border: 2px solid var(--text-color);
