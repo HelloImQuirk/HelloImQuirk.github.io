@@ -152,18 +152,15 @@ a:hover { color: var(--primary-accent); }
 
 /* 5. Hero Section */
 .hero {
-    min-height: calc(100vh - 3rem); /* Adjusted for header height */
+    min-height: calc(100vh - 3rem); /* Account for header height */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Changed to start to move content higher */
-    padding-top: 1.5rem; /* Reduced top padding */
-    padding-bottom: 3rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    align-items: center;
+    justify-content: center;          /* Center vertically */
+    align-items: center;              /* Center horizontally */
     text-align: center;
-    position: relative;
+    position: relative;               /* For absolute scroll-cue */
     z-index: 1;
+    padding: 0 2rem;                  
 }
 
 .hero h1 {
@@ -627,15 +624,17 @@ main {
 /* 9. Animations & Transitions */
 .scroll-cue {
     position: absolute;
-    bottom: 0.5rem; /* Moved higher */
-    left: 50%; 
+    left: 50%;
     transform: translateX(-50%);
+    bottom: 2rem; /* Enough so it's above the fold and visible */
     width: 24px;
     height: 40px;
     border: 2px solid var(--text-color);
     border-radius: 12px;
     animation: bounce 2s infinite;
+    z-index: 2;
 }
+
 .scroll-cue::after {
     content: '';
     display: block;
@@ -645,6 +644,7 @@ main {
     border-radius: 2px;
     margin: 6px auto;
 }
+
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(-10px); }
@@ -716,7 +716,6 @@ main {
     .compass-question {
         font-size: 1.1em;
     }
-
     /* For mobile, the active state acts as the "hover" visual feedback, but it's momentary.
        The checked state provides persistent visual change. */
     .compass-point .compass-bubble:active {
@@ -725,14 +724,10 @@ main {
         transform: scale(1.01);
         /* You can adjust active colors specifically for a brief tap visual */
     }
-
     /* New hero section mobile adjustments */
     .hero {
-        min-height: calc(100vh - 2.8rem); /* Adjusted for smaller header */
-        padding-top: 1rem; /* Further reduced for mobile */
-        padding-bottom: 2rem;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        min-height: calc(100vh - 2.8rem); /* Header height for mobile */
+        padding: 0 1.5rem;
     }
 
     .hero h1 {
@@ -744,7 +739,7 @@ main {
     }
 
     .scroll-cue {
-        bottom: 0.3rem; /* Slightly higher on mobile */
+        bottom: 1rem; /* Slightly higher for mobile screens */
     }
 }
   
