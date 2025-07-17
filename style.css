@@ -35,10 +35,10 @@ body {
 }
 
 main#homepage-main {
-    min-height: 100vh; /* Reduced from 300vh */
-    padding-top: 4.8rem; /* Account for fixed header */
+    padding-top: 3.6rem; /* Reduced to match header height (0.8rem padding + 1.8rem logo + margins) */
     position: relative;
-    overflow: visible; /* Allow content to flow naturally */
+    overflow: visible;
+    min-height: 100vh;
     background-image: url('assets/gradient-background.webp');
     background-size: cover;
     background-position: center center;
@@ -61,13 +61,17 @@ a:hover { color: var(--primary-accent); }
 
 /* 4. Header & Navigation (Mobile First) */
 .header {
-    position: fixed; /* Fix header to top to avoid pushing hero down */
+    position: fixed; /* Keep fixed for consistency */
     top: 0;
     left: 0;
-    width: 100%;
-    padding: 1rem 5%; /* Slightly reduced padding */
-    background-color: var(--bg-color); /* Ensure background is solid */
+    width: 100%; /* Ensure full width */
+    padding: 0.8rem 5%; /* Slightly reduce padding for tighter alignment */
+    display: flex;
+    justify-content: space-between; /* Ensure logo and hamburger are on opposite sides */
+    align-items: center;
+    background-color: var(--bg-color);
     z-index: 1000;
+    box-sizing: border-box; /* Prevent padding issues */
 }
 
 .logo {
@@ -90,6 +94,7 @@ a:hover { color: var(--primary-accent); }
     flex-direction: column;
     justify-content: space-between;
     z-index: 1001;
+    margin-left: auto; /* Push hamburger to the right */
 }
 
 .nav-toggle-label span {
@@ -147,13 +152,13 @@ a:hover { color: var(--primary-accent); }
 
 /* 5. Hero Section */
 .hero {
-    min-height: calc(100vh - 4.8rem); /* Subtract header height (approx 1.5rem padding + 1.8rem logo font-size + margins) */
+    min-height: calc(100vh - 3.6rem); /* Adjust for fixed header height */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 4rem 2rem; /* Reduce top padding slightly for mobile */
+    padding: 3rem 2rem; /* Reduce top padding slightly for mobile */
     position: relative;
     z-index: 1;
 }
@@ -619,8 +624,8 @@ main {
 /* 9. Animations & Transitions */
 .scroll-cue {
     position: absolute;
-    bottom: 3rem;
-    left: 50%; /* <-- ENSURE THIS LINE IS PRESENT */
+    bottom: 1.5rem;
+    left: 50%; 
     transform: translateX(-50%);
     width: 24px;
     height: 40px;
@@ -643,7 +648,7 @@ main {
   60% { transform: translateY(-5px); }
 }
 
-/* 10. Tablet & Desktop Media Queries */
+/* 10. Tablet, Mobile & Desktop Media Queries */
 
 /* Tablet Styles */
 @media (min-width: 768px) {
@@ -651,19 +656,26 @@ main {
     h2 { font-size: 2.5rem; }
 
     .nav-toggle-label { display: none; }
-    .nav-menu {
+   .nav-menu {
         position: static;
         transform: none;
         flex-direction: row;
         width: auto;
         height: auto;
         background: none;
+        display: flex;
+        align-items: center; /* Vertically align with logo */
+        margin-left: auto; /* Push nav to the right */
     }
-    .nav-menu ul {
+  
+   .nav-menu ul {
         display: flex;
         gap: 2rem;
         align-items: center;
+        justify-content: flex-end; /* Ensure links are right-aligned */
+        margin: 0; /* Remove any default margins */
     }
+  
     .nav-menu li { margin: 0; }
     .nav-menu a { font-size: 1rem; font-family: var(--sans-font); }
 
@@ -713,22 +725,37 @@ main {
 
     /* New hero section mobile adjustments */
     .hero {
-        min-height: calc(100vh - 4rem); /* Adjust for smaller header on mobile */
-        padding: 3rem 1.5rem; /* Further reduce padding */
+        min-height: calc(100vh - 3.2rem); /* Adjust for smaller header */
+        padding: 2rem 1.5rem; /* Further reduce padding */
     }
 
     .hero h1 {
-        font-size: 2.5rem; /* Smaller font for mobile */
+        font-size: 2.5rem;
     }
 
     .hero .tagline {
         font-size: 1rem;
     }
+
+    .scroll-cue {
+        bottom: 1rem; /* Slightly higher on mobile */
+    }
+}
   
 /* Desktop Styles */
 @media (min-width: 1024px) {
     h1 { font-size: 5rem; }
     main { padding: 3rem 5%; }
     .blog-grid { grid-template-columns: repeat(3, 1fr); }
-    .hero h1 { font-size: 6rem; }
+    .hero h1 {
+        font-size: 5.5rem;
+    }
+
+    .hero .tagline {
+        font-size: 1.2rem;
+    }
+
+    .scroll-cue {
+        bottom: 2rem; /* Slightly lower on desktop for balance */
+    }
 }
