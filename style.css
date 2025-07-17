@@ -35,7 +35,7 @@ body {
 }
 
 main#homepage-main {
-    padding-top: 3.6rem; /* Reduced to match header height (0.8rem padding + 1.8rem logo + margins) */
+    padding-top: 3rem; /* Reduced to match header height (0.8rem padding + 1.8rem logo + margins) */
     position: relative;
     overflow: visible;
     min-height: 100vh;
@@ -152,13 +152,16 @@ a:hover { color: var(--primary-accent); }
 
 /* 5. Hero Section */
 .hero {
-    min-height: calc(100vh - 3.6rem); /* Adjust for fixed header height */
+    min-height: calc(100vh - 3rem); /* Adjusted for header height */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Changed to start to move content higher */
+    padding-top: 1.5rem; /* Reduced top padding */
+    padding-bottom: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     align-items: center;
     text-align: center;
-    padding: 3rem 2rem; /* Reduce top padding slightly for mobile */
     position: relative;
     z-index: 1;
 }
@@ -624,7 +627,7 @@ main {
 /* 9. Animations & Transitions */
 .scroll-cue {
     position: absolute;
-    bottom: 1.5rem;
+    bottom: 0.5rem; /* Moved higher */
     left: 50%; 
     transform: translateX(-50%);
     width: 24px;
@@ -725,8 +728,11 @@ main {
 
     /* New hero section mobile adjustments */
     .hero {
-        min-height: calc(100vh - 3.2rem); /* Adjust for smaller header */
-        padding: 2rem 1.5rem; /* Further reduce padding */
+        min-height: calc(100vh - 2.8rem); /* Adjusted for smaller header */
+        padding-top: 1rem; /* Further reduced for mobile */
+        padding-bottom: 2rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 
     .hero h1 {
@@ -738,7 +744,7 @@ main {
     }
 
     .scroll-cue {
-        bottom: 1rem; /* Slightly higher on mobile */
+        bottom: 0.3rem; /* Slightly higher on mobile */
     }
 }
   
@@ -756,6 +762,6 @@ main {
     }
 
     .scroll-cue {
-        bottom: 2rem; /* Slightly lower on desktop for balance */
+        bottom: 1rem; 
     }
 }
