@@ -432,6 +432,7 @@ a:focus {
     margin: 4rem auto;
     background: var(--light-bg-card); /* This will now use #D8DADC */
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* ADD this shadow */
+    text-align: center;
     padding: 2rem;
     border-radius: 8px;
     line-height: 1.5;
@@ -443,8 +444,9 @@ a:focus {
     font-family: 'Playfair Display', serif;
     margin-bottom: 1rem;
     font-size: 2rem;
-    color: var(--text-color); 
+    color: var(--primary-accent); 
 }
+
 .manifesto p {
     margin-top: 1rem;
     color: var(--text-color);
