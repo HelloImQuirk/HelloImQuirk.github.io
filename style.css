@@ -35,16 +35,11 @@ body {
     padding: 0;
 }
 
-/* Remove the background image from the homepage main */
 main#homepage-main {
-    padding-top: 3rem;
+    padding-top: 6rem;
     position: relative;
     overflow: visible;
     min-height: 100vh;
-    /* background-image: url('assets/gradient-background.webp'); */ /* REMOVED */
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
 }
 
 /* 3. Typography */
@@ -217,7 +212,7 @@ a:focus {
     margin: 4em auto;
     padding: 2em;
     text-align: center;
-    background-color: var(--bg-color);
+    background-color: var(--tertiary-accent);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(44, 46, 51, 0.05);
 }
@@ -226,7 +221,7 @@ a:focus {
     font-family: var(--serif-font);
     font-size: 2.2rem;
     margin-bottom: 0.5em;
-    color: var(--primary-accent);
+    color: var(--bg-color); /* Light text on Dark Blue background for contrast */
 }
 
 .compass-intro {
@@ -236,7 +231,7 @@ a:focus {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    color: var(--text-color);
+    color: var(--bg-color); /* Light text on Dark Blue background for contrast */
 }
 
 .compass-grid {
@@ -268,7 +263,7 @@ a:focus {
     justify-content: center;
     padding: 1.5em;
     background-color: var(--bg-color); /* Updated for monochrome */
-    border: 2px solid var(--secondary-accent);
+    border: 2px solid var(--primary-accent); /* Use Primary Blue for the border for definition */
     border-radius: 15px;
     min-height: 200px;
     transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
@@ -315,7 +310,7 @@ a:focus {
 
 .compass-point:hover .compass-question,
 .compass-point:hover .compass-category {
-    color: var(--bg-color);
+    color: var(--text-color); /* Dark text on hovered light blue bubble */
     text-shadow: 0 1px 2px rgba(44, 46, 51, 0.3);
 }
 
@@ -422,7 +417,7 @@ a:focus {
 .manifesto {
     max-width: 700px;
     margin: 4rem auto;
-    background: rgba(245, 242, 235, 0.9);
+    background: var(--secondary-accent); /* Use Light Blue for a subtle distinct background */
     padding: 2rem;
     border-radius: 8px;
     line-height: 1.5;
@@ -434,7 +429,7 @@ a:focus {
     font-family: 'Playfair Display', serif;
     margin-bottom: 1rem;
     font-size: 2rem;
-    color: var(--primary-accent);
+    color: var(--text-color); /* Change H2 to dark text for strong contrast on Light Blue background */
 }
 .manifesto p {
     margin-top: 1rem;
@@ -443,9 +438,11 @@ a:focus {
 
 /* 9. Layout & General Content */
 main {
-    padding: 2rem 5%;
-    position: relative;
-    z-index: 2;
+    padding-top: 6rem; /* Updated: Increased to ensure all page headings clear the fixed header */
+    padding-left: 5%;  
+    padding-right: 5%; 
+    position: relative; 
+    z-index: 2;      
 }
 
 .content-wrapper {
