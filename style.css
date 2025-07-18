@@ -1,9 +1,9 @@
 /*
-  STYLE.CSS
+  STYLE.CSS (Monochromatic Blue Redesign)
   ---
   CONTENTS:
   1.  Global Styles & Variables
-  2.  Grainy Texture & Gradients
+  2.  Grainy Texture & Gradients (REMOVED background image per request)
   3.  Typography
   4.  Header & Navigation (Mobile First)
   5.  Hero Section
@@ -16,15 +16,16 @@
 
 /* 1. Global Styles & Variables */
 :root {
-    --bg-color: #F9F8F4;
-    --text-color: #333333;
-    --primary-accent: #E0AA99; /* Dusty Pink */
-    --secondary-accent: #A0D2C9; /* Mint Green */
-    --tertiary-accent: #6BE5D3; /* Optional: A third accent if needed, used in gradient-accent-3 */
+    --bg-color: #F5F2EB;
+    --text-color: #2C2E33;
+    --primary-accent: #4A63F3;  /* Primary Blue */
+    --secondary-accent: #8EB5F3; /* Light Blue */
+    --tertiary-accent: #384D9C; /* Dark Blue */
     --serif-font: 'Playfair Display', serif;
     --sans-font: 'Inter', sans-serif;
 }
 
+/* 2. Global & Default Styles */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -34,54 +35,73 @@ body {
     padding: 0;
 }
 
+/* Remove the background image from the homepage main */
 main#homepage-main {
-    padding-top: 3rem; /* Reduced to match header height (0.8rem padding + 1.8rem logo + margins) */
+    padding-top: 3rem;
     position: relative;
     overflow: visible;
     min-height: 100vh;
-    background-image: url('assets/gradient-background.webp');
+    /* background-image: url('assets/gradient-background.webp'); */ /* REMOVED */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
 }
 
 /* 3. Typography */
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--serif-font);
     font-weight: 700;
     line-height: 1.2;
-    color: black;
+    color: var(--text-color);
+    margin-top: 0;
 }
 
-h1 { font-size: 3rem; }
+/* Main h1 site/page title: use brand blue */
+h1 {
+    color: var(--primary-accent);
+    font-size: 3rem;
+}
+
 h2 { font-size: 2.2rem; }
 p { font-size: 1rem; margin-bottom: 1rem; }
-a { color: var(--text-color); text-decoration: none; transition: color 0.3s ease; }
-a:hover { color: var(--primary-accent); }
 
-/* 4. Header & Navigation (Mobile First) */
+/* 4. Links */
+a {
+    color: var(--primary-accent);
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--tertiary-accent);
+    text-decoration: underline;
+}
+
+/* 5. Header & Navigation (Mobile First) */
 .header {
-    position: fixed; /* Keep fixed for consistency */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Ensure full width */
-    padding: 0.8rem 5%; /* Slightly reduce padding for tighter alignment */
+    width: 100%;
+    padding: 0.8rem 5%;
     display: flex;
-    justify-content: space-between; /* Ensure logo and hamburger are on opposite sides */
+    justify-content: space-between;
     align-items: center;
     background-color: var(--bg-color);
     z-index: 1000;
-    box-sizing: border-box; /* Prevent padding issues */
+    box-sizing: border-box;
 }
 
 .logo {
     font-family: var(--serif-font);
     font-size: 1.8rem;
     font-weight: 700;
+    color: var(--primary-accent);
     z-index: 1001;
+    letter-spacing: 0.05em;
 }
 
-/* CSS-Only Hamburger Menu */
 .nav-toggle {
     display: none;
 }
@@ -94,7 +114,7 @@ a:hover { color: var(--primary-accent); }
     flex-direction: column;
     justify-content: space-between;
     z-index: 1001;
-    margin-left: auto; /* Push hamburger to the right */
+    margin-left: auto;
 }
 
 .nav-toggle-label span {
@@ -145,92 +165,95 @@ a:hover { color: var(--primary-accent); }
     margin: 2rem 0;
 }
 
-.nav-menu a {
+.nav-menu a,
+.nav-link {
     font-size: 1.8rem;
     font-family: var(--serif-font);
+    color: var(--primary-accent);
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
-/* 5. Hero Section */
+.nav-menu a:hover,
+.nav-menu a:focus,
+.nav-link:hover,
+.nav-link:focus {
+    color: var(--tertiary-accent);
+    text-decoration: underline;
+}
+
+/* 6. Hero Section */
 .hero {
-    min-height: calc(100vh - 3rem); /* Account for header height */
+    min-height: calc(100vh - 3rem);
     display: flex;
     flex-direction: column;
-    justify-content: center;          /* Center vertically */
-    align-items: center;              /* Center horizontally */
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    position: relative;               /* For absolute scroll-cue */
+    position: relative;
     z-index: 1;
-    padding: 0 2rem;                  
+    padding: 0 2rem;
 }
 
 .hero h1 {
-    font-size: 3.5rem; /* Adjusted font size based on your snippet */
+    font-size: 3.5rem;
     margin: 0;
     position: relative;
-    z-index: 2; /* Ensure hero content remains above gradients */
+    z-index: 2;
+    color: var(--primary-accent);
 }
 
 .hero .tagline {
     font-size: 1.1rem;
     margin-top: 0.5rem;
-    color: #555;
+    color: var(--tertiary-accent);
     position: relative;
-    z-index: 2; /* Ensure hero content remains above gradients */
+    z-index: 2;
 }
 
-/* ========== SCROLLREVEAL SECTION ========== */
-.scroll-section {
-    position: relative;
-    height: auto; /* Let content determine height */
-    min-height: 100vh; /* Ensure at least one viewport height */
-    padding: 4rem 2rem;
-}
-
-/* --- Quirk's Compass Section --- */
+/* 7. Compass Section */
 .quirks-compass-section {
-    max-width: 1000px; /* Adjust max-width as needed to fit your overall design */
-    margin: 4em auto; /* Top/bottom margin, auto for horizontal centering */
+    max-width: 1000px;
+    margin: 4em auto;
     padding: 2em;
-    text-align: center; /* Center the heading and intro text */
-    background-color: var(--bg-color); /* Use your global background color */
-    border-radius: 8px; /* Soft corners for the section */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    text-align: center;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(44, 46, 51, 0.05);
 }
 
 .compass-heading {
-    font-family: var(--serif-font); /* Use your serif font for headings */
-    font-size: 2.2rem; /* Matches your h2 size */
+    font-family: var(--serif-font);
+    font-size: 2.2rem;
     margin-bottom: 0.5em;
-    color: var(--text-color); /* Use your text color, or a darker variant */
+    color: var(--primary-accent);
 }
 
 .compass-intro {
-    font-family: var(--sans-font); /* Use your sans-serif font */
+    font-family: var(--sans-font);
     font-size: 1.1em;
     margin-bottom: 3em;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    color: var(--text-color); /* Matches text color */
+    color: var(--text-color);
 }
 
-/* --- Compass Grid Layout --- */
 .compass-grid {
     display: flex;
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
-    justify-content: center; /* Centers items if there aren't enough to fill a row */
-    gap: 30px; /* Space between compass points */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
 }
 
-/* --- Individual Compass Point --- */
 .compass-point {
-    flex: 1 1 calc(50% - 30px); /* 2 items per row on larger screens, minus gap */
-    max-width: calc(50% - 30px); /* Ensures max 2 per row */
-    min-width: 280px; /* Minimum width before wrapping */
-    box-sizing: border-box; /* Include padding and border in element's total width/height */
-    cursor: pointer; /* Indicate clickable area */
+    flex: 1 1 calc(50% - 30px);
+    max-width: calc(50% - 30px);
+    min-width: 280px;
+    box-sizing: border-box;
+    cursor: pointer;
     text-align: center;
-    position: relative; /* For content positioning */
+    position: relative;
 }
 
 /* Hide the actual checkbox */
@@ -238,247 +261,187 @@ a:hover { color: var(--primary-accent); }
     display: none;
 }
 
-/* --- Compass Bubble (The clickable question area) --- */
 .compass-bubble {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1.5em;
-    background-color: #fcfcfc; /* A slightly off-white for distinction */
-    border: 2px solid #eee;
-    border-radius: 15px; /* Softer rounded corners */
-    min-height: 200px; /* Ensures consistent height before expansion */
-    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background-color: var(--bg-color); /* Updated for monochrome */
+    border: 2px solid var(--secondary-accent);
+    border-radius: 15px;
+    min-height: 200px;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 8px rgba(44, 46, 51, 0.08);
 }
 
 .compass-icon {
-    width: 60px; /* Size of the SVG icon */
+    width: 60px;
     height: 60px;
     margin-bottom: 0.8em;
-    color: var(--text-color); /* Default icon color */
-    transition: color 0.3s ease;
+    color: var(--primary-accent);
+    transition: color 0.3s;
 }
 
 .compass-question {
-    font-family: var(--sans-font); /* Use your sans-serif font */
+    font-family: var(--sans-font);
     font-size: 1.2em;
     font-weight: bold;
     color: var(--text-color);
     margin-bottom: 0.5em;
     line-height: 1.4;
-    flex-grow: 1; /* Allows question to take up available space */
+    flex-grow: 1;
 }
 
 .compass-category {
-    font-family: var(--sans-font); /* Use your sans-serif font */
+    font-family: var(--sans-font);
     font-size: 0.9em;
-    color: #888; /* A muted color for the category label */
+    color: var(--tertiary-accent);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-/* --- Hover/Focus/Active Effects (Desktop & Mobile Tap Feedback) --- */
-
-/* Hover (Desktop only) */
+/* Hover/Focus/Active Effects */
 .compass-point:hover .compass-bubble {
-    background-color: var(--primary-accent); /* Dusty Pink accent color */
-    border-color: var(--primary-accent);
-    transform: translateY(-5px) scale(1.02); /* Slight lift and scale */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-accent);
+    border-color: var(--secondary-accent);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(44, 46, 51, 0.1);
 }
 
 .compass-point:hover .compass-icon {
-    color: var(--bg-color); /* Icon becomes light on hover */
+    color: var(--bg-color);
 }
 
 .compass-point:hover .compass-question,
 .compass-point:hover .compass-category {
-    color: var(--bg-color); /* Text becomes light on hover */
+    color: var(--bg-color);
+    text-shadow: 0 1px 2px rgba(44, 46, 51, 0.3);
 }
 
-/* Active (Tap/Click Feedback for both desktop & mobile) */
 .compass-point .compass-bubble:active {
-    background-color: var(--secondary-accent); /* Mint Green accent for active feedback */
-    border-color: var(--secondary-accent);
-    transform: translateY(-2px) scale(1.01); /* Immediate feedback */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--tertiary-accent);
+    border-color: var(--tertiary-accent);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 3px 10px rgba(44,46,51,0.1);
 }
 
 .compass-point .compass-bubble:active .compass-icon,
 .compass-point .compass-bubble:active .compass-question,
 .compass-point .compass-bubble:active .compass-category {
-    color: var(--text-color); /* Text darkens slightly on active */
+    color: var(--bg-color);
 }
 
-
-/* Pulsation Animation (for desktop hover) */
+/* Animation for hover */
 @keyframes pulse {
     0% { transform: scale(1) translateY(0); }
-    50% { transform: scale(1.01) translateY(-2px); } /* Subtle pulse with lift */
+    50% { transform: scale(1.01) translateY(-2px); }
     100% { transform: scale(1) translateY(0); }
 }
 
 .compass-point:hover .compass-bubble {
-    animation: pulse 1.5s infinite ease-in-out; /* Apply on hover */
+    animation: pulse 1.5s infinite ease-in-out;
 }
 
-/* --- Expanded Content --- */
-.compass-content {
-    max-height: 0; /* Initially hidden */
-    overflow: hidden;
-    transition: max-height 0.5s ease-out, padding 0.5s ease-out, opacity 0.5s ease-out;
-    opacity: 0;
-    padding-top: 0; /* No padding when collapsed */
-    text-align: left; /* Text alignment within expanded content */
-    background-color: #fff; /* White background for expanded content */
-    border-radius: 0 0 15px 15px; /* Rounded bottom corners */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05); /* Shadow for expanded content */
-    margin-top: -15px; /* Pulls it up slightly under the bubble */
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-    padding-bottom: 1.5em;
-    position: relative;
-    z-index: -1; /* To ensure it sits 'behind' or below the bubble visually */
-}
-
-.compass-content .compass-elaboration {
-    font-family: var(--sans-font); /* Use your sans-serif font */
-    font-size: 1em;
-    color: #666;
-    margin-top: 1em; /* Space from question bubble */
-    margin-bottom: 1em;
-}
-
-.compass-content .compass-link {
-    display: inline-block;
-    background-color: var(--primary-accent); /* Your primary accent color for button */
-    color: var(--bg-color); /* Text color for button */
-    padding: 0.8em 1.5em;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.compass-content .compass-link:hover {
-    background-color: #c78f7e; /* Slightly darker primary accent on hover */
-}
-
-.compass-content .compass-placeholder {
-    font-family: var(--sans-font); /* Use your sans-serif font */
-    font-style: italic;
-    color: #888;
-    margin-top: 1em;
-    font-size: 0.9em;
-}
-
-
-/* --- Checkbox Hack: When checkbox is checked (clicked/tapped) --- */
-
-/* Common styles for checked state */
+/* Checked/Active Category: Consistent Primary Blue */
 .compass-toggle:checked + .compass-bubble {
-    transform: translateY(-5px); /* Stays slightly lifted */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    animation: none; /* Stop pulsation when expanded */
+    background-color: var(--primary-accent) !important;
+    border-color: var(--primary-accent) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(44, 46, 51, 0.1);
+    animation: none;
 }
 
 .compass-toggle:checked + .compass-bubble .compass-icon,
 .compass-toggle:checked + .compass-bubble .compass-question,
 .compass-toggle:checked + .compass-bubble .compass-category {
-    color: var(--bg-color); /* Text and icon become light for contrast */
-}
-
-/* Specific colors for each category when checked */
-#compass-reflections:checked + .compass-bubble {
-    background-color: #ff99aa; /* Rose */
-    border-color: #ff99aa;
-}
-
-#compass-worlds:checked + .compass-bubble {
-    background-color: #91e5c4; /* Mint */
-    border-color: #91e5c4;
-}
-
-#compass-process:checked + .compass-bubble {
-    background-color: #ffc285; /* Soft Orange */
-    border-color: #ffc285;
-}
-
-#compass-signals:checked + .compass-bubble {
-    background-color: #c2b6f7; /* Lavender */
-    border-color: #c2b6f7;
+    color: var(--bg-color);
+    text-shadow: 0 1px 2px rgba(44, 46, 51, 0.3);
 }
 
 .compass-toggle:checked ~ .compass-content {
-    max-height: 300px; /* Sufficient height to show content. Adjust as needed */
-    padding-top: 1.5em; /* Add padding when expanded */
+    max-height: 300px;
+    padding-top: 1.5em;
     opacity: 1;
-    z-index: 1; /* Bring to front when expanded */
+    z-index: 1;
 }
 
-/* --- Responsive Adjustments for Smaller Screens --- */
-@media (max-width: 768px) {
-    .compass-point {
-        flex: 1 1 90%; /* One item per row on smaller screens */
-        max-width: 90%;
-    }
-
-    .quirks-compass-section {
-        margin: 2em auto;
-        padding: 1em;
-    }
-
-    .compass-heading {
-        font-size: 2em;
-    }
-
-    .compass-intro {
-        font-size: 1em;
-        margin-bottom: 2em;
-    }
-
-    .compass-bubble {
-        min-height: 180px; /* Slightly smaller bubbles on mobile */
-    }
-
-    .compass-question {
-        font-size: 1.1em;
-    }
-
-    /* For mobile, the active state acts as the "hover" visual feedback, but it's momentary.
-       The checked state provides persistent visual change. */
-    .compass-point .compass-bubble:active {
-        background-color: var(--secondary-accent);
-        border-color: var(--secondary-accent);
-        transform: scale(1.01);
-        /* You can adjust active colors specifically for a brief tap visual */
-    }
+/* Compass Content */
+.compass-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s, padding 0.5s, opacity 0.5s;
+    opacity: 0;
+    padding-top: 0;
+    text-align: left;
+    background-color: var(--bg-color);
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 8px 15px rgba(44, 46, 51, 0.05);
+    margin-top: -15px;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-bottom: 1.5em;
+    position: relative;
+    z-index: -1;
 }
 
-/* MANIFESTO BLOCK */
+.compass-content .compass-elaboration {
+    font-family: var(--sans-font);
+    font-size: 1em;
+    color: var(--text-color);
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.compass-content .compass-link {
+    display: inline-block;
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    padding: 0.8em 1.5em;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.compass-content .compass-link:hover,
+.compass-content .compass-link:focus {
+    background-color: var(--secondary-accent);
+    color: var(--text-color);
+}
+
+.compass-content .compass-placeholder {
+    font-family: var(--sans-font);
+    font-style: italic;
+    color: var(--secondary-accent);
+    margin-top: 1em;
+    font-size: 0.9em;
+}
+
+/* 8. Manifesto Block */
 .manifesto {
     max-width: 700px;
-    margin: 4rem auto; /* Reduced top margin for better mobile placement */
-    background: rgba(255, 255, 255, 0.9);
+    margin: 4rem auto;
+    background: rgba(245, 242, 235, 0.9);
     padding: 2rem;
     border-radius: 8px;
     line-height: 1.5;
     position: relative;
-    z-index: 2; /* Ensure manifesto is above other elements */
+    z-index: 2;
 }
 
 .manifesto h2 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 1rem;
-  font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: var(--primary-accent);
 }
 .manifesto p {
-  margin-top: 1rem;
+    margin-top: 1rem;
+    color: var(--text-color);
 }
 
-/* 6. Layout & General Content */
+/* 9. Layout & General Content */
 main {
     padding: 2rem 5%;
     position: relative;
@@ -494,9 +457,10 @@ main {
     border-bottom: 2px solid var(--primary-accent);
     padding-bottom: 0.5rem;
     display: inline-block;
+    color: var(--primary-accent);
 }
 
-/* 7. Page-Specific Elements */
+/* 10. Page-Specific Elements */
 
 /* Blog Filters (CSS-Only) */
 .blog-filters {
@@ -511,14 +475,16 @@ main {
 .blog-filters .filter-label {
     cursor: pointer;
     padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--secondary-accent);
+    background: var(--bg-color);
+    color: var(--primary-accent);
     border-radius: 20px;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
 }
 .blog-filters .filter-radio:checked + .filter-label {
-    background: var(--text-color);
+    background: var(--primary-accent);
     color: var(--bg-color);
-    border-color: var(--text-color);
+    border-color: var(--primary-accent);
 }
 .blog-grid {
     display: grid;
@@ -527,23 +493,21 @@ main {
 }
 .post-card {
     background-color: var(--bg-color);
-
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(44, 46, 51, 0.1);
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* This creates a subtle, consistent lift */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 12px rgba(44, 46, 51, 0.08);
 }
 
 .post-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
+    box-shadow: 0 10px 20px rgba(44, 46, 51, 0.15);
 }
 .post-card img { max-width: 100%; height: auto; display: block; }
 .post-content { padding: 1.5rem; }
-.post-content h3 { margin-top: 0; font-size: 1.6rem; }
-.post-content .read-time { font-size: 0.9rem; color: #777; }
+.post-content h3 { margin-top: 0; font-size: 1.6rem; color: var(--primary-accent);}
+.post-content .read-time { font-size: 0.9rem; color: var(--tertiary-accent); }
 
 /* CSS for showing/hiding posts based on filter */
 #filter-all:checked ~ .blog-grid .post-card { display: block; }
@@ -552,20 +516,19 @@ main {
 #filter-process:checked ~ .blog-grid .post-card:not([data-category="process"]) { display: none; }
 #filter-signals:checked ~ .blog-grid .post-card:not([data-category="signals"]) { display: none; }
 
-
 /* Reading List */
 .reading-item {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--secondary-accent);
 }
-.reading-item h3 { margin-top: 0; }
+.reading-item h3 { margin-top: 0; color: var(--primary-accent);}
 .reading-item blockquote {
     margin: 1rem 0 0 0;
     padding-left: 1rem;
     border-left: 3px solid var(--secondary-accent);
     font-style: italic;
-    color: #555;
+    color: var(--text-color);
 }
 
 /* Forms (Newsletter & Contact) */
@@ -580,56 +543,108 @@ main {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
+    color: var(--primary-accent);
 }
 .form-field input, .form-field textarea {
     width: 100%;
     padding: 0.8rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondary-accent);
     border-radius: 4px;
     font-family: var(--sans-font);
-    background-color: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 .form-field input:focus, .form-field textarea:focus {
     outline: none;
     border-color: var(--primary-accent);
 }
-.btn {
+.btn,
+.button-primary {
     display: inline-block;
     padding: 0.8rem 1.8rem;
-    background-color: var(--text-color);
+    background-color: var(--primary-accent);
     color: var(--bg-color);
     border: none;
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s, color 0.3s;
 }
-.btn:hover {
-    background-color: black;
+.btn:hover,
+.btn:focus,
+.button-primary:hover,
+.button-primary:focus {
+    background-color: var(--secondary-accent);
+    color: var(--text-color);
 }
 
-/* 8. Footer */
-.footer {
+/* Secondary/Outline Button */
+.button-secondary {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    background-color: transparent;
+    color: var(--primary-accent);
+    border: 1px solid var(--primary-accent);
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.button-secondary:hover,
+.button-secondary:focus {
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    border-color: var(--primary-accent);
+}
+
+/* 11. Footer */
+.footer, footer {
     text-align: center;
     padding: 3rem 5%;
     margin-top: 3rem;
-    border-top: 1px solid #eee;
-    color: #888;
+    border-top: 1px solid var(--secondary-accent);
+    color: var(--bg-color);
+    background-color: var(--tertiary-accent);
+}
+.footer a, footer a {
+    color: var(--secondary-accent);
+    text-decoration: none;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+.footer a:hover,
+.footer a:focus,
+footer a:hover,
+footer a:focus {
+    color: var(--bg-color);
+    text-decoration: underline;
 }
 .social-icons a {
     margin: 0 0.75rem;
     font-size: 1.5rem;
 }
 
-/* 9. Animations & Transitions */
+/* 12. Optional: Section Dark (for dark content sections) */
+.section-dark {
+    background-color: var(--tertiary-accent);
+    color: var(--bg-color);
+}
+.section-dark a {
+    color: var(--secondary-accent);
+}
+.section-dark a:hover,
+.section-dark a:focus {
+    color: var(--bg-color);
+}
+
+/* 13. Animations & Transitions */
 .scroll-cue {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 2rem; /* Enough so it's above the fold and visible */
+    bottom: 2rem;
     width: 24px;
     height: 40px;
-    border: 2px solid var(--text-color);
+    border: 2px solid var(--primary-accent);
     border-radius: 12px;
     animation: bounce 2s infinite;
     z-index: 2;
@@ -640,7 +655,7 @@ main {
     display: block;
     width: 4px;
     height: 8px;
-    background-color: var(--text-color);
+    background-color: var(--primary-accent);
     border-radius: 2px;
     margin: 6px auto;
 }
@@ -651,15 +666,13 @@ main {
   60% { transform: translateY(-5px); }
 }
 
-/* 10. Tablet, Mobile & Desktop Media Queries */
-
-/* Tablet Styles */
+/* 14. Media Queries */
 @media (min-width: 768px) {
     h1 { font-size: 4rem; }
     h2 { font-size: 2.5rem; }
 
     .nav-toggle-label { display: none; }
-   .nav-menu {
+    .nav-menu {
         position: static;
         transform: none;
         flex-direction: row;
@@ -667,96 +680,51 @@ main {
         height: auto;
         background: none;
         display: flex;
-        align-items: center; /* Vertically align with logo */
-        margin-left: auto; /* Push nav to the right */
+        align-items: center;
+        margin-left: auto;
     }
-  
-   .nav-menu ul {
+
+    .nav-menu ul {
         display: flex;
         gap: 2rem;
         align-items: center;
-        justify-content: flex-end; /* Ensure links are right-aligned */
-        margin: 0; /* Remove any default margins */
+        justify-content: flex-end;
+        margin: 0;
     }
-  
+
     .nav-menu li { margin: 0; }
-    .nav-menu a { font-size: 1rem; font-family: var(--sans-font); }
+    .nav-menu a,
+    .nav-link { font-size: 1rem; font-family: var(--sans-font); }
 
     .hero h1 { font-size: 5.5rem; }
     .hero .tagline { font-size: 1.2rem; }
     .blog-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Mobile Styles */
 @media (max-width: 768px) {
-    /* Existing mobile styles */
     .compass-point {
-        flex: 1 1 90%; /* One item per row on smaller screens */
+        flex: 1 1 90%;
         max-width: 90%;
     }
-
     .quirks-compass-section {
         margin: 2em auto;
         padding: 1em;
     }
-
-    .compass-heading {
-        font-size: 2em;
-    }
-
-    .compass-intro {
-        font-size: 1em;
-        margin-bottom: 2em;
-    }
-
-    .compass-bubble {
-        min-height: 180px; /* Slightly smaller bubbles on mobile */
-    }
-
-    .compass-question {
-        font-size: 1.1em;
-    }
-    /* For mobile, the active state acts as the "hover" visual feedback, but it's momentary.
-       The checked state provides persistent visual change. */
-    .compass-point .compass-bubble:active {
-        background-color: var(--secondary-accent);
-        border-color: var(--secondary-accent);
-        transform: scale(1.01);
-        /* You can adjust active colors specifically for a brief tap visual */
-    }
-    /* New hero section mobile adjustments */
-    .hero {
-        min-height: calc(100vh - 2.8rem); /* Header height for mobile */
-        padding: 0 1.5rem;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero .tagline {
-        font-size: 1rem;
-    }
-
-    .scroll-cue {
-        bottom: 1rem; /* Slightly higher for mobile screens */
-    }
+    .compass-heading { font-size: 2em; }
+    .compass-intro { font-size: 1em; margin-bottom: 2em; }
+    .compass-bubble { min-height: 180px; }
+    .compass-question { font-size: 1.1em; }
+    .hero { min-height: calc(100vh - 2.8rem); padding: 0 1.5rem;}
+    .hero h1 { font-size: 2.5rem; }
+    .hero .tagline { font-size: 1rem; }
+    .scroll-cue { bottom: 1rem; }
 }
-  
-/* Desktop Styles */
+
 @media (min-width: 1024px) {
     h1 { font-size: 5rem; }
     main { padding: 3rem 5%; }
     .blog-grid { grid-template-columns: repeat(3, 1fr); }
-    .hero h1 {
-        font-size: 5.5rem;
-    }
-
-    .hero .tagline {
-        font-size: 1.2rem;
-    }
-
-    .scroll-cue {
-        bottom: 1rem; 
-    }
+    .hero h1 { font-size: 5.5rem; }
+    .hero .tagline { font-size: 1.2rem; }
+    .scroll-cue { bottom: 1rem; }
 }
