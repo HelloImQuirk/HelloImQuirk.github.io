@@ -23,6 +23,7 @@
     --tertiary-accent: #384D9C; /* Dark Blue */
     --serif-font: 'Playfair Display', serif;
     --sans-font: 'Inter', sans-serif;
+    --light-bg-card: #D8DADC; /* NEW & IMPROVED: A visibly distinct, subtle light blue-gray */
 }
 
 /* 2. Global & Default Styles */
@@ -39,7 +40,7 @@ main#homepage-main {
     padding-top: 6rem;
     position: relative;
     overflow: visible;
-    min-height: 100vh;
+    min-height: calc(100vh - 4.5rem); 
 }
 
 /* 3. Typography */
@@ -60,7 +61,7 @@ h1 {
 h2 { font-size: 2.2rem; }
 p { font-size: 1rem; margin-bottom: 1rem; }
 
-/* 4. Links */
+/* Links */
 a {
     color: var(--primary-accent);
     text-decoration: none;
@@ -73,7 +74,7 @@ a:focus {
     text-decoration: underline;
 }
 
-/* 5. Header & Navigation (Mobile First) */
+/* 4. Header & Navigation (Mobile First) */
 .header {
     position: fixed;
     top: 0;
@@ -83,7 +84,7 @@ a:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--bg-color);
+    background-color: var(--light-bg-card); /* This will now use #D8DADC */
     z-index: 1000;
     box-sizing: border-box;
 }
@@ -177,9 +178,9 @@ a:focus {
     text-decoration: underline;
 }
 
-/* 6. Hero Section */
+/* 5. Hero Section */
 .hero {
-    min-height: calc(100vh - 3rem);
+    min-height: calc(100vh - 4.5rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -188,6 +189,17 @@ a:focus {
     position: relative;
     z-index: 1;
     padding: 0 2rem;
+}
+
+.hero-text-content {
+    background-color: var(--light-bg-card); /* This will now use #D8DADC */
+    padding: 2.5rem 3rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .hero h1 {
@@ -212,7 +224,7 @@ a:focus {
     margin: 4em auto;
     padding: 2em;
     text-align: center;
-    background-color: var(--tertiary-accent);
+    background-color: var(--light-bg-card); /* This will now use #D8DADC */
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(44, 46, 51, 0.05);
 }
@@ -221,7 +233,7 @@ a:focus {
     font-family: var(--serif-font);
     font-size: 2.2rem;
     margin-bottom: 0.5em;
-    color: var(--bg-color); /* Light text on Dark Blue background for contrast */
+    color: var(--primary-accent); 
 }
 
 .compass-intro {
@@ -231,7 +243,7 @@ a:focus {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    color: var(--bg-color); /* Light text on Dark Blue background for contrast */
+    color: var(--text-color); 
 }
 
 .compass-grid {
@@ -262,8 +274,8 @@ a:focus {
     align-items: center;
     justify-content: center;
     padding: 1.5em;
-    background-color: var(--bg-color); /* Updated for monochrome */
-    border: 2px solid var(--primary-accent); /* Use Primary Blue for the border for definition */
+    background-color: var(--bg-color);
+    border: 2px solid var(--primary-accent); 
     border-radius: 15px;
     min-height: 200px;
     transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
@@ -417,7 +429,7 @@ a:focus {
 .manifesto {
     max-width: 700px;
     margin: 4rem auto;
-    background: var(--secondary-accent); /* Use Light Blue for a subtle distinct background */
+    background: var(--light-bg-card); /* This will now use #D8DADC */
     padding: 2rem;
     border-radius: 8px;
     line-height: 1.5;
@@ -429,7 +441,7 @@ a:focus {
     font-family: 'Playfair Display', serif;
     margin-bottom: 1rem;
     font-size: 2rem;
-    color: var(--text-color); /* Change H2 to dark text for strong contrast on Light Blue background */
+    color: var(--text-color); 
 }
 .manifesto p {
     margin-top: 1rem;
