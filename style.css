@@ -899,16 +899,16 @@ footer a:focus {
 
 /* 11. Animations & Transitions */
 .scroll-cue {
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 2rem;
+    bottom: 3rem; 
     width: 24px;
     height: 40px;
     border: 2px solid var(--primary-accent);
     border-radius: 12px;
     animation: bounce 2s infinite;
-    z-index: 2;
+    z-index: 1002; 
 }
 
 .scroll-cue::after {
