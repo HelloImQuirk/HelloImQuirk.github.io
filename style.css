@@ -219,7 +219,7 @@ a:focus {
     z-index: 2;
 }
 
-/* 7. Compass Section */
+/* 6. Compass Section */
 .quirks-compass-section {
     max-width: 1000px;
     margin: 4em auto;
@@ -426,7 +426,7 @@ a:focus {
     font-size: 0.9em;
 }
 
-/* 8. Manifesto Block */
+/* 7. Manifesto Block */
 .manifesto {
     max-width: 700px;
     margin: 4rem auto;
@@ -473,8 +473,349 @@ main {
     color: var(--primary-accent);
 }
 
-/* 10. Page-Specific Elements */
+/* ============================================== */
+/* START: Blog Post Specific Styles (Add/Refine this section in style-2.css) */
+/* ============================================== */
 
+/* 7. Page-Specific Elements (Updated to include blog post details) */
+
+.blog-post {
+    padding-top: 4rem; /* Padding at the top of the post content */
+    padding-bottom: 4rem;
+}
+
+.post-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-top: 2rem; /* Give space below fixed header */
+    background-color: var(--light-bg-card); /* Consistent with other floating elements */
+    padding: 3rem 2rem; /* Generous padding */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Consistent shadow */
+    border-radius: 8px; /* Consistent rounded corners */
+    max-width: 900px; /* Wider than content for hero feel */
+    margin: 0 auto 3rem auto; /* Center with margin below */
+}
+
+.post-header h1 {
+    font-family: var(--serif-font);
+    font-size: 3.8rem; /* Larger for impact */
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+}
+
+.post-meta {
+    font-family: var(--sans-font);
+    font-size: 0.95rem;
+    color: var(--tertiary-accent); /* Dark blue for meta info */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.post-meta .post-category {
+    font-weight: 600;
+    color: var(--primary-accent); /* Highlight category */
+}
+
+.post-content {
+    font-size: 1.15rem; /* Slightly larger base font for readability */
+    line-height: 1.85; /* Increased line height for comfort */
+    max-width: 760px; /* Optimized content width for readability */
+    margin: 0 auto;
+    padding: 0 2rem; /* Ensure padding on smaller screens */
+    color: var(--text-color); /* Ensure text color is consistently dark */
+}
+
+.post-content p {
+    margin-bottom: 1.8rem; /* Increased space between paragraphs */
+}
+
+.post-content strong {
+    color: var(--primary-accent); /* Highlight strong text with accent */
+}
+
+.post-content em {
+    font-style: italic;
+    color: var(--tertiary-accent); /* Highlight emphasis with dark accent */
+}
+
+/* New: Styling for H2 section titles within the post */
+.post-content h2 {
+    font-family: var(--serif-font);
+    font-size: 2.5rem; /* Prominent size for main sections */
+    color: var(--primary-accent); /* Primary blue for main section titles */
+    margin-top: 4.5rem; /* More space above new sections */
+    margin-bottom: 1.5rem;
+    text-align: center;
+    line-height: 1.2;
+}
+
+
+.section-title { /* Used for "Modes of Writing" */
+    font-family: var(--serif-font);
+    font-size: 2.5rem;
+    color: var(--primary-accent); /* Primary blue for section titles */
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.section-description {
+    font-family: var(--sans-font);
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+}
+
+.post-content h3 { /* For sub-headings like within the promises list or card titles */
+    font-family: var(--serif-font);
+    font-size: 1.6rem;
+    color: var(--tertiary-accent); /* Dark blue for principle/mode headings */
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+}
+
+/* --- General Pull Quote Styling --- */
+blockquote.pull-quote, blockquote.final-quote {
+    font-family: var(--serif-font);
+    font-style: italic;
+    font-size: 1.45rem; /* Distinctive font size for quotes */
+    line-height: 1.6;
+    margin: 3.5rem auto; /* Center with generous vertical margin */
+    padding: 2.5rem;
+    max-width: 680px; /* Keep quotes narrower than main content for emphasis */
+    text-align: center;
+    background-color: var(--light-bg-card); /* Light card background for quotes */
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Consistent shadow */
+    color: var(--text-color); /* Ensure good contrast */
+    position: relative;
+    z-index: 1; /* Ensure text is above pseudo-elements */
+}
+
+blockquote.pull-quote::before, blockquote.final-quote::before {
+    content: '“'; /* Opening curly quote */
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 5rem; /* Large quote mark */
+    color: var(--secondary-accent); /* Light blue accent for quote mark */
+    font-family: var(--serif-font);
+    line-height: 1;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+blockquote.pull-quote::after, blockquote.final-quote::after {
+    content: '”'; /* Closing curly quote */
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    font-size: 5rem; /* Large quote mark */
+    color: var(--secondary-accent); /* Light blue accent for quote mark */
+    font-family: var(--serif-font);
+    line-height: 1;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+blockquote.pull-quote p, blockquote.final-quote p {
+    margin: 0;
+    position: relative; /* Ensure text is above pseudo-elements */
+    z-index: 1;
+}
+
+
+blockquote.final-quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--tertiary-accent); /* Dark blue for citation */
+    font-style: normal;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Promises List Styling --- */
+.promises-list {
+    list-style: none; /* Remove default bullet points */
+    padding-left: 0;
+    margin-top: 2.5rem;
+    margin-bottom: 3.5rem;
+    border-top: 1px solid var(--light-bg-card); /* Subtle top border for section */
+    padding-top: 2.5rem; /* Space below border */
+}
+
+.promises-list li {
+    background-color: var(--light-bg-card); /* Light card background for each promise */
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem; /* Space between promise items */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Lighter shadow for list items */
+    position: relative;
+    padding-left: 4.5rem; /* Space for custom bullet */
+}
+
+.promises-list li::before {
+    content: '✓'; /* Custom checkmark bullet */
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: var(--primary-accent); /* Primary blue checkmark */
+    font-weight: bold;
+}
+
+.promises-list li h4 {
+    font-family: var(--sans-font);
+    font-size: 1.15rem;
+    color: var(--primary-accent); /* Primary blue for promise titles */
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.promises-list li p {
+    margin: 0; /* Remove default paragraph margin within list item */
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --- Writing Modes Grid (FIXED FOR 3 CARDS) --- */
+.writing-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(280px, 1fr)); /* Explicitly 3 columns for desktop */
+    gap: 2rem; /* Space between cards */
+    max-width: 960px; /* Control max width of the grid */
+    margin: 2.5rem auto 3.5rem auto; /* Center the entire grid container */
+    justify-content: center; /* In case max-width isn't perfectly divisible, this helps */
+}
+
+.writing-mode-card {
+    background-color: var(--light-bg-card); /* Light card background */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Consistent shadow */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top */
+    align-items: flex-start; /* Align text to left */
+    text-align: left; /* Ensure text is left-aligned */
+}
+
+.writing-mode-card:hover {
+    transform: translateY(-5px); /* Lifts slightly on hover */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); /* Slightly stronger shadow */
+}
+
+.writing-mode-card h3 {
+    font-family: var(--serif-font);
+    font-size: 1.4rem;
+    color: var(--primary-accent); /* Primary blue for mode titles */
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 0.8rem;
+}
+
+.writing-mode-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0; /* Remove bottom margin if it's the last element */
+    color: var(--text-color);
+}
+
+/* Section Dividers (for use with <hr class="section-divider">) */
+.section-divider {
+    border: none;
+    border-bottom: 1px dashed var(--secondary-accent); /* Light blue dashed line */
+    margin: 3rem auto; /* Center and space out */
+    width: 60%; /* Control length */
+    opacity: 0.6;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .post-header {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+    }
+    .post-header h1 {
+        font-size: 2.5rem;
+    }
+    .post-content {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    .post-content p {
+        margin-bottom: 1.5rem;
+    }
+    /* Adjusted: H2 section titles for smaller screens */
+    .post-content h2 {
+        font-size: 2rem;
+        margin-top: 3.5rem; /* Keep good spacing */
+        margin-bottom: 1rem;
+    }
+    .section-description {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+    .post-content h3 {
+        font-size: 1.3rem;
+        margin-top: 2rem;
+    }
+    blockquote.pull-quote, blockquote.final-quote {
+        font-size: 1.2rem;
+        padding: 1.5rem;
+        margin: 2.5rem auto;
+    }
+    blockquote.pull-quote::before, blockquote.final-quote::before,
+    blockquote.pull-quote::after, blockquote.final-quote::after {
+        font-size: 3rem;
+        opacity: 0.4;
+    }
+    .promises-list li {
+        padding: 1rem 1.5rem;
+        padding-left: 3.5rem;
+        margin-bottom: 1rem;
+    }
+    .promises-list li::before {
+        font-size: 1.5rem;
+        left: 1rem;
+    }
+    .promises-list li h4 {
+        font-size: 1rem;
+    }
+    .promises-list li p {
+        font-size: 0.9rem;
+    }
+    /* FIXED: Writing modes grid for smaller screens */
+    .writing-modes-grid {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+        gap: 1.5rem;
+        max-width: 100%; /* Allow to take full width */
+        padding: 0 1rem; /* Ensure inner padding on grid */
+    }
+    .writing-mode-card {
+        padding: 1.5rem;
+    }
+    .writing-mode-card h3 {
+        font-size: 1.2rem;
+    }
+    .writing-mode-card p {
+        font-size: 0.9rem;
+    }
+    .section-divider {
+        margin: 2rem auto;
+        width: 80%;
+    }
+}
+
+/* ============================================== */
+/* END: Blog Post Specific Styles */
+/* ============================================== */
 /* Blog Filters (CSS-Only) */
 .blog-filters {
     text-align: center;
