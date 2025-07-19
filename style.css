@@ -852,6 +852,17 @@ blockquote.final-quote cite {
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 12px rgba(44, 46, 51, 0.08);
+    position: relative; /* ADD THIS LINE */
+}
+
+/* Add this new rule */
+.full-card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensures it's above other content in the card, making the whole card clickable */
 }
 
 .post-card:hover {
