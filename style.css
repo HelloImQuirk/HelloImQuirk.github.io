@@ -3,15 +3,21 @@
   ---
   CONTENTS:
   1.  Global Styles & Variables
-  2.  Grainy Texture & Gradients (REMOVED background image per request)
+  2.  Global & Default Styles
   3.  Typography
   4.  Header & Navigation (Mobile First)
   5.  Hero Section
-  6.  Layout & General Content
-  7.  Page-Specific Elements (Blog, Forms, etc.)
-  8.  Footer
-  9.  Animations & Transitions
-  10. Tablet & Desktop Media Queries
+  6.  Compass Section
+  7.  Manifesto Block
+  8.  Layout & General Content
+  9.  Page-Specific Elements (Blog, Forms, etc.)
+      a. Blog Post Details
+      b. Blog Filters & Grid
+      c. Reading List
+      d. Forms (Newsletter & Contact)
+  10. Footer
+  11. Animations & Transitions
+  12. Media Queries (Tablet & Desktop)
 */
 
 /* 1. Global Styles & Variables */
@@ -37,7 +43,7 @@ body {
 }
 
 main#homepage-main {
-    padding-top: 6rem;
+    padding-top: 8rem; /* UPDATED: Increased for header clearance */
     position: relative;
     overflow: visible;
     min-height: calc(100vh - 4.5rem); 
@@ -84,8 +90,8 @@ a:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--light-bg-card); /* This will now use #D8DADC */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* ADD this shadow */
+    background-color: var(--light-bg-card);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     z-index: 1000;
     box-sizing: border-box;
 }
@@ -123,6 +129,20 @@ a:focus {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+.nav-toggle:checked ~ .nav-menu {
+    transform: translateX(0);
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 .nav-menu {
     position: fixed;
     top: 0;
@@ -136,20 +156,6 @@ a:focus {
     align-items: center;
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-}
-
-.nav-toggle:checked ~ .nav-menu {
-    transform: translateX(0);
-}
-
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-}
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
-    opacity: 0;
-}
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
 }
 
 .nav-menu ul {
@@ -193,7 +199,7 @@ a:focus {
 }
 
 .hero-text-content {
-    background-color: var(--light-bg-card); /* This will now use #D8DADC */
+    background-color: var(--light-bg-card);
     padding: 2.5rem 3rem;
     border-radius: 8px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
@@ -225,7 +231,7 @@ a:focus {
     margin: 4em auto;
     padding: 2em;
     text-align: center;
-    background-color: var(--light-bg-card); /* This will now use #D8DADC */
+    background-color: var(--light-bg-card);
     border-radius: 8px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); 
 }
@@ -323,7 +329,7 @@ a:focus {
 
 .compass-point:hover .compass-question,
 .compass-point:hover .compass-category {
-    color: var(--text-color); /* Dark text on hovered light blue bubble */
+    color: var(--text-color);
     text-shadow: 0 1px 2px rgba(44, 46, 51, 0.3);
 }
 
@@ -338,17 +344,6 @@ a:focus {
 .compass-point .compass-bubble:active .compass-question,
 .compass-point .compass-bubble:active .compass-category {
     color: var(--bg-color);
-}
-
-/* Animation for hover */
-@keyframes pulse {
-    0% { transform: scale(1) translateY(0); }
-    50% { transform: scale(1.01) translateY(-2px); }
-    100% { transform: scale(1) translateY(0); }
-}
-
-.compass-point:hover .compass-bubble {
-    animation: pulse 1.5s infinite ease-in-out;
 }
 
 /* Checked/Active Category: Consistent Primary Blue */
@@ -430,8 +425,8 @@ a:focus {
 .manifesto {
     max-width: 700px;
     margin: 4rem auto;
-    background: var(--light-bg-card); /* This will now use #D8DADC */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* ADD this shadow */
+    background: var(--light-bg-card);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
     padding: 2rem;
     border-radius: 8px;
@@ -452,9 +447,9 @@ a:focus {
     color: var(--text-color);
 }
 
-/* 9. Layout & General Content */
+/* 8. Layout & General Content */
 main {
-    padding-top: 6rem; /* Updated: Increased to ensure all page headings clear the fixed header */
+    padding-top: 8rem; /* UPDATED: Increased to ensure all page headings clear the fixed header */
     padding-left: 5%;  
     padding-right: 5%; 
     position: relative; 
@@ -473,12 +468,9 @@ main {
     color: var(--primary-accent);
 }
 
-/* ============================================== */
-/* START: Blog Post Specific Styles (Add/Refine this section in style-2.css) */
-/* ============================================== */
+/* 9. Page-Specific Elements */
 
-/* 7. Page-Specific Elements (Updated to include blog post details) */
-
+/* 9a. Blog Post Details */
 .blog-post {
     padding-top: 4rem; /* Padding at the top of the post content */
     padding-bottom: 4rem;
@@ -487,18 +479,18 @@ main {
 .post-header {
     text-align: center;
     margin-bottom: 3rem;
-    padding-top: 2rem; /* Give space below fixed header */
-    background-color: var(--light-bg-card); /* Consistent with other floating elements */
-    padding: 3rem 2rem; /* Generous padding */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Consistent shadow */
-    border-radius: 8px; /* Consistent rounded corners */
-    max-width: 900px; /* Wider than content for hero feel */
-    margin: 0 auto 3rem auto; /* Center with margin below */
+    padding-top: 3rem; /* Give space below fixed header */
+    background-color: var(--light-bg-card);
+    padding: 3rem 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
 }
 
 .post-header h1 {
     font-family: var(--serif-font);
-    font-size: 3.8rem; /* Larger for impact */
+    font-size: 3.8rem;
     line-height: 1.1;
     margin-bottom: 0.8rem;
     color: var(--text-color);
@@ -507,54 +499,52 @@ main {
 .post-meta {
     font-family: var(--sans-font);
     font-size: 0.95rem;
-    color: var(--tertiary-accent); /* Dark blue for meta info */
+    color: var(--tertiary-accent);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
 .post-meta .post-category {
     font-weight: 600;
-    color: var(--primary-accent); /* Highlight category */
+    color: var(--primary-accent);
 }
 
 .post-content {
-    font-size: 1.15rem; /* Slightly larger base font for readability */
-    line-height: 1.85; /* Increased line height for comfort */
-    max-width: 760px; /* Optimized content width for readability */
+    font-size: 1.15rem;
+    line-height: 1.85;
+    max-width: 760px;
     margin: 0 auto;
-    padding: 0 2rem; /* Ensure padding on smaller screens */
-    color: var(--text-color); /* Ensure text color is consistently dark */
+    padding: 0 2rem;
+    color: var(--text-color);
 }
 
 .post-content p {
-    margin-bottom: 1.8rem; /* Increased space between paragraphs */
+    margin-bottom: 1.8rem;
 }
 
 .post-content strong {
-    color: var(--primary-accent); /* Highlight strong text with accent */
+    color: var(--primary-accent);
 }
 
 .post-content em {
     font-style: italic;
-    color: var(--tertiary-accent); /* Highlight emphasis with dark accent */
+    color: var(--tertiary-accent);
 }
 
-/* New: Styling for H2 section titles within the post */
 .post-content h2 {
     font-family: var(--serif-font);
-    font-size: 2.5rem; /* Prominent size for main sections */
-    color: var(--primary-accent); /* Primary blue for main section titles */
-    margin-top: 4.5rem; /* More space above new sections */
+    font-size: 2.5rem;
+    color: var(--primary-accent);
+    margin-top: 4.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
     line-height: 1.2;
 }
 
-
-.section-title { /* Used for "Modes of Writing" */
+.section-title {
     font-family: var(--serif-font);
     font-size: 2.5rem;
-    color: var(--primary-accent); /* Primary blue for section titles */
+    color: var(--primary-accent);
     margin-top: 4rem;
     margin-bottom: 1.5rem;
     text-align: center;
@@ -569,40 +559,40 @@ main {
     margin: 0 auto 3rem auto;
 }
 
-.post-content h3 { /* For sub-headings like within the promises list or card titles */
+.post-content h3 {
     font-family: var(--serif-font);
     font-size: 1.6rem;
-    color: var(--tertiary-accent); /* Dark blue for principle/mode headings */
+    color: var(--tertiary-accent);
     margin-top: 2.5rem;
     margin-bottom: 0.8rem;
     line-height: 1.3;
 }
 
-/* --- General Pull Quote Styling --- */
+/* General Pull Quote Styling */
 blockquote.pull-quote, blockquote.final-quote {
     font-family: var(--serif-font);
     font-style: italic;
-    font-size: 1.45rem; /* Distinctive font size for quotes */
+    font-size: 1.45rem;
     line-height: 1.6;
-    margin: 3.5rem auto; /* Center with generous vertical margin */
+    margin: 3.5rem auto;
     padding: 2.5rem;
-    max-width: 680px; /* Keep quotes narrower than main content for emphasis */
+    max-width: 680px;
     text-align: center;
-    background-color: var(--light-bg-card); /* Light card background for quotes */
+    background-color: var(--light-bg-card);
     border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Consistent shadow */
-    color: var(--text-color); /* Ensure good contrast */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    color: var(--text-color);
     position: relative;
-    z-index: 1; /* Ensure text is above pseudo-elements */
+    z-index: 1;
 }
 
 blockquote.pull-quote::before, blockquote.final-quote::before {
-    content: '“'; /* Opening curly quote */
+    content: '“';
     position: absolute;
     top: 1rem;
     left: 1rem;
-    font-size: 5rem; /* Large quote mark */
-    color: var(--secondary-accent); /* Light blue accent for quote mark */
+    font-size: 5rem;
+    color: var(--secondary-accent);
     font-family: var(--serif-font);
     line-height: 1;
     opacity: 0.6;
@@ -610,12 +600,12 @@ blockquote.pull-quote::before, blockquote.final-quote::before {
 }
 
 blockquote.pull-quote::after, blockquote.final-quote::after {
-    content: '”'; /* Closing curly quote */
+    content: '”';
     position: absolute;
     bottom: 0.5rem;
     right: 1rem;
-    font-size: 5rem; /* Large quote mark */
-    color: var(--secondary-accent); /* Light blue accent for quote mark */
+    font-size: 5rem;
+    color: var(--secondary-accent);
     font-family: var(--serif-font);
     line-height: 1;
     opacity: 0.6;
@@ -624,199 +614,118 @@ blockquote.pull-quote::after, blockquote.final-quote::after {
 
 blockquote.pull-quote p, blockquote.final-quote p {
     margin: 0;
-    position: relative; /* Ensure text is above pseudo-elements */
+    position: relative;
     z-index: 1;
 }
-
 
 blockquote.final-quote cite {
     display: block;
     margin-top: 1rem;
     font-size: 1rem;
-    color: var(--tertiary-accent); /* Dark blue for citation */
+    color: var(--tertiary-accent);
     font-style: normal;
     position: relative;
     z-index: 1;
 }
 
-/* --- Promises List Styling --- */
+/* Promises List Styling */
 .promises-list {
-    list-style: none; /* Remove default bullet points */
+    list-style: none;
     padding-left: 0;
     margin-top: 2.5rem;
     margin-bottom: 3.5rem;
-    border-top: 1px solid var(--light-bg-card); /* Subtle top border for section */
-    padding-top: 2.5rem; /* Space below border */
+    border-top: 1px solid var(--light-bg-card);
+    padding-top: 2.5rem;
 }
 
 .promises-list li {
-    background-color: var(--light-bg-card); /* Light card background for each promise */
+    background-color: var(--light-bg-card);
     padding: 1.5rem 2rem;
-    margin-bottom: 1.5rem; /* Space between promise items */
+    margin-bottom: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Lighter shadow for list items */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     position: relative;
-    padding-left: 4.5rem; /* Space for custom bullet */
+    padding-left: 4.5rem;
 }
 
 .promises-list li::before {
-    content: '✓'; /* Custom checkmark bullet */
+    content: '✓';
     position: absolute;
     left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
     font-size: 2rem;
-    color: var(--primary-accent); /* Primary blue checkmark */
+    color: var(--primary-accent);
     font-weight: bold;
 }
 
 .promises-list li h4 {
     font-family: var(--sans-font);
     font-size: 1.15rem;
-    color: var(--primary-accent); /* Primary blue for promise titles */
+    color: var(--primary-accent);
     margin: 0 0 0.5rem 0;
     line-height: 1.3;
 }
 
 .promises-list li p {
-    margin: 0; /* Remove default paragraph margin within list item */
+    margin: 0;
     font-size: 1rem;
     line-height: 1.6;
 }
 
-/* --- Writing Modes Grid (FIXED FOR 3 CARDS) --- */
+/* Writing Modes Grid */
 .writing-modes-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(280px, 1fr)); /* Explicitly 3 columns for desktop */
-    gap: 2rem; /* Space between cards */
-    max-width: 960px; /* Control max width of the grid */
-    margin: 2.5rem auto 3.5rem auto; /* Center the entire grid container */
-    justify-content: center; /* In case max-width isn't perfectly divisible, this helps */
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 960px;
+    margin: 2.5rem auto 3.5rem auto;
+    justify-content: center;
 }
 
 .writing-mode-card {
-    background-color: var(--light-bg-card); /* Light card background */
+    background-color: var(--light-bg-card);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Consistent shadow */
-    transition: all 0.3s ease-in-out; /* Smooth transition for hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align content to top */
-    align-items: flex-start; /* Align text to left */
-    text-align: left; /* Ensure text is left-aligned */
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
 }
 
 .writing-mode-card:hover {
-    transform: translateY(-5px); /* Lifts slightly on hover */
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); /* Slightly stronger shadow */
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
 .writing-mode-card h3 {
     font-family: var(--serif-font);
     font-size: 1.4rem;
-    color: var(--primary-accent); /* Primary blue for mode titles */
-    margin-top: 0; /* Remove default top margin */
+    color: var(--primary-accent);
+    margin-top: 0;
     margin-bottom: 0.8rem;
 }
 
 .writing-mode-card p {
     font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 0; /* Remove bottom margin if it's the last element */
+    margin-bottom: 0;
     color: var(--text-color);
 }
 
 /* Section Dividers (for use with <hr class="section-divider">) */
 .section-divider {
     border: none;
-    border-bottom: 1px dashed var(--secondary-accent); /* Light blue dashed line */
-    margin: 3rem auto; /* Center and space out */
-    width: 60%; /* Control length */
+    border-bottom: 1px dashed var(--secondary-accent);
+    margin: 3rem auto;
+    width: 60%;
     opacity: 0.6;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .post-header {
-        padding: 2rem 1rem;
-        margin-bottom: 2rem;
-    }
-    .post-header h1 {
-        font-size: 2.5rem;
-    }
-    .post-content {
-        font-size: 1rem;
-        padding: 0 1rem;
-    }
-    .post-content p {
-        margin-bottom: 1.5rem;
-    }
-    /* Adjusted: H2 section titles for smaller screens */
-    .post-content h2 {
-        font-size: 2rem;
-        margin-top: 3.5rem; /* Keep good spacing */
-        margin-bottom: 1rem;
-    }
-    .section-description {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-    }
-    .post-content h3 {
-        font-size: 1.3rem;
-        margin-top: 2rem;
-    }
-    blockquote.pull-quote, blockquote.final-quote {
-        font-size: 1.2rem;
-        padding: 1.5rem;
-        margin: 2.5rem auto;
-    }
-    blockquote.pull-quote::before, blockquote.final-quote::before,
-    blockquote.pull-quote::after, blockquote.final-quote::after {
-        font-size: 3rem;
-        opacity: 0.4;
-    }
-    .promises-list li {
-        padding: 1rem 1.5rem;
-        padding-left: 3.5rem;
-        margin-bottom: 1rem;
-    }
-    .promises-list li::before {
-        font-size: 1.5rem;
-        left: 1rem;
-    }
-    .promises-list li h4 {
-        font-size: 1rem;
-    }
-    .promises-list li p {
-        font-size: 0.9rem;
-    }
-    /* FIXED: Writing modes grid for smaller screens */
-    .writing-modes-grid {
-        grid-template-columns: 1fr; /* Stack on smaller screens */
-        gap: 1.5rem;
-        max-width: 100%; /* Allow to take full width */
-        padding: 0 1rem; /* Ensure inner padding on grid */
-    }
-    .writing-mode-card {
-        padding: 1.5rem;
-    }
-    .writing-mode-card h3 {
-        font-size: 1.2rem;
-    }
-    .writing-mode-card p {
-        font-size: 0.9rem;
-    }
-    .section-divider {
-        margin: 2rem auto;
-        width: 80%;
-    }
-}
-
-/* ============================================== */
-/* END: Blog Post Specific Styles */
-/* ============================================== */
-/* Blog Filters (CSS-Only) */
+/* 9b. Blog Filters & Grid */
 .blog-filters {
     text-align: center;
     margin-bottom: 3rem;
@@ -852,17 +761,16 @@ blockquote.final-quote cite {
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 12px rgba(44, 46, 51, 0.08);
-    position: relative; /* ADD THIS LINE */
+    position: relative;
 }
 
-/* Add this new rule */
 .full-card-link {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Ensures it's above other content in the card, making the whole card clickable */
+    z-index: 1;
 }
 
 .post-card:hover {
@@ -881,7 +789,7 @@ blockquote.final-quote cite {
 #filter-process:checked ~ .blog-grid .post-card:not([data-category="process"]) { display: none; }
 #filter-signals:checked ~ .blog-grid .post-card:not([data-category="signals"]) { display: none; }
 
-/* Reading List */
+/* 9c. Reading List */
 .reading-item {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
@@ -896,7 +804,7 @@ blockquote.final-quote cite {
     color: var(--text-color);
 }
 
-/* Forms (Newsletter & Contact) */
+/* 9d. Forms (Newsletter & Contact) */
 .form-container {
     max-width: 600px;
     margin: 2rem auto;
@@ -962,17 +870,18 @@ blockquote.final-quote cite {
     border-color: var(--primary-accent);
 }
 
-/* 11. Footer */
+/* 10. Footer */
 .footer, footer {
     text-align: center;
     padding: 3rem 5%;
     margin-top: 3rem;
     border-top: 1px solid var(--secondary-accent);
-    color: var(--bg-color);
+    color: var(--bg-color); /* This color applies to text within the footer */
     background-color: var(--tertiary-accent);
 }
+/* Ensure links within the footer are visible against the dark background */
 .footer a, footer a {
-    color: var(--secondary-accent);
+    color: var(--secondary-accent); /* Light blue for links on dark footer */
     text-decoration: none;
     transition: color 0.3s, text-decoration 0.3s;
 }
@@ -980,7 +889,7 @@ blockquote.final-quote cite {
 .footer a:focus,
 footer a:hover,
 footer a:focus {
-    color: var(--bg-color);
+    color: var(--bg-color); /* Lighter on hover */
     text-decoration: underline;
 }
 .social-icons a {
@@ -988,20 +897,7 @@ footer a:focus {
     font-size: 1.5rem;
 }
 
-/* 12. Optional: Section Dark (for dark content sections) */
-.section-dark {
-    background-color: var(--tertiary-accent);
-    color: var(--bg-color);
-}
-.section-dark a {
-    color: var(--secondary-accent);
-}
-.section-dark a:hover,
-.section-dark a:focus {
-    color: var(--bg-color);
-}
-
-/* 13. Animations & Transitions */
+/* 11. Animations & Transitions */
 .scroll-cue {
     position: absolute;
     left: 50%;
@@ -1031,7 +927,7 @@ footer a:focus {
   60% { transform: translateY(-5px); }
 }
 
-/* 14. Media Queries */
+/* 12. Media Queries */
 @media (min-width: 768px) {
     h1 { font-size: 4rem; }
     h2 { font-size: 2.5rem; }
@@ -1083,11 +979,84 @@ footer a:focus {
     .hero h1 { font-size: 2.5rem; }
     .hero .tagline { font-size: 1rem; }
     .scroll-cue { bottom: 1rem; }
+
+    /* Blog Post Specific Adjustments for smaller screens */
+    .post-header {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+    }
+    .post-header h1 {
+        font-size: 2.5rem;
+    }
+    .post-content {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    .post-content p {
+        margin-bottom: 1.5rem;
+    }
+    .post-content h2 {
+        font-size: 2rem;
+        margin-top: 3.5rem;
+        margin-bottom: 1rem;
+    }
+    .section-description {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+    .post-content h3 {
+        font-size: 1.3rem;
+        margin-top: 2rem;
+    }
+    blockquote.pull-quote, blockquote.final-quote {
+        font-size: 1.2rem;
+        padding: 1.5rem;
+        margin: 2.5rem auto;
+    }
+    blockquote.pull-quote::before, blockquote.final-quote::before,
+    blockquote.pull-quote::after, blockquote.final-quote::after {
+        font-size: 3rem;
+        opacity: 0.4;
+    }
+    .promises-list li {
+        padding: 1rem 1.5rem;
+        padding-left: 3.5rem;
+        margin-bottom: 1rem;
+    }
+    .promises-list li::before {
+        font-size: 1.5rem;
+        left: 1rem;
+    }
+    .promises-list li h4 {
+        font-size: 1rem;
+    }
+    .promises-list li p {
+        font-size: 0.9rem;
+    }
+    .writing-modes-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    .writing-mode-card {
+        padding: 1.5rem;
+    }
+    .writing-mode-card h3 {
+        font-size: 1.2rem;
+    }
+    .writing-mode-card p {
+        font-size: 0.9rem;
+    }
+    .section-divider {
+        margin: 2rem auto;
+        width: 80%;
+    }
 }
 
 @media (min-width: 1024px) {
     h1 { font-size: 5rem; }
-    main { padding: 3rem 5%; }
+    main { padding: 8rem 5%; } /* UPDATED: Increased for header clearance */
     .blog-grid { grid-template-columns: repeat(3, 1fr); }
     .hero h1 { font-size: 5.5rem; }
     .hero .tagline { font-size: 1.2rem; }
