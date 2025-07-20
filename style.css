@@ -724,7 +724,137 @@ blockquote.final-quote cite {
     width: 60%;
     opacity: 0.6;
 }
+/* --- Adaptive Notes Article Card Styles --- */
 
+/* Container for the stack of cards */
+.card-stack-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px; /* Adjust as needed for card width */
+    margin: 3rem auto; /* Centers the card container */
+    padding-bottom: 3rem; /* Space for navigation buttons below */
+    overflow: hidden; /* Hides cards not currently in view */
+}
+
+/* Wrapper for individual cards, handles transitions */
+.card-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto; /* Height adapts to content */
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Base style for the Adaptive Idea Card */
+.adaptive-idea-card {
+    background-color: var(--light-bg-card); /* Light background for the card */
+    border-radius: 10px; /* Rounded corners */
+    padding: 2rem;
+    margin: 0 auto; /* Ensures the card is centered within its wrapper */
+    box-shadow: 0px 8px 15px rgba(56, 77, 156, 0.2); /* Soft shadow for depth */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions for hover effects */
+    border: 1px solid rgba(56, 77, 156, 0.1); /* Subtle border */
+}
+
+/* Hover effect for the cards */
+.adaptive-idea-card:hover {
+    transform: translateY(-5px); /* Lifts the card slightly */
+    box-shadow: 0px 12px 20px rgba(56, 77, 156, 0.3); /* Stronger shadow on hover */
+}
+
+/* Typography within the cards */
+.adaptive-idea-card h1,
+.adaptive-idea-card h2,
+.adaptive-idea-card h3 {
+    font-family: var(--serif-font);
+    color: var(--tertiary-accent); /* Dark blue for headings */
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.adaptive-idea-card h2 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--secondary-accent); /* Light blue separator */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.adaptive-idea-card h3 {
+    font-size: 1.25rem;
+    color: var(--primary-accent); /* Primary blue for sub-headings */
+}
+
+.adaptive-idea-card p,
+.adaptive-idea-card ul,
+.adaptive-idea-card li {
+    font-family: var(--sans-font);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.adaptive-idea-card ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+}
+
+.adaptive-idea-card li {
+    margin-bottom: 0.5rem;
+}
+
+/* Specific text styling within cards */
+.adaptive-idea-card strong {
+    color: var(--primary-accent); /* Makes bold text stand out with primary accent color */
+}
+
+.adaptive-idea-card em {
+    font-style: italic;
+}
+
+/* Metadata section styling */
+.adaptive-idea-card .metadata {
+    font-size: 0.9em;
+    color: rgba(44, 46, 51, 0.7); /* Slightly lighter text for metadata */
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dashed rgba(44, 46, 51, 0.2); /* Dashed separator */
+    padding-bottom: 0.8rem;
+}
+
+/* Card navigation controls */
+.adaptive-card-nav {
+    display: flex;
+    justify-content: center; /* Centers the buttons */
+    margin-top: 2rem;
+    gap: 1rem; /* Space between buttons */
+}
+
+.adaptive-card-nav button {
+    background-color: var(--primary-accent); /* Primary blue background */
+    color: var(--bg-color); /* Light text on buttons */
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 8px rgba(56, 77, 156, 0.2); /* Shadow for buttons */
+}
+
+/* Hover effects for buttons */
+.adaptive-card-nav button:hover {
+    background-color: var(--tertiary-accent); /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Disabled button state */
+.adaptive-card-nav button:disabled {
+    background-color: var(--secondary-accent); /* Lighter blue when disabled */
+    cursor: not-allowed;
+    opacity: 0.6;
+}
 /* 9b. Blog Filters & Grid */
 .blog-filters {
     text-align: center;
