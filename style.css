@@ -56,18 +56,16 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     color: var(--text-color);
     margin-top: 0;
-    text-align: center; /* All headings centered */
 }
 
-/* Main h1 site/page title */
+/* Main h1 site/page title: use brand blue */
 h1 {
-    color: var(--primary-accent); /* Keep brand blue for H1 */
-    font-size: 3.5rem; /* Standardized H1 size */
+    color: var(--primary-accent);
+    font-size: 3rem;
 }
 
-h2 { font-size: 2.5rem; /* Standardized H2 size */ }
-h3 { font-size: 2rem; /* Standardized H3 size */ }
-p { font-size: 1rem; margin-bottom: 1rem; text-align: left; } /* Ensure left-justified body text */
+h2 { font-size: 2.2rem; }
+p { font-size: 1rem; margin-bottom: 1rem; }
 
 /* Links */
 a {
@@ -240,7 +238,7 @@ a:focus {
 
 .compass-heading {
     font-family: var(--serif-font);
-    font-size: 2.5rem; /* Aligned with new H2 size */
+    font-size: 2.2rem;
     margin-bottom: 0.5em;
     color: var(--primary-accent);
 }
@@ -288,8 +286,7 @@ a:focus {
     border-radius: 15px;
     min-height: 200px;
     transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    /* Updated box-shadow to match post-card more closely */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(44, 46, 51, 0.08);
 }
 
 .compass-icon {
@@ -322,9 +319,8 @@ a:focus {
 .compass-point:hover .compass-bubble {
     background-color: var(--secondary-accent);
     border-color: var(--secondary-accent);
-    transform: translateY(-5px) scale(1.02); /* Added translateY for lift effect */
-    /* Updated box-shadow on hover to match post-card hover more closely */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(44, 46, 51, 0.1);
 }
 
 .compass-point:hover .compass-icon {
@@ -354,9 +350,9 @@ a:focus {
 .compass-toggle:checked + .compass-bubble {
     background-color: var(--primary-accent) !important;
     border-color: var(--primary-accent) !important;
-    transform: translateY(-5px); /* Keep transform consistent with hover */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Update shadow for consistency */
-    animation: none; /* Remove pulse animation as requested/implied */
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(44, 46, 51, 0.1);
+    animation: none;
 }
 
 .compass-toggle:checked + .compass-bubble .compass-icon,
@@ -442,14 +438,13 @@ a:focus {
 .manifesto h2 {
     font-family: 'Playfair Display', serif;
     margin-bottom: 1rem;
-    font-size: 2.5rem; /* Aligned with new H2 size */
+    font-size: 2rem;
     color: var(--primary-accent);
 }
 
 .manifesto p {
     margin-top: 1rem;
     color: var(--text-color);
-    text-align: left; /* Ensure paragraphs within this section are left-justified */
 }
 
 /* 8. Layout & General Content */
@@ -458,247 +453,315 @@ main {
     padding-left: 5%;
     padding-right: 5%;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .content-wrapper {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 2rem 0;
-    text-align: center; /* Default content wrapper to center for main titles */
 }
 
-.section-title {
-    font-family: var(--serif-font);
-    font-size: 2.5rem; /* Aligned with new H2 size */
+.content-wrapper h2 {
+    border-bottom: 2px solid var(--primary-accent);
+    padding-bottom: 0.5rem;
+    display: inline-block;
     color: var(--primary-accent);
-    margin-bottom: 1.5rem;
 }
 
 /* 9. Page-Specific Elements */
 
 /* 9a. Blog Post Details */
+.blog-post {
+    padding-top: 4rem; /* Padding at the top of the post content */
+    padding-bottom: 4rem;
+}
+
 .post-header {
     text-align: center;
     margin-bottom: 3rem;
-    padding-top: 2rem;
+    padding-top: 3rem; /* Give space below fixed header */
+    background-color: var(--light-bg-card);
+    padding: 3rem 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
 }
 
 .post-header h1 {
-    font-size: 3.8rem; /* Keep specific size for blog post title, ensure centered */
-    color: var(--text-color); /* Override to text-color for post title */
-    margin-bottom: 0.5rem;
+    font-family: var(--serif-font);
+    font-size: 3.8rem;
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
 }
 
 .post-meta {
     font-family: var(--sans-font);
-    font-size: 1em;
+    font-size: 0.95rem;
     color: var(--tertiary-accent);
-    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.post-meta .post-category {
+    font-weight: 600;
+    color: var(--primary-accent);
 }
 
 .post-content {
-    max-width: 750px;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    max-width: 760px;
     margin: 0 auto;
-    font-size: 1rem;
-    line-height: 1.8;
+    padding: 0 2rem;
     color: var(--text-color);
-    text-align: left; /* Ensure post content is left-justified */
 }
 
-.post-content h2 {
-    font-size: 2.5rem; /* Aligned with new H2 size */
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-    text-align: center; /* Ensure centered */
+.post-content p {
+    margin-bottom: 1.8rem;
 }
 
-.post-content h3 {
-    font-size: 2rem; /* Aligned with new H3 size */
-    margin-top: 2.5rem;
-    margin-bottom: 0.8rem;
-    line-height: 1.4;
-    text-align: center; /* Ensure centered */
+.post-content strong {
+    color: var(--primary-accent);
 }
 
-.post-content img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 2rem auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.post-content p,
-.post-content ul,
-.post-content ol,
-.post-content li {
-    font-size: 1rem; /* Consistent body text size */
-    text-align: left; /* Left-justified */
-    margin-bottom: 1em;
-}
-
-.post-content ul,
-.post-content ol {
-    list-style: initial; /* Ensure default list style */
-    padding-left: 1.5em;
-    margin-left: 1.5em;
-}
-
-/* Blockquotes */
-blockquote {
-    border-left: 4px solid var(--primary-accent);
-    padding-left: 1.5em;
-    margin: 2em 0;
+.post-content em {
     font-style: italic;
     color: var(--tertiary-accent);
 }
 
-blockquote p {
-    margin: 0;
-    font-size: 1.1em;
-}
-
-/* Pull Quotes & Final Quotes */
-blockquote.pull-quote,
-blockquote.final-quote {
+.post-content h2 {
     font-family: var(--serif-font);
-    font-size: 1.5rem;
-    font-style: normal;
+    font-size: 2.5rem;
+    color: var(--primary-accent);
+    margin-top: 4.5rem;
+    margin-bottom: 1.5rem;
     text-align: center;
-    border-left: none;
-    padding: 2rem;
-    margin: 4rem auto;
-    max-width: 800px;
-    position: relative;
-    background-color: var(--light-bg-card);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    line-height: 1.2;
+}
+
+.section-title {
+    font-family: var(--serif-font);
+    font-size: 2.5rem;
     color: var(--primary-accent);
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
-blockquote.pull-quote::before,
-blockquote.final-quote::before {
-    content: "“";
-    font-size: 5rem;
-    line-height: 1;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: var(--secondary-accent);
-    opacity: 0.6;
-}
-
-blockquote.pull-quote::after,
-blockquote.final-quote::after {
-    content: "”";
-    font-size: 5rem;
-    line-height: 1;
-    position: absolute;
-    bottom: -10px;
-    right: 10px;
-    color: var(--secondary-accent);
-    opacity: 0.6;
-}
-
-/* 9b. Blog Filters & Grid */
-.blog-filters {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-}
-
-.filter-radio {
-    display: none;
-}
-
-.filter-label {
-    padding: 0.8rem 1.5rem;
-    border: 2px solid var(--primary-accent);
-    border-radius: 25px;
-    color: var(--primary-accent);
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    font-weight: 500;
-}
-
-.filter-radio:checked + .filter-label {
-    background-color: var(--primary-accent);
-    color: var(--bg-color);
-}
-
-.filter-label:hover {
-    background-color: var(--secondary-accent);
-    border-color: var(--secondary-accent);
-    color: var(--bg-color);
-}
-
-.blog-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto 4rem auto;
-}
-
-.post-card {
-    background-color: var(--bg-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    position: relative; /* For full-card-link */
-}
-
-.post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.post-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px 8px 0 0;
-}
-
-.post-content {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+.section-description {
+    font-family: var(--sans-font);
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
 }
 
 .post-content h3 {
     font-family: var(--serif-font);
     font-size: 1.6rem;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
-    color: var(--text-color);
-    text-align: left; /* Keep card title left-aligned */
-}
-
-.post-content p {
-    font-size: 0.95rem;
-    color: var(--text-color);
-    flex-grow: 1;
-    margin-bottom: 1rem;
-    text-align: left; /* Keep card body left-aligned */
-}
-
-.read-time {
-    font-family: var(--sans-font);
-    font-size: 0.85rem;
     color: var(--tertiary-accent);
-    text-align: right;
-    display: block; /* Ensures it sits on its own line */
-    margin-top: auto; /* Pushes it to the bottom */
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+}
+
+/* General Pull Quote Styling */
+blockquote.pull-quote, blockquote.final-quote {
+    font-family: var(--serif-font);
+    font-style: italic;
+    font-size: 1.45rem;
+    line-height: 1.6;
+    margin: 3.5rem auto;
+    padding: 2.5rem;
+    max-width: 680px;
+    text-align: center;
+    background-color: var(--light-bg-card);
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    color: var(--text-color);
+    position: relative;
+    z-index: 1;
+}
+
+blockquote.pull-quote::before, blockquote.final-quote::before {
+    content: 'â€œ';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 5rem;
+    color: var(--secondary-accent);
+    font-family: var(--serif-font);
+    line-height: 1;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+blockquote.pull-quote::after, blockquote.final-quote::after {
+    content: 'â€';
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    font-size: 5rem;
+    color: var(--secondary-accent);
+    font-family: var(--serif-font);
+    line-height: 1;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+blockquote.pull-quote p, blockquote.final-quote p {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+blockquote.final-quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--tertiary-accent);
+    font-style: normal;
+    position: relative;
+    z-index: 1;
+}
+
+/* Promises List Styling */
+.promises-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 2.5rem;
+    margin-bottom: 3.5rem;
+    border-top: 1px solid var(--light-bg-card);
+    padding-top: 2.5rem;
+}
+
+.promises-list li {
+    background-color: var(--light-bg-card);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-left: 4.5rem;
+}
+
+.promises-list li::before {
+    content: 'âœ“';
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: var(--primary-accent);
+    font-weight: bold;
+}
+
+.promises-list li h4 {
+    font-family: var(--sans-font);
+    font-size: 1.15rem;
+    color: var(--primary-accent);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.promises-list li p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Writing Modes Grid */
+.writing-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 960px;
+    margin: 2.5rem auto 3.5rem auto;
+    justify-content: center;
+}
+
+.writing-mode-card {
+    background-color: var(--light-bg-card);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.writing-mode-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.writing-mode-card h3 {
+    font-family: var(--serif-font);
+    font-size: 1.4rem;
+    color: var(--primary-accent);
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+}
+
+.writing-mode-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+    color: var(--text-color);
+}
+
+/* Section Dividers (for use with <hr class="section-divider">) */
+.section-divider {
+    border: none;
+    border-bottom: 1px dashed var(--secondary-accent);
+    margin: 3rem auto;
+    width: 60%;
+    opacity: 0.6;
+}
+
+/* 9b. Blog Filters & Grid */
+.blog-filters {
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.blog-filters .filter-radio { display: none; }
+.blog-filters .filter-label {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--secondary-accent);
+    background: var(--bg-color);
+    color: var(--primary-accent);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.blog-filters .filter-radio:checked + .filter-label {
+    background: var(--primary-accent);
+    color: var(--bg-color);
+    border-color: var(--primary-accent);
+}
+.blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+.post-card {
+    background-color: var(--bg-color);
+    border: 1px solid rgba(44, 46, 51, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 12px rgba(44, 46, 51, 0.08);
+    position: relative;
 }
 
 .full-card-link {
@@ -710,175 +773,245 @@ blockquote.final-quote::after {
     z-index: 1;
 }
 
-/* Filtering logic for blog grid (JavaScript handles this by adding/removing 'hidden' class) */
-.post-card.hidden {
-    display: none;
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(44, 46, 51, 0.15);
 }
+.post-card img { max-width: 100%; height: auto; display: block; }
+.post-content { padding: 1.5rem; }
+.post-content h3 { margin-top: 0; font-size: 1.6rem; color: var(--primary-accent);}
+.post-content .read-time { font-size: 0.9rem; color: var(--tertiary-accent); }
+
+/* CSS for showing/hiding posts based on filter */
+#filter-all:checked ~ .blog-grid .post-card { display: block; }
+#filter-reflections:checked ~ .blog-grid .post-card:not([data-category="reflections"]) { display: none; }
+#filter-worlds:checked ~ .blog-grid .post-card:not([data-category="worlds"]) { display: none; }
+#filter-process:checked ~ .blog-grid .post-card:not([data-category="process"]) { display: none; }
+#filter-signals:checked ~ .blog-grid .post-card:not([data-category="signals"]) { display: none; }
 
 /* 9c. Reading List */
-.reading-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto 4rem auto;
+.reading-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--secondary-accent);
 }
-
-.book-card {
-    background-color: var(--light-bg-card);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    display: flex;
-    padding: 1rem;
-    gap: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.book-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.book-card img {
-    width: 100px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 4px;
-    flex-shrink: 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.book-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-}
-
-.book-details h3 {
-    font-family: var(--serif-font);
-    font-size: 1.2rem;
-    margin: 0;
+.reading-item h3 { margin-top: 0; color: var(--primary-accent);}
+.reading-item blockquote {
+    margin: 1rem 0 0 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--secondary-accent);
+    font-style: italic;
     color: var(--text-color);
-    text-align: left; /* Book title left-aligned */
-}
-
-.book-details p {
-    font-size: 0.9rem;
-    color: var(--tertiary-accent);
-    margin: 0.3rem 0;
-    text-align: left; /* Book author/notes left-aligned */
-}
-
-.book-details .status {
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: var(--primary-accent);
-    margin-top: 0.5rem;
-    text-align: left; /* Book status left-aligned */
 }
 
 /* 9d. Forms (Newsletter & Contact) */
-.form-section {
+.form-container {
     max-width: 600px;
-    margin: 4rem auto;
-    padding: 2.5rem;
-    background-color: var(--light-bg-card);
-    border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    text-align: center;
+    margin: 2rem auto;
 }
-
-.form-section h2 {
-    font-family: var(--serif-font);
-    font-size: 2.5rem; /* Aligned with new H2 size */
-    color: var(--primary-accent);
+.form-field {
     margin-bottom: 1.5rem;
 }
-
-.form-section p {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-    color: var(--text-color);
-    text-align: left; /* Form description left-aligned */
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-}
-
-.form-group label {
+.form-field label {
     display: block;
-    font-size: 0.9rem;
-    color: var(--tertiary-accent);
     margin-bottom: 0.5rem;
     font-weight: bold;
+    color: var(--primary-accent);
 }
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group textarea {
+.form-field input, .form-field textarea {
     width: 100%;
     padding: 0.8rem;
     border: 1px solid var(--secondary-accent);
-    border-radius: 5px;
+    border-radius: 4px;
     font-family: var(--sans-font);
-    font-size: 1rem;
-    color: var(--text-color);
     background-color: var(--bg-color);
-    box-sizing: border-box; /* Ensures padding doesn't add to width */
+    color: var(--text-color);
 }
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 100px;
+.form-field input:focus, .form-field textarea:focus {
+    outline: none;
+    border-color: var(--primary-accent);
 }
-
-.submit-button {
+.btn,
+.button-primary {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
     background-color: var(--primary-accent);
     color: var(--bg-color);
-    padding: 1rem 2rem;
     border: none;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    font-weight: bold;
+    border-radius: 4px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, color 0.3s;
+}
+.btn:hover,
+.btn:focus,
+.button-primary:hover,
+.button-primary:focus {
+    background-color: var(--secondary-accent);
+    color: var(--text-color);
 }
 
-.submit-button:hover {
-    background-color: var(--tertiary-accent);
-    transform: translateY(-2px);
+/* Secondary/Outline Button */
+.button-secondary {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    background-color: transparent;
+    color: var(--primary-accent);
+    border: 1px solid var(--primary-accent);
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.button-secondary:hover,
+.button-secondary:focus {
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    border-color: var(--primary-accent);
+}
+
+/* 9e. Voice Map Grid */
+.voice-map-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column for mobile */
+    gap: 1.5rem;
+    margin: 3rem auto;
+    max-width: 800px; /* Constrain width */
+    padding: 0 1rem; /* Padding for mobile */
+}
+
+.voice-map-quadrant {
+    background-color: var(--light-bg-card);
+    border: 1px solid var(--secondary-accent); /* Match border of compass points/post cards */
+    border-radius: 8px; /* Match border-radius */
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Match subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover transition */
+}
+
+.voice-map-quadrant:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.voice-map-quadrant .quadrant-title {
+    font-family: var(--serif-font);
+    font-size: 1.3rem; /* Slightly smaller than H3, but prominent */
+    color: var(--primary-accent);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    text-align: center; /* Center quadrant titles */
+}
+
+.voice-map-quadrant .quadrant-example {
+    font-size: 0.95rem;
+    color: var(--tertiary-accent);
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center; /* Center example text */
+}
+
+.voice-map-quadrant .quadrant-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--primary-accent);
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-align: left; /* Labels are left-aligned */
+}
+
+.voice-map-quadrant .quadrant-content {
+    font-size: 1rem; /* Match body text size */
+    color: var(--text-color);
+    margin-bottom: 0;
+    line-height: 1.5;
+    text-align: left; /* Content is left-aligned */
+}
+
+/* Media query for desktop grid layout */
+@media (min-width: 768px) {
+    .voice-map-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for desktop */
+        padding: 0; /* Remove specific padding when wider */
+    }
 }
 
 /* 10. Footer */
-.footer {
-    background-color: var(--light-bg-card);
-    color: var(--tertiary-accent);
+.footer, footer {
     text-align: center;
-    padding: 1.5rem 0;
-    font-size: 0.9rem;
-    margin-top: 4rem;
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+    padding: 3rem 5%;
+    margin-top: 3rem;
+    border-top: 1px solid var(--secondary-accent);
+    color: var(--bg-color); /* This color applies to text within the footer */
+    background-color: var(--tertiary-accent);
+}
+/* Ensure links within the footer are visible against the dark background */
+.footer a, footer a {
+    color: var(--secondary-accent); /* Light blue for links on dark footer */
+    text-decoration: none;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+.footer a:hover,
+.footer a:focus,
+footer a:hover,
+footer a:focus {
+    color: var(--bg-color); /* Lighter on hover */
+    text-decoration: underline;
+}
+.social-icons a {
+    margin: 0 0.75rem;
+    font-size: 1.5rem;
 }
 
 /* 11. Animations & Transitions */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.scroll-cue {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 2rem;
+    width: 24px;
+    height: 40px;
+    border: 2px solid var(--primary-accent);
+    border-radius: 12px;
+    animation: bounce 2s infinite;
+    z-index: 2;
 }
 
-.fade-in {
-    animation: fadeIn 1s ease-out forwards;
+.scroll-cue::before {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute;
+    top: 6px; /* Starting position inside the 'mouse' */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px; /* Width of the line */
+    height: 6px; /* Height of the line */
+    background-color: var(--primary-accent); /* Color of the line */
+    border-radius: 1px; /* Slightly rounded ends */
+    animation: scroll-line 2s infinite; /* New animation for the line */
 }
 
-/* No specific animations for compass-point beyond transform/box-shadow */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
 
-/* 12. Media Queries (Tablet & Desktop) */
+@keyframes scroll-line {
+    0%, 20% { top: 6px; opacity: 1; }
+    40% { top: 18px; opacity: 0; } /* Line moves down and fades */
+    41% { top: 6px; opacity: 0; } /* Resets off-screen */
+    100% { top: 6px; opacity: 1; } /* Fades back in for next cycle */
+}
 
+/* 12. Media Queries */
 @media (min-width: 768px) {
-    /* General desktop adjustments */
+    h1 { font-size: 4rem; }
+    h2 { font-size: 2.5rem; }
+
     .nav-toggle-label { display: none; }
     .nav-menu {
         position: static;
@@ -904,14 +1037,10 @@ blockquote.final-quote::after {
     .nav-menu a,
     .nav-link { font-size: 1rem; font-family: var(--sans-font); }
 
-    /* Font sizes for larger screens */
-    h1 { font-size: 4rem; } /* Override for larger screens */
-    h2 { font-size: 2.8rem; } /* Slightly larger h2 for larger screens */
-
-    .hero h1 { font-size: 5.5rem; } /* Keep hero h1 large */
-    .hero .tagline { font-size: 1.2rem; } /* Keep existing */
-
-    .blog-grid { grid-template-columns: repeat(2, 1fr); } /* 2 columns for tablets */
+    .hero h1 { font-size: 5.5rem; }
+    .hero .tagline { font-size: 1.2rem; }
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    /* The specific .scroll-cue { bottom: 1rem; } override for min-width: 768px has been removed */
 }
 
 @media (max-width: 768px) {
@@ -927,29 +1056,38 @@ blockquote.final-quote::after {
     .compass-intro { font-size: 1em; margin-bottom: 2em; }
     .compass-bubble { min-height: 180px; }
     .compass-question { font-size: 1.1em; }
+    .hero { min-height: calc(100vh - 2.8rem); padding: 0 1.5rem;}
+    .hero h1 { font-size: 2.5rem; }
+    .hero .tagline { font-size: 1rem; }
+    .scroll-cue { bottom: 1rem; } /* This specific override for max-width: 768px is kept for mobile */
 
-    /* Mobile specific heading adjustments */
-    .hero h1 { font-size: 2.5rem; } /* Keep specific mobile adjustment */
-    .hero .tagline { font-size: 1rem; } /* Keep specific mobile adjustment */
+    /* Blog Post Specific Adjustments for smaller screens */
+    .post-header {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+    }
     .post-header h1 {
-        font-size: 2.5rem; /* Match hero h1 for mobile */
+        font-size: 2.5rem;
+    }
+    .post-content {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    .post-content p {
+        margin-bottom: 1.5rem;
     }
     .post-content h2 {
-        font-size: 2rem; /* Mobile specific h2 */
+        font-size: 2rem;
+        margin-top: 3.5rem;
+        margin-bottom: 1rem;
+    }
+    .section-description {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
     }
     .post-content h3 {
-        font-size: 1.5rem; /* Mobile specific h3 */
-    }
-    .writing-mode-card h3 {
-        font-size: 1.2rem; /* Keep specific mobile adjustment */
-    }
-    .post-content p,
-    .post-content ul li,
-    .post-content ol li {
-        font-size: 0.95rem; /* Slightly smaller on mobile if desired */
-    }
-    .manifesto p {
-        font-size: 0.95rem; /* Slightly smaller on mobile */
+        font-size: 1.3rem;
+        margin-top: 2rem;
     }
     blockquote.pull-quote, blockquote.final-quote {
         font-size: 1.2rem;
@@ -988,11 +1126,20 @@ blockquote.final-quote::after {
     .writing-mode-card h3 {
         font-size: 1.2rem;
     }
+    .writing-mode-card p {
+        font-size: 0.9rem;
+    }
+    .section-divider {
+        margin: 2rem auto;
+        width: 80%;
+    }
 }
 
 @media (min-width: 1024px) {
-    /* Larger desktop adjustments */
-    h1 { font-size: 5rem; } /* Override for even larger screens */
-    .hero h1 { font-size: 5.5rem; } /* Keep hero h1 largest */
-    .blog-grid { grid-template-columns: repeat(3, 1fr); } /* 3 columns for larger desktops */
+    h1 { font-size: 5rem; }
+    main { padding: 8rem 5%; }
+    .blog-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero h1 { font-size: 5.5rem; }
+    .hero .tagline { font-size: 1.2rem; }
+    /* The specific .scroll-cue { bottom: 1rem; } override for min-width: 1024px has been removed */
 }
