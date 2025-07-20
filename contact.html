@@ -33,21 +33,21 @@
             <h2>Get In Touch</h2>
             <p>Have a question, a thought, or just want to say hello? I'd love to hear from you. I don’t bite. (Usually.)</p>
 
-            <div class="form-container">
-                <form action="#"> <div class="form-field">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-field">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
+       <form name="contact" data-netlify="true" action="/contact-success" method="POST">
+    <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+    </div>
+    <button type="submit" class="btn">Send Message</button>
+</form>
             </div>
         </div>
     </main>
