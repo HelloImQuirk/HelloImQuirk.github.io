@@ -34,12 +34,13 @@
             <p>Join the Dispatches—sporadic essays, quick links, and progress notes straight to your inbox. No spam, just thoughts.</p>
             
             <div class="form-container">
-                <form action="#"> <div class="form-field">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <button type="submit" class="btn">Subscribe</button>
-                </form>
+                <form name="newsletter-signup" data-netlify="true" action="/newsletter-success" method="POST">
+    <div class="form-field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <button type="submit" class="btn">Subscribe</button>
+</form>
             </div>
         </div>
     </main>
