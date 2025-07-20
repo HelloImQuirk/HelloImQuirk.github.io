@@ -356,9 +356,19 @@
             const nextButton = document.getElementById('nextCard');
             let currentIndex = 0;
 
-            function showCard(index) {
+            // Function to apply/remove classes based on current index for smooth transitions
+            function updateCardClasses() {
                 cards.forEach((card, i) => {
-                    card.style.display = (i === index) ? 'block' : 'none';
+                    card.classList.remove('active', 'prev-visible', 'next-visible', 'hidden'); // Clear all state classes
+                    if (i === currentIndex) {
+                        card.classList.add('active'); // Current active card
+                    } else if (i === currentIndex - 1) {
+                        card.classList.add('prev-visible'); // Card immediately before current
+                    } else if (i === currentIndex + 1) {
+                        card.classList.add('next-visible'); // Card immediately after current
+                    } else {
+                        card.classList.add('hidden'); // All other cards are fully hidden
+                    }
                 });
                 updateButtons();
             }
@@ -371,19 +381,19 @@
             prevButton.addEventListener('click', () => {
                 if (currentIndex > 0) {
                     currentIndex--;
-                    showCard(currentIndex);
+                    updateCardClasses();
                 }
             });
 
             nextButton.addEventListener('click', () => {
                 if (currentIndex < cards.length - 1) {
                     currentIndex++;
-                    showCard(currentIndex);
+                    updateCardClasses();
                 }
             });
 
-            // Initialize: show the first card
-            showCard(currentIndex);
+            // Initialize: Set initial classes for the first card
+            updateCardClasses();
         });
     </script>
 
