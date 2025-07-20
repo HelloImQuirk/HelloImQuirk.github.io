@@ -734,17 +734,58 @@ blockquote.final-quote cite {
     margin: 3rem auto; /* Centers the card container */
     padding-bottom: 3rem; /* Space for navigation buttons below */
     overflow: hidden; /* Hides cards not currently in view */
+    /* NEW: Add min-height to prevent content jumps. Adjust this value if your cards have vastly different heights. */
+    min-height: 650px; /* Example value, ensures container can hold the tallest card without collapse */
+    display: flex; /* Flexbox helps center absolute children */
+    justify-content: center; /* Centers cards horizontally */
+    align-items: flex-start; /* Aligns cards to the top of the container */
 }
 
-/* Wrapper for individual cards, handles transitions */
+/* Wrapper for individual cards, handles transitions and positioning */
 .card-wrapper {
-    position: relative;
+    position: absolute; /* Allows cards to stack and overlap */
+    top: 0; /* Aligns to the top of the .card-stack-container */
+    left: 50%; /* Starts card at the horizontal center */
+    transform: translateX(-50%) translateY(0) scale(1); /* Centers horizontally, initial vertical position, and scale */
     width: 100%;
+    max-width: 700px; /* Ensures cards don't exceed container width */
     height: auto; /* Height adapts to content */
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0; /* Hidden by default */
+    pointer-events: none; /* Non-active cards are not clickable/interactive */
+    z-index: 0; /* Default z-index for hidden cards */
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out; /* Smooth transitions for movement and fade */
 }
 
-/* Base style for the Adaptive Idea Card */
+/* Styles for the currently active (visible) card */
+.card-wrapper.active {
+    opacity: 1; /* Fully visible */
+    transform: translateX(-50%) translateY(0) scale(1); /* Centered and full size */
+    z-index: 3; /* Placed on top of other cards */
+    pointer-events: auto; /* Active card is interactive */
+}
+
+/* Styles for the card immediately before the active one (visible as a "glimpse") */
+.card-wrapper.prev-visible {
+    opacity: 0.4; /* Partially visible */
+    transform: translateX(-50%) translateY(-20px) scale(0.95); /* Slightly moved up and scaled down */
+    z-index: 2; /* Behind active card, but above fully hidden cards */
+}
+
+/* Styles for the card immediately after the active one (visible as a "glimpse") */
+.card-wrapper.next-visible {
+    opacity: 0.4; /* Partially visible */
+    transform: translateX(-50%) translateY(20px) scale(0.95); /* Slightly moved down and scaled down */
+    z-index: 2; /* Behind active card, but above fully hidden cards */
+}
+
+/* Styles for cards that are neither active nor adjacent (fully hidden) */
+.card-wrapper.hidden {
+    opacity: 0; /* Completely invisible */
+    transform: translateX(-50%) translateY(0) scale(1); /* Resets position/scale, but keeps hidden */
+    z-index: 0; /* Furthest back */
+}
+
+/* Base style for the Adaptive Idea Card (the inner card content) */
 .adaptive-idea-card {
     background-color: var(--light-bg-card); /* Light background for the card */
     border-radius: 10px; /* Rounded corners */
