@@ -523,6 +523,11 @@ main {
 }
 
 .post-content strong {
+    color: var(--primary-accent); /* Primary Blue */
+    font-weight: 700; /* Ensure bold weight */
+}
+
+.post-content blockquote strong {
     color: var(--primary-accent);
 }
 
@@ -533,12 +538,12 @@ main {
 
 .post-content h2 {
     font-family: var(--serif-font);
-    font-size: 2.5rem;
-    color: var(--primary-accent);
-    margin-top: 4.5rem;
+    color: var(--tertiary-accent); /* Dark Blue */
+    font-size: 2rem; /* Retaining the larger size for main article headings. If you want ALL h2 to be 1.5rem, change this. */
+    border-bottom: 1px solid var(--secondary-accent); /* Light Blue underline */
+    padding-bottom: 0.5rem;
+    margin-top: 2.5rem; /* Ensure good spacing above headings */
     margin-bottom: 1.5rem;
-    text-align: center;
-    line-height: 1.2;
 }
 
 .section-title {
@@ -1303,6 +1308,48 @@ footer a:focus {
     .section-divider {
         margin: 2rem auto;
         width: 80%;
+    }
+}
+
+@media (max-width: 600px) {
+    /* --- Accordion Container for Adaptive Idea Cards --- */
+    .accordion-header {
+        font-size: 1.2rem;
+        padding: 15px 20px;
+    }
+    .accordion-icon {
+        font-size: 1.5rem;
+    }
+    .accordion-content {
+        padding: 0 20px;
+    }
+    .accordion-content.active {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    /* --- Adaptive Idea Card Original Styles (modified for accordion) --- */
+    .adaptive-idea-card h2 {
+        font-size: 1.2rem;
+    }
+    .adaptive-idea-card h3 {
+        font-size: 1.1rem;
+    }
+    .adaptive-idea-card p,
+    .adaptive-idea-card ul,
+    .adaptive-idea-card li {
+        font-size: 0.95rem;
+    }
+
+    /* --- Adjustments for general post content outside of adaptive-idea-card --- */
+    .post-content h2 {
+        font-size: 1.6rem; /* Adjusting for smaller screens */
+        margin-top: 1.5rem;
+    }
+    .post-content p,
+    .post-content ul,
+    .post-content li {
+        font-size: 0.95rem;
     }
 }
 
