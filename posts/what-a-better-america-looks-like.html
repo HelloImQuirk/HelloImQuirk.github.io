@@ -271,6 +271,52 @@
     <footer class="footer">
         <p>&copy; 2025 Quirk. A life in progress.</p>
     </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to replace problematic characters with HTML entities
+        function sanitizeBlockquoteContent(element) {
+            let html = element.innerHTML;
 
+            // Replace common smart quotes and em-dashes
+            // Note: If you encounter other weird characters, you can add more replacements here
+            html = html.replace(/“/g, '&ldquo;');   // Left double curly quote
+            html = html.replace(/”/g, '&rdquo;');  // Right double curly quote
+            html = html.replace(/‘/g, '&lsquo;');   // Left single curly quote
+            html = html.replace(/’/g, '&rsquo;');  // Right single curly quote (apostrophe)
+            html = html.replace(/—/g, '&mdash;'); // Em dash
+            html = html.replace(/–/g, '&ndash;'); // En dash (shorter than em dash)
+
+            element.innerHTML = html;
+        }
+
+        // Get all blockquote elements on the page
+        const blockquotes = document.querySelectorAll('blockquote');
+
+        // Apply the sanitization to each blockquote
+        blockquotes.forEach(blockquote => {
+            // Apply only to the direct text content within the blockquote's children (e.g., p tags)
+            // This prevents issues if you have complex HTML inside blockquotes
+            blockquote.querySelectorAll('p, span, div').forEach(childElement => {
+                sanitizeBlockquoteContent(childElement);
+            });
+            // If the blockquote has direct text content (unlikely but possible), sanitize it too
+            if (blockquote.childNodes.length > 0) {
+                blockquote.childNodes.forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        node.textContent = node.textContent
+                            .replace(/“/g, '“') // Keep as is, it might be the CSS handling it.
+                            .replace(/”/g, '”')
+                            .replace(/‘/g, '‘')
+                            .replace(/’/g, '’')
+                            .replace(/—/g, '—')
+                            .replace(/–/g, '–');
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
 </body>
 </html>
