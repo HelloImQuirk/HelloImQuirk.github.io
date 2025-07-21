@@ -573,6 +573,185 @@ main {
     line-height: 1.3;
 }
 
+/* --- Your Blueprint for a Better America Section Styling --- */
+.blueprint-section {
+    margin: 4rem auto;
+    max-width: 800px; /* Match content wrapper */
+    padding: 0 1.5rem; /* Consistent padding */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.blueprint-section h2 {
+    font-family: var(--serif-font);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.blueprint-intro {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    max-width: 600px; /* Constrain width for readability */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.big-picture-statement {
+    font-family: var(--serif-font);
+    font-size: 2.8rem; /* Larger and more prominent */
+    font-weight: 700;
+    color: var(--primary-accent);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+    line-height: 1.2;
+}
+
+.blueprint-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between question cards */
+    margin: 0 auto;
+    max-width: 700px; /* Max width for the stack of questions */
+}
+
+.question-card {
+    background-color: var(--light-bg-card);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden; /* Ensures content transitions smoothly */
+    margin: 0; /* Override default details margin */
+    border: none; /* Remove default details border */
+}
+
+.question-card summary {
+    display: flex; /* Use flexbox for question and icon alignment */
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--tertiary-accent); /* Dark blue for question headers */
+    cursor: pointer;
+    outline: none; /* Remove outline on focus */
+    user-select: none; /* Prevent text selection on click */
+    background-color: var(--light-bg-card);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.question-card summary:hover {
+    background-color: #D0D2D4; /* Slightly darker hover state */
+}
+
+/* Custom disclosure icon (replaces default triangle) */
+.disclosure-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.disclosure-icon::before,
+.disclosure-icon::after {
+    content: '';
+    position: absolute;
+    background-color: var(--tertiary-accent);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.disclosure-icon::before {
+    width: 10px;
+    height: 2px;
+}
+
+.disclosure-icon::after {
+    width: 2px;
+    height: 10px;
+}
+
+/* Rotate icon when open */
+.question-card[open] .disclosure-icon {
+    transform: rotate(45deg); /* For a plus-to-x effect */
+}
+.question-card[open] .disclosure-icon::after {
+    opacity: 0; /* Hide vertical bar for 'x' effect, or keep for 'minus' */
+}
+
+.question-details {
+    padding: 0 1.5rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    text-align: left; /* Align text within details */
+}
+
+.question-details p {
+    margin-bottom: 0.8rem; /* Spacing between paragraphs in details */
+}
+
+.question-details p:last-child {
+    margin-bottom: 0;
+}
+
+.reflection-prompt {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--primary-accent); /* Highlight prompt */
+    padding-top: 0.5rem;
+    border-top: 1px dashed rgba(var(--primary-accent-rgb), 0.3);
+    margin-top: 1rem;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .blueprint-section h2 {
+        font-size: 2rem;
+    }
+    .big-picture-statement {
+        font-size: 2.2rem;
+    }
+    .question-card summary {
+        font-size: 1rem;
+        padding: 1rem 1.2rem;
+    }
+    .question-details {
+        font-size: 0.95rem;
+        padding: 0 1.2rem 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .blueprint-section h2 {
+        font-size: 1.7rem;
+        margin-bottom: 1rem;
+    }
+    .blueprint-intro {
+        font-size: 1rem;
+    }
+    .big-picture-statement {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+    .question-card summary {
+        font-size: 0.95rem;
+        padding: 0.8rem 1rem;
+    }
+    .question-details {
+        font-size: 0.9rem;
+        padding: 0 1rem 1rem;
+    }
+    .reflection-prompt {
+        font-size: 0.85rem;
+    }
+}
+
 /* General Pull Quote Styling */
 blockquote.pull-quote, blockquote.final-quote {
     font-family: var(--serif-font);
