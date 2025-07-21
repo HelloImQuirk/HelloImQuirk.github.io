@@ -1361,7 +1361,7 @@ blockquote.final-quote cite {
         padding: 0; /* Remove specific padding when wider */
     }
 }
-/* 9e. Tags & Search */
+/* 9f. Tags & Search */
 /* --- Post Tags Styling (applies to individual post pages) --- */
 .post-tags {
     margin-top: 1.5rem; /* Space above the tags */
@@ -1562,6 +1562,96 @@ blockquote.final-quote cite {
     .clear-filter-button {
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
+    }
+}
+
+/* --- Search Input Styles --- */
+.search-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem; /* Space before the tag cloud */
+    max-width: 600px; /* Limit width */
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--light-bg-card);
+    border-radius: 8px;
+    padding: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#post-search-input {
+    flex-grow: 1; /* Take up available space */
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--bg-color); /* Lighter background for the input field */
+    outline: none;
+    transition: box-shadow 0.2s ease;
+}
+
+#post-search-input:focus {
+    box-shadow: 0 0 0 2px var(--primary-accent);
+}
+
+#post-search-input::placeholder {
+    color: #888;
+}
+
+#clear-search-button {
+    background-color: transparent;
+    border: none;
+    color: #888;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#clear-search-button:hover {
+    background-color: var(--secondary-accent);
+    color: var(--bg-color);
+}
+
+/* Responsive adjustments for search input */
+@media (max-width: 768px) {
+    .search-input-container {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        padding: 0.4rem;
+    }
+    #post-search-input {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.95rem;
+    }
+    #clear-search-button {
+        font-size: 1rem;
+        width: 28px;
+        height: 28px;
+    }
+}
+@media (max-width: 480px) {
+    .search-input-container {
+        padding: 0.3rem;
+    }
+    #post-search-input {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.7rem;
+    }
+    #clear-search-button {
+        font-size: 0.9rem;
+        width: 25px;
+        height: 25px;
     }
 }
 
