@@ -1361,7 +1361,7 @@ blockquote.final-quote cite {
         padding: 0; /* Remove specific padding when wider */
     }
 }
-/* 9e. Tags */
+/* 9e. Tags & Search */
 /* --- Post Tags Styling (applies to individual post pages) --- */
 .post-tags {
     margin-top: 1.5rem; /* Space above the tags */
@@ -1462,6 +1462,109 @@ blockquote.final-quote cite {
 .tag[data-tag-color="misc"] {
     color: var(--text-color); /* Or a darker color if text visibility is an issue on very light tags */
 }
+
+/* --- Search & Tags Page Specific Styles --- */
+#tag-cloud {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background-color: var(--light-bg-card);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem; /* Slightly larger gap for main tag cloud */
+    justify-content: center;
+}
+
+#filtered-posts-display {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--secondary-accent);
+}
+
+.filtered-results-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.filtered-results-header h2 {
+    font-size: 2rem;
+    color: var(--tertiary-accent);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: inline-block; /* Allows Clear Filter button to align */
+}
+
+.filtered-results-header .highlight-tag {
+    color: var(--primary-accent);
+    font-style: italic;
+    text-transform: capitalize; /* Capitalize the first letter of the tag slug */
+}
+
+.clear-filter-button {
+    display: inline-block;
+    background-color: var(--secondary-accent);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-left: 1rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.clear-filter-button:hover {
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+}
+
+.filtered-post-item {
+    /* Inherits most styles from .post-card */
+    margin-bottom: 1.5rem; /* Space between filtered post cards */
+    /* Ensure it acts as a block */
+    display: block;
+    width: 100%; /* Take full width within its container */
+}
+
+.no-results-message {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments for Search & Tags page */
+@media (max-width: 768px) {
+    #tag-cloud {
+        padding: 1rem;
+        gap: 0.6rem;
+    }
+    .filtered-results-header h2 {
+        font-size: 1.6rem;
+        display: block; /* Stack heading and button */
+        margin-bottom: 0.5rem;
+    }
+    .clear-filter-button {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #tag-cloud {
+        gap: 0.5rem;
+    }
+    .filtered-results-header h2 {
+        font-size: 1.4rem;
+    }
+    .clear-filter-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}
+
 /* 10. Footer */
 .footer, footer {
     text-align: center;
