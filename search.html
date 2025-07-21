@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search & Tags - Quirk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">Quirk</a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="reading-list.html">Reading List</a></li>
+                <li><a href="newsletter.html">Dispatches</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <h1>Explore by Tags</h1>
+            <p>Click on a tag to see all related posts, or browse the full list of tags below.</p>
+
+            <div id="tag-cloud">
+                <!-- Tags will be dynamically loaded here by JavaScript -->
+                <p>Loading tags...</p>
+            </div>
+
+            <div id="filtered-posts-display">
+                <!-- Filtered posts will be displayed here -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Quirk. A life in progress.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tagCloudContainer = document.getElementById('tag-cloud');
+            const filteredPostsDisplay = document.getElementById('filtered-posts-display');
+
+            // IMPORTANT: This array acts as your "database" of posts and their tags.
+            // Keep this updated manually as you add new blog posts.
+            const allPostsData = [
+                {
+                    title: "What a Better America Actually Looks Like",
+                    url: "posts/what-a-better-america-looks-like.html",
+                    category: "Worlds",
+                    description: "A grounded speculative essay that follows an ordinary weekday in a reformed America, shaped by actual policy shifts and institutional accountability.",
+                    readTime: "15 min read",
+                    tags: [
+                        { name: "Future", slug: "future", colorField: "society" },
+                        { name: "Society", slug: "society", colorField: "society" },
+                        { name: "Policy", slug: "policy", colorField: "society" },
+                        { name: "Civic Engagement", slug: "civic-engagement", colorField: "society" },
+                        { name: "Utopia", slug: "utopia", colorField: "society" },
+                        { name: "Speculative Fiction", slug: "speculative-fiction", colorField: "society" },
+                        { name: "Community", slug: "community", colorField: "society" }
+                    ]
+                },
+                {
+                    title: "Signal in the Dark: Why This Blog Exists",
+                    url: "posts/signal-in-the-dark.html",
+                    category: "Reflections",
+                    description: "Why this blog exists and what it promises.",
+                    readTime: "7 min read",
+                    tags: [
+                        { name: "Self-exploration", slug: "self-exploration", colorField: "growth" },
+                        { name: "Personal Growth", slug: "personal-growth", colorField: "growth" },
+                        { name: "Well-being", slug: "well-being", colorField: "growth" },
+                        { name: "Emotional Intelligence", slug: "emotional-intelligence", colorField: "growth" },
+                        { name: "Mindfulness", slug: "mindfulness", colorField: "growth" },
+                        { name: "Clarity", slug: "clarity", colorField: "growth" }
+                    ]
+                },
+                {
+                    title: "Mapping the Voices in Your Head",
+                    url: "posts/shards-to-self.html",
+                    category: "Reflections",
+                    description: "A deep dive into the purpose and patterns of our inner monologue, exploring how it shapes our identity and interactions.",
+                    readTime: "7 min read",
+                    tags: [
+                        { name: "Self-awareness", slug: "self-awareness", colorField: "growth" },
+                        { name: "Inner Monologue", slug: "inner-monologue", colorField: "knowledge" },
+                        { name: "Psychology", slug: "psychology", colorField: "knowledge" },
+                        { name: "Mental Health", slug: "mental-health", colorField: "growth" },
+                        { name: "Integration", slug: "integration", colorField: "growth" },
+                        { name: "Coping Mechanisms", slug: "coping-mechanisms", colorField: "growth" }
+                    ]
+                },
+                {
+                    title: "My System for Taking Notes",
+                    url: "posts/my-system-for-taking-notes.html",
+                    category: "Processes",
+                    description: "A look at the tools and mindset I use to capture and connect ideas from various sources.",
+                    readTime: "8 min read",
+                    tags: [
+                        { name: "Note-taking", slug: "note-taking", colorField: "productivity" },
+                        { name: "Productivity", slug: "productivity", colorField: "productivity" },
+                        { name: "Knowledge Management", slug: "knowledge-management", colorField: "knowledge" },
+                        { name: "Learning", slug: "learning", colorField: "growth" },
+                        { name: "Personal Workflow", slug: "personal-workflow", colorField: "productivity" },
+                        { name: "Tools", slug: "tools", colorField: "tools" }
+                    ]
+                }
+            ];
+
+            // Function to generate and display the tag cloud
+            function generateTagCloud(postsData) {
+                const tagCounts = {};
+                const tagsWithDetails = {}; // Store name, slug, colorField
+
+                postsData.forEach(post => {
+                    post.tags.forEach(tag => {
+                        tagCounts[tag.slug] = (tagCounts[tag.slug] || 0) + 1;
+                        if (!tagsWithDetails[tag.slug]) {
+                            tagsWithDetails[tag.slug] = {
+                                name: tag.name,
+                                slug: tag.slug,
+                                colorField: tag.colorField
+                            };
+                        }
+                    });
+                });
+
+                // Convert to array for sorting
+                const sortedTags = Object.values(tagsWithDetails).sort((a, b) => {
+                    // Sort by usage count (more frequent first), then alphabetically if counts are equal
+                    if (tagCounts[b.slug] !== tagCounts[a.slug]) {
+                        return tagCounts[b.slug] - tagCounts[a.slug];
+                    }
+                    return a.name.localeCompare(b.name);
+                });
+
+                let tagCloudHtml = '';
+                if (sortedTags.length === 0) {
+                    tagCloudHtml = '<p>No tags available yet.</p>';
+                } else {
+                    sortedTags.forEach(tag => {
+                        tagCloudHtml += `<a href="search.html?tag=${tag.slug}" class="tag" data-tag-color="${tag.colorField}">${tag.name} (${tagCounts[tag.slug]})</a>`;
+                    });
+                }
+                tagCloudContainer.innerHTML = tagCloudHtml;
+            }
+
+            // Function to filter and display posts based on URL tag parameter
+            function filterPostsByTag() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const requestedTagSlug = urlParams.get('tag');
+                
+                let filteredPostsHtml = '';
+
+                if (requestedTagSlug) {
+                    // Display a clear heading for the filtered results
+                    filteredPostsHtml += `
+                        <div class="filtered-results-header">
+                            <h2>Posts tagged with: <span class="highlight-tag">${requestedTagSlug.replace(/-/g, ' ')}</span></h2>
+                            <a href="search.html" class="clear-filter-button">Clear Filter</a>
+                        </div>
+                    `;
+                    
+                    let foundPosts = 0;
+                    allPostsData.forEach(post => {
+                        const postHasTag = post.tags.some(tag => tag.slug === requestedTagSlug);
+                        if (postHasTag) {
+                            foundPosts++;
+                            // Create a post card for each filtered post
+                            filteredPostsHtml += `
+                                <article class="post-card filtered-post-item">
+                                    <div class="post-content">
+                                        <h3><a href="${post.url}">${post.title}</a></h3>
+                                        <p>${post.description}</p>
+                                        <div class="post-card-tags">
+                                            ${post.tags.map(tag => `<a href="search.html?tag=${tag.slug}" class="tag" data-tag-color="${tag.colorField}">${tag.name}</a>`).join('')}
+                                        </div>
+                                        <span class="read-time">${post.readTime}</span>
+                                    </div>
+                                    <a href="${post.url}" class="full-card-link"></a>
+                                </article>
+                            `;
+                        }
+                    });
+
+                    if (foundPosts === 0) {
+                        filteredPostsHtml += '<p class="no-results-message">No posts found for this tag.</p>';
+                    }
+                } else {
+                    // Default message if no tag is selected
+                    filteredPostsHtml = '<p class="no-results-message">Click a tag above to see related posts.</p>';
+                }
+
+                filteredPostsDisplay.innerHTML = filteredPostsHtml;
+            }
+
+            // Execute functions on page load
+            generateTagCloud(allPostsData);
+            filterPostsByTag();
+        });
+    </script>
+</body>
+</html>
