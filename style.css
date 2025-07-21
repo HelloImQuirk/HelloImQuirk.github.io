@@ -646,6 +646,63 @@ main {
     background-color: #D0D2D4; /* Slightly darker hover state */
 }
 
+/* --- Vignette Section Styling (e.g., Jordan's Morning, Jordan's Work) --- */
+.vignette-section {
+    background-color: var(--light-bg-card); /* Light background for the section */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
+    padding: 3rem 2.5rem; /* Generous padding inside the section */
+    margin: 4rem auto; /* Space above/below and center the block */
+    max-width: 800px; /* Constrain width to match your content wrapper */
+    box-sizing: border-box; /* Include padding in the width calculation */
+    color: var(--text-color); /* Ensure text color is readable */
+}
+
+.vignette-section h2 {
+    font-family: var(--serif-font);
+    font-size: 2.2rem;
+    color: var(--tertiary-accent); /* Dark blue for headings */
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+    text-align: center; /* Center section titles */
+}
+
+.vignette-section p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.vignette-section p:last-child {
+    margin-bottom: 0; /* No margin after last paragraph */
+}
+
+/* Responsive adjustments for Vignette Sections */
+@media (max-width: 768px) {
+    .vignette-section {
+        padding: 2rem 1.5rem;
+        margin: 3rem auto;
+    }
+    .vignette-section h2 {
+        font-size: 1.8rem;
+    }
+    .vignette-section p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .vignette-section {
+        padding: 1.5rem 1rem;
+        margin: 2rem auto;
+    }
+    .vignette-section h2 {
+        font-size: 1.5rem;
+    }
+    .vignette-section p {
+        font-size: 0.95rem;
+    }
+}
 /* Custom disclosure icon (replaces default triangle) */
 .disclosure-icon {
     display: inline-block;
