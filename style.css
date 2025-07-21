@@ -1597,9 +1597,3 @@ footer a:focus {
     .hero .tagline { font-size: 1.2rem; }
     /* The specific .scroll-cue { bottom: 1rem; } override for min-width: 1024px has been removed */
 }
-
-/* TEMPORARY DIAGNOSTIC FOR BLOCKQUOTE CHARACTERS */
-blockquote {
-    font-family: "Arial", sans-serif !important; /* Force a very common, web-safe font */
-    /* You might already have a blockquote style, ensure this overrides it for testing */
-}
