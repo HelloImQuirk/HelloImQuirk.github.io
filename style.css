@@ -1235,12 +1235,6 @@ blockquote.final-quote cite {
 .post-content h3 { margin-top: 0; font-size: 1.6rem; color: var(--primary-accent);}
 .post-content .read-time { font-size: 0.9rem; color: var(--tertiary-accent); }
 
-#filter-all:checked ~ .blog-grid .post-card { display: block; }
-#filter-reflections:checked ~ .blog-grid .post-card:not([data-category="reflections"]) { display: none; }
-#filter-worlds:checked ~ .blog-grid .post-card:not([data-category="worlds"]) { display: none; }
-#filter-process:checked ~ .blog-grid .post-card:not([data-category="process"]) { display: none; }
-#filter-signals:checked ~ .blog-grid .post-card:not([data-category="signals"]) { display: none; }
-
 /* 9c. Reading List */
 .reading-item {
     margin-bottom: 2rem;
