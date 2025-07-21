@@ -18,6 +18,7 @@
       d. Forms (Newsletter & Contact)
       e. Voice Map Grid 
       f. Tags
+      g. OS Stack Interactive Cards
   10. Footer
   11. Animations & Transitions
   12. Media Queries (Tablet & Desktop)
@@ -1588,6 +1589,136 @@ blockquote.final-quote cite {
 #clear-search-button:hover {
     background-color: var(--secondary-accent);
     color: var(--bg-color);
+}
+/* UPDATED SECTION: 9g. OS Stack Interactive Cards (Now targeting <details> structure) */
+
+/* Container for the OS cards - now identical to .blueprint-questions */
+.blueprint-questions { /* Changed from .os-stack-interactive */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 auto 3rem auto; /* Added 3rem margin-bottom here */
+    max-width: 700px; /* Limits width for readability */
+}
+
+/* Base styling for each OS Card (now .question-card) - IDENTICAL to .question-card */
+.question-card { /* Changed from .accordion-item */
+    background-color: var(--light-bg-card);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(var(--text-color-rgb), 0.08);
+    overflow: hidden; /* Ensures rounded corners are respected and no content spills */
+    margin: 0; /* Override any default margin on <details> */
+    border: none; /* Override any default border on <details> */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Styling for the header (now summary) - IDENTICAL to .question-summary */
+.question-card summary { /* Changed from .accordion-header */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--tertiary-accent);
+    cursor: pointer;
+    outline: none; /* Removes the focus outline */
+    user-select: none;
+    background-color: var(--light-bg-card); /* Matches the card background */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.question-card summary:hover {
+    background-color: var(--secondary-accent);
+    color: var(--text-color); /* Ensure text is readable on hover */
+}
+
+/* Styling for the expand/collapse icon - now .disclosure-icon */
+.disclosure-icon { /* Changed from .accordion-icon */
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    transition: transform 0.3s ease;
+    /* Remove default disclosure triangle in some browsers */
+    list-style: none; /* For Webkit (Chrome, Safari) */
+    &::-webkit-details-marker {
+        display: none;
+    }
+}
+
+.disclosure-icon::before,
+.disclosure-icon::after {
+    content: '';
+    position: absolute;
+    background-color: var(--tertiary-accent); /* Icon color */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.disclosure-icon::before {
+    width: 10px; /* Horizontal bar */
+    height: 2px;
+}
+
+.disclosure-icon::after {
+    width: 2px; /* Vertical bar */
+    height: 10px;
+}
+
+/* When the <details> is open, rotate the icon */
+.question-card[open] .disclosure-icon {
+    transform: rotate(45deg);
+}
+
+/* Hide the vertical bar when the <details> is open */
+.question-card[open] .disclosure-icon::after {
+    opacity: 0;
+}
+
+/* Styling for the content area (now .question-details) - IDENTICAL to .question-details */
+.question-details { /* Changed from .accordion-content */
+    padding: 0 1.5rem 1.5rem; /* Consistent padding */
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    text-align: left;
+    transition: color 0.3s ease;
+    /* max-height and overflow handling is now native to <details> */
+}
+
+.question-details p {
+    margin-bottom: 0.8rem;
+}
+
+.question-details p:last-child {
+    margin-bottom: 0;
+}
+
+/* Ensure consistent list styling within the content */
+.question-details ul,
+.question-details ol {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem; /* Standard indentation for lists */
+}
+
+.question-details ul li,
+.question-details ol li {
+    margin-bottom: 0.5em;
+    color: var(--text-color);
+}
+
+/* Specific styling for the reflection-prompt (if you choose to use it) */
+.reflection-prompt {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--primary-accent);
+    padding-top: 0.5rem;
+    border-top: 1px dashed rgba(var(--primary-accent-rgb), 0.3);
+    margin-top: 1rem;
+    transition: color 0.3s ease, border-top-color 0.3s ease;
 }
 
 /* 10. Footer */
