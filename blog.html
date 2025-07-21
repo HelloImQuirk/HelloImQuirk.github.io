@@ -215,5 +215,27 @@
         });
     });
 </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-radio');
+        const blogPosts = document.querySelectorAll('.post-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('change', function() {
+                const selectedCategory = this.id.replace('filter-', ''); // e.g., 'all', 'reflections'
+
+                blogPosts.forEach(post => {
+                    const postCategory = post.getAttribute('data-category');
+
+                    if (selectedCategory === 'all' || postCategory === selectedCategory) {
+                        post.style.display = 'block'; // Show the post
+                    } else {
+                        post.style.display = 'none'; // Hide the post
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 </html>
