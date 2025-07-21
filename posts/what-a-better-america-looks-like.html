@@ -288,5 +288,66 @@
     </footer>
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Function to set the theme
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            // Update the button icon based on the new theme
+            if (themeToggle) {
+                if (theme === 'dark') {
+                    themeToggle.querySelector('.icon-light-mode').style.opacity = '0';
+                    themeToggle.querySelector('.icon-light-mode').style.transform = 'scale(0.5)';
+                    themeToggle.querySelector('.icon-dark-mode').style.opacity = '1';
+                    themeToggle.querySelector('.icon-dark-mode').style.transform = 'scale(1)';
+                } else {
+                    themeToggle.querySelector('.icon-light-mode').style.opacity = '1';
+                    themeToggle.querySelector('.icon-light-mode').style.transform = 'scale(1)';
+                    themeToggle.querySelector('.icon-dark-mode').style.opacity = '0';
+                    themeToggle.querySelector('.icon-dark-mode').style.transform = 'scale(0.5)';
+                }
+            }
+        }
+
+        // Function to get the preferred theme
+        function getPreferredTheme() {
+            // 1. Check local storage first
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme) {
+                return storedTheme;
+            }
+            // 2. Then check system preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            // 3. Default to light
+            return 'light';
+        }
+
+        // Apply initial theme on load
+        const initialTheme = getPreferredTheme();
+        setTheme(initialTheme);
+
+        // Listen for toggle button click
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
+            });
+        }
+
+        // Optional: Listen for system theme changes (if user changes system preference while page is open)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+    });
+</script>
 </body>
 </html>
