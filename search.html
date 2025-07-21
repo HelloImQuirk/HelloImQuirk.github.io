@@ -33,8 +33,11 @@
             <h1>Explore by Tags</h1>
             <p>Click on a tag to see all related posts, or browse the full list of tags below.</p>
 
+            <div class="search-input-container">
+                <input type="text" id="post-search-input" placeholder="Search posts by keyword..." aria-label="Search posts">
+                <button id="clear-search-button" aria-label="Clear search">X</button>
+            </div>
             <div id="tag-cloud">
-                <!-- Tags will be dynamically loaded here by JavaScript -->
                 <p>Loading tags...</p>
             </div>
 
@@ -48,17 +51,19 @@
         <p>&copy; 2025 Quirk. A life in progress.</p>
     </footer>
 
-    <script>
+ <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tagCloudContainer = document.getElementById('tag-cloud');
             const filteredPostsDisplay = document.getElementById('filtered-posts-display');
+            const postSearchInput = document.getElementById('post-search-input'); // NEW
+            const clearSearchButton = document.getElementById('clear-search-button'); // NEW
 
             // IMPORTANT: This array acts as your "database" of posts and their tags.
             // Keep this updated manually as you add new blog posts.
             const allPostsData = [
                 {
                     title: "What a Better America Actually Looks Like",
-                    url: "posts/what-a-better-america-looks-like.html",
+                    url: "../posts/what-a-better-america-looks-like.html", // Ensure correct path for individual posts
                     category: "Worlds",
                     description: "A grounded speculative essay that follows an ordinary weekday in a reformed America, shaped by actual policy shifts and institutional accountability.",
                     readTime: "15 min read",
@@ -74,7 +79,7 @@
                 },
                 {
                     title: "Signal in the Dark: Why This Blog Exists",
-                    url: "posts/signal-in-the-dark.html",
+                    url: "../posts/signal-in-the-dark.html", // Ensure correct path
                     category: "Reflections",
                     description: "Why this blog exists and what it promises.",
                     readTime: "7 min read",
@@ -89,7 +94,7 @@
                 },
                 {
                     title: "Mapping the Voices in Your Head",
-                    url: "posts/shards-to-self.html",
+                    url: "../posts/shards-to-self.html", // Ensure correct path
                     category: "Reflections",
                     description: "A deep dive into the purpose and patterns of our inner monologue, exploring how it shapes our identity and interactions.",
                     readTime: "7 min read",
@@ -104,7 +109,7 @@
                 },
                 {
                     title: "My System for Taking Notes",
-                    url: "posts/my-system-for-taking-notes.html",
+                    url: "../posts/my-system-for-taking-notes.html", // Ensure correct path
                     category: "Processes",
                     description: "A look at the tools and mindset I use to capture and connect ideas from various sources.",
                     readTime: "8 min read",
@@ -137,9 +142,7 @@
                     });
                 });
 
-                // Convert to array for sorting
                 const sortedTags = Object.values(tagsWithDetails).sort((a, b) => {
-                    // Sort by usage count (more frequent first), then alphabetically if counts are equal
                     if (tagCounts[b.slug] !== tagCounts[a.slug]) {
                         return tagCounts[b.slug] - tagCounts[a.slug];
                     }
@@ -157,58 +160,83 @@
                 tagCloudContainer.innerHTML = tagCloudHtml;
             }
 
-            // Function to filter and display posts based on URL tag parameter
-            function filterPostsByTag() {
+            // Central function to filter and display posts based on URL tag parameter AND search input
+            function displayFilteredPosts() {
                 const urlParams = new URLSearchParams(window.location.search);
                 const requestedTagSlug = urlParams.get('tag');
+                const searchTerm = postSearchInput.value.toLowerCase().trim(); // NEW
+
+                let postsToShow = allPostsData;
+
+                // 1. Filter by Tag (if present in URL)
+                if (requestedTagSlug) {
+                    postsToShow = postsToShow.filter(post => 
+                        post.tags.some(tag => tag.slug === requestedTagSlug)
+                    );
+                }
+
+                // 2. Filter by Search Term (if present in input)
+                if (searchTerm) {
+                    postsToShow = postsToShow.filter(post => 
+                        post.title.toLowerCase().includes(searchTerm) ||
+                        post.description.toLowerCase().includes(searchTerm) || // Search in description too
+                        post.tags.some(tag => tag.name.toLowerCase().includes(searchTerm)) // Search in tag names
+                    );
+                }
                 
                 let filteredPostsHtml = '';
 
-                if (requestedTagSlug) {
-                    // Display a clear heading for the filtered results
+                if (requestedTagSlug || searchTerm) { // Display header if any filter is active
                     filteredPostsHtml += `
                         <div class="filtered-results-header">
-                            <h2>Posts tagged with: <span class="highlight-tag">${requestedTagSlug.replace(/-/g, ' ')}</span></h2>
-                            <a href="search.html" class="clear-filter-button">Clear Filter</a>
+                            <h2>
+                                ${requestedTagSlug ? `Posts tagged with: <span class="highlight-tag">${requestedTagSlug.replace(/-/g, ' ')}</span>` : ''}
+                                ${requestedTagSlug && searchTerm ? ' & ' : ''}
+                                ${searchTerm ? `Search results for: "<span class="highlight-tag">${searchTerm}</span>"` : ''}
+                            </h2>
+                            <a href="search.html" class="clear-filter-button">Clear All Filters</a>
                         </div>
                     `;
-                    
-                    let foundPosts = 0;
-                    allPostsData.forEach(post => {
-                        const postHasTag = post.tags.some(tag => tag.slug === requestedTagSlug);
-                        if (postHasTag) {
-                            foundPosts++;
-                            // Create a post card for each filtered post
-                            filteredPostsHtml += `
-                                <article class="post-card filtered-post-item">
-                                    <div class="post-content">
-                                        <h3><a href="${post.url}">${post.title}</a></h3>
-                                        <p>${post.description}</p>
-                                        <div class="post-card-tags">
-                                            ${post.tags.map(tag => `<a href="search.html?tag=${tag.slug}" class="tag" data-tag-color="${tag.colorField}">${tag.name}</a>`).join('')}
-                                        </div>
-                                        <span class="read-time">${post.readTime}</span>
-                                    </div>
-                                    <a href="${post.url}" class="full-card-link"></a>
-                                </article>
-                            `;
-                        }
-                    });
-
-                    if (foundPosts === 0) {
-                        filteredPostsHtml += '<p class="no-results-message">No posts found for this tag.</p>';
-                    }
-                } else {
-                    // Default message if no tag is selected
-                    filteredPostsHtml = '<p class="no-results-message">Click a tag above to see related posts.</p>';
                 }
 
+                if (postsToShow.length === 0) {
+                    filteredPostsHtml += '<p class="no-results-message">No posts found matching your criteria.</p>';
+                } else {
+                    postsToShow.forEach(post => {
+                        filteredPostsHtml += `
+                            <article class="post-card filtered-post-item">
+                                <div class="post-content">
+                                    <h3><a href="${post.url}">${post.title}</a></h3>
+                                    <p>${post.description}</p>
+                                    <div class="post-card-tags">
+                                        ${post.tags.map(tag => `<a href="search.html?tag=${tag.slug}" class="tag" data-tag-color="${tag.colorField}">${tag.name}</a>`).join('')}
+                                    </div>
+                                    <span class="read-time">${post.readTime}</span>
+                                </div>
+                                <a href="${post.url}" class="full-card-link"></a>
+                            </article>
+                        `;
+                    });
+                }
                 filteredPostsDisplay.innerHTML = filteredPostsHtml;
             }
 
-            // Execute functions on page load
+            // Event Listeners for search input
+            postSearchInput.addEventListener('input', displayFilteredPosts); // Filter on every key stroke
+            clearSearchButton.addEventListener('click', function() {
+                postSearchInput.value = ''; // Clear input
+                // To also clear the tag filter from URL, we'll navigate cleanly
+                if (window.location.search) { // If there are any URL parameters
+                    window.location.href = 'search.html'; // Redirect to clear them
+                } else {
+                    displayFilteredPosts(); // Just re-display if no URL params
+                }
+            });
+
+
+            // Initial calls on page load
             generateTagCloud(allPostsData);
-            filterPostsByTag();
+            displayFilteredPosts(); // Initial display based on any URL tag or empty search
         });
     </script>
 </body>
