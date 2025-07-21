@@ -68,8 +68,24 @@
             // Keep this updated manually as you add new blog posts.
             const allPostsData = [
                 {
+                    title: "Your Personal OS: Building a Biological-First System",
+                    url: "../posts/your-personal-os.html",
+                    category: "Process",
+                    description: "Redesign your productivity from the ground up, aligning with your biology and nervous system for true resilience and sustainable action.",
+                    readTime: "10 min read",
+                    tags: [
+                        { name: "Coping Mechanisms", slug: "coping-mechanisms", colorField: "growth" },
+                        { name: "Self-awareness", slug: "self-awareness", colorField: "growth" },
+                        { name: "Mindfulness", slug: "mindfulness", colorField: "knowledge" },
+                        { name: "Personal Workflow", slug: "personal-workflow", colorField: "productivity" },
+                        { name: "Well-being", slug: "well-being", colorField: "growth" },
+                        { name: "Integration", slug: "integration", colorField: "growth" },
+                        { name: "Self-exploration", slug: "self-exploration", colorField: "growth" }
+                    ]
+                },
+                {
                     title: "What a Better America Actually Looks Like",
-                    url: "../posts/what-a-better-america-looks-like.html", // Ensure correct path for individual posts
+                    url: "../posts/what-a-better-america-looks-like.html",
                     category: "Worlds",
                     description: "A grounded speculative essay that follows an ordinary weekday in a reformed America, shaped by actual policy shifts and institutional accountability.",
                     readTime: "15 min read",
@@ -85,7 +101,7 @@
                 },
                 {
                     title: "Signal in the Dark: Why This Blog Exists",
-                    url: "../posts/signal-in-the-dark.html", // Ensure correct path
+                    url: "../posts/signal-in-the-dark.html",
                     category: "Reflections",
                     description: "Why this blog exists and what it promises.",
                     readTime: "7 min read",
@@ -100,7 +116,7 @@
                 },
                 {
                     title: "Mapping the Voices in Your Head",
-                    url: "../posts/shards-to-self.html", // Ensure correct path
+                    url: "../posts/shards-to-self.html",
                     category: "Reflections",
                     description: "A deep dive into the purpose and patterns of our inner monologue, exploring how it shapes our identity and interactions.",
                     readTime: "7 min read",
@@ -115,7 +131,7 @@
                 },
                 {
                     title: "My System for Taking Notes",
-                    url: "../posts/my-system-for-taking-notes.html", // Ensure correct path
+                    url: "../posts/my-system-for-taking-notes.html",
                     category: "Processes",
                     description: "A look at the tools and mindset I use to capture and connect ideas from various sources.",
                     readTime: "8 min read",
@@ -131,22 +147,48 @@
             ];
 
             // Function to generate and display the tag cloud
-            function generateTagCloud(postsData) {
-                const tagCounts = {};
-                const tagsWithDetails = {}; // Store name, slug, colorField
+            function generateTagCloud() {
+                const tagCounts = {}; // To store the count of each tag
+                let maxCount = 0; // To find the maximum count for scaling
 
-                postsData.forEach(post => {
+                // 1. Count occurrences of each tag and find the max count
+                allPostsData.forEach(post => {
                     post.tags.forEach(tag => {
                         tagCounts[tag.slug] = (tagCounts[tag.slug] || 0) + 1;
-                        if (!tagsWithDetails[tag.slug]) {
-                            tagsWithDetails[tag.slug] = {
-                                name: tag.name,
-                                slug: tag.slug,
-                                colorField: tag.colorField
-                            };
+                        if (tagCounts[tag.slug] > maxCount) {
+                            maxCount = tagCounts[tag.slug];
                         }
                     });
                 });
+
+                const tagCloudContainer = document.getElementById('tag-cloud');
+                tagCloudContainer.innerHTML = ''; // Clear existing tags
+
+                // 2. Sort tags alphabetically for consistent display
+                const sortedTagSlugs = Object.keys(tagCounts).sort();
+
+                // 3. Generate tag links with weighted styling
+                sortedTagSlugs.forEach(slug => {
+                    const count = tagCounts[slug];
+                    const tagName = allPostsData.find(post => post.tags.some(t => t.slug === slug)).tags.find(t => t.slug === slug).name; // Get the original tag name
+                    const tagColorField = allPostsData.find(post => post.tags.some(t => t.slug === slug)).tags.find(t => t.slug === slug).colorField; // Get the original tag color
+
+                    const tagLink = document.createElement('a');
+                    tagLink.href = `search.html?tag=${slug}`; // Retain direct link functionality
+                    tagLink.className = `tag-cloud-item tag-${tagColorField}`; // Apply existing tag color classes
+                    tagLink.textContent = `${tagName} (${count})`;
+
+                    // Calculate font size based on count relative to maxCount
+                    // Minimum font size (e.g., 1em) for single occurrences, scales up to a max (e.g., 1.8em)
+                    const minFontSize = 0.9; // Base size for tags with count 1
+                    const maxFontSize = 1.6; // Max size for the most frequent tag
+                    const fontSize = minFontSize + (count - 1) / (maxCount - 1 || 1) * (maxFontSize - minFontSize);
+                    tagLink.style.fontSize = `${fontSize}em`;
+                    tagLink.style.fontWeight = 'normal'; // Reset if any default bolding exists for links
+                    
+                    tagCloudContainer.appendChild(tagLink);
+                });
+            }
 
                 const sortedTags = Object.values(tagsWithDetails).sort((a, b) => {
                     if (tagCounts[b.slug] !== tagCounts[a.slug]) {
