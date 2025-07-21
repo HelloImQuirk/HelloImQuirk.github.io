@@ -15,6 +15,8 @@
       b. Blog Filters & Grid
       c. Reading List
       d. Forms (Newsletter & Contact)
+      e. Voice Map Grid 
+      f. Tags
   10. Footer
   11. Animations & Transitions
   12. Media Queries (Tablet & Desktop)
@@ -30,6 +32,14 @@
     --serif-font: 'Playfair Display', serif;
     --sans-font: 'Inter', sans-serif;
     --light-bg-card: #D8DADC; /* NEW & IMPROVED: A visibly distinct, subtle light blue-gray */
+
+    /* --- Tag Colors (New) --- */
+    --tag-color-productivity: #A0C4FF; /* Light Blue */
+    --tag-color-growth: #B6E8A9;       /* Light Green */
+    --tag-color-knowledge: #FFDDA0;    /* Light Orange/Yellow */
+    --tag-color-society: #FFB3BA;      /* Light Red/Pink */
+    --tag-color-tools: #C2A0FF;        /* Light Purple */
+    --tag-color-misc: #E0E0E0;         /* Grey for uncategorized/misc */
 }
 
 /* 2. Global & Default Styles */
@@ -1351,7 +1361,107 @@ blockquote.final-quote cite {
         padding: 0; /* Remove specific padding when wider */
     }
 }
+/* 9e. Tags */
+/* --- Post Tags Styling (applies to individual post pages) --- */
+.post-tags {
+    margin-top: 1.5rem; /* Space above the tags */
+    margin-bottom: 2rem; /* Space below the tags before content */
+    display: flex;
+    flex-wrap: wrap; /* Allow tags to wrap to next line */
+    gap: 0.6rem; /* Space between tags */
+    justify-content: center; /* Center the tags */
+}
 
+/* --- Base Styling for ALL Tags (both on individual posts and blog cards) --- */
+.tag {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px; /* Rounded corners for capsule shape */
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none; /* Remove underline from links */
+    color: var(--text-color); /* Default text color for tags */
+    background-color: var(--light-bg-card); /* Fallback background */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap; /* Prevent tags from breaking onto multiple lines */
+}
+
+.tag:hover {
+    transform: translateY(-2px); /* Slight lift effect on hover */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+/* --- Styles for tags within post cards on blog.html --- */
+.post-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Space between tags */
+    margin-top: 1rem; /* Space above tags */
+    margin-bottom: 0.8rem; /* Space below tags, before read time */
+    /* Align tags to the left within the post card content */
+    justify-content: flex-start;
+}
+
+/* Inherit individual .tag styling from the .tag class for tags inside post cards */
+.post-card-tags .tag {
+    font-size: 0.75rem; /* Slightly smaller tags for post cards */
+    padding: 0.3rem 0.7rem;
+}
+
+/* Responsive adjustments for tags */
+@media (max-width: 768px) {
+    .post-tags { /* For individual post pages */
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        gap: 0.5rem;
+    }
+    .tag { /* General tag size adjustment */
+        padding: 0.35rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    .post-card-tags { /* For blog.html post cards */
+        gap: 0.4rem;
+        margin-top: 0.8rem;
+        margin-bottom: 0.6rem;
+    }
+    .post-card-tags .tag { /* Specific size for post card tags */
+        font-size: 0.7rem;
+        padding: 0.25rem 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-tags { /* For individual post pages */
+        justify-content: center; /* Ensure centering on very small screens */
+    }
+    .tag { /* General tag size adjustment */
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+    }
+    .post-card-tags { /* For blog.html post cards */
+        justify-content: flex-start; /* Keep left alignment */
+    }
+    .post-card-tags .tag { /* Specific size for post card tags */
+        font-size: 0.65rem; /* Even smaller on tiny screens */
+        padding: 0.25rem 0.5rem;
+    }
+}
+/* --- Tag Color Coding (using data attributes) --- */
+.tag[data-tag-color="productivity"] { background-color: var(--tag-color-productivity); }
+.tag[data-tag-color="growth"] { background-color: var(--tag-color-growth); }
+.tag[data-tag-color="knowledge"] { background-color: var(--tag-color-knowledge); }
+.tag[data-tag-color="society"] { background-color: var(--tag-color-society); }
+.tag[data-tag-color="tools"] { background-color: var(--tag-color-tools); }
+.tag[data-tag-color="misc"] { background-color: var(--tag-color-misc); }
+
+/* Ensure text inside tags is readable if background is light */
+.tag[data-tag-color="productivity"],
+.tag[data-tag-color="growth"],
+.tag[data-tag-color="knowledge"],
+.tag[data-tag-color="society"],
+.tag[data-tag-color="tools"],
+.tag[data-tag-color="misc"] {
+    color: var(--text-color); /* Or a darker color if text visibility is an issue on very light tags */
+}
 /* 10. Footer */
 .footer, footer {
     text-align: center;
