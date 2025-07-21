@@ -1,11 +1,12 @@
 /*
-  STYLE.CSS (Monochromatic Blue Redesign)
+  STYLE.CSS (Monochromatic Blue Redesign + Dark Mode)
   ---
   CONTENTS:
   1.  Global Styles & Variables
   2.  Global & Default Styles
   3.  Typography
   4.  Header & Navigation (Mobile First)
+      a. Dark Mode Toggle Button Styling
   5.  Hero Section
   6.  Compass Section
   7.  Manifesto Block
@@ -33,13 +34,47 @@
     --sans-font: 'Inter', sans-serif;
     --light-bg-card: #D8DADC; /* NEW & IMPROVED: A visibly distinct, subtle light blue-gray */
 
-    /* --- Tag Colors (New) --- */
+    /* --- Tag Colors (New - Light Mode) --- */
     --tag-color-productivity: #A0C4FF; /* Light Blue */
     --tag-color-growth: #B6E8A9;       /* Light Green */
     --tag-color-knowledge: #FFDDA0;    /* Light Orange/Yellow */
     --tag-color-society: #FFB3BA;      /* Light Red/Pink */
     --tag-color-tools: #C2A0FF;        /* Light Purple */
     --tag-color-misc: #E0E0E0;         /* Grey for uncategorized/misc */
+
+    /* RGB values for rgba() functions (Light Mode) */
+    --bg-color-rgb: 245, 242, 235;
+    --text-color-rgb: 44, 46, 51;
+    --primary-accent-rgb: 74, 99, 243;
+    --secondary-accent-rgb: 142, 181, 243;
+    --tertiary-accent-rgb: 56, 77, 156;
+    --light-bg-card-rgb: 216, 218, 220;
+}
+
+/* Dark Mode Colors */
+[data-theme="dark"] {
+    --bg-color: #1A1E26;           /* Very dark, desaturated blue-grey for main background */
+    --text-color: #F0F0F0;         /* Soft light grey for main text */
+    --primary-accent: #7B9CFF;     /* Slightly lighter/brighter primary blue for contrast */
+    --secondary-accent: #5C82E0;   /* Muted blue, still visible */
+    --tertiary-accent: #AABFFF;    /* Lighter dark blue for headings/strong accents */
+    --light-bg-card: #2C313A;      /* Slightly lighter dark grey for card backgrounds */
+
+    /* Dark Mode Tag Colors (adjusted for visibility on dark backgrounds) */
+    --tag-color-productivity: #8CC0FF;
+    --tag-color-growth: #A5D690;
+    --tag-color-knowledge: #FFC870;
+    --tag-color-society: #FF9999;
+    --tag-color-tools: #C999FF;
+    --tag-color-misc: #888888;
+
+    /* RGB values for rgba() functions (Dark Mode) */
+    --bg-color-rgb: 26, 30, 38;
+    --text-color-rgb: 240, 240, 240;
+    --primary-accent-rgb: 123, 156, 255;
+    --secondary-accent-rgb: 92, 130, 224;
+    --tertiary-accent-rgb: 170, 191, 255;
+    --light-bg-card-rgb: 44, 49, 58;
 }
 
 /* 2. Global & Default Styles */
@@ -50,13 +85,15 @@ body {
     line-height: 1.7;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 main#homepage-main {
-    padding-top: 0; /* FIX: Removed top padding for hero page to allow proper vertical centering */
+    padding-top: 0;
     position: relative;
     overflow: visible;
     min-height: calc(100vh - 4.5rem);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* 3. Typography */
@@ -66,18 +103,18 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     color: var(--text-color);
     margin-top: 0;
+    transition: color 0.3s ease;
 }
 
-/* Main h1 site/page title: use brand blue */
 h1 {
     color: var(--primary-accent);
     font-size: 3rem;
+    transition: color 0.3s ease;
 }
 
 h2 { font-size: 2.2rem; }
 p { font-size: 1rem; margin-bottom: 1rem; }
 
-/* Links */
 a {
     color: var(--primary-accent);
     text-decoration: none;
@@ -101,9 +138,10 @@ a:focus {
     justify-content: space-between;
     align-items: center;
     background-color: var(--light-bg-card);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
     z-index: 1000;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo {
@@ -113,6 +151,7 @@ a:focus {
     color: var(--primary-accent);
     z-index: 1001;
     letter-spacing: 0.05em;
+    transition: color 0.3s ease;
 }
 
 .nav-toggle {
@@ -136,7 +175,7 @@ a:focus {
     height: 3px;
     background-color: var(--text-color);
     border-radius: 3px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
 }
 
 .nav-toggle:checked ~ .nav-menu {
@@ -165,7 +204,7 @@ a:focus {
     justify-content: center;
     align-items: center;
     transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease;
 }
 
 .nav-menu ul {
@@ -195,6 +234,49 @@ a:focus {
     text-decoration: underline;
 }
 
+/* --- Dark Mode Toggle Button Styling --- */
+#theme-toggle {
+    background-color: var(--secondary-accent);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(var(--text-color-rgb), 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-left: 1rem;
+    flex-shrink: 0;
+    color: var(--bg-color);
+    position: relative;
+}
+
+#theme-toggle:hover {
+    background-color: var(--primary-accent);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.15);
+}
+
+#theme-toggle .icon-light-mode,
+#theme-toggle .icon-dark-mode {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+body[data-theme="light"] .icon-dark-mode,
+body:not([data-theme]) .icon-dark-mode {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+body[data-theme="dark"] .icon-light-mode {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
 /* 5. Hero Section */
 .hero {
     min-height: calc(100vh - 4.5rem);
@@ -203,16 +285,17 @@ a:focus {
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative; /* Essential for positioning scroll-cue */
+    position: relative;
     z-index: 1;
     padding: 0 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .hero-text-content {
     background-color: var(--light-bg-card);
     padding: 2.5rem 3rem;
     border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
     max-width: 700px;
     margin: 0 auto;
     text-align: center;
@@ -225,6 +308,7 @@ a:focus {
     position: relative;
     z-index: 2;
     color: var(--primary-accent);
+    transition: color 0.3s ease;
 }
 
 .hero .tagline {
@@ -233,6 +317,7 @@ a:focus {
     color: var(--tertiary-accent);
     position: relative;
     z-index: 2;
+    transition: color 0.3s ease;
 }
 
 /* 6. Compass Section */
@@ -243,7 +328,8 @@ a:focus {
     text-align: center;
     background-color: var(--light-bg-card);
     border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .compass-heading {
@@ -251,6 +337,7 @@ a:focus {
     font-size: 2.2rem;
     margin-bottom: 0.5em;
     color: var(--primary-accent);
+    transition: color 0.3s ease;
 }
 
 .compass-intro {
@@ -261,6 +348,7 @@ a:focus {
     margin-left: auto;
     margin-right: auto;
     color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
 .compass-grid {
@@ -278,6 +366,7 @@ a:focus {
     cursor: pointer;
     text-align: center;
     position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 /* Hide the actual checkbox */
@@ -296,7 +385,7 @@ a:focus {
     border-radius: 15px;
     min-height: 200px;
     transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 8px rgba(44, 46, 51, 0.08);
+    box-shadow: 0 2px 8px rgba(var(--text-color-rgb), 0.08);
 }
 
 .compass-icon {
@@ -315,6 +404,7 @@ a:focus {
     margin-bottom: 0.5em;
     line-height: 1.4;
     flex-grow: 1;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .compass-category {
@@ -323,6 +413,7 @@ a:focus {
     color: var(--tertiary-accent);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 /* Hover/Focus/Active Effects */
@@ -330,7 +421,7 @@ a:focus {
     background-color: var(--secondary-accent);
     border-color: var(--secondary-accent);
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 6px 20px rgba(44, 46, 51, 0.1);
+    box-shadow: 0 6px 20px rgba(var(--text-color-rgb), 0.1);
 }
 
 .compass-point:hover .compass-icon {
@@ -340,14 +431,14 @@ a:focus {
 .compass-point:hover .compass-question,
 .compass-point:hover .compass-category {
     color: var(--text-color);
-    text-shadow: 0 1px 2px rgba(44, 46, 51, 0.3);
+    text-shadow: 0 1px 2px rgba(var(--text-color-rgb), 0.3);
 }
 
 .compass-point .compass-bubble:active {
     background-color: var(--tertiary-accent);
     border-color: var(--tertiary-accent);
     transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 3px 10px rgba(44,46,51,0.1);
+    box-shadow: 0 3px 10px rgba(var(--text-color-rgb), 0.1);
 }
 
 .compass-point .compass-bubble:active .compass-icon,
@@ -361,7 +452,7 @@ a:focus {
     background-color: var(--primary-accent) !important;
     border-color: var(--primary-accent) !important;
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(44, 46, 51, 0.1);
+    box-shadow: 0 6px 20px rgba(var(--text-color-rgb), 0.1);
     animation: none;
 }
 
@@ -369,7 +460,7 @@ a:focus {
 .compass-toggle:checked + .compass-bubble .compass-question,
 .compass-toggle:checked + .compass-bubble .compass-category {
     color: var(--bg-color);
-    text-shadow: 0 1px 2px rgba(44, 46, 51, 0.3);
+    text-shadow: 0 1px 2px rgba(var(--text-color-rgb), 0.3);
 }
 
 .compass-toggle:checked ~ .compass-content {
@@ -383,13 +474,13 @@ a:focus {
 .compass-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s, padding 0.5s, opacity 0.5s;
+    transition: max-height 0.5s, padding 0.5s, opacity 0.5s, background-color 0.3s ease;
     opacity: 0;
     padding-top: 0;
     text-align: left;
     background-color: var(--bg-color);
     border-radius: 0 0 15px 15px;
-    box-shadow: 0 8px 15px rgba(44, 46, 51, 0.05);
+    box-shadow: 0 8px 15px rgba(var(--text-color-rgb), 0.05);
     margin-top: -15px;
     padding-left: 1.5em;
     padding-right: 1.5em;
@@ -404,6 +495,7 @@ a:focus {
     color: var(--text-color);
     margin-top: 1em;
     margin-bottom: 1em;
+    transition: color 0.3s ease;
 }
 
 .compass-content .compass-link {
@@ -429,6 +521,7 @@ a:focus {
     color: var(--secondary-accent);
     margin-top: 1em;
     font-size: 0.9em;
+    transition: color 0.3s ease;
 }
 
 /* 7. Manifesto Block */
@@ -436,13 +529,14 @@ a:focus {
     max-width: 700px;
     margin: 4rem auto;
     background: var(--light-bg-card);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
     text-align: center;
     padding: 2rem;
     border-radius: 8px;
     line-height: 1.5;
     position: relative;
     z-index: 2;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .manifesto h2 {
@@ -450,20 +544,23 @@ a:focus {
     margin-bottom: 1rem;
     font-size: 2rem;
     color: var(--primary-accent);
+    transition: color 0.3s ease;
 }
 
 .manifesto p {
     margin-top: 1rem;
     color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
 /* 8. Layout & General Content */
 main {
-    padding-top: 8rem; /* Keep this for other pages like Blog, About to clear fixed header */
+    padding-top: 8rem;
     padding-left: 5%;
     padding-right: 5%;
     position: relative;
     z-index: 2;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .content-wrapper {
@@ -476,26 +573,29 @@ main {
     padding-bottom: 0.5rem;
     display: inline-block;
     color: var(--primary-accent);
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
 /* 9. Page-Specific Elements */
 
 /* 9a. Blog Post Details */
 .blog-post {
-    padding-top: 4rem; /* Padding at the top of the post content */
+    padding-top: 4rem;
     padding-bottom: 4rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .post-header {
     text-align: center;
     margin-bottom: 3rem;
-    padding-top: 3rem; /* Give space below fixed header */
+    padding-top: 3rem;
     background-color: var(--light-bg-card);
     padding: 3rem 2rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
     border-radius: 8px;
     max-width: 900px;
     margin: 0 auto 3rem auto;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .post-header h1 {
@@ -504,6 +604,7 @@ main {
     line-height: 1.1;
     margin-bottom: 0.8rem;
     color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
 .post-meta {
@@ -512,11 +613,13 @@ main {
     color: var(--tertiary-accent);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    transition: color 0.3s ease;
 }
 
 .post-meta .post-category {
     font-weight: 600;
     color: var(--primary-accent);
+    transition: color 0.3s ease;
 }
 
 .post-content {
@@ -526,6 +629,7 @@ main {
     margin: 0 auto;
     padding: 0 2rem;
     color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
 .post-content p {
@@ -533,8 +637,9 @@ main {
 }
 
 .post-content strong {
-    color: var(--primary-accent); /* Primary Blue */
-    font-weight: 700; /* Ensure bold weight */
+    color: var(--primary-accent);
+    font-weight: 700;
+    transition: color 0.3s ease;
 }
 
 .post-content blockquote strong {
@@ -544,16 +649,18 @@ main {
 .post-content em {
     font-style: italic;
     color: var(--tertiary-accent);
+    transition: color 0.3s ease;
 }
 
 .post-content h2 {
     font-family: var(--serif-font);
-    color: var(--tertiary-accent); /* Dark Blue */
-    font-size: 2rem; /* Retaining the larger size for main article headings. If you want ALL h2 to be 1.5rem, change this. */
-    border-bottom: 1px solid var(--secondary-accent); /* Light Blue underline */
+    color: var(--tertiary-accent);
+    font-size: 2rem;
+    border-bottom: 1px solid var(--secondary-accent);
     padding-bottom: 0.5rem;
-    margin-top: 2.5rem; /* Ensure good spacing above headings */
+    margin-top: 2.5rem;
     margin-bottom: 1.5rem;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
 .section-title {
@@ -563,6 +670,7 @@ main {
     margin-top: 4rem;
     margin-bottom: 1.5rem;
     text-align: center;
+    transition: color 0.3s ease;
 }
 
 .section-description {
@@ -572,6 +680,7 @@ main {
     text-align: center;
     max-width: 600px;
     margin: 0 auto 3rem auto;
+    transition: color 0.3s ease;
 }
 
 .post-content h3 {
@@ -581,15 +690,17 @@ main {
     margin-top: 2.5rem;
     margin-bottom: 0.8rem;
     line-height: 1.3;
+    transition: color 0.3s ease;
 }
 
 /* --- Your Blueprint for a Better America Section Styling --- */
 .blueprint-section {
     margin: 4rem auto;
-    max-width: 800px; /* Match content wrapper */
-    padding: 0 1.5rem; /* Consistent padding */
+    max-width: 800px;
+    padding: 0 1.5rem;
     box-sizing: border-box;
     text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .blueprint-section h2 {
@@ -598,6 +709,7 @@ main {
     color: var(--text-color);
     margin-bottom: 1.5rem;
     line-height: 1.2;
+    transition: color 0.3s ease;
 }
 
 .blueprint-intro {
@@ -605,115 +717,93 @@ main {
     line-height: 1.8;
     color: var(--text-color);
     margin-bottom: 1rem;
-    max-width: 600px; /* Constrain width for readability */
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    transition: color 0.3s ease;
 }
 
 .big-picture-statement {
     font-family: var(--serif-font);
-    font-size: 2.8rem; /* Larger and more prominent */
+    font-size: 2.8rem;
     font-weight: 700;
     color: var(--primary-accent);
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    text-shadow: 2px 2px 5px rgba(var(--text-color-rgb), 0.1);
     margin-bottom: 3rem;
     line-height: 1.2;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .blueprint-questions {
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Space between question cards */
+    gap: 1rem;
     margin: 0 auto;
-    max-width: 700px; /* Max width for the stack of questions */
+    max-width: 700px;
 }
 
 .question-card {
     background-color: var(--light-bg-card);
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    overflow: hidden; /* Ensures content transitions smoothly */
-    margin: 0; /* Override default details margin */
-    border: none; /* Remove default details border */
+    box-shadow: 0 4px 12px rgba(var(--text-color-rgb), 0.08);
+    overflow: hidden;
+    margin: 0;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .question-card summary {
-    display: flex; /* Use flexbox for question and icon alignment */
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.2rem 1.5rem;
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--tertiary-accent); /* Dark blue for question headers */
+    color: var(--tertiary-accent);
     cursor: pointer;
-    outline: none; /* Remove outline on focus */
-    user-select: none; /* Prevent text selection on click */
+    outline: none;
+    user-select: none;
     background-color: var(--light-bg-card);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .question-card summary:hover {
-    background-color: #D0D2D4; /* Slightly darker hover state */
+    background-color: var(--secondary-accent);
 }
 
-/* --- Vignette Section Styling (e.g., Jordan's Morning, Jordan's Work) --- */
 .vignette-section {
-    background-color: var(--light-bg-card); /* Light background for the section */
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
-    padding: 3rem 2.5rem; /* Generous padding inside the section */
-    margin: 4rem auto; /* Space above/below and center the block */
-    max-width: 800px; /* Constrain width to match your content wrapper */
-    box-sizing: border-box; /* Include padding in the width calculation */
-    color: var(--text-color); /* Ensure text color is readable */
+    background-color: var(--light-bg-card);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(var(--text-color-rgb), 0.08);
+    padding: 3rem 2.5rem;
+    margin: 4rem auto;
+    max-width: 800px;
+    box-sizing: border-box;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 .vignette-section h2 {
     font-family: var(--serif-font);
     font-size: 2.2rem;
-    color: var(--tertiary-accent); /* Dark blue for headings */
+    color: var(--tertiary-accent);
     margin-bottom: 1.5rem;
     line-height: 1.3;
-    text-align: center; /* Center section titles */
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 .vignette-section p {
     font-size: 1.05rem;
     line-height: 1.7;
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
 }
 
 .vignette-section p:last-child {
-    margin-bottom: 0; /* No margin after last paragraph */
+    margin-bottom: 0;
 }
 
-/* Responsive adjustments for Vignette Sections */
-@media (max-width: 768px) {
-    .vignette-section {
-        padding: 2rem 1.5rem;
-        margin: 3rem auto;
-    }
-    .vignette-section h2 {
-        font-size: 1.8rem;
-    }
-    .vignette-section p {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .vignette-section {
-        padding: 1.5rem 1rem;
-        margin: 2rem auto;
-    }
-    .vignette-section h2 {
-        font-size: 1.5rem;
-    }
-    .vignette-section p {
-        font-size: 0.95rem;
-    }
-}
-/* Custom disclosure icon (replaces default triangle) */
 .disclosure-icon {
     display: inline-block;
     width: 20px;
@@ -730,6 +820,7 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: background-color 0.3s ease;
 }
 
 .disclosure-icon::before {
@@ -742,12 +833,11 @@ main {
     height: 10px;
 }
 
-/* Rotate icon when open */
 .question-card[open] .disclosure-icon {
-    transform: rotate(45deg); /* For a plus-to-x effect */
+    transform: rotate(45deg);
 }
 .question-card[open] .disclosure-icon::after {
-    opacity: 0; /* Hide vertical bar for 'x' effect, or keep for 'minus' */
+    opacity: 0;
 }
 
 .question-details {
@@ -755,11 +845,12 @@ main {
     font-size: 1rem;
     line-height: 1.7;
     color: var(--text-color);
-    text-align: left; /* Align text within details */
+    text-align: left;
+    transition: color 0.3s ease;
 }
 
 .question-details p {
-    margin-bottom: 0.8rem; /* Spacing between paragraphs in details */
+    margin-bottom: 0.8rem;
 }
 
 .question-details p:last-child {
@@ -769,54 +860,11 @@ main {
 .reflection-prompt {
     font-weight: 500;
     font-style: italic;
-    color: var(--primary-accent); /* Highlight prompt */
+    color: var(--primary-accent);
     padding-top: 0.5rem;
     border-top: 1px dashed rgba(var(--primary-accent-rgb), 0.3);
     margin-top: 1rem;
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .blueprint-section h2 {
-        font-size: 2rem;
-    }
-    .big-picture-statement {
-        font-size: 2.2rem;
-    }
-    .question-card summary {
-        font-size: 1rem;
-        padding: 1rem 1.2rem;
-    }
-    .question-details {
-        font-size: 0.95rem;
-        padding: 0 1.2rem 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .blueprint-section h2 {
-        font-size: 1.7rem;
-        margin-bottom: 1rem;
-    }
-    .blueprint-intro {
-        font-size: 1rem;
-    }
-    .big-picture-statement {
-        font-size: 1.8rem;
-        margin-bottom: 2rem;
-    }
-    .question-card summary {
-        font-size: 0.95rem;
-        padding: 0.8rem 1rem;
-    }
-    .question-details {
-        font-size: 0.9rem;
-        padding: 0 1rem 1rem;
-    }
-    .reflection-prompt {
-        font-size: 0.85rem;
-    }
+    transition: color 0.3s ease, border-top-color 0.3s ease;
 }
 
 /* General Pull Quote Styling */
@@ -831,14 +879,15 @@ blockquote.pull-quote, blockquote.final-quote {
     text-align: center;
     background-color: var(--light-bg-card);
     border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
     color: var(--text-color);
     position: relative;
     z-index: 1;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 blockquote.pull-quote::before, blockquote.final-quote::before {
-    content: 'â€œ';
+    content: '“';
     position: absolute;
     top: 1rem;
     left: 1rem;
@@ -848,10 +897,11 @@ blockquote.pull-quote::before, blockquote.final-quote::before {
     line-height: 1;
     opacity: 0.6;
     z-index: 0;
+    transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 blockquote.pull-quote::after, blockquote.final-quote::after {
-    content: 'â€';
+    content: '”';
     position: absolute;
     bottom: 0.5rem;
     right: 1rem;
@@ -861,6 +911,7 @@ blockquote.pull-quote::after, blockquote.final-quote::after {
     line-height: 1;
     opacity: 0.6;
     z-index: 0;
+    transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 blockquote.pull-quote p, blockquote.final-quote p {
@@ -877,6 +928,7 @@ blockquote.final-quote cite {
     font-style: normal;
     position: relative;
     z-index: 1;
+    transition: color 0.3s ease;
 }
 
 /* Promises List Styling */
@@ -894,13 +946,14 @@ blockquote.final-quote cite {
     padding: 1.5rem 2rem;
     margin-bottom: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(var(--text-color-rgb), 0.05);
     position: relative;
     padding-left: 4.5rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .promises-list li::before {
-    content: 'âœ“';
+    content: '✓';
     position: absolute;
     left: 1.5rem;
     top: 50%;
@@ -908,6 +961,7 @@ blockquote.final-quote cite {
     font-size: 2rem;
     color: var(--primary-accent);
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .promises-list li h4 {
@@ -916,12 +970,14 @@ blockquote.final-quote cite {
     color: var(--primary-accent);
     margin: 0 0 0.5rem 0;
     line-height: 1.3;
+    transition: color 0.3s ease;
 }
 
 .promises-list li p {
     margin: 0;
     font-size: 1rem;
     line-height: 1.6;
+    transition: color 0.3s ease;
 }
 
 /* Writing Modes Grid */
@@ -938,7 +994,7 @@ blockquote.final-quote cite {
     background-color: var(--light-bg-card);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
     transition: all 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
@@ -949,7 +1005,7 @@ blockquote.final-quote cite {
 
 .writing-mode-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 40px rgba(var(--text-color-rgb), 0.12);
 }
 
 .writing-mode-card h3 {
@@ -958,6 +1014,7 @@ blockquote.final-quote cite {
     color: var(--primary-accent);
     margin-top: 0;
     margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
 }
 
 .writing-mode-card p {
@@ -965,32 +1022,34 @@ blockquote.final-quote cite {
     line-height: 1.6;
     margin-bottom: 0;
     color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
-/* Section Dividers (for use with <hr class="section-divider">) */
+/* Section Dividers */
 .section-divider {
     border: none;
     border-bottom: 1px dashed var(--secondary-accent);
     margin: 3rem auto;
     width: 60%;
     opacity: 0.6;
+    transition: border-bottom-color 0.3s ease;
 }
-
 
 /* --- Accordion Container for Adaptive Idea Cards --- */
 .accordion-container {
     width: 100%;
-    max-width: 800px; /* Max width for readability */
+    max-width: 800px;
     margin: 0 auto;
 }
 
 /* --- Accordion Item (Each Card) --- */
 .accordion-item {
-    background-color: #fff;
+    background-color: var(--bg-color);
     border-radius: 10px;
-    box-shadow: 0px 8px 15px rgba(56, 77, 156, 0.1);
-    margin-bottom: 20px; /* Space between accordion items */
-    overflow: hidden; /* Ensures rounded corners */
+    box-shadow: 0px 8px 15px rgba(var(--tertiary-accent-rgb), 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* --- Accordion Header (Card Title) --- */
@@ -1005,7 +1064,7 @@ blockquote.final-quote cite {
     text-align: left;
     cursor: pointer;
     outline: none;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     font-family: var(--serif-font);
     color: var(--tertiary-accent);
     font-size: 1.4rem;
@@ -1013,7 +1072,7 @@ blockquote.final-quote cite {
 }
 
 .accordion-header:hover {
-    background-color: rgba(74, 99, 243, 0.15); /* Light hover effect */
+    background-color: var(--secondary-accent);
 }
 
 .accordion-header.active {
@@ -1026,46 +1085,41 @@ blockquote.final-quote cite {
     font-size: 1.8rem;
     line-height: 1;
     transition: transform 0.3s ease;
-    margin-left: 15px; /* Space from title */
+    margin-left: 15px;
 }
 
 .accordion-header.active .accordion-icon {
-    transform: rotate(45deg); /* Rotates plus to an 'x' or minus to a dash */
+    transform: rotate(45deg);
 }
 
-/* --- Accordion Content (The Actual Card Content) --- */
 .accordion-content {
     padding: 0 25px;
-    background-color: var(--bg-color); /* Matches body background for subtle blend */
-    max-height: 0; /* Hidden by default */
+    background-color: var(--bg-color);
+    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Smooth slide animation */
-    padding-bottom: 0; /* No padding when collapsed */
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out, background-color 0.3s ease;
+    padding-bottom: 0;
 }
 
 .accordion-content.active {
-    max-height: 2000px; /* Adjust based on max possible content height */
+    max-height: 2000px;
     padding-top: 25px;
     padding-bottom: 25px;
-    transition: max-height 0.6s ease-in, padding 0.6s ease-in; /* Longer transition for reveal */
+    transition: max-height 0.6s ease-in, padding 0.6s ease-in;
 }
 
-
 /* --- Adaptive Idea Card Original Styles (modified for accordion) --- */
-/* These styles define how the content *inside* the accordion looks */
 .adaptive-idea-card {
-    background-color: transparent; /* Remove background as it's now part of accordion-content */
-    box-shadow: none; /* Remove shadow as it's on accordion-item */
-    border: none; /* Remove border */
-    padding: 0; /* Adjust padding as accordion-content handles it */
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
     margin: 0;
 }
 
 .adaptive-idea-card h1 {
-    /* Hide the H1 inside the content, as its text is now used in the accordion-header button */
     display: none;
 }
-/* Re-applying existing styles, ensure these match your current style.css */
 .adaptive-idea-card h2 {
     font-family: var(--serif-font);
     color: var(--tertiary-accent);
@@ -1073,7 +1127,8 @@ blockquote.final-quote cite {
     border-bottom: 1px solid var(--secondary-accent);
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
-    margin-top: 0; /* Important for first element in content */
+    margin-top: 0;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
 .adaptive-idea-card h3 {
@@ -1082,6 +1137,7 @@ blockquote.final-quote cite {
     color: var(--primary-accent);
     margin-bottom: 1rem;
     margin-top: 0;
+    transition: color 0.3s ease;
 }
 
 .adaptive-idea-card p,
@@ -1091,6 +1147,7 @@ blockquote.final-quote cite {
     color: var(--text-color);
     line-height: 1.6;
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
 }
 
 .adaptive-idea-card ul {
@@ -1104,6 +1161,7 @@ blockquote.final-quote cite {
 
 .adaptive-idea-card strong {
     color: var(--primary-accent);
+    transition: color 0.3s ease;
 }
 
 .adaptive-idea-card em {
@@ -1112,39 +1170,11 @@ blockquote.final-quote cite {
 
 .adaptive-idea-card .metadata {
     font-size: 0.9em;
-    color: rgba(44, 46, 51, 0.7);
+    color: rgba(var(--text-color-rgb), 0.7);
     margin-bottom: 1.5rem;
-    border-bottom: 1px dashed rgba(44, 46, 51, 0.2);
+    border-bottom: 1px dashed rgba(var(--text-color-rgb), 0.2);
     padding-bottom: 0.8rem;
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 600px) {
-    .accordion-header {
-        font-size: 1.2rem;
-        padding: 15px 20px;
-    }
-    .accordion-icon {
-        font-size: 1.5rem;
-    }
-    .accordion-content {
-        padding: 0 20px;
-    }
-    .accordion-content.active {
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-    .adaptive-idea-card h2 {
-        font-size: 1.2rem;
-    }
-    .adaptive-idea-card h3 {
-        font-size: 1.1rem;
-    }
-    .adaptive-idea-card p,
-    .adaptive-idea-card ul,
-    .adaptive-idea-card li {
-        font-size: 0.95rem;
-    }
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
 /* 9b. Blog Filters & Grid */
@@ -1178,11 +1208,11 @@ blockquote.final-quote cite {
 }
 .post-card {
     background-color: var(--bg-color);
-    border: 1px solid rgba(44, 46, 51, 0.1);
+    border: 1px solid rgba(var(--text-color-rgb), 0.1);
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 12px rgba(44, 46, 51, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(var(--text-color-rgb), 0.08);
     position: relative;
 }
 
@@ -1197,14 +1227,13 @@ blockquote.final-quote cite {
 
 .post-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(44, 46, 51, 0.15);
+    box-shadow: 0 10px 20px rgba(var(--text-color-rgb), 0.15);
 }
 .post-card img { max-width: 100%; height: auto; display: block; }
 .post-content { padding: 1.5rem; }
 .post-content h3 { margin-top: 0; font-size: 1.6rem; color: var(--primary-accent);}
 .post-content .read-time { font-size: 0.9rem; color: var(--tertiary-accent); }
 
-/* CSS for showing/hiding posts based on filter */
 #filter-all:checked ~ .blog-grid .post-card { display: block; }
 #filter-reflections:checked ~ .blog-grid .post-card:not([data-category="reflections"]) { display: none; }
 #filter-worlds:checked ~ .blog-grid .post-card:not([data-category="worlds"]) { display: none; }
@@ -1224,6 +1253,7 @@ blockquote.final-quote cite {
     border-left: 3px solid var(--secondary-accent);
     font-style: italic;
     color: var(--text-color);
+    transition: color 0.3s ease, border-left-color 0.3s ease;
 }
 
 /* 9d. Forms (Newsletter & Contact) */
@@ -1239,6 +1269,7 @@ blockquote.final-quote cite {
     margin-bottom: 0.5rem;
     font-weight: bold;
     color: var(--primary-accent);
+    transition: color 0.3s ease;
 }
 .form-field input, .form-field textarea {
     width: 100%;
@@ -1248,6 +1279,7 @@ blockquote.final-quote cite {
     font-family: var(--sans-font);
     background-color: var(--bg-color);
     color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 .form-field input:focus, .form-field textarea:focus {
     outline: none;
@@ -1295,35 +1327,36 @@ blockquote.final-quote cite {
 /* 9e. Voice Map Grid */
 .voice-map-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Default to single column for mobile */
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     margin: 3rem auto;
-    max-width: 800px; /* Constrain width */
-    padding: 0 1rem; /* Padding for mobile */
+    max-width: 800px;
+    padding: 0 1rem;
 }
 
 .voice-map-quadrant {
     background-color: var(--light-bg-card);
-    border: 1px solid var(--secondary-accent); /* Match border of compass points/post cards */
-    border-radius: 8px; /* Match border-radius */
+    border: 1px solid var(--secondary-accent);
+    border-radius: 8px;
     padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Match subtle shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover transition */
+    box-shadow: 0 4px 15px rgba(var(--text-color-rgb), 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .voice-map-quadrant:hover {
-    transform: translateY(-5px); /* Lift on hover */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.15);
 }
 
 .voice-map-quadrant .quadrant-title {
     font-family: var(--serif-font);
-    font-size: 1.3rem; /* Slightly smaller than H3, but prominent */
+    font-size: 1.3rem;
     color: var(--primary-accent);
     margin-top: 0;
     margin-bottom: 0.5rem;
     line-height: 1.3;
-    text-align: center; /* Center quadrant titles */
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 .voice-map-quadrant .quadrant-example {
@@ -1332,7 +1365,8 @@ blockquote.final-quote cite {
     font-style: italic;
     margin-top: 0;
     margin-bottom: 1rem;
-    text-align: center; /* Center example text */
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 .voice-map-quadrant .quadrant-label {
@@ -1343,108 +1377,68 @@ blockquote.final-quote cite {
     margin-bottom: 0.2rem;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    text-align: left; /* Labels are left-aligned */
+    text-align: left;
+    transition: color 0.3s ease;
 }
 
 .voice-map-quadrant .quadrant-content {
-    font-size: 1rem; /* Match body text size */
+    font-size: 1rem;
     color: var(--text-color);
     margin-bottom: 0;
     line-height: 1.5;
-    text-align: left; /* Content is left-aligned */
+    text-align: left;
+    transition: color 0.3s ease;
 }
 
 /* Media query for desktop grid layout */
 @media (min-width: 768px) {
     .voice-map-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for desktop */
-        padding: 0; /* Remove specific padding when wider */
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0;
     }
 }
 /* 9f. Tags & Search */
-/* --- Post Tags Styling (applies to individual post pages) --- */
 .post-tags {
-    margin-top: 1.5rem; /* Space above the tags */
-    margin-bottom: 2rem; /* Space below the tags before content */
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
     display: flex;
-    flex-wrap: wrap; /* Allow tags to wrap to next line */
-    gap: 0.6rem; /* Space between tags */
-    justify-content: center; /* Center the tags */
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
 }
 
-/* --- Base Styling for ALL Tags (both on individual posts and blog cards) --- */
 .tag {
     display: inline-block;
     padding: 0.4rem 0.9rem;
-    border-radius: 20px; /* Rounded corners for capsule shape */
+    border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
-    text-decoration: none; /* Remove underline from links */
-    color: var(--text-color); /* Default text color for tags */
-    background-color: var(--light-bg-card); /* Fallback background */
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    white-space: nowrap; /* Prevent tags from breaking onto multiple lines */
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--light-bg-card);
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
 }
 
 .tag:hover {
-    transform: translateY(-2px); /* Slight lift effect on hover */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(var(--text-color-rgb), 0.1);
 }
-/* --- Styles for tags within post cards on blog.html --- */
+
 .post-card-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem; /* Space between tags */
-    margin-top: 1rem; /* Space above tags */
-    margin-bottom: 0.8rem; /* Space below tags, before read time */
-    /* Align tags to the left within the post card content */
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.8rem;
     justify-content: flex-start;
 }
 
-/* Inherit individual .tag styling from the .tag class for tags inside post cards */
 .post-card-tags .tag {
-    font-size: 0.75rem; /* Slightly smaller tags for post cards */
+    font-size: 0.75rem;
     padding: 0.3rem 0.7rem;
 }
 
-/* Responsive adjustments for tags */
-@media (max-width: 768px) {
-    .post-tags { /* For individual post pages */
-        margin-top: 1rem;
-        margin-bottom: 1.5rem;
-        gap: 0.5rem;
-    }
-    .tag { /* General tag size adjustment */
-        padding: 0.35rem 0.8rem;
-        font-size: 0.8rem;
-    }
-    .post-card-tags { /* For blog.html post cards */
-        gap: 0.4rem;
-        margin-top: 0.8rem;
-        margin-bottom: 0.6rem;
-    }
-    .post-card-tags .tag { /* Specific size for post card tags */
-        font-size: 0.7rem;
-        padding: 0.25rem 0.6rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .post-tags { /* For individual post pages */
-        justify-content: center; /* Ensure centering on very small screens */
-    }
-    .tag { /* General tag size adjustment */
-        font-size: 0.75rem;
-        padding: 0.3rem 0.7rem;
-    }
-    .post-card-tags { /* For blog.html post cards */
-        justify-content: flex-start; /* Keep left alignment */
-    }
-    .post-card-tags .tag { /* Specific size for post card tags */
-        font-size: 0.65rem; /* Even smaller on tiny screens */
-        padding: 0.25rem 0.5rem;
-    }
-}
 /* --- Tag Color Coding (using data attributes) --- */
 .tag[data-tag-color="productivity"] { background-color: var(--tag-color-productivity); }
 .tag[data-tag-color="growth"] { background-color: var(--tag-color-growth); }
@@ -1460,7 +1454,7 @@ blockquote.final-quote cite {
 .tag[data-tag-color="society"],
 .tag[data-tag-color="tools"],
 .tag[data-tag-color="misc"] {
-    color: var(--text-color); /* Or a darker color if text visibility is an issue on very light tags */
+    color: var(--text-color);
 }
 
 /* --- Search & Tags Page Specific Styles --- */
@@ -1470,11 +1464,12 @@ blockquote.final-quote cite {
     padding: 1.5rem;
     background-color: var(--light-bg-card);
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(var(--text-color-rgb), 0.05);
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem; /* Slightly larger gap for main tag cloud */
+    gap: 0.8rem;
     justify-content: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #filtered-posts-display {
@@ -1493,13 +1488,15 @@ blockquote.final-quote cite {
     color: var(--tertiary-accent);
     margin-top: 0;
     margin-bottom: 1rem;
-    display: inline-block; /* Allows Clear Filter button to align */
+    display: inline-block;
+    transition: color 0.3s ease;
 }
 
 .filtered-results-header .highlight-tag {
     color: var(--primary-accent);
     font-style: italic;
-    text-transform: capitalize; /* Capitalize the first letter of the tag slug */
+    text-transform: capitalize;
+    transition: color 0.3s ease;
 }
 
 .clear-filter-button {
@@ -1511,7 +1508,7 @@ blockquote.final-quote cite {
     text-decoration: none;
     font-size: 0.9rem;
     margin-left: 1rem;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
 .clear-filter-button:hover {
@@ -1521,11 +1518,9 @@ blockquote.final-quote cite {
 }
 
 .filtered-post-item {
-    /* Inherits most styles from .post-card */
-    margin-bottom: 1.5rem; /* Space between filtered post cards */
-    /* Ensure it acts as a block */
+    margin-bottom: 1.5rem;
     display: block;
-    width: 100%; /* Take full width within its container */
+    width: 100%;
 }
 
 .no-results-message {
@@ -1533,36 +1528,7 @@ blockquote.final-quote cite {
     font-style: italic;
     color: #777;
     margin-top: 2rem;
-}
-
-/* Responsive adjustments for Search & Tags page */
-@media (max-width: 768px) {
-    #tag-cloud {
-        padding: 1rem;
-        gap: 0.6rem;
-    }
-    .filtered-results-header h2 {
-        font-size: 1.6rem;
-        display: block; /* Stack heading and button */
-        margin-bottom: 0.5rem;
-    }
-    .clear-filter-button {
-        margin-left: 0;
-        margin-top: 0.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    #tag-cloud {
-        gap: 0.5rem;
-    }
-    .filtered-results-header h2 {
-        font-size: 1.4rem;
-    }
-    .clear-filter-button {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-    }
+    transition: color 0.3s ease;
 }
 
 /* --- Search Input Styles --- */
@@ -1571,26 +1537,27 @@ blockquote.final-quote cite {
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
-    margin-bottom: 2rem; /* Space before the tag cloud */
-    max-width: 600px; /* Limit width */
+    margin-bottom: 2rem;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     background-color: var(--light-bg-card);
     border-radius: 8px;
     padding: 0.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(var(--text-color-rgb), 0.05);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #post-search-input {
-    flex-grow: 1; /* Take up available space */
+    flex-grow: 1;
     padding: 0.8rem 1rem;
     border: none;
     border-radius: 6px;
     font-size: 1rem;
     color: var(--text-color);
-    background-color: var(--bg-color); /* Lighter background for the input field */
+    background-color: var(--bg-color);
     outline: none;
-    transition: box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 #post-search-input:focus {
@@ -1623,50 +1590,19 @@ blockquote.final-quote cite {
     color: var(--bg-color);
 }
 
-/* Responsive adjustments for search input */
-@media (max-width: 768px) {
-    .search-input-container {
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
-        padding: 0.4rem;
-    }
-    #post-search-input {
-        padding: 0.7rem 0.8rem;
-        font-size: 0.95rem;
-    }
-    #clear-search-button {
-        font-size: 1rem;
-        width: 28px;
-        height: 28px;
-    }
-}
-@media (max-width: 480px) {
-    .search-input-container {
-        padding: 0.3rem;
-    }
-    #post-search-input {
-        font-size: 0.9rem;
-        padding: 0.6rem 0.7rem;
-    }
-    #clear-search-button {
-        font-size: 0.9rem;
-        width: 25px;
-        height: 25px;
-    }
-}
-
 /* 10. Footer */
 .footer, footer {
     text-align: center;
     padding: 3rem 5%;
     margin-top: 3rem;
     border-top: 1px solid var(--secondary-accent);
-    color: var(--bg-color); /* This color applies to text within the footer */
+    color: var(--bg-color);
     background-color: var(--tertiary-accent);
+    transition: background-color 0.3s ease, color 0.3s ease, border-top-color 0.3s ease;
 }
-/* Ensure links within the footer are visible against the dark background */
+
 .footer a, footer a {
-    color: var(--secondary-accent); /* Light blue for links on dark footer */
+    color: var(--secondary-accent);
     text-decoration: none;
     transition: color 0.3s, text-decoration 0.3s;
 }
@@ -1674,7 +1610,7 @@ blockquote.final-quote cite {
 .footer a:focus,
 footer a:hover,
 footer a:focus {
-    color: var(--bg-color); /* Lighter on hover */
+    color: var(--bg-color);
     text-decoration: underline;
 }
 .social-icons a {
@@ -1694,19 +1630,21 @@ footer a:focus {
     border-radius: 12px;
     animation: bounce 2s infinite;
     z-index: 2;
+    transition: border-color 0.3s ease;
 }
 
 .scroll-cue::before {
-    content: ''; /* Required for pseudo-elements */
+    content: '';
     position: absolute;
-    top: 6px; /* Starting position inside the 'mouse' */
+    top: 6px;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px; /* Width of the line */
-    height: 6px; /* Height of the line */
-    background-color: var(--primary-accent); /* Color of the line */
-    border-radius: 1px; /* Slightly rounded ends */
-    animation: scroll-line 2s infinite; /* New animation for the line */
+    width: 2px;
+    height: 6px;
+    background-color: var(--primary-accent);
+    border-radius: 1px;
+    animation: scroll-line 2s infinite;
+    transition: background-color 0.3s ease;
 }
 
 @keyframes bounce {
@@ -1717,9 +1655,9 @@ footer a:focus {
 
 @keyframes scroll-line {
     0%, 20% { top: 6px; opacity: 1; }
-    40% { top: 18px; opacity: 0; } /* Line moves down and fades */
-    41% { top: 6px; opacity: 0; } /* Resets off-screen */
-    100% { top: 6px; opacity: 1; } /* Fades back in for next cycle */
+    40% { top: 18px; opacity: 0; }
+    41% { top: 6px; opacity: 0; }
+    100% { top: 6px; opacity: 1; }
 }
 
 /* 12. Media Queries */
@@ -1738,6 +1676,7 @@ footer a:focus {
         display: flex;
         align-items: center;
         margin-left: auto;
+        transition: background-color 0.3s ease;
     }
 
     .nav-menu ul {
@@ -1755,7 +1694,6 @@ footer a:focus {
     .hero h1 { font-size: 5.5rem; }
     .hero .tagline { font-size: 1.2rem; }
     .blog-grid { grid-template-columns: repeat(2, 1fr); }
-    /* The specific .scroll-cue { bottom: 1rem; } override for min-width: 768px has been removed */
 }
 
 @media (max-width: 768px) {
@@ -1774,9 +1712,8 @@ footer a:focus {
     .hero { min-height: calc(100vh - 2.8rem); padding: 0 1.5rem;}
     .hero h1 { font-size: 2.5rem; }
     .hero .tagline { font-size: 1rem; }
-    .scroll-cue { bottom: 1rem; } /* This specific override for max-width: 768px is kept for mobile */
+    .scroll-cue { bottom: 1rem; }
 
-    /* Blog Post Specific Adjustments for smaller screens */
     .post-header {
         padding: 2rem 1rem;
         margin-bottom: 2rem;
@@ -1851,7 +1788,6 @@ footer a:focus {
 }
 
 @media (max-width: 600px) {
-    /* --- Accordion Container for Adaptive Idea Cards --- */
     .accordion-header {
         font-size: 1.2rem;
         padding: 15px 20px;
@@ -1866,8 +1802,6 @@ footer a:focus {
         padding-top: 20px;
         padding-bottom: 20px;
     }
-
-    /* --- Adaptive Idea Card Original Styles (modified for accordion) --- */
     .adaptive-idea-card h2 {
         font-size: 1.2rem;
     }
@@ -1879,10 +1813,8 @@ footer a:focus {
     .adaptive-idea-card li {
         font-size: 0.95rem;
     }
-
-    /* --- Adjustments for general post content outside of adaptive-idea-card --- */
     .post-content h2 {
-        font-size: 1.6rem; /* Adjusting for smaller screens */
+        font-size: 1.6rem;
         margin-top: 1.5rem;
     }
     .post-content p,
@@ -1898,5 +1830,4 @@ footer a:focus {
     .blog-grid { grid-template-columns: repeat(3, 1fr); }
     .hero h1 { font-size: 5.5rem; }
     .hero .tagline { font-size: 1.2rem; }
-    /* The specific .scroll-cue { bottom: 1rem; } override for min-width: 1024px has been removed */
 }
