@@ -564,5 +564,184 @@
         });
     });
 </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Dark Mode Toggle (Existing) ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (themeToggle) {
+                if (theme === 'dark') {
+                    themeToggle.querySelector('.icon-light-mode').style.opacity = '0';
+                    themeToggle.querySelector('.icon-light-mode').style.transform = 'scale(0.5)';
+                    themeToggle.querySelector('.icon-dark-mode').style.opacity = '1';
+                    themeToggle.querySelector('.icon-dark-mode').style.transform = 'scale(1)';
+                } else {
+                    themeToggle.querySelector('.icon-light-mode').style.opacity = '1';
+                    themeToggle.querySelector('.icon-light-mode').style.transform = 'scale(1)';
+                    themeToggle.querySelector('.icon-dark-mode').style.opacity = '0';
+                    themeToggle.querySelector('.icon-dark-mode').style.transform = 'scale(0.5)';
+                }
+            }
+        }
+
+        function getPreferredTheme() {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme) {
+                return storedTheme;
+            }
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        }
+
+        const initialTheme = getPreferredTheme();
+        setTheme(initialTheme);
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
+            });
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+
+        // --- Reading List Sorting Functionality ---
+        const sortBySelect = document.getElementById('sort-by');
+        const readingListContainer = document.getElementById('reading-list-container'); // The div containing all category sections
+
+        if (sortBySelect && readingListContainer) {
+            sortBySelect.addEventListener('change', sortReadingList);
+            // Initial sort on load (optional, but good for consistency)
+            sortReadingList(); 
+        }
+
+        function sortReadingList() {
+            const sortMethod = sortBySelect.value; // e.g., 'title-asc', 'rating-desc'
+            let allReadingItems = [];
+
+            // Collect all reading items from within their category and media type groups
+            document.querySelectorAll('.reading-item').forEach(item => {
+                allReadingItems.push(item);
+            });
+
+            allReadingItems.sort((a, b) => {
+                const titleA = a.dataset.title ? a.dataset.title.toLowerCase() : '';
+                const titleB = b.dataset.title ? b.dataset.title.toLowerCase() : '';
+                
+                // For rating, convert '⭐⭐⭐⭐⭐' to a number (e.g., 5)
+                const ratingA = a.dataset.rating !== '0' ? a.dataset.rating.length : 0;
+                const ratingB = b.dataset.rating !== '0' ? b.dataset.rating.length : 0;
+
+                const dateA = new Date(a.dataset.added);
+                const dateB = new Date(b.dataset.added);
+
+                switch (sortMethod) {
+                    case 'title-asc':
+                        return titleA.localeCompare(titleB);
+                    case 'title-desc':
+                        return titleB.localeCompare(titleA);
+                    case 'rating-desc':
+                        return ratingB - ratingA;
+                    case 'rating-asc':
+                        return ratingA - ratingB;
+                    case 'date-added-desc':
+                        return dateB - dateA;
+                    case 'date-added-asc':
+                        return dateA - dateB;
+                    default:
+                        return 0; // No sort change
+                }
+            });
+
+            // To re-render, we'll clear the current content and re-append in sorted order.
+            // This approach removes all existing items and adds them back.
+            // A more sophisticated approach would be to re-render within their original categories,
+            // but for simplicity and to allow cross-category sorting, we'll flatten the view.
+
+            // First, remove all existing category sections to prepare for re-appending.
+            // We'll create a single flat list if we sort across categories.
+            // If you want to maintain categories but sort within them, the logic needs to be more complex.
+            // For now, this will make a flat list under the main container after sorting.
+            
+            // To maintain categories and sort within them, the structure needs to be different.
+            // Given the current HTML structure (categories > media types > items),
+            // a simple sort of `allReadingItems` will flatten the list.
+            // If the goal is to sort *within each media type group* AND *within each category*,
+            // we'd iterate through each `.media-type-group`, sort its children, and re-append.
+
+            // Let's assume for simplicity, the sorting will reorder all items globally for now.
+            // If you want sorting *within* categories, we need a different approach.
+            // For global sort, we'll just append to a new div.
+
+            const sortedItemsContainer = document.createElement('div');
+            sortedItemsContainer.id = 'sorted-reading-items-flat-view'; // A new container for sorted flat list
+            sortedItemsContainer.innerHTML = '<h3>All Items (Sorted)</h3>'; // Optional title for flat view
+
+            allReadingItems.forEach(item => {
+                sortedItemsContainer.appendChild(item);
+            });
+
+            // Replace the original content-wrapper children (categories) with the sorted flat view
+            // This is a destructive change to the original category structure.
+            // If you prefer to keep categories, let me know.
+            // For now, to simplify, we're making a flat, sortable list.
+            const currentContentWrapper = document.querySelector('.content-wrapper');
+            const originalReadingListContainer = document.getElementById('reading-list-container');
+            if (originalReadingListContainer) {
+                originalReadingListContainer.remove(); // Remove the old structured content
+            }
+            currentContentWrapper.appendChild(sortedItemsContainer); // Add the new flat sorted content
+        }
+
+        // --- Featured Section Carousel Functionality ---
+        const carouselContainer = document.querySelector('.carousel-container');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const prevButton = document.querySelector('.prev-button');
+        const nextButton = document.querySelector('.next-button');
+        let currentIndex = 0;
+
+        if (carouselContainer && carouselItems.length > 0 && prevButton && nextButton) {
+            // Initially hide all but the first item
+            carouselItems.forEach((item, index) => {
+                if (index !== 0) {
+                    item.style.display = 'none';
+                }
+            });
+
+            function showSlide(index) {
+                carouselItems.forEach((item, i) => {
+                    item.style.display = (i === index) ? 'block' : 'none';
+                });
+            }
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
+                showSlide(currentIndex);
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+                showSlide(currentIndex);
+            });
+
+            // Optional: Auto-advance carousel
+            // setInterval(() => {
+            //     currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+            //     showSlide(currentIndex);
+            // }, 5000); // Change slide every 5 seconds
+        }
+    });
+</script>
 </body>
 </html>
