@@ -146,147 +146,126 @@
                 }
             ];
 
-            // Function to generate and display the tag cloud
-            function generateTagCloud() {
-                const tagCounts = {}; // To store the count of each tag
-                let maxCount = 0; // To find the maximum count for scaling
+           // Function to generate and display the tag cloud
+function generateTagCloud() {
+    const tagCounts = {}; // To store the count of each tag
+    let maxCount = 0; // To find the maximum count for scaling
 
-                // 1. Count occurrences of each tag and find the max count
-                allPostsData.forEach(post => {
-                    post.tags.forEach(tag => {
-                        tagCounts[tag.slug] = (tagCounts[tag.slug] || 0) + 1;
-                        if (tagCounts[tag.slug] > maxCount) {
-                            maxCount = tagCounts[tag.slug];
-                        }
-                    });
-                });
-
-                const tagCloudContainer = document.getElementById('tag-cloud');
-                tagCloudContainer.innerHTML = ''; // Clear existing tags
-
-                // 2. Sort tags alphabetically for consistent display
-                const sortedTagSlugs = Object.keys(tagCounts).sort();
-
-                // 3. Generate tag links with weighted styling
-                sortedTagSlugs.forEach(slug => {
-                    const count = tagCounts[slug];
-                    const tagName = allPostsData.find(post => post.tags.some(t => t.slug === slug)).tags.find(t => t.slug === slug).name; // Get the original tag name
-                    const tagColorField = allPostsData.find(post => post.tags.some(t => t.slug === slug)).tags.find(t => t.slug === slug).colorField; // Get the original tag color
-
-                    const tagLink = document.createElement('a');
-                    tagLink.href = `search.html?tag=${slug}`; // Retain direct link functionality
-                    tagLink.className = `tag-cloud-item tag-${tagColorField}`; // Apply existing tag color classes
-                    tagLink.textContent = `${tagName} (${count})`;
-
-                    // Calculate font size based on count relative to maxCount
-                    // Minimum font size (e.g., 1em) for single occurrences, scales up to a max (e.g., 1.8em)
-                    const minFontSize = 0.9; // Base size for tags with count 1
-                    const maxFontSize = 1.6; // Max size for the most frequent tag
-                    const fontSize = minFontSize + (count - 1) / (maxCount - 1 || 1) * (maxFontSize - minFontSize);
-                    tagLink.style.fontSize = `${fontSize}em`;
-                    tagLink.style.fontWeight = 'normal'; // Reset if any default bolding exists for links
-                    
-                    tagCloudContainer.appendChild(tagLink);
-                });
+    // 1. Count occurrences of each tag and find the max count
+    allPostsData.forEach(post => {
+        post.tags.forEach(tag => {
+            tagCounts[tag.slug] = (tagCounts[tag.slug] || 0) + 1;
+            if (tagCounts[tag.slug] > maxCount) {
+                maxCount = tagCounts[tag.slug];
             }
-
-                const sortedTags = Object.values(tagsWithDetails).sort((a, b) => {
-                    if (tagCounts[b.slug] !== tagCounts[a.slug]) {
-                        return tagCounts[b.slug] - tagCounts[a.slug];
-                    }
-                    return a.name.localeCompare(b.name);
-                });
-
-                let tagCloudHtml = '';
-                if (sortedTags.length === 0) {
-                    tagCloudHtml = '<p>No tags available yet.</p>';
-                } else {
-                    sortedTags.forEach(tag => {
-                        tagCloudHtml += `<a href="search.html?tag=${tag.slug}" class="tag" data-tag-color="${tag.colorField}">${tag.name} (${tagCounts[tag.slug]})</a>`;
-                    });
-                }
-                tagCloudContainer.innerHTML = tagCloudHtml;
-            }
-
-            // Central function to filter and display posts based on URL tag parameter AND search input
-            function displayFilteredPosts() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const requestedTagSlug = urlParams.get('tag');
-                const searchTerm = postSearchInput.value.toLowerCase().trim(); // NEW
-
-                let postsToShow = allPostsData;
-
-                // 1. Filter by Tag (if present in URL)
-                if (requestedTagSlug) {
-                    postsToShow = postsToShow.filter(post => 
-                        post.tags.some(tag => tag.slug === requestedTagSlug)
-                    );
-                }
-
-                // 2. Filter by Search Term (if present in input)
-                if (searchTerm) {
-                    postsToShow = postsToShow.filter(post => 
-                        post.title.toLowerCase().includes(searchTerm) ||
-                        post.description.toLowerCase().includes(searchTerm) || // Search in description too
-                        post.tags.some(tag => tag.name.toLowerCase().includes(searchTerm)) // Search in tag names
-                    );
-                }
-                
-                let filteredPostsHtml = '';
-
-                if (requestedTagSlug || searchTerm) { // Display header if any filter is active
-                    filteredPostsHtml += `
-                        <div class="filtered-results-header">
-                            <h2>
-                                ${requestedTagSlug ? `Posts tagged with: <span class="highlight-tag">${requestedTagSlug.replace(/-/g, ' ')}</span>` : ''}
-                                ${requestedTagSlug && searchTerm ? ' & ' : ''}
-                                ${searchTerm ? `Search results for: "<span class="highlight-tag">${searchTerm}</span>"` : ''}
-                            </h2>
-                            <a href="search.html" class="clear-filter-button">Clear All Filters</a>
-                        </div>
-                    `;
-                }
-
-                if (postsToShow.length === 0) {
-                    filteredPostsHtml += '<p class="no-results-message">No posts found matching your criteria.</p>';
-                } else {
-                    postsToShow.forEach(post => {
-                        filteredPostsHtml += `
-                            <article class="post-card filtered-post-item">
-                                <div class="post-content">
-                                    <h3><a href="${post.url}">${post.title}</a></h3>
-                                    <p>${post.description}</p>
-                                    <div class="post-card-tags">
-                                        ${post.tags.map(tag => `<a href="search.html?tag=${tag.slug}" class="tag" data-tag-color="${tag.colorField}">${tag.name}</a>`).join('')}
-                                    </div>
-                                    <span class="read-time">${post.readTime}</span>
-                                </div>
-                                <a href="${post.url}" class="full-card-link"></a>
-                            </article>
-                        `;
-                    });
-                }
-                filteredPostsDisplay.innerHTML = filteredPostsHtml;
-            }
-
-            // Event Listeners for search input
-            postSearchInput.addEventListener('input', displayFilteredPosts); // Filter on every key stroke
-            clearSearchButton.addEventListener('click', function() {
-                postSearchInput.value = ''; // Clear input
-                // To also clear the tag filter from URL, we'll navigate cleanly
-                if (window.location.search) { // If there are any URL parameters
-                    window.location.href = 'search.html'; // Redirect to clear them
-                } else {
-                    displayFilteredPosts(); // Just re-display if no URL params
-                }
-            });
-
-
-            // Initial calls on page load
-            generateTagCloud(allPostsData);
-            displayFilteredPosts(); // Initial display based on any URL tag or empty search
         });
-    </script>
+    });
+
+    const tagCloudContainer = document.getElementById('tag-cloud');
+    tagCloudContainer.innerHTML = ''; // Clear existing tags
+
+    // 2. Sort tags alphabetically for consistent display
+    const sortedTagSlugs = Object.keys(tagCounts).sort();
+
+    // 3. Generate tag links with weighted styling
+    sortedTagSlugs.forEach(slug => {
+        const count = tagCounts[slug];
+        const tagName = allPostsData.find(post => post.tags.some(t => t.slug === slug)).tags.find(t => t.slug === slug).name; // Get the original tag name
+        const tagColorField = allPostsData.find(post => post.tags.some(t => t.slug === slug)).tags.find(t => t.slug === slug).colorField; // Get the original tag color
+
+        const tagLink = document.createElement('a');
+        tagLink.href = `search.html?tag=${slug}`; // Retain direct link functionality
+        tagLink.className = `tag-cloud-item tag-${tagColorField}`; // Apply existing tag color classes
+        tagLink.textContent = `${tagName} (${count})`;
+
+        // Calculate font size based on count relative to maxCount
+        // Minimum font size (e.g., 1em) for single occurrences, scales up to a max (e.g., 1.8em)
+        const minFontSize = 0.9; // Base size for tags with count 1
+        const maxFontSize = 1.6; // Max size for the most frequent tag
+        const fontSize = minFontSize + (count - 1) / (maxCount - 1 || 1) * (maxFontSize - minFontSize);
+        tagLink.style.fontSize = `${fontSize}em`;
+        tagLink.style.fontWeight = 'normal'; // Reset if any default bolding exists for links
+
+        tagCloudContainer.appendChild(tagLink);
+    });
+}
+
+// Central function to filter and display posts based on URL tag parameter AND search input
+function displayFilteredPosts() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const requestedTagSlug = urlParams.get('tag');
+    const searchTerm = postSearchInput.value.toLowerCase().trim(); // NEW
+
+    let postsToShow = allPostsData;
+
+    // 1. Filter by Tag (if present in URL)
+    if (requestedTagSlug) {
+        postsToShow = postsToShow.filter(post =>
+            post.tags.some(tag => tag.slug === requestedTagSlug)
+        );
+    }
+
+    // 2. Filter by Search Term (if present in input)
+    if (searchTerm) {
+        postsToShow = postsToShow.filter(post =>
+            post.title.toLowerCase().includes(searchTerm) ||
+            post.description.toLowerCase().includes(searchTerm) || // Search in description too
+            post.tags.some(tag => tag.name.toLowerCase().includes(searchTerm)) // Search in tag names
+        );
+    }
+
+    let filteredPostsHtml = '';
+
+    if (requestedTagSlug || searchTerm) { // Display header if any filter is active
+        filteredPostsHtml += `
+            <div class="filtered-results-header">
+                <h2>
+                    ${requestedTagSlug ? `Posts tagged with: <span class="highlight-tag">${requestedTagSlug.replace(/-/g, ' ')}</span>` : ''}
+                    ${requestedTagSlug && searchTerm ? ' & ' : ''}
+                    ${searchTerm ? `Search results for: "<span class="highlight-tag">${searchTerm}</span>"` : ''}
+                </h2>
+                <a href="search.html" class="clear-filter-button">Clear All Filters</a>
+            </div>
+        `;
+    }
+
+    if (postsToShow.length === 0) {
+        filteredPostsHtml += '<p class="no-results-message">No posts found matching your criteria.</p>';
+    } else {
+        postsToShow.forEach(post => {
+            filteredPostsHtml += `
+                <article class="post-card filtered-post-item">
+                    <div class="post-content">
+                        <h3><a href="${post.url}">${post.title}</a></h3>
+                        <p>${post.description}</p>
+                        <div class="post-card-tags">
+                            ${post.tags.map(tag => `<a href="search.html?tag=${tag.slug}" class="tag tag-${tag.colorField}">${tag.name}</a>`).join('')}
+                        </div>
+                        <span class="read-time">${post.readTime}</span>
+                    </div>
+                    <a href="${post.url}" class="full-card-link"></a>
+                </article>
+            `;
+        });
+    }
+    filteredPostsDisplay.innerHTML = filteredPostsHtml;
+}
+
+// Event Listeners for search input
+postSearchInput.addEventListener('input', displayFilteredPosts); // Filter on every key stroke
+clearSearchButton.addEventListener('click', function() {
+    postSearchInput.value = ''; // Clear input
+    // To also clear the tag filter from URL, we'll navigate cleanly
+    if (window.location.search) { // If there are any URL parameters
+        window.location.href = 'search.html'; // Redirect to clear them
+    } else {
+        displayFilteredPosts(); // Just re-display if no URL params
+    }
+});
+            
+// Initial calls on page load
+generateTagCloud(); // No need to pass allPostsData if it's a global variable
+displayFilteredPosts(); // Initial display based on any URL tag or empty search
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const themeToggle = document.getElementById('theme-toggle');
