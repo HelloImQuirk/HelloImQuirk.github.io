@@ -1278,7 +1278,6 @@ blockquote.final-quote cite {
 }
 
 /* 9d. Reading List Page */
-
 /* Featured Section */
 .featured-section {
     background-color: var(--light-bg-card); /* [cite: 643] */
@@ -1446,6 +1445,161 @@ blockquote.final-quote cite {
     color: var(--text-color); /* [cite: 641] */
 }
 
+/* Carousel Specific Styling */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px; /* Adjust as needed */
+    height: 300px; /* Fixed height for consistency */
+    margin: 2rem auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: var(--bg-color); /* Matches page background */
+    box-shadow: 0 5px 20px rgba(var(--text-color-rgb), 0.1);
+    display: flex; /* Helps with centering content if only one item */
+    align-items: center; /* Vertically centers carousel content */
+    justify-content: center; /* Horizontally centers carousel content */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-item {
+    width: 100%;
+    height: 100%;
+    display: flex; /* To lay out content (image and details) */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column; /* Stack image and text vertically */
+    padding: 2rem;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    position: absolute; /* Allows items to stack and be positioned */
+    top: 0;
+    left: 0;
+    opacity: 1; /* Default visible state */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition for fading in/out */
+}
+
+/* Initially hide all carousel items using JS, then show one by one */
+.carousel-item[style*="display: none"] {
+    opacity: 0;
+    pointer-events: none; /* Make hidden items unclickable */
+}
+
+.featured-cover {
+    max-width: 150px; /* Adjust size of featured image */
+    max-height: 150px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1);
+}
+
+.featured-details h4 {
+    font-family: var(--serif-font);
+    font-size: 1.8rem;
+    color: var(--primary-accent);
+    margin-bottom: 0.5rem;
+}
+
+.featured-details p {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.read-more-button {
+    display: inline-block;
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-accent); /* Added for consistency */
+}
+
+.read-more-button:hover {
+    background-color: var(--secondary-accent);
+    color: var(--text-color);
+    box-shadow: 0 4px 15px rgba(var(--text-color-rgb), 0.1);
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 1rem;
+    box-sizing: border-box;
+    z-index: 10; /* Ensure buttons are above carousel items */
+}
+
+.carousel-controls button {
+    background-color: rgba(var(--text-color-rgb), 0.7); /* Semi-transparent dark button */
+    color: var(--bg-color);
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Fixed width for circular button */
+    height: 45px; /* Fixed height for circular button */
+}
+
+.carousel-controls button:hover {
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+}
+
+/* Optional: Subtle note below featured section */
+.featured-note {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--tertiary-accent);
+    margin-top: 1rem;
+    transition: color 0.3s ease;
+}
+
+/* Responsive adjustments for carousel */
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 250px;
+        margin: 2rem auto;
+    }
+
+    .featured-cover {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .featured-details h4 {
+        font-size: 1.5rem;
+    }
+
+    .featured-details p {
+        font-size: 0.9rem;
+    }
+
+    .read-more-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .carousel-controls button {
+        padding: 0.6rem 1rem;
+        font-size: 1.2rem;
+        width: 38px;
+        height: 38px;
+    }
+}
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .featured-section {
