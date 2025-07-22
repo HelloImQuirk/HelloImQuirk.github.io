@@ -35,13 +35,19 @@
     --sans-font: 'Inter', sans-serif;
     --light-bg-card: #D8DADC; /* NEW & IMPROVED: A visibly distinct, subtle light blue-gray */
 
-    /* --- Tag Colors (New - Light Mode) --- */
+    /* --- Tag Colors (Updated - Light Mode) --- */
     --tag-color-productivity: #A0C4FF; /* Light Blue */
+    --tag-color-productivity-border: #7AB2FF; /* Slightly darker */
     --tag-color-growth: #B6E8A9;       /* Light Green */
+    --tag-color-growth-border: #8FD680; /* Slightly darker */
     --tag-color-knowledge: #FFDDA0;    /* Light Orange/Yellow */
+    --tag-color-knowledge-border: #FFCB70; /* Slightly darker */
     --tag-color-society: #FFB3BA;      /* Light Red/Pink */
+    --tag-color-society-border: #FF8F9B; /* Slightly darker */
     --tag-color-tools: #C2A0FF;        /* Light Purple */
+    --tag-color-tools-border: #9D7BFF; /* Slightly darker */
     --tag-color-misc: #E0E0E0;         /* Grey for uncategorized/misc */
+    --tag-color-misc-border: #BBBBBB; /* Slightly darker */
 
     /* RGB values for rgba() functions (Light Mode) */
     --bg-color-rgb: 245, 242, 235;
@@ -61,13 +67,19 @@
     --tertiary-accent: #AABFFF;    /* Lighter dark blue for headings/strong accents */
     --light-bg-card: #2C313A;      /* Slightly lighter dark grey for card backgrounds */
 
-    /* Dark Mode Tag Colors (adjusted for visibility on dark backgrounds) */
-    --tag-color-productivity: #8CC0FF;
-    --tag-color-growth: #A5D690;
-    --tag-color-knowledge: #FFC870;
-    --tag-color-society: #FF9999;
-    --tag-color-tools: #C999FF;
-    --tag-color-misc: #888888;
+  /* Dark Mode Tag Colors (adjusted for visibility on dark backgrounds) */
+    --tag-color-productivity-dark: #8CC0FF;
+    --tag-color-productivity-dark-border: #699BEB;
+    --tag-color-growth-dark: #A5D690;
+    --tag-color-growth-dark-border: #80C170;
+    --tag-color-knowledge-dark: #FFC870;
+    --tag-color-knowledge-dark-border: #E6A95B;
+    --tag-color-society-dark: #FF9999;
+    --tag-color-society-dark-border: #E07A7A;
+    --tag-color-tools-dark: #C999FF;
+    --tag-color-tools-dark-border: #B079E0;
+    --tag-color-misc-dark: #888888;
+    --tag-color-misc-dark-border: #666666;
 
     /* RGB values for rgba() functions (Dark Mode) */
     --bg-color-rgb: 26, 30, 38;
@@ -1434,24 +1446,6 @@ blockquote.final-quote cite {
     padding: 0.3rem 0.7rem;
 }
 
-/* --- Tag Color Coding (using data attributes) --- */
-.tag[data-tag-color="productivity"] { background-color: var(--tag-color-productivity); }
-.tag[data-tag-color="growth"] { background-color: var(--tag-color-growth); }
-.tag[data-tag-color="knowledge"] { background-color: var(--tag-color-knowledge); }
-.tag[data-tag-color="society"] { background-color: var(--tag-color-society); }
-.tag[data-tag-color="tools"] { background-color: var(--tag-color-tools); }
-.tag[data-tag-color="misc"] { background-color: var(--tag-color-misc); }
-
-/* Ensure text inside tags is readable if background is light */
-.tag[data-tag-color="productivity"],
-.tag[data-tag-color="growth"],
-.tag[data-tag-color="knowledge"],
-.tag[data-tag-color="society"],
-.tag[data-tag-color="tools"],
-.tag[data-tag-color="misc"] {
-    color: var(--text-color);
-}
-
 /* --- Search & Tags Page Specific Styles --- */
 #tag-cloud {
     margin-top: 2rem;
@@ -1462,11 +1456,105 @@ blockquote.final-quote cite {
     box-shadow: 0 2px 10px rgba(var(--text-color-rgb), 0.05);
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    gap: 0.7rem; /* Optimal spacing for weighted tags */
     justify-content: center;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.tag-cloud-item {
+    padding: 0.4em 0.8em; /* Padding scales with font size */
+    border-radius: 15px;
+    text-decoration: none;
+    white-space: nowrap; /* Prevent tags from wrapping */
+    transition: all 0.2s ease;
+    border: 1px solid transparent; /* Base transparent border, overridden by color classes */
+    display: inline-block; /* Allows padding and scaling */
+    line-height: 1; /* Keep text centered vertically */
+    color: var(--text-color); /* Default text color for light mode */
+}
+
+/* Hover effect for tag cloud items */
+.tag-cloud-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(var(--text-color-rgb), 0.1);
+    opacity: 0.9;
+}
+
+/* Base styles for specific tag colors (Light Mode) */
+.tag-growth {
+    background-color: var(--tag-color-growth);
+    border-color: var(--tag-color-growth-border);
+    color: var(--text-color);
+}
+
+.tag-productivity {
+    background-color: var(--tag-color-productivity);
+    border-color: var(--tag-color-productivity-border);
+    color: var(--text-color);
+}
+
+.tag-knowledge {
+    background-color: var(--tag-color-knowledge);
+    border-color: var(--tag-color-knowledge-border);
+    color: var(--text-color);
+}
+
+.tag-society {
+    background-color: var(--tag-color-society);
+    border-color: var(--tag-color-society-border);
+    color: var(--text-color);
+}
+
+.tag-tools {
+    background-color: var(--tag-color-tools);
+    border-color: var(--tag-color-tools-border);
+    color: var(--text-color);
+}
+
+.tag-misc { /* Add this block only if you use a 'misc' tag in your posts */
+    background-color: var(--tag-color-misc);
+    border-color: var(--tag-color-misc-border);
+    color: var(--text-color);
+}
+
+/* --- Dark Mode Overrides for Tags --- */
+body[data-theme="dark"] .tag-growth {
+    background-color: var(--tag-color-growth-dark);
+    border-color: var(--tag-color-growth-dark-border);
+    color: var(--bg-color); /* Ensures text color for dark mode tags */
+}
+
+body[data-theme="dark"] .tag-productivity {
+    background-color: var(--tag-color-productivity-dark);
+    border-color: var(--tag-color-productivity-dark-border);
+    color: var(--bg-color);
+}
+
+body[data-theme="dark"] .tag-knowledge {
+    background-color: var(--tag-color-knowledge-dark);
+    border-color: var(--tag-color-knowledge-dark-border);
+    color: var(--bg-color);
+}
+
+body[data-theme="dark"] .tag-society {
+    background-color: var(--tag-color-society-dark);
+    border-color: var(--tag-color-society-dark-border);
+    color: var(--bg-color);
+}
+
+body[data-theme="dark"] .tag-tools {
+    background-color: var(--tag-color-tools-dark);
+    border-color: var(--tag-color-tools-dark-border);
+    color: var(--bg-color);
+}
+
+body[data-theme="dark"] .tag-misc { /* Add this block only if you use a 'misc' tag */
+    background-color: var(--tag-color-misc-dark);
+    border-color: var(--tag-color-misc-dark-border);
+    color: var(--bg-color);
+}
+
+/* --- Keep all existing Search Page Styles below this, unchanged --- */
 #filtered-posts-display {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -1583,6 +1671,7 @@ blockquote.final-quote cite {
 #clear-search-button:hover {
     background-color: var(--secondary-accent);
     color: var(--bg-color);
+    transform: translateY(-2px);
 }
 /* UPDATED SECTION: 9g. OS Stack Interactive Cards (Now targeting <details> structure) */
 
