@@ -291,6 +291,26 @@ displayFilteredPosts(); // Initial display based on any URL tag or empty search
             }
         }
 
+     // Function to set the theme
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            // Update the button icon based on the new theme
+            if (themeToggle) {
+                if (theme === 'dark') {
+                    themeToggle.querySelector('.icon-light-mode').style.opacity = '0';
+                    themeToggle.querySelector('.icon-light-mode').style.transform = 'scale(0.5)';
+                    themeToggle.querySelector('.icon-dark-mode').style.opacity = '1';
+                    themeToggle.querySelector('.icon-dark-mode').style.transform = 'scale(1)';
+                } else {
+                    themeToggle.querySelector('.icon-light-mode').style.opacity = '1';
+                    themeToggle.querySelector('.icon-light-mode').style.transform = 'scale(1)';
+                    themeToggle.querySelector('.icon-dark-mode').style.opacity = '0';
+                    themeToggle.querySelector('.icon-dark-mode').style.transform = 'scale(0.5)';
+                }
+            }
+        }
+
         // Function to get the preferred theme
         function getPreferredTheme() {
             // 1. Check local storage first
