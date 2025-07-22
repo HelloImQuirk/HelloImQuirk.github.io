@@ -1462,7 +1462,7 @@ blockquote.final-quote cite {
 }
 
 .tag-cloud-item {
-    padding: 0.4em 0.8em; /* Padding scales with font size */
+    padding: 8px 16px; /* Use fixed pixel values for padding for consistency */
     border-radius: 15px;
     text-decoration: none;
     white-space: nowrap; /* Prevent tags from wrapping */
@@ -1471,6 +1471,10 @@ blockquote.final-quote cite {
     display: inline-block; /* Allows padding and scaling */
     line-height: 1; /* Keep text centered vertically */
     color: var(--text-color); /* Default text color for light mode */
+    /* Ensure text alignment within the potentially scaled element */
+    text-align: center;
+    /* Optional: Specify a base font size here if not already inherited */
+    font-size: 0.9em; /* A base font size for consistency before dynamic scaling */
 }
 
 /* Hover effect for tag cloud items */
