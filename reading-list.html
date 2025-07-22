@@ -27,7 +27,6 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <!-- NEW: Dark Mode Toggle Button -->
         <button id="theme-toggle" aria-label="Toggle dark mode">
             <span class="icon-light-mode">☀️</span>
             <span class="icon-dark-mode">🌙</span>
@@ -39,19 +38,464 @@
             <h2>Reading List</h2>
             <p>"If it’s on here, I’ve devoured it (or I plan to)." These are the books, articles, and podcasts that have caught my eye and fueled my thinking.</p>
             
-            <div class="reading-item">
-                <h3>Book: Meditations by Marcus Aurelius</h3>
-                <blockquote>A timeless, raw look into the mind of a leader grappling with duty and human nature. It's a foundational text for anyone interested in practical philosophy.</blockquote>
-            </div>
+            <section class="featured-section">
+                <h3>Featured Reads</h3>
+                <div class="carousel-container">
+                    <div class="carousel-item">
+                        <img src="path/to/featured-book-cover.jpg" alt="Featured Item" class="featured-cover">
+                        <div class="featured-details">
+                            <h4>Featured Title Here</h4>
+                            <p>A short blurb about why this is featured.</p>
+                            <a href="#item-id" class="read-more-button">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="prev-button">‹</button>
+                        <button class="next-button">›</button>
+                    </div>
+                </div>
+                <p class="featured-note">Curated recommendations that have recently made a significant impact on my thinking.</p>
+            </section>
+            <hr>
 
-            <div class="reading-item">
-                <h3>Article: "The Busy Trap" by Tim Kreider</h3>
-                <blockquote>This essay was a wake-up call. It perfectly articulates the difference between being productive and just being busy.</blockquote>
-            </div>
+            <div class="sort-options">
+                <label for="sort-by">Sort by:</label>
+                <select id="sort-by">
+                    <option value="date-added-desc">Date Added (Newest First)</option>
+                    <option value="date-added-asc">Date Added (Oldest First)</option>
+                    <option value="title-asc">Title (A-Z)</option>
+                    <option value="title-desc">Title (Z-A)</option>
+                    <option value="rating-desc">Rating (Highest First)</option>
+                    <option value="rating-asc">Rating (Lowest First)</option>
+                </select>
+                </div>
+            
+            <div id="reading-list-container">
+                <section class="category-section" id="mind-philosophy">
+                    <h2>Mind & Philosophy 🧠</h2>
 
-            <div class="reading-item">
-                <h3>Podcast: Lex Fridman Podcast</h3>
-                <blockquote>The sheer breadth of guests and the depth of conversation are astounding. It's a masterclass in curiosity.</blockquote>
+                    <div class="media-type-group">
+                        <h3>Books 📖</h3>
+                        <div class="reading-item status-planned" data-title="Steering the Craft" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/steering-the-craft-cover.jpg" alt="Cover of Steering the Craft" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Steering the Craft</h4>
+                                    <p class="item-creator">by Ursula K. Le Guin</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Original Year: 1998 | Genre: Writing, Craft
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.goodreads.com/book/show/13645.Steering_the_Craft" target="_blank" rel="noopener noreferrer" class="link-button">View on Goodreads</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A technical workbook that zeroes in on syntax, rhythm, and narrative voice—without fluff. It's designed to help writers refine their prose instincts.</p>
+                                <p class="item-recommendation">
+                                    **Why I want to read it:** I want to refine my prose instincts and tighten the relationship between form and meaning in my writing. Le Guin's insights are invaluable.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="reading-item status-planned" data-title="The War of Art" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/the-war-of-art-cover.jpg" alt="Cover of The War of Art" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">The War of Art</h4>
+                                    <p class="item-creator">by Steven Pressfield</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Original Year: 2002 | Genre: Creativity, Self-Help
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.goodreads.com/book/show/136394.The_War_of_Art" target="_blank" rel="noopener noreferrer" class="link-button">View on Goodreads</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A manifesto on creative Resistance, arguing that the biggest enemy to our creative aspirations is internal self-sabotage.</p>
+                                <p class="item-recommendation">
+                                    **Why I want to read it:** I’m reading it to unpack my internal barriers and build creative discipline without losing soul. Less about productivity, more about grit and psychological warfare with the self.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="reading-item status-planned" data-title="Metaphors We Live By" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/metaphors-we-live-by-cover.jpg" alt="Cover of Metaphors We Live By" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Metaphors We Live By</h4>
+                                    <p class="item-creator">by George Lakoff & Mark Johnson</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Original Year: 1980 | Genre: Linguistics, Philosophy
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.goodreads.com/book/show/84990.Metaphors_We_Live_By" target="_blank" rel="noopener noreferrer" class="link-button">View on Goodreads</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A foundational text arguing that metaphors aren’t just literary devices—they fundamentally shape our logic, politics, and perception of reality.</p>
+                                <p class="item-recommendation">
+                                    **Why I want to read it:** I’m especially drawn to how this reframes the way I process meaning in everyday language, belief, and narrative. It promises to deepen my understanding of communication.
+                                </p>
+                            </div>
+                        </div>
+
+                         <div class="reading-item status-planned" data-title="Atomic Habits" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/atomic-habits-cover.jpg" alt="Cover of Atomic Habits" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Atomic Habits</h4>
+                                    <p class="item-creator">by James Clear</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Original Year: 2018 | Genre: Self-Help, Productivity
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.goodreads.com/book/show/40257324-atomic-habits" target="_blank" rel="noopener noreferrer" class="link-button">View on Goodreads</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">An easy-to-understand, practical guide on how to build good habits and break bad ones, focusing on small changes that yield remarkable results.</p>
+                                <p class="item-recommendation">
+                                    **Why I want to read it:** I'm looking for actionable strategies to improve my daily routines and create systems that support long-term goals. This book comes highly recommended for its clarity and effectiveness.
+                                </p>
+                            </div>
+                        </div>
+
+                         <div class="reading-item status-planned" data-title="Mindset" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/mindset-dweck-cover.jpg" alt="Cover of Mindset" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Mindset: The New Psychology of Success</h4>
+                                    <p class="item-creator">by Carol S. Dweck</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Original Year: 2006 | Genre: Psychology, Self-Help
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.goodreads.com/book/show/40745.Mindset" target="_blank" rel="noopener noreferrer" class="link-button">View on Goodreads</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">Explores the power of mindset—how our beliefs about our abilities and potential profoundly impact our success and happiness. It distinguishes between a fixed mindset and a growth mindset.</p>
+                                <p class="item-recommendation">
+                                    **Why I want to read it:** Understanding the concepts of fixed versus growth mindsets is crucial for personal and professional development. I'm keen to learn how to cultivate a more resilient and adaptable approach to challenges.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media-type-group">
+                        <h3>Articles 📝</h3>
+                        <div class="reading-item status-completed" data-title="The Busy Trap" data-rating="4" data-added="2023-01-15">
+                            <div class="item-header">
+                                <img src="path/to/article-icon.png" alt="Generic article icon" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">"The Busy Trap"</h4>
+                                    <p class="item-creator">by Tim Kreider</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Completed ✅</span> | Original Year: 2012 | Genre: Essay, Social Commentary
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">⭐⭐⭐⭐</span>
+                                    <a href="https://opinionator.blogs.nytimes.com/2012/06/30/the-busy-trap/" target="_blank" rel="noopener noreferrer" class="link-button">Read Article</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A sharp critique of performative busyness and our obsession with self-worth through work. It hits close to home.</p>
+                                <p class="item-recommendation">
+                                    **Why I recommend it:** This essay was a major wake-up call for me. It perfectly articulates the difference between genuinely being productive and merely *feeling* busy. Sometimes I need reminders that presence matters more than productivity.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="reading-item status-on-deck" data-title="Deep Work (Excerpt)" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/article-icon.png" alt="Generic article icon" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">"Deep Work" (Excerpt)</h4>
+                                    <p class="item-creator">by Cal Newport</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: On Deck 🎧</span> | Original Year: 2016 (Book) | Genre: Productivity, Self-Help
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="path/to/deep-work-excerpt.pdf" target="_blank" rel="noopener noreferrer" class="link-button">Read Excerpt</a> </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">An excerpt focusing on the value of focused, distraction-free time for producing high-quality work in a world designed to derail your attention.</p>
+                                <p class="item-recommendation">
+                                    **Why I'm exploring it:** I’m exploring it as a counterweight to my fractured attention and to rethink how I approach deep personal work. It's a foundational text for serious productivity.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media-type-group">
+                        <h3>Podcasts 🎧</h3>
+                        <div class="reading-item status-planned" data-title="Philosophize This!" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/philosophize-this-logo.jpg" alt="Philosophize This! Logo" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Philosophize This!</h4>
+                                    <p class="item-creator">by Stephen West</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Avg. Length: ~30-45 min | Genre: Philosophy, Education
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.philosophizethis.org/" target="_blank" rel="noopener noreferrer" class="link-button">Listen on Philosophize This!</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">Bite-sized entries into philosophical schools and thinkers, with strong contemporary tie-ins, making complex ideas accessible.</p>
+                                <p class="item-recommendation">
+                                    **Why I want to listen:** I listen to widen my inner vocabulary for understanding the self, the system, and society. Stephen West makes dense philosophy engaging and relevant.
+                                </p>
+                            </div>
+                        </div>
+                         <div class="reading-item status-active" data-title="Lex Fridman Podcast" data-rating="5" data-added="2023-05-01">
+                            <div class="item-header">
+                                <img src="path/to/lex-fridman-logo.jpg" alt="Lex Fridman Podcast Logo" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Lex Fridman Podcast</h4>
+                                    <p class="item-creator">Hosted by Lex Fridman</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Active ⏳</span> | Avg. Length: ~2-4 hours | Episodes: 400+ | Genre: AI, Science, Philosophy
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">⭐⭐⭐⭐⭐</span>
+                                    <a href="https://lexfridman.com/podcast/" target="_blank" rel="noopener noreferrer" class="link-button">Listen on LexFridman.com</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A podcast featuring long-form conversations with scientists, engineers, philosophers, and entrepreneurs from diverse fields, often focusing on AI, science, technology, history, and the nature of intelligence, consciousness, love, and power.</p>
+                                <p class="item-recommendation">
+                                    **Why I recommend it:** The sheer breadth of guests and the depth of conversation are astounding. Lex's unique approach to interviewing—combining profound curiosity with respectful inquiry—makes every episode a masterclass in learning and understanding complex topics from experts at the top of their fields.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="category-section" id="science-technology">
+                    <h2>Science & Technology 🔬</h2>
+                    <div class="media-type-group">
+                        <h3>Articles 📝</h3>
+                        <div class="reading-item status-planned" data-title="The Age of Decadence" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/article-icon.png" alt="Generic article icon" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">"The Age of Decadence" (Transcript)</h4>
+                                    <p class="item-creator">by Patrick Wyman</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Original Year: 2021 (Podcast) | Genre: History, Social Commentary
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.patrickwyman.com/podcast" target="_blank" rel="noopener noreferrer" class="link-button">Find Podcast/Transcript</a> </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A socio-historical analysis of slow collapse, stagnation, and cultural decay, often drawing parallels to historical empires.</p>
+                                <p class="item-recommendation">
+                                    **Why I want to read/listen:** I’m interested in this as a lens on our moment—and how media and systems reflect decline while masking it. It offers a critical historical perspective on contemporary issues.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="category-section" id="culture-society">
+                    <h2>Culture & Society 🌍</h2>
+                    <div class="media-type-group">
+                        <h3>Podcasts 🎧</h3>
+                        <div class="reading-item status-planned" data-title="The Wild Geese Podcast" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/wild-geese-podcast-logo.jpg" alt="The Wild Geese Podcast Logo" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">The Wild Geese Podcast</h4>
+                                    <p class="item-creator">Hosted by [Creator Name - *To Be Confirmed*]</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Genre: [Genre - *To Be Confirmed*]
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://example.com/wild-geese-podcast" target="_blank" rel="noopener noreferrer" class="link-button">Listen on [Platform - *To Be Confirmed*]</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">*(Blurb - To Be Written)*</p>
+                                <p class="item-recommendation">
+                                    **Why I want to listen:** *(Your recommendation - To Be Written)*
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="category-section" id="stories-creativity">
+                    <h2>Stories & Creativity 📚</h2>
+
+                    <div class="media-type-group">
+                        <h3>Light Novels 📖</h3>
+                        <div class="reading-item status-completed" data-title="Ascendance of a Bookworm" data-rating="5" data-added="2024-03-10">
+                            <div class="item-header">
+                                <img src="path/to/bookworm-cover.jpg" alt="Cover of Ascendance of a Bookworm" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Ascendance of a Bookworm</h4>
+                                    <p class="item-creator">by Miya Kazuki</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Completed ✅</span> | Original Year: 2013 | Genre: Isekai, Fantasy, Slice of Life
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">⭐⭐⭐⭐⭐</span>
+                                    <a href="https://j-novel.club/series/ascendance-of-a-bookworm" target="_blank" rel="noopener noreferrer" class="link-button">Read on J-Novel Club</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A quiet, obsessive girl is reborn into a medieval world with one goal: make books. What starts as a personal passion spirals into systemic change—through libraries, education, and logistics.</p>
+                                <p class="item-recommendation">
+                                    **Why I recommend it:** I keep returning to it for how it validates intellectual hunger as a world-shaping force. It's a surprisingly deep dive into economics and societal change through the lens of a simple passion.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="reading-item status-completed" data-title="Tensei Shitara Slime Datta Ken" data-rating="4" data-added="2024-01-20">
+                            <div class="item-header">
+                                <img src="path/to/slime-cover.jpg" alt="Cover of Tensei Shitara Slime Datta Ken" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Tensei Shitara Slime Datta Ken</h4>
+                                    <p class="item-creator">by Fuse</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Completed ✅</span> | Original Year: 2013 | Genre: Isekai, Fantasy, Kingdom Building
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">⭐⭐⭐⭐</span>
+                                    <a href="https://j-novel.club/series/that-time-i-got-reincarnated-as-a-slime" target="_blank" rel="noopener noreferrer" class="link-button">Read on J-Novel Club</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">What if utopia started with a slime? It’s a surprisingly detailed take on multicultural governance, alliances, and interspecies diplomacy—disguised as action fantasy.</p>
+                                <p class="item-recommendation">
+                                    **Why I recommend it:** I read it for joy, but stayed for the systems. It's a fascinating exploration of community building, resource management, and diplomacy, all wrapped in an engaging fantasy setting.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media-type-group">
+                        <h3>Manga  Manga</h3>
+                        <div class="reading-item status-completed" data-title="Houseki no Kuni (Land of the Lustrous)" data-rating="5" data-added="2024-04-01">
+                            <div class="item-header">
+                                <img src="path/to/houseki-kuni-cover.jpg" alt="Cover of Houseki no Kuni" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Houseki no Kuni (Land of the Lustrous)</h4>
+                                    <p class="item-creator">by Haruko Ichikawa</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Completed ✅</span> | Original Year: 2012 | Genre: Sci-Fi, Fantasy, Existential
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">⭐⭐⭐⭐⭐</span>
+                                    <a href="https://kodansha.us/series/land-of-the-lustrous/" target="_blank" rel="noopener noreferrer" class="link-button">View on Kodansha</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A slow, existential sci-fi where gem-bodied beings drift through time, identity, and ruin, constantly battling a mysterious enemy from the moon.</p>
+                                <p class="item-recommendation">
+                                    **Why I recommend it:** Gorgeous to look at—philosophically haunting beneath. I read it like a visual essay on impermanence, adaptation, and the struggle for identity in a world of constant change.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media-type-group">
+                        <h3>Podcasts 🎧</h3>
+                        <div class="reading-item status-on-deck" data-title="Imaginary Worlds" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/imaginary-worlds-logo.jpg" alt="Imaginary Worlds Podcast Logo" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Imaginary Worlds</h4>
+                                    <p class="item-creator">by Eric Molinsky</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: On Deck 🎧</span> | Avg. Length: ~20-30 min | Genre: Culture, Storytelling
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.imaginaryworlds.fm/" target="_blank" rel="noopener noreferrer" class="link-button">Listen on Imaginary Worlds FM</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">A deep dive into how stories get made and why they matter, exploring the creative process behind fictional worlds across different media.</p>
+                                <p class="item-recommendation">
+                                    **Why I'm exploring it:** It’s part analysis, part anthropology of imagination. I tune in for the meta—why world-building resonates across culture and how creators bring these complex narratives to life.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="reading-item status-on-deck" data-title="Writing Excuses" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/writing-excuses-logo.jpg" alt="Writing Excuses Podcast Logo" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">Writing Excuses</h4>
+                                    <p class="item-creator">by Brandon Sanderson & Co.</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: On Deck 🎧</span> | Avg. Length: ~15-20 min | Genre: Writing, Craft
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://writingexcuses.com/" target="_blank" rel="noopener noreferrer" class="link-button">Listen on Writing Excuses</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">Fast-paced episodes on character, genre, pacing, and magic systems, offering practical advice for aspiring and established writers.</p>
+                                <p class="item-recommendation">
+                                    **Why I'm exploring it:** It’s one of the few writing podcasts that’s actually tactical. Perfect for thinking structurally without losing momentum, and getting actionable tips from experienced authors.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="reading-item status-planned" data-title="The Creative Penn" data-rating="0" data-added="2025-07-21">
+                            <div class="item-header">
+                                <img src="path/to/creative-penn-logo.jpg" alt="The Creative Penn Podcast Logo" class="item-cover">
+                                <div class="item-details">
+                                    <h4 class="item-title">The Creative Penn</h4>
+                                    <p class="item-creator">by Joanna Penn</p>
+                                    <p class="item-meta">
+                                        <span class="item-status">Status: Planned 🕒</span> | Avg. Length: ~30-60 min | Genre: Writing, Publishing, Marketing
+                                    </p>
+                                </div>
+                                <div class="item-actions">
+                                    <span class="item-rating">Not Yet Rated</span>
+                                    <a href="https://www.thecreativepenn.com/podcasts/" target="_blank" rel="noopener noreferrer" class="link-button">Listen on The Creative Penn</a>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <p class="item-blurb">Covers writing, publishing, and marketing for authors, with a focus on building a sustainable creative career and leveraging modern tools.</p>
+                                <p class="item-recommendation">
+                                    **Why I want to listen:** I’m curious how authors build repeatable, meaningful processes across creative and business lives. Joanna Penn provides practical, systems-minded advice for authors.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </main>
