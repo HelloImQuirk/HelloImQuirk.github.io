@@ -1277,6 +1277,195 @@ blockquote.final-quote cite {
     transition: color 0.3s ease, border-left-color 0.3s ease;
 }
 
+/* 9d. Reading List Page */
+
+/* Featured Section */
+.featured-section {
+    background-color: var(--light-bg-card); /* [cite: 643] */
+    padding: 3.5rem 2.5rem;
+    margin: 4rem auto;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08); /* [cite: 671] */
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* [cite: 698] */
+}
+
+.featured-section h2 {
+    font-family: var(--serif-font); /* [cite: 642] */
+    font-size: 2.8rem;
+    color: var(--primary-accent); /* [cite: 641] */
+    margin-bottom: 1rem;
+    transition: color 0.3s ease; /* [cite: 666] */
+}
+
+.featured-section p {
+    font-size: 1.1rem;
+    color: var(--text-color); /* [cite: 641] */
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.7; /* [cite: 662] */
+    transition: color 0.3s ease; /* [cite: 666] */
+}
+
+/* Sorting & Filtering Options */
+.filter-sort-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2.5rem auto;
+    max-width: 900px;
+    padding: 0 1rem;
+}
+
+.sort-dropdown,
+.filter-button {
+    background-color: var(--bg-color); /* [cite: 640] */
+    color: var(--primary-accent); /* [cite: 641] */
+    border: 2px solid var(--primary-accent); /* [cite: 704] */
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--sans-font); /* [cite: 643] */
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.sort-dropdown:hover,
+.filter-button:hover,
+.filter-button.active {
+    background-color: var(--primary-accent); /* [cite: 641] */
+    color: var(--bg-color); /* [cite: 640] */
+    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1); /* [cite: 687] */
+}
+
+/* Categories & Media Types - Reusing Tag Styles */
+.category-tag,
+.media-type-tag {
+    display: inline-block;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Example: Specific colors for categories, adapting your tag colors */
+.category-knowledge {
+    background-color: var(--tag-color-knowledge); /* [cite: 645] */
+    border: 1px solid var(--tag-color-knowledge-border); /* [cite: 646] */
+    color: var(--text-color); /* [cite: 641] */
+}
+
+.category-knowledge:hover {
+    background-color: var(--tag-color-knowledge-border); /* [cite: 646] */
+}
+
+/* Dark Mode Adjustments for Tags */
+[data-theme="dark"] .category-knowledge {
+    background-color: var(--tag-color-knowledge-dark); /* [cite: 658] */
+    border: 1px solid var(--tag-color-knowledge-dark-border); /* [cite: 658] */
+    color: var(--text-color); /* [cite: 653] */
+}
+/* ... similar for other tag categories like productivity, growth, etc. */
+
+/* Individual Reading Item Card */
+.reading-item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+.reading-item-card {
+    background-color: var(--light-bg-card); /* [cite: 643] */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(var(--text-color-rgb), 0.05); /* [cite: 780] */
+    transition: all 0.3s ease-in-out; /* [cite: 480] */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.reading-item-card:hover {
+    transform: translateY(-5px); /* [cite: 481] */
+    box-shadow: 0 12px 40px rgba(var(--text-color-rgb), 0.12); /* [cite: 481] */
+}
+
+.reading-item-card h3 {
+    font-family: var(--serif-font); /* [cite: 642] */
+    font-size: 1.5rem;
+    color: var(--primary-accent); /* [cite: 641] */
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    transition: color 0.3s ease; /* [cite: 482] */
+}
+
+.reading-item-card .meta-info {
+    font-size: 0.9rem;
+    color: var(--tertiary-accent); /* [cite: 642] */
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.reading-item-card p {
+    font-size: 1rem;
+    line-height: 1.6; /* [cite: 483] */
+    color: var(--text-color); /* [cite: 641] */
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Allows description to take up available space */
+    transition: color 0.3s ease; /* [cite: 483] */
+}
+
+.reading-item-card .read-more-link {
+    display: inline-block;
+    background-color: var(--primary-accent); /* [cite: 641] */
+    color: var(--bg-color); /* [cite: 640] */
+    padding: 0.6em 1.2em;
+    border-radius: 5px;
+    text-decoration: none; /* [cite: 421] */
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, color 0.3s; /* [cite: 421] */
+    align-self: flex-start; /* Aligns button to the start */
+}
+
+.reading-item-card .read-more-link:hover {
+    background-color: var(--secondary-accent); /* [cite: 641] */
+    color: var(--text-color); /* [cite: 641] */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .featured-section {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .featured-section h2 {
+        font-size: 2.2rem;
+    }
+
+    .filter-sort-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .reading-item-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+}
 /* 9d. Forms (Newsletter & Contact) */
 .form-container {
     max-width: 600px;
