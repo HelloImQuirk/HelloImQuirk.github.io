@@ -1242,6 +1242,20 @@ blockquote.final-quote cite {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(var(--text-color-rgb), 0.15);
 }
+
+.post-content h3 a {
+    color: var(--primary-accent); /* Or var(--text-color); based on your preference for title link color */
+    text-decoration: none; /* Removes the default underline */
+    transition: color 0.2s ease;
+    display: block; /* Makes the link take up the full width/height of its parent h3 */
+    padding: 5px 0; /* Adds a small vertical padding to increase the clickable area */
+}
+
+.post-content h3 a:hover {
+    color: var(--tertiary-accent); /* Or var(--primary-accent) - changes color on hover */
+    text-decoration: underline; /* Adds an underline on hover for visual feedback */
+}
+
 .post-card img { max-width: 100%; height: auto; display: block; }
 .post-content { padding: 1.5rem; }
 .post-content h3 { margin-top: 0; font-size: 1.6rem; color: var(--primary-accent);}
