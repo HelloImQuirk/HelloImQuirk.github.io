@@ -19,6 +19,7 @@
       e. Voice Map Grid 
       f. Tags
       g. OS Stack Interactive Cards
+      h. Timeline Styling
   10. Footer
   11. Animations & Transitions
   12. Media Queries (Tablet & Desktop)
@@ -2164,7 +2165,177 @@ body[data-theme="dark"] .tag-misc { /* Add this block only if you use a 'misc' t
     margin-top: 1rem;
     transition: color 0.3s ease, border-top-color 0.3s ease;
 }
+/* ------------------------------------ */
+/* 9. Page-Specific Elements (Continued) */
+/* h. Timeline Styling          */
+/* ------------------------------------ */
 
+.timeline-section {
+    max-width: 900px; /* Aligns with .post-header or .quirks-compass-section max-width */
+    margin: 4rem auto; /* Consistent vertical spacing with other sections */
+    padding: 0 2rem; /* Consistent horizontal padding */
+}
+
+.timeline-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-accent); /* Use primary accent color for section title */
+    font-family: var(--serif-font);
+    font-size: 2.5rem; /* Slightly larger than standard h2 for emphasis */
+    border-bottom: 2px solid var(--primary-accent); /* Consistent underline style */
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+/* Vertical line for the timeline */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: var(--secondary-accent); /* Muted blue for the line */
+    transform: translateX(-50%);
+    transition: background-color 0.3s ease;
+}
+
+.timeline-event {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem; /* Spacing between events */
+    position: relative;
+}
+
+/* Alternating layout for events */
+.timeline-event:nth-child(even) {
+    flex-direction: row-reverse; /* Content on left, date on right for even items */
+}
+
+/* Circles on the timeline line */
+.timeline-event::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-accent); /* Primary blue dots */
+    border: 2px solid var(--bg-color); /* Matches background for "floating" effect */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    box-shadow: 0 0 0 4px var(--bg-color); /* Creates a subtle halo effect over the line */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-date {
+    flex: 0 0 20%; /* Date takes up 20% of the width */
+    text-align: right;
+    font-family: var(--serif-font);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--tertiary-accent); /* Darker blue for dates */
+    padding-right: 2rem; /* Space between date and line/content */
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.timeline-event:nth-child(even) .timeline-date {
+    text-align: left;
+    padding-left: 2rem;
+    padding-right: 0;
+}
+
+.timeline-content {
+    flex: 0 0 70%; /* Content takes up 70% of the width */
+    background-color: var(--light-bg-card); /* Card background color */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08); /* Consistent card shadow */
+    position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-content h3 {
+    font-family: var(--serif-font);
+    font-size: 1.8rem;
+    color: var(--primary-accent); /* Primary accent for content titles */
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.timeline-content p {
+    font-family: var(--sans-font);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-color); /* Standard text color */
+    margin-bottom: 0;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for timeline events */
+.timeline-event:hover .timeline-content {
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: 0 12px 40px rgba(var(--text-color-rgb), 0.12); /* Enhanced shadow */
+}
+
+.timeline-event:hover::after {
+    transform: translate(-50%, -50%) scale(1.2); /* Make dot slightly larger */
+    background-color: var(--tertiary-accent); /* Change dot color on hover */
+}
+
+/* Dark Mode Adjustments - These are automatically handled by CSS variables,
+   but good to keep in mind the transitions are set globally on body. */
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px; /* Move line to the left edge */
+        transform: translateX(0);
+    }
+
+    .timeline-event {
+        flex-direction: column !important; /* Stack vertically */
+        align-items: flex-start; /* Align content to the left */
+        margin-left: 20px; /* Create space for the line */
+        margin-bottom: 3rem;
+    }
+
+    .timeline-event::after {
+        left: 20px; /* Keep dot on the line */
+        transform: translate(-50%, -50%);
+    }
+
+    .timeline-date {
+        text-align: left;
+        padding-left: 2.5rem; /* Space for the dot */
+        padding-right: 0;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+    }
+
+    .timeline-content {
+        flex: 0 0 100%; /* Content takes full width */
+        width: calc(100% - 2.5rem); /* Adjust width to account for margin */
+        padding: 1.5rem;
+        margin-left: 0; /* Remove previous left/right shifts */
+        box-sizing: border-box;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.5rem;
+    }
+}
 /* 10. Footer */
 .footer, footer {
     text-align: center;
