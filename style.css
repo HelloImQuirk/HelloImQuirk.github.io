@@ -2206,63 +2206,64 @@ body[data-theme="dark"] .tag-misc { /* Add this block only if you use a 'misc' t
 }
 
 .timeline-event {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid; /* Using Grid for precise column control */
+    grid-template-columns: 1fr auto 1fr; /* Date column | Auto-sized column for dot | Content column */
+    gap: 2rem; /* Space between date/dot and dot/content */
     margin-bottom: 4rem; /* Spacing between events */
-    position: relative;
+    align-items: center; /* Vertically align items in the grid row */
+    position: relative; /* Needed for the dot's absolute positioning relative to the event */
 }
 
-/* Alternating layout for events */
-.timeline-event:nth-child(even) {
-    flex-direction: row-reverse; /* Content on left, date on right for even items */
-}
-
-/* Circles on the timeline line */
-.timeline-event::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 16px;
-    height: 16px;
-    background-color: var(--primary-accent); /* Primary blue dots */
-    border: 2px solid var(--bg-color); /* Matches background for "floating" effect */
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    box-shadow: 0 0 0 4px var(--bg-color); /* Creates a subtle halo effect over the line */
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
+/* Position the date */
 .timeline-date {
-    flex: 0 0 20%; /* Date takes up 20% of the width */
+    grid-column: 1 / 2; /* Place in the first column */
     text-align: right;
     font-family: var(--serif-font);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--tertiary-accent); /* Darker blue for dates */
-    padding-right: 2rem; /* Space between date and line/content */
-    position: relative;
-    z-index: 1;
     transition: color 0.3s ease;
 }
 
-.timeline-event:nth-child(even) .timeline-date {
-    text-align: left;
-    padding-left: 2rem;
-    padding-right: 0;
-}
-
+/* Position the content card */
 .timeline-content {
-    flex: 0 0 70%; /* Content takes up 70% of the width */
+    grid-column: 3 / 4; /* Place in the third column */
     background-color: var(--light-bg-card); /* Card background color */
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08); /* Consistent card shadow */
-    position: relative;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+/* The dot (timeline indicator) */
+.timeline-event::after {
+    content: '';
+    grid-column: 2 / 3; /* Place in the middle (auto-sized) column */
+    justify-self: center; /* Center horizontally within its grid cell */
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-accent); /* Primary blue dots */
+    border: 2px solid var(--bg-color); /* Matches background for "floating" effect */
+    border-radius: 50%;
+    transform: translateX(0); /* Reset any previous transform that might offset it */
+    z-index: 1; /* Ensure it's above the line */
+    box-shadow: 0 0 0 4px var(--bg-color); /* Creates a subtle halo effect over the line */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Alternating layout for even events */
+.timeline-event:nth-child(even) .timeline-date {
+    grid-column: 3 / 4; /* Move date to the third column */
+    text-align: left;
+}
+
+.timeline-event:nth-child(even) .timeline-content {
+    grid-column: 1 / 2; /* Move content to the first column */
+}
+
+/* Note: The ::after dot remains in grid-column 2 / 3 for both odd/even,
+   as it's centered in the middle column of the grid. */
+
 
 .timeline-content h3 {
     font-family: var(--serif-font);
@@ -2289,54 +2290,66 @@ body[data-theme="dark"] .tag-misc { /* Add this block only if you use a 'misc' t
 }
 
 .timeline-event:hover::after {
-    transform: translate(-50%, -50%) scale(1.2); /* Make dot slightly larger */
+    transform: scale(1.2); /* Make dot slightly larger */
     background-color: var(--tertiary-accent); /* Change dot color on hover */
 }
-
-/* Dark Mode Adjustments - These are automatically handled by CSS variables,
-   but good to keep in mind the transitions are set globally on body. */
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .timeline::before {
-        left: 20px; /* Move line to the left edge */
+        left: 20px; /* Move vertical line to the left edge */
         transform: translateX(0);
     }
 
     .timeline-event {
-        flex-direction: column !important; /* Stack vertically */
-        align-items: flex-start; /* Align content to the left */
-        margin-left: 20px; /* Create space for the line */
+        grid-template-columns: auto 1fr; /* Dot/alignment space | Content column */
+        gap: 0; /* Remove gap, use padding/margin for spacing */
+        margin-left: 20px; /* Shift the entire event to the right of the line */
         margin-bottom: 3rem;
-        padding-top: 1.5rem; /* Add padding to visually center the dot */
-    }
-
-    .timeline-event::after {
-        top: 0.75rem; /* Adjust top position to align with the padding */
-        left: 20px; /* Keep dot on the line */
-        transform: translateX(-50%); /* Only adjust horizontal position */
     }
 
     .timeline-date {
+        grid-column: 2 / 3; /* Date is in the second column */
         text-align: left;
-        padding-left: 2.5rem; /* Space for the dot */
-        padding-right: 0;
-        margin-bottom: 0.5rem; /* Reduce margin between date and content */
+        padding-left: 1.5rem; /* Space between dot and date text */
+        margin-bottom: 0.5rem; /* Space below the date */
         font-size: 1.3rem;
     }
 
     .timeline-content {
-        flex: 0 0 100%; /* Content takes full width */
-        width: calc(100% - 2.5rem); /* Adjust width to account for margin */
+        grid-column: 2 / 3; /* Content is in the second column */
+        width: auto; /* Let grid manage width */
         padding: 1.5rem;
-        margin-left: 0; /* Remove previous left/right shifts */
-        box-sizing: border-box;
     }
 
-    .timeline-content h3 {
-        font-size: 1.5rem;
+    /* Position the dot on mobile */
+    .timeline-event::after {
+        grid-column: 1 / 2; /* Dot stays in the first column */
+        justify-self: center; /* Center horizontally in its cell */
+        margin-left: -8px; /* Offset to align precisely with the main vertical line */
+        align-self: start; /* Align to the top of its row */
+        transform: translateY(10px); /* Align with the top of the date/content block */
     }
-  
+
+    /* On mobile, even items should not reverse layout */
+    .timeline-event:nth-child(even) .timeline-date,
+    .timeline-event:nth-child(even) .timeline-content,
+    .timeline-event:nth-child(even)::after {
+        grid-column: auto; /* Reset to default grid column */
+        text-align: left; /* Ensure text alignment remains left */
+    }
+    /* Specific mobile re-assignment */
+    .timeline-event:nth-child(even) .timeline-date {
+        grid-column: 2 / 3;
+    }
+    .timeline-event:nth-child(even) .timeline-content {
+        grid-column: 2 / 3;
+    }
+    .timeline-event:nth-child(even)::after {
+        grid-column: 1 / 2;
+    }
+}
+
 /* 10. Footer */
 .footer, footer {
     text-align: center;
