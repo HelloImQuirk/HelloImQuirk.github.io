@@ -2166,8 +2166,7 @@ body[data-theme="dark"] .tag-misc { /* Add this block only if you use a 'misc' t
     transition: color 0.3s ease, border-top-color 0.3s ease;
 }
 /* ------------------------------------ */
-/* 9. Page-Specific Elements (Continued) */
-/* h. Timeline Styling          */
+/* 9h. Timeline Styling          */
 /* ------------------------------------ */
 
 .timeline-section {
@@ -2309,18 +2308,20 @@ body[data-theme="dark"] .tag-misc { /* Add this block only if you use a 'misc' t
         align-items: flex-start; /* Align content to the left */
         margin-left: 20px; /* Create space for the line */
         margin-bottom: 3rem;
+        padding-top: 1.5rem; /* Add padding to visually center the dot */
     }
 
     .timeline-event::after {
+        top: 0.75rem; /* Adjust top position to align with the padding */
         left: 20px; /* Keep dot on the line */
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%); /* Only adjust horizontal position */
     }
 
     .timeline-date {
         text-align: left;
         padding-left: 2.5rem; /* Space for the dot */
         padding-right: 0;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem; /* Reduce margin between date and content */
         font-size: 1.3rem;
     }
 
@@ -2335,7 +2336,7 @@ body[data-theme="dark"] .tag-misc { /* Add this block only if you use a 'misc' t
     .timeline-content h3 {
         font-size: 1.5rem;
     }
-}
+  
 /* 10. Footer */
 .footer, footer {
     text-align: center;
