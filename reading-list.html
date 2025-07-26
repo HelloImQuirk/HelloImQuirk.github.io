@@ -614,242 +614,219 @@
             }
         }
         <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // --- Dark Mode Toggle (Existing) ---
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
+document.addEventListener('DOMContentLoaded', function() {
+    // --- Dark Mode Toggle ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
 
-        // Set initial theme based on localStorage or system preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            body.setAttribute('data-theme', savedTheme);
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            body.setAttribute('data-theme', 'dark');
-        } else {
-            body.setAttribute('data-theme', 'light');
-        }
+    // Set initial theme based on localStorage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.setAttribute('data-theme', savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        body.setAttribute('data-theme', 'dark');
+    } else {
+        body.setAttribute('data-theme', 'light');
+    }
 
-        // Toggle theme on click
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                if (body.getAttribute('data-theme') === 'dark') {
-                    body.setAttribute('data-theme', 'light');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    body.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
-        }
-
-        // --- Dynamic Filtering and Sorting ---
-        const readingListContainer = document.getElementById('reading-list-container');
-        const readingItems = Array.from(document.querySelectorAll('.reading-item'));
-        const sortBySelect = document.getElementById('sort-by');
-
-        const categoryFilterButtons = document.querySelectorAll('.category-filter');
-        const mediaTypeFilterButtons = document.querySelectorAll('.media-type-filter');
-
-        let currentCategoryFilter = 'all';
-        let currentMediaTypeFilter = 'all';
-
-        // Function to apply filters and sorting
-        function applyFiltersAndSorting() {
-            let filteredItems = readingItems.filter(item => {
-                const itemCategory = item.dataset.category;
-                const itemMediaType = item.dataset.mediaType;
-
-                const categoryMatch = (currentCategoryFilter === 'all' || itemCategory === currentCategoryFilter);
-                const mediaTypeMatch = (currentMediaTypeFilter === 'all' || itemMediaType === currentMediaTypeFilter);
-
-                return categoryMatch && mediaTypeMatch;
-            });
-
-            // Apply sorting
-            const sortValue = sortBySelect.value;
-            filteredItems.sort((a, b) => {
-                let valA, valB;
-
-                switch (sortValue) {
-                    case 'date-added-desc':
-                        valA = new Date(a.dataset.added);
-                        valB = new Date(b.dataset.added);
-                        return valB - valA;
-                    case 'date-added-asc':
-                        valA = new Date(a.dataset.added);
-                        valB = new Date(b.dataset.added);
-                        return valA - valB;
-                    case 'title-asc':
-                        valA = a.dataset.title.toLowerCase();
-                        valB = b.dataset.title.toLowerCase();
-                        return valA.localeCompare(valB);
-                    case 'title-desc':
-                        valA = a.dataset.title.toLowerCase();
-                        valB = b.dataset.title.toLowerCase();
-                        return valB.localeCompare(valA);
-                    case 'rating-desc':
-                        valA = parseInt(a.dataset.rating, 10);
-                        valB = parseInt(b.dataset.rating, 10);
-                        return valB - valA;
-                    case 'rating-asc':
-                        valA = parseInt(a.dataset.rating, 10);
-                        valB = parseInt(b.dataset.rating, 10);
-                        return valA - valB;
-                    default:
-                        return 0;
-                }
-            });
-
-            // Clear current display and re-append filtered/sorted items
-            // First, hide all media type groups and category sections
-            document.querySelectorAll('.media-type-group').forEach(group => group.style.display = 'none');
-            document.querySelectorAll('.category-section').forEach(section => section.style.display = 'none');
-
-            // Then, append the filtered and sorted items into their respective
-            // media type groups and category sections, making them visible if they contain items.
-            filteredItems.forEach(item => {
-                const categorySectionId = item.dataset.category;
-                const mediaTypeGroupEl = item.closest('.media-type-group'); // Get the direct parent media group
-                const categorySectionEl = document.getElementById(categorySectionId); // Get the category section
-
-                // Ensure the item is visible
-                item.style.display = ''; // Reset display to default (e.g., block, flex)
-
-                // Ensure its parent media type group and category section are visible
-                if (mediaTypeGroupEl) {
-                    mediaTypeGroupEl.style.display = '';
-                }
-                if (categorySectionEl) {
-                    categorySectionEl.style.display = '';
-                }
-            });
-
-            // Loop through all items and hide those that are not in filteredItems
-            readingItems.forEach(item => {
-                if (!filteredItems.includes(item)) {
-                    item.style.display = 'none';
-                }
-            });
-
-            // If a category filter is active, hide media type groups that are empty
-            if (currentCategoryFilter !== 'all') {
-                document.querySelectorAll(`.category-section`).forEach(categorySection => {
-                     if (categorySection.id === currentCategoryFilter) {
-                        categorySection.querySelectorAll('.media-type-group').forEach(mediaGroup => {
-                            const visibleItemsInGroup = Array.from(mediaGroup.querySelectorAll('.reading-item')).some(item => item.style.display !== 'none');
-                            mediaGroup.style.display = visibleItemsInGroup ? '' : 'none';
-                        });
-                     } else {
-                         // Hide other category sections if a specific one is selected
-                         categorySection.style.display = 'none';
-                     }
-                });
+    // Toggle theme on click
+    if (themeToggle) { // Ensure the button exists before adding listener
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
             }
+        });
+    } else {
+        console.warn("Theme toggle button with ID 'theme-toggle' not found.");
+    }
+
+
+    // --- Dynamic Filtering and Sorting ---
+    const readingListContainer = document.getElementById('reading-list-container');
+    const readingItems = Array.from(document.querySelectorAll('.reading-item')); // Convert NodeList to Array
+    const sortBySelect = document.getElementById('sort-by');
+
+    const categoryFilterButtons = document.querySelectorAll('.category-filter');
+    const mediaTypeFilterButtons = document.querySelectorAll('.media-type-filter');
+
+    let currentCategoryFilter = 'all';
+    let currentMediaTypeFilter = 'all';
+
+    // Function to apply filters and sorting
+    function applyFiltersAndSorting() {
+        let itemsToShow = []; // Collect items that should be visible after filtering
+
+        // 1. Determine which individual items should be visible
+        readingItems.forEach(item => {
+            const itemCategory = item.dataset.category;
+            const itemMediaType = item.dataset.mediaType;
+
+            // Check if item matches current category filter
+            const categoryMatch = (currentCategoryFilter === 'all' || itemCategory === currentCategoryFilter);
+            // Check if item matches current media type filter
+            const mediaTypeMatch = (currentMediaTypeFilter === 'all' || itemMediaType === currentMediaTypeFilter);
+
+            if (categoryMatch && mediaTypeMatch) {
+                itemsToShow.push(item);
+            }
+        });
+
+        // 2. Sort the items that passed the filter
+        const sortValue = sortBySelect.value;
+        itemsToShow.sort((a, b) => {
+            let valA, valB;
+
+            switch (sortValue) {
+                case 'date-added-desc':
+                    valA = new Date(a.dataset.added || '1970-01-01'); // Default if no date
+                    valB = new Date(b.dataset.added || '1970-01-01');
+                    return valB - valA;
+                case 'date-added-asc':
+                    valA = new Date(a.dataset.added || '1970-01-01');
+                    valB = new Date(b.dataset.added || '1970-01-01');
+                    return valA - valB;
+                case 'title-asc':
+                    valA = (a.dataset.title || '').toLowerCase();
+                    valB = (b.dataset.title || '').toLowerCase();
+                    return valA.localeCompare(valB);
+                case 'title-desc':
+                    valA = (a.dataset.title || '').toLowerCase();
+                    valB = (b.dataset.title || '').toLowerCase();
+                    return valB.localeCompare(valA);
+                case 'rating-desc':
+                    valA = parseInt(a.dataset.rating || '0', 10); // Default to 0 if no rating
+                    valB = parseInt(b.dataset.rating || '0', 10);
+                    return valB - valA;
+                case 'rating-asc':
+                    valA = parseInt(a.dataset.rating || '0', 10);
+                    valB = parseInt(b.dataset.rating || '0', 10);
+                    return valA - valB;
+                default:
+                    return 0; // No sorting
+            }
+        });
+
+        // 3. Re-organize and display items based on filters and sort order
+        // Temporarily detach all items from their current parents
+        readingItems.forEach(item => {
+            if (item.parentNode) {
+                item.parentNode.removeChild(item);
+            }
+        });
+
+        // Get references to all category sections and media type groups
+        const categorySections = document.querySelectorAll('.category-section');
+        const mediaTypeGroups = document.querySelectorAll('.media-type-group');
+
+        // Reset display of all containers to 'none' initially
+        categorySections.forEach(section => section.style.display = 'none');
+        mediaTypeGroups.forEach(group => group.style.display = 'none');
+
+        // Append itemsToShow into their correct (and now visible) parent groups/sections
+        itemsToShow.forEach(item => {
+            const categorySectionId = item.dataset.category;
+            const mediaTypeGroupEl = item.closest('.media-type-group'); // Get the media type group parent
+
+            // Find the correct category section
+            const targetCategorySection = document.getElementById(categorySectionId);
             
-            // If a media type filter is active, hide media type groups that do not match it
-            // and hide category sections that become empty
-            if (currentMediaTypeFilter !== 'all') {
-                document.querySelectorAll('.media-type-group').forEach(mediaGroup => {
-                    const mediaTypeInGroup = mediaGroup.querySelector('.reading-item')?.dataset.mediaType;
-                    const hasVisibleItems = Array.from(mediaGroup.querySelectorAll('.reading-item')).some(item => item.style.display !== 'none');
+            if (targetCategorySection && mediaTypeGroupEl) {
+                // Ensure the category section is visible
+                targetCategorySection.style.display = '';
 
-                    if (mediaTypeInGroup && mediaTypeInGroup === currentMediaTypeFilter && hasVisibleItems) {
-                        mediaGroup.style.display = '';
-                    } else if (hasVisibleItems && currentCategoryFilter === 'all') {
-                        // If 'all categories' is selected, but a specific media type is selected,
-                        // ensure media groups matching that media type are visible if they have items.
-                        // This handles cases where different categories have the same media type.
-                        mediaGroup.style.display = '';
-                    }
-                     else {
-                        mediaGroup.style.display = 'none';
-                    }
-                });
-                 // After media type filtering, check if category sections become empty and hide them
-                document.querySelectorAll('.category-section').forEach(section => {
-                    const visibleItemsInCategory = Array.from(section.querySelectorAll('.reading-item')).some(item => item.style.display !== 'none');
-                    section.style.display = visibleItemsInCategory ? '' : 'none';
-                });
+                // Ensure the media type group within that section is visible
+                mediaTypeGroupEl.style.display = '';
+                
+                // Append the item back to its media type group
+                mediaTypeGroupEl.appendChild(item);
             }
-
-            // If both 'all' filters are active, ensure all category sections and media type groups are visible
-            if (currentCategoryFilter === 'all' && currentMediaTypeFilter === 'all') {
-                document.querySelectorAll('.category-section').forEach(section => section.style.display = '');
-                document.querySelectorAll('.media-type-group').forEach(group => group.style.display = '');
+        });
+        
+        // Final check: Hide any media type groups or category sections that ended up empty
+        mediaTypeGroups.forEach(group => {
+            const hasVisibleChildren = Array.from(group.children).some(child =>
+                child.classList.contains('reading-item') && child.style.display !== 'none'
+            );
+            if (!hasVisibleChildren) {
+                group.style.display = 'none';
             }
-
-            // Re-append the original reading items back to their initial structure
-            // This is important to ensure proper sorting within their original media type groups
-            // and prevent items from jumping around when filters change.
-
-            // Instead of re-appending all, just ensure visibility is correct
-            // The display 'none' / '' logic above should suffice for visibility.
-            // We ensure *only* filtered items are visible.
-        }
-
-
-        // Event Listeners for Category Filters
-        categoryFilterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove 'active' from all category buttons
-                categoryFilterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add 'active' to clicked button
-                this.classList.add('active');
-                currentCategoryFilter = this.dataset.filter;
-                applyFiltersAndSorting();
-            });
         });
 
-        // Event Listeners for Media Type Filters
-        mediaTypeFilterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove 'active' from all media type buttons
-                mediaTypeFilterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add 'active' to clicked button
-                this.classList.add('active');
-                currentMediaTypeFilter = this.dataset.filter;
-                applyFiltersAndSorting();
-            });
+        categorySections.forEach(section => {
+            const hasVisibleGroups = Array.from(section.querySelectorAll('.media-type-group')).some(group =>
+                group.style.display !== 'none'
+            );
+            if (!hasVisibleGroups) {
+                section.style.display = 'none';
+            }
+        });
+    }
+
+    // Event Listeners for Category Filters
+    categoryFilterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove 'active' from all category buttons
+            categoryFilterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add 'active' to clicked button
+            this.classList.add('active');
+            currentCategoryFilter = this.dataset.filter;
+            applyFiltersAndSorting();
+        });
+    });
+
+    // Event Listeners for Media Type Filters
+    mediaTypeFilterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove 'active' from all media type buttons
+            mediaTypeFilterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add 'active' to clicked button
+            this.classList.add('active');
+            currentMediaTypeFilter = this.dataset.filter;
+            applyFiltersAndSorting();
+        });
+    });
+
+    // Event Listener for Sort By dropdown
+    sortBySelect.addEventListener('change', applyFiltersAndSorting);
+
+    // Initial load: Apply filters and sorting
+    applyFiltersAndSorting();
+
+
+    // --- Carousel (Existing) ---
+    const carouselContainer = document.querySelector('.carousel-container');
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    let currentIndex = 0;
+
+    function showCarouselItem(index) {
+        carouselItems.forEach((item, i) => {
+            item.style.display = (i === index) ? 'block' : 'none';
+        });
+    }
+
+    if (prevButton && nextButton && carouselItems.length > 0) { // Ensure buttons and items exist
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : carouselItems.length - 1;
+            showCarouselItem(currentIndex);
         });
 
-        // Event Listener for Sort By dropdown
-        sortBySelect.addEventListener('change', applyFiltersAndSorting);
-
-        // Initial load: Apply filters and sorting
-        applyFiltersAndSorting();
-
-        // --- Carousel (Existing) ---
-        const carouselContainer = document.querySelector('.carousel-container');
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        const prevButton = document.querySelector('.prev-button');
-        const nextButton = document.querySelector('.next-button');
-        let currentIndex = 0;
-
-        function showCarouselItem(index) {
-            carouselItems.forEach((item, i) => {
-                item.style.display = (i === index) ? 'block' : 'none';
-            });
-        }
-
-        if (prevButton) {
-            prevButton.addEventListener('click', () => {
-                currentIndex = (currentIndex > 0) ? currentIndex - 1 : carouselItems.length - 1;
-                showCarouselItem(currentIndex);
-            });
-        }
-
-        if (nextButton) {
-            nextButton.addEventListener('click', () => {
-                currentIndex = (currentIndex < carouselItems.length - 1) ? currentIndex + 1 : 0;
-                showCarouselItem(currentIndex);
-            });
-        }
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex < carouselItems.length - 1) ? currentIndex + 1 : 0;
+            showCarouselItem(currentIndex);
+        });
 
         // Initial display of the first carousel item
-        if (carouselItems.length > 0) {
-            showCarouselItem(currentIndex);
-        }
-    });
+        showCarouselItem(currentIndex);
+    } else {
+        console.warn("Carousel elements not found or no items to display.");
+    }
+});
 </script>
 
 </body>
