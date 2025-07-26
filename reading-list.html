@@ -589,248 +589,198 @@
     <footer class="footer">
         <p>&copy; 2025 Quirk. A life in progress.</p>
     </footer>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // --- Dark Mode Toggle ---
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Theme Toggle (Existing)
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.body.setAttribute('data-theme', currentTheme);
+        }
 
-    // Function to set the theme and update button icon visibility
-    function setTheme(theme) {
-        body.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        if (themeToggle) {
-            const lightIcon = themeToggle.querySelector('.icon-light-mode');
-            const darkIcon = themeToggle.querySelector('.icon-dark-mode');
+        themeToggle.addEventListener('click', () => {
+            let theme = document.body.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
 
-            if (lightIcon && darkIcon) { // Ensure icons exist before manipulating
-                if (theme === 'dark') {
-                    lightIcon.style.opacity = '0';
-                    lightIcon.style.transform = 'scale(0.5)';
-                    darkIcon.style.opacity = '1';
-                    darkIcon.style.transform = 'scale(1)';
+        // --- Reading List Filters & Sorting (Corrected) ---
+        const categoryFilterButtons = document.querySelectorAll('.category-filter');
+        const mediaTypeFilterButtons = document.querySelectorAll('.media-type-filter');
+        const readingItems = document.querySelectorAll('.reading-item');
+        const sortBySelect = document.getElementById('sort-by'); // Assuming you add a select with id="sort-by"
+        const readingListContainer = document.getElementById('reading-list-container');
+
+        function applyFiltersAndSorting() {
+            const activeCategory = document.querySelector('.category-filter.active')?.dataset.filter || 'all';
+            const activeMediaType = document.querySelector('.media-type-filter.active')?.dataset.filter || 'all';
+            const sortBy = sortBySelect ? sortBySelect.value : 'added-desc'; // Default if sort-by is not present
+
+            // Create an array from HTML collection for sorting
+            let itemsArray = Array.from(readingItems);
+
+            // Filter items
+            itemsArray.forEach(item => {
+                const itemCategory = item.dataset.category;
+                const itemMediaType = item.dataset.mediaType;
+
+                const categoryMatch = (activeCategory === 'all' || itemCategory === activeCategory);
+                const mediaTypeMatch = (activeMediaType === 'all' || itemMediaType === activeMediaType);
+
+                if (categoryMatch && mediaTypeMatch) {
+                    item.style.display = 'flex'; // Use flex as per new CSS
                 } else {
-                    lightIcon.style.opacity = '1';
-                    lightIcon.style.transform = 'scale(1)';
-                    darkIcon.style.opacity = '0';
-                    darkIcon.style.transform = 'scale(0.5)';
+                    item.style.display = 'none';
                 }
-            }
+            });
+
+            // Sort items
+            itemsArray.sort((a, b) => {
+                const dateA = new Date(a.dataset.added);
+                const dateB = new Date(b.dataset.added);
+                const titleA = a.dataset.title.toLowerCase();
+                const titleB = b.dataset.title.toLowerCase();
+
+                if (sortBy === 'added-desc') {
+                    return dateB - dateA;
+                } else if (sortBy === 'added-asc') {
+                    return dateA - dateB;
+                } else if (sortBy === 'title-asc') {
+                    return titleA.localeCompare(titleB);
+                } else if (sortBy === 'title-desc') {
+                    return titleB.localeCompare(titleA);
+                }
+                return 0;
+            });
+
+            // Re-append sorted items to their respective media-type-groups and category-sections
+            // This part needs to rebuild the DOM structure to ensure correct grouping and visibility
+            const categorySections = document.querySelectorAll('.category-section');
+            categorySections.forEach(section => {
+                // Clear existing items in media type groups to re-populate
+                section.querySelectorAll('.media-type-group').forEach(group => {
+                    // Temporarily hide the group, will show later if it contains visible items
+                    group.style.display = 'none';
+                    // Remove all reading items from the group to re-add them sorted
+                    Array.from(group.children).filter(child => child.classList.contains('reading-item'))
+                         .forEach(item => item.remove());
+                });
+                section.style.display = 'none'; // Hide category section by default
+            });
+
+
+            // Re-insert sorted and filtered items
+            itemsArray.forEach(item => {
+                if (item.style.display === 'flex') { // Only re-insert visible items
+                    const categoryId = item.dataset.category;
+                    const mediaType = item.dataset.mediaType;
+
+                    const targetCategorySection = document.getElementById(categoryId);
+                    if (targetCategorySection) {
+                        targetCategorySection.style.display = 'block'; // Show category section if it has visible items
+                        let targetMediaTypeGroup = targetCategorySection.querySelector(`.media-type-group[data-media-type-group="${mediaType}"]`);
+                        if (!targetMediaTypeGroup) {
+                             // If a media-type-group for this type doesn't exist, create it dynamically.
+                             // This is a more robust solution if the HTML structure isn't fully comprehensive.
+                            targetMediaTypeGroup = document.createElement('div');
+                            targetMediaTypeGroup.classList.add('media-type-group');
+                            targetMediaTypeGroup.dataset.mediaTypeGroup = mediaType;
+                            targetMediaTypeGroup.innerHTML = `<h3>${mediaType.charAt(0).toUpperCase() + mediaType.slice(1)}</h3>`; // Basic heading
+                            targetCategorySection.appendChild(targetMediaTypeGroup);
+                        }
+                        targetMediaTypeGroup.style.display = 'block'; // Show media type group
+                        targetMediaTypeGroup.appendChild(item);
+                    }
+                }
+            });
+
+            // Handle visibility of category sections and media type groups
+            categorySections.forEach(section => {
+                const visibleItemsInCategory = section.querySelectorAll('.reading-item[style*="display: flex"]');
+                if (visibleItemsInCategory.length > 0) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+
+                section.querySelectorAll('.media-type-group').forEach(group => {
+                    const visibleItemsInGroup = group.querySelectorAll('.reading-item[style*="display: flex"]');
+                    if (visibleItemsInGroup.length > 0) {
+                        group.style.display = 'block';
+                    } else {
+                        group.style.display = 'none';
+                    }
+                });
+            });
         }
-    }
 
-    // Function to get the preferred theme (from localStorage or system preference)
-    function getPreferredTheme() {
-        const storedTheme = localStorage.getItem('theme');
-        if (storedTheme) {
-            return storedTheme;
+
+        categoryFilterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                categoryFilterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                applyFiltersAndSorting();
+            });
+        });
+
+        mediaTypeFilterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                mediaTypeFilterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                applyFiltersAndSorting();
+            });
+        });
+
+        // Event Listener for Sort By dropdown
+        if (sortBySelect) {
+            sortBySelect.addEventListener('change', applyFiltersAndSorting);
         }
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
+
+
+        // Initial load: Apply filters and sorting
+        applyFiltersAndSorting();
+
+        // --- Carousel (Existing - ensure this is present) ---
+        const carouselContainer = document.querySelector('.carousel-container');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const prevButton = document.querySelector('.prev-button');
+        const nextButton = document.querySelector('.next-button');
+        let currentIndex = 0;
+
+        function showCarouselItem(index) {
+            carouselItems.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
         }
-        return 'light'; // Default to light
-    }
 
-    // Apply initial theme on load
-    setTheme(getPreferredTheme());
-
-    // Listen for toggle button click
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            setTheme(newTheme);
-        });
-    } else {
-        console.warn("Theme toggle button with ID 'theme-toggle' not found.");
-    }
-
-    // Optional: Listen for system theme changes (if user changes system preference while page is open)
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        // Only react to system changes if user hasn't explicitly set a theme via the toggle
-        if (!localStorage.getItem('theme')) {
-            setTheme(event.matches ? 'dark' : 'light');
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : carouselItems.length - 1;
+                showCarouselItem(currentIndex);
+            });
         }
-    });
 
-
-    // --- Dynamic Filtering and Sorting ---
-    const readingListContainer = document.getElementById('reading-list-container');
-    const readingItems = Array.from(document.querySelectorAll('.reading-item')); // Convert NodeList to Array
-    const sortBySelect = document.getElementById('sort-by');
-
-    const categoryFilterButtons = document.querySelectorAll('.category-filter');
-    const mediaTypeFilterButtons = document.querySelectorAll('.media-type-filter');
-
-    let currentCategoryFilter = 'all';
-    let currentMediaTypeFilter = 'all';
-
-    // Function to apply filters and sorting
-    function applyFiltersAndSorting() {
-        let itemsToShow = []; // Collect items that should be visible after filtering
-
-        // 1. Determine which individual items should be visible
-        readingItems.forEach(item => {
-            const itemCategory = item.dataset.category;
-            const itemMediaType = item.dataset.mediaType;
-
-            const categoryMatch = (currentCategoryFilter === 'all' || itemCategory === currentCategoryFilter);
-            const mediaTypeMatch = (currentMediaTypeFilter === 'all' || itemMediaType === currentMediaTypeFilter);
-
-            if (categoryMatch && mediaTypeMatch) {
-                itemsToShow.push(item);
-            }
-        });
-
-        // 2. Sort the items that passed the filter
-        const sortValue = sortBySelect.value;
-        itemsToShow.sort((a, b) => {
-            let valA, valB;
-
-            switch (sortValue) {
-                case 'date-added-desc':
-                    valA = new Date(a.dataset.added || '1970-01-01'); // Default if no date
-                    valB = new Date(b.dataset.added || '1970-01-01');
-                    return valB - valA;
-                case 'date-added-asc':
-                    valA = new Date(a.dataset.added || '1970-01-01');
-                    valB = new Date(b.dataset.added || '1970-01-01');
-                    return valA - valB;
-                case 'title-asc':
-                    valA = (a.dataset.title || '').toLowerCase();
-                    valB = (b.dataset.title || '').toLowerCase();
-                    return valA.localeCompare(valB);
-                case 'title-desc':
-                    valA = (a.dataset.title || '').toLowerCase();
-                    valB = (b.dataset.title || '').toLowerCase();
-                    return valB.localeCompare(valA);
-                case 'rating-desc':
-                    valA = parseInt(a.dataset.rating || '0', 10); // Default to 0 if no rating
-                    valB = parseInt(b.dataset.rating || '0', 10);
-                    return valB - valA;
-                case 'rating-asc':
-                    valA = parseInt(a.dataset.rating || '0', 10);
-                    valB = parseInt(b.dataset.rating || '0', 10);
-                    return valA - valB;
-                default:
-                    return 0; // No sorting
-            }
-        });
-
-        // 3. Re-organize and display items based on filters and sort order
-        // Temporarily detach all items from their current parents
-        readingItems.forEach(item => {
-            if (item.parentNode) {
-                item.parentNode.removeChild(item);
-            }
-        });
-
-        // Get references to all category sections and media type groups
-        const categorySections = document.querySelectorAll('.category-section');
-        const mediaTypeGroups = document.querySelectorAll('.media-type-group');
-
-        // Reset display of all containers to 'none' initially
-        categorySections.forEach(section => section.style.display = 'none');
-        mediaTypeGroups.forEach(group => group.style.display = 'none');
-
-        // Append itemsToShow into their correct (and now visible) parent groups/sections
-        itemsToShow.forEach(item => {
-            const categorySectionId = item.dataset.category;
-            const mediaTypeGroupEl = item.closest('.media-type-group'); // Get the media type group parent
-
-            // Find the correct category section
-            const targetCategorySection = document.getElementById(categorySectionId);
-            
-            if (targetCategorySection && mediaTypeGroupEl) {
-                // Ensure the category section is visible
-                targetCategorySection.style.display = '';
-
-                // Ensure the media type group within that section is visible
-                mediaTypeGroupEl.style.display = '';
-                
-                // Append the item back to its media type group
-                mediaTypeGroupEl.appendChild(item);
-            }
-        });
-        
-        // Final check: Hide any media type groups or category sections that ended up empty
-        mediaTypeGroups.forEach(group => {
-            const hasVisibleChildren = Array.from(group.children).some(child =>
-                child.classList.contains('reading-item') && child.style.display !== 'none'
-            );
-            if (!hasVisibleChildren) {
-                group.style.display = 'none';
-            }
-        });
-
-        categorySections.forEach(section => {
-            const hasVisibleGroups = Array.from(section.querySelectorAll('.media-type-group')).some(group =>
-                group.style.display !== 'none'
-            );
-            if (!hasVisibleGroups) {
-                section.style.display = 'none';
-            }
-        });
-    }
-
-
-    // Event Listeners for Category Filters
-    categoryFilterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            categoryFilterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            currentCategoryFilter = this.dataset.filter;
-            applyFiltersAndSorting();
-        });
-    });
-
-    // Event Listeners for Media Type Filters
-    mediaTypeFilterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            mediaTypeFilterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            currentMediaTypeFilter = this.dataset.filter;
-            applyFiltersAndSorting();
-        });
-    });
-
-    // Event Listener for Sort By dropdown
-    sortBySelect.addEventListener('change', applyFiltersAndSorting);
-
-    // Initial load: Apply filters and sorting
-    applyFiltersAndSorting();
-
-
-    // --- Carousel (Existing) ---
-    const carouselContainer = document.querySelector('.carousel-container');
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    const prevButton = document.querySelector('.prev-button');
-    const nextButton = document.querySelector('.next-button');
-    let currentIndex = 0;
-
-    function showCarouselItem(index) {
-        carouselItems.forEach((item, i) => {
-            item.style.display = (i === index) ? 'block' : 'none';
-        });
-    }
-
-    if (prevButton && nextButton && carouselItems.length > 0) { // Ensure buttons and items exist
-        prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : carouselItems.length - 1;
-            showCarouselItem(currentIndex);
-        });
-
-        nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex < carouselItems.length - 1) ? currentIndex + 1 : 0;
-            showCarouselItem(currentIndex);
-        });
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex < carouselItems.length - 1) ? currentIndex + 1 : 0;
+                showCarouselItem(currentIndex);
+            });
+        }
 
         // Initial display of the first carousel item
-        showCarouselItem(currentIndex);
-    } else {
-        console.warn("Carousel elements not found or no items to display.");
-    }
-});
+        if (carouselItems.length > 0) {
+            showCarouselItem(currentIndex);
+        }
+    });
 </script>
 </body>
 </html>
