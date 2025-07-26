@@ -1307,105 +1307,99 @@ blockquote.final-quote cite {
     line-height: 1.7; /* [cite: 662] */
     transition: color 0.3s ease; /* [cite: 666] */
 }
-
-/* Sorting & Filtering Options */
-.filter-sort-container {
+/* Updated Filter and Sort Controls */
+/* Wrapper for all filter and sort elements */
+.filter-sort-controls {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2.5rem auto;
+    flex-direction: column; /* Stack filter groups and sort dropdown vertically */
+    gap: 1.5rem; /* Space between filter groups and sort */
+    margin: 2.5rem auto 3rem auto; /* Positioning on the page */
     max-width: 900px;
     padding: 0 1rem;
+    align-items: center; /* Center horizontally */
 }
 
-.sort-dropdown,
+/* Individual filter groups (e.g., Category, Media Type) */
+.filter-group {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    gap: 0.7rem; /* Space between buttons */
+    justify-content: center; /* Center buttons within the group */
+    align-items: center;
+}
+
+.filter-group h4 {
+    width: 100%; /* Make heading take full width */
+    text-align: center;
+    margin-bottom: 0.8rem; /* Space below heading */
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-family: var(--sans-font);
+    font-weight: 600;
+}
+
+/* Base styling for all filter buttons */
 .filter-button {
-    background-color: var(--bg-color); /* [cite: 640] */
-    color: var(--primary-accent); /* [cite: 641] */
-    border: 2px solid var(--primary-accent); /* [cite: 704] */
+    background-color: var(--bg-color);
+    color: var(--tertiary-accent); /* Darker blue for non-active filters */
+    border: 2px solid var(--tertiary-accent);
     padding: 0.7rem 1.2rem;
     border-radius: 25px;
     font-size: 0.95rem;
+    font-family: var(--sans-font);
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: var(--sans-font); /* [cite: 643] */
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    white-space: nowrap; /* Prevent text wrapping within button */
 }
 
-.sort-dropdown:hover,
 .filter-button:hover,
 .filter-button.active {
-    background-color: var(--primary-accent); /* [cite: 641] */
-    color: var(--bg-color); /* [cite: 640] */
-    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1); /* [cite: 687] */
-}
-/* Styling for the Sort By dropdown */
-.sort-options {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2.5rem auto 1.5rem auto; /* Adjusted margin to better fit */
-    max-width: 900px;
-    padding: 0 1rem;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-}
-
-.sort-options label {
-    font-family: var(--sans-font);
-    color: var(--text-color);
-    font-size: 1rem;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-#sort-by {
-    background-color: var(--bg-color); /* Matches filter buttons and general bg */
-    color: var(--primary-accent); /* Primary accent for text */
-    border: 2px solid var(--primary-accent); /* Primary accent border */
-    padding: 0.7rem 1.2rem;
-    border-radius: 25px; /* Rounded like buttons */
-    font-size: 0.95rem;
-    font-family: var(--sans-font);
-    cursor: pointer;
-    outline: none; /* Remove default outline */
-    appearance: none; /* Remove default dropdown arrow */
-    -webkit-appearance: none; /* For Safari */
-    -moz-appearance: none; /* For Firefox */
-    transition: all 0.3s ease;
-    padding-right: 2.5rem; /* Space for custom arrow */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234A63F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* Custom SVG arrow */
-    background-repeat: no-repeat;
-    background-position: right 0.8rem center;
-    background-size: 1.2em;
-}
-
-#sort-by:hover {
-    background-color: var(--primary-accent); /* Hover state like buttons */
-    color: var(--bg-color); /* Text color on hover */
-    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1);
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23F5F2EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* White arrow on hover */
-}
-
-#sort-by:focus {
-    border-color: var(--secondary-accent); /* Slightly different border on focus */
-    box-shadow: 0 0 0 3px rgba(var(--primary-accent-rgb), 0.3); /* Focus ring */
-}
-
-/* Dark Mode Adjustments for Sort By dropdown */
-[data-theme="dark"] #sort-by {
-    background-color: var(--dark-bg-color); /* Dark mode background */
-    color: var(--primary-accent); /* Keep accent color */
+    background-color: var(--primary-accent); /* Primary blue for active/hover */
+    color: var(--bg-color); /* Light text on active/hover */
     border-color: var(--primary-accent);
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234A63F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* Primary accent arrow in dark mode */
+    box-shadow: 0 4px 12px rgba(var(--text-color-rgb), 0.1);
 }
 
-[data-theme="dark"] #sort-by:hover {
+/* Dark Mode Adjustments for filter buttons */
+[data-theme="dark"] .filter-group h4 {
+    color: var(--dark-text-color);
+}
+
+[data-theme="dark"] .filter-button {
+    background-color: var(--dark-bg-color);
+    color: var(--secondary-accent); /* Lighter accent for non-active in dark mode */
+    border-color: var(--secondary-accent);
+}
+
+[data-theme="dark"] .filter-button:hover,
+[data-theme="dark"] .filter-button.active {
     background-color: var(--primary-accent);
-    color: var(--dark-bg-color); /* Text color on dark mode hover */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%232C2E33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* Dark background color arrow on dark mode hover */
+    color: var(--dark-bg-color); /* Dark background color text on active/hover */
+    border-color: var(--primary-accent);
+}
+
+/* Responsive adjustments for filters */
+@media (max-width: 768px) {
+    .filter-sort-controls {
+        gap: 1rem;
+        margin: 2rem auto;
+    }
+
+    .filter-group {
+        gap: 0.6rem;
+    }
+
+    .filter-group h4 {
+        font-size: 1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .filter-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* Categories & Media Types - Reusing Tag Styles */
