@@ -1341,6 +1341,72 @@ blockquote.final-quote cite {
     color: var(--bg-color); /* [cite: 640] */
     box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1); /* [cite: 687] */
 }
+/* Styling for the Sort By dropdown */
+.sort-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2.5rem auto 1.5rem auto; /* Adjusted margin to better fit */
+    max-width: 900px;
+    padding: 0 1rem;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.sort-options label {
+    font-family: var(--sans-font);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+#sort-by {
+    background-color: var(--bg-color); /* Matches filter buttons and general bg */
+    color: var(--primary-accent); /* Primary accent for text */
+    border: 2px solid var(--primary-accent); /* Primary accent border */
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px; /* Rounded like buttons */
+    font-size: 0.95rem;
+    font-family: var(--sans-font);
+    cursor: pointer;
+    outline: none; /* Remove default outline */
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    transition: all 0.3s ease;
+    padding-right: 2.5rem; /* Space for custom arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234A63F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* Custom SVG arrow */
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 1.2em;
+}
+
+#sort-by:hover {
+    background-color: var(--primary-accent); /* Hover state like buttons */
+    color: var(--bg-color); /* Text color on hover */
+    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23F5F2EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* White arrow on hover */
+}
+
+#sort-by:focus {
+    border-color: var(--secondary-accent); /* Slightly different border on focus */
+    box-shadow: 0 0 0 3px rgba(var(--primary-accent-rgb), 0.3); /* Focus ring */
+}
+
+/* Dark Mode Adjustments for Sort By dropdown */
+[data-theme="dark"] #sort-by {
+    background-color: var(--dark-bg-color); /* Dark mode background */
+    color: var(--primary-accent); /* Keep accent color */
+    border-color: var(--primary-accent);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234A63F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* Primary accent arrow in dark mode */
+}
+
+[data-theme="dark"] #sort-by:hover {
+    background-color: var(--primary-accent);
+    color: var(--dark-bg-color); /* Text color on dark mode hover */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%232C2E33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); /* Dark background color arrow on dark mode hover */
+}
 
 /* Categories & Media Types - Reusing Tag Styles */
 .category-tag,
