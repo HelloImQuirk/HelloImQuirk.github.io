@@ -1299,92 +1299,68 @@ blockquote.final-quote cite {
     max-width: 700px; /* Adjust as needed */
     height: 300px; /* Fixed height for consistency */
     margin: 2rem auto;
-    overflow: hidden;
+    overflow: hidden; /* Essential for hiding overflowing content */
     border-radius: 10px;
-    background-color: var(--bg-color); /* Matches page background */
+    background-color: var(--bg-color);
     box-shadow: 0 5px 20px rgba(var(--text-color-rgb), 0.1);
-    /* Remove display: flex here as items are absolutely positioned */
-    /* align-items: center; */
-    /* justify-content: center; */
+    /* Removed display: flex, align-items, justify-content from here as they don't apply to absolute children */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .carousel-item {
     width: 100%;
     height: 100%;
-    display: flex; /* Keep flex for content layout *within* the item */
-    align-items: center;
-    justify-content: center;
+    display: flex;
+    align-items: center; /* Keeps content vertically centered within the item */
+    justify-content: center; /* Keeps content horizontally centered within the item */
     text-align: center;
     flex-direction: column;
-    padding: 2rem;
+    padding: 2rem; /* Consider reducing this for smaller screens */
     box-sizing: border-box;
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0; /* Initially hide all items by default */
-    visibility: hidden; /* Ensure they are not interactable */
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transition both */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    z-index: 1; /* NEW: Ensure carousel items are below controls */
 }
 
-/* Only show the active carousel item */
 .carousel-item.active {
     opacity: 1;
     visibility: visible;
+    z-index: 2; /* NEW: Active item should be above inactive items, but below controls */
 }
 
-.carousel-image-wrapper {
-    flex-shrink: 0;
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(var(--text-color-rgb), 0.05);
-}
-
+/* Featured cover and details - review for sizing */
 .featured-cover {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.featured-details {
-    text-align: left;
-    flex-grow: 1;
+    max-width: 150px;
+    max-height: 150px;
+    height: auto;
+    object-fit: contain; /* NEW: Ensures image scales down without being cut */
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1);
 }
 
 .featured-details h4 {
+    font-family: var(--serif-font);
     font-size: 1.8rem;
     color: var(--primary-accent);
     margin-bottom: 0.5rem;
+    line-height: 1.2; /* NEW: Tighten line height to save vertical space */
 }
 
 .featured-details p {
     font-size: 1rem;
     color: var(--text-color);
-    margin-bottom: 1rem;
-}
-
-.read-more-button {
-    display: inline-block;
-    background-color: var(--primary-accent);
-    color: var(--bg-color);
-    padding: 0.7rem 1.5rem;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.read-more-button:hover {
-    background-color: var(--tertiary-accent);
-    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1);
+    margin-bottom: 1.5rem;
+    line-height: 1.4; /* NEW: Tighten line height to save vertical space */
 }
 
 /* Carousel Controls */
 .carousel-controls {
-    position: absolute; /* Position relative to .carousel-container */
+    position: absolute;
     top: 50%;
     width: 100%;
     display: flex;
@@ -1392,66 +1368,44 @@ blockquote.final-quote cite {
     transform: translateY(-50%);
     padding: 0 1rem;
     box-sizing: border-box;
-    z-index: 10;
+    z-index: 10; /* Keep this high so buttons are always on top */
 }
 
-.carousel-controls button {
-    background-color: rgba(var(--primary-accent-rgb), 0.8);
-    color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    opacity: 0.8;
-}
-
-.carousel-controls button:hover {
-    background-color: var(--primary-accent);
-    transform: scale(1.1);
-    opacity: 1;
-    box-shadow: 0 4px 12px rgba(var(--text-color-rgb), 0.2);
-}
-
-/* Media Queries for Carousel */
+/* Responsive adjustments for carousel */
 @media (max-width: 768px) {
+    .carousel-container {
+        height: 250px; /* Potentially decrease further or use min-height */
+        margin: 2rem auto;
+    }
+
     .carousel-item {
-        flex-direction: column; /* Stack image and details vertically */
-        text-align: center;
-        gap: 1rem;
+        padding: 1.5rem; /* NEW: Reduce padding on smaller screens */
     }
 
-    .carousel-image-wrapper {
-        width: 150px;
-        height: 150px;
-    }
-
-    .featured-details {
-        text-align: center;
+    .featured-cover {
+        max-width: 100px;
+        max-height: 100px;
     }
 
     .featured-details h4 {
-        font-size: 1.5rem;
+        font-size: 1.4rem; /* NEW: Reduce font size */
     }
 
     .featured-details p {
-        font-size: 0.95rem;
+        font-size: 0.85rem; /* NEW: Reduce font size */
+        margin-bottom: 1rem; /* NEW: Reduce margin */
     }
-
+    
     .read-more-button {
-        padding: 0.6rem 1.2rem;
+        padding: 0.5rem 1rem;
         font-size: 0.9rem;
     }
 
     .carousel-controls button {
-        width: 35px;
-        height: 35px;
-        font-size: 1.5rem;
+        padding: 0.6rem 1rem;
+        font-size: 1.2rem;
+        width: 38px;
+        height: 38px;
     }
 }
 
