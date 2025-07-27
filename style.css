@@ -1263,23 +1263,49 @@ blockquote.final-quote cite {
 .post-content .read-time { font-size: 0.9rem; color: var(--tertiary-accent); }
 
 /* 9c. Reading List /*
-/* Reading List Specific Styles */
+/* Featured Section */
+.featured-section {
+    background-color: var(--light-bg-card);
+    padding: 3.5rem 2.5rem;
+    margin: 4rem auto;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-/* Featured Section Carousel */
+.featured-section h2 {
+    font-family: var(--serif-font);
+    font-size: 2.8rem;
+    color: var(--primary-accent);
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.featured-section p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.7;
+    transition: color 0.3s ease;
+}
+
+/* Carousel specific styles */
 .carousel-container {
     position: relative;
-    width: 100%;
-    max-width: 800px; /* Adjust as needed */
+    overflow: hidden; /* Important for hiding non-active items */
     margin: 2rem auto;
-    overflow: hidden; /* Ensures items outside view are hidden */
+    max-width: 800px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(var(--text-color-rgb), 0.1);
-    background-color: var(--light-bg-card);
+    box-shadow: 0 4px 15px rgba(var(--text-color-rgb), 0.05);
+    background-color: var(--bg-color);
     padding: 1.5rem;
-    display: flex; /* Use flex to manage items, though JS will control visibility */
-    justify-content: center;
-    align-items: center;
-    min-height: 250px; /* Ensure a minimum height for the carousel */
+    display: flex; /* Make it a flex container to center items */
+    align-items: center; /* Vertically center items */
+    justify-content: center; /* Horizontally center items */
+    min-height: 250px; /* Give it a minimum height to avoid collapse */
 }
 
 .carousel-item {
@@ -1296,24 +1322,29 @@ blockquote.final-quote cite {
     display: flex; /* Only the active item is displayed */
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.carousel-image-wrapper {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(var(--text-color-rgb), 0.05);
 }
 
 .featured-cover {
-    width: 120px; /* Smaller image for featured section */
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(var(--text-color-rgb), 0.1);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .featured-details {
+    text-align: left;
     flex-grow: 1;
 }
 
 .featured-details h4 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--primary-accent);
     margin-bottom: 0.5rem;
 }
@@ -1328,20 +1359,21 @@ blockquote.final-quote cite {
     display: inline-block;
     background-color: var(--primary-accent);
     color: var(--bg-color);
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
     text-decoration: none;
     font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .read-more-button:hover {
     background-color: var(--tertiary-accent);
-    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.1);
 }
 
+/* Carousel Controls */
 .carousel-controls {
-    position: absolute;
+    position: absolute; /* Position relative to .carousel-container */
     top: 50%;
     width: 100%;
     display: flex;
@@ -1353,32 +1385,63 @@ blockquote.final-quote cite {
 }
 
 .carousel-controls button {
-    background-color: rgba(var(--primary-accent-rgb), 0.7);
+    background-color: rgba(var(--primary-accent-rgb), 0.8);
     color: var(--bg-color);
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1.8rem;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 10px rgba(var(--text-color-rgb), 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0.8;
 }
 
 .carousel-controls button:hover {
     background-color: var(--primary-accent);
     transform: scale(1.1);
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(var(--text-color-rgb), 0.2);
 }
 
-.featured-note {
-    text-align: center;
-    font-style: italic;
-    color: var(--tertiary-accent);
-    margin-top: 1rem;
-    font-size: 0.9rem;
+/* Media Queries for Carousel */
+@media (max-width: 768px) {
+    .carousel-item {
+        flex-direction: column; /* Stack image and details vertically */
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .carousel-image-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+
+    .featured-details {
+        text-align: center;
+    }
+
+    .featured-details h4 {
+        font-size: 1.5rem;
+    }
+
+    .featured-details p {
+        font-size: 0.95rem;
+    }
+
+    .read-more-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .carousel-controls button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.5rem;
+    }
 }
 
 /* Filters and Sorting Controls */
