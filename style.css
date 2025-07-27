@@ -1292,34 +1292,45 @@ blockquote.final-quote cite {
     transition: color 0.3s ease;
 }
 
-/* Carousel specific styles */
+/* Carousel Specific Styling */
 .carousel-container {
     position: relative;
-    overflow: hidden; /* Important for hiding non-active items */
+    width: 100%;
+    max-width: 700px; /* Adjust as needed */
+    height: 300px; /* Fixed height for consistency */
     margin: 2rem auto;
-    max-width: 800px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(var(--text-color-rgb), 0.05);
-    background-color: var(--bg-color);
-    padding: 1.5rem;
-    display: flex; /* Make it a flex container to center items */
-    align-items: center; /* Vertically center items */
-    justify-content: center; /* Horizontally center items */
-    min-height: 250px; /* Give it a minimum height to avoid collapse */
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: var(--bg-color); /* Matches page background */
+    box-shadow: 0 5px 20px rgba(var(--text-color-rgb), 0.1);
+    /* Remove display: flex here as items are absolutely positioned */
+    /* align-items: center; */
+    /* justify-content: center; */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .carousel-item {
-    display: none; /* Hidden by default, JavaScript will show/hide */
-    flex-direction: row; /* For horizontal layout of image and details */
-    align-items: center;
-    gap: 1.5rem;
     width: 100%;
+    height: 100%;
+    display: flex; /* Keep flex for content layout *within* the item */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 2rem;
     box-sizing: border-box;
-    animation: fadeIn 0.5s ease-out; /* Simple fade-in animation */
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Initially hide all items by default */
+    visibility: hidden; /* Ensure they are not interactable */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transition both */
 }
 
+/* Only show the active carousel item */
 .carousel-item.active {
-    display: flex; /* Only the active item is displayed */
+    opacity: 1;
+    visibility: visible;
 }
 
 .carousel-image-wrapper {
