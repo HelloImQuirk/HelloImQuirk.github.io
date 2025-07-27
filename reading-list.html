@@ -727,43 +727,41 @@
         }
 
         applyFiltersAndSorting();
+        });
+    
+// --- Carousel Functionality ---
+    const carouselContainer = document.querySelector('.carousel-container');
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    let currentIndex = 0;
 
-        // --- Carousel (Corrected Section) ---
-        const carouselContainer = document.querySelector('.carousel-container');
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        const prevButton = document.querySelector('.prev-button');
-        const nextButton = document.querySelector('.next-button');
-        let currentIndex = 0;
+    function showCarouselItem(index) {
+        carouselItems.forEach((item, i) => {
+            if (i === index) {
+                item.classList.add('active'); // Add 'active' class to the current item
+            } else {
+                item.classList.remove('active'); // Remove 'active' class from others
+            }
+        });
+    }
 
-        // ** THIS IS THE CRITICAL CHANGE **
-        function showCarouselItem(index) {
-            carouselItems.forEach((item, i) => {
-                if (i === index) {
-                    item.classList.add('active'); // Now correctly adds/removes the 'active' class
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-        }
-
-        if (prevButton) {
-            prevButton.addEventListener('click', () => {
-                currentIndex = (currentIndex > 0) ? currentIndex - 1 : carouselItems.length - 1;
-                showCarouselItem(currentIndex);
-            });
-        }
-
-        if (nextButton) {
-            nextButton.addEventListener('click', () => {
-                currentIndex = (currentIndex < carouselItems.length - 1) ? currentIndex + 1 : 0;
-                showCarouselItem(currentIndex);
-            });
-        }
-
-        if (carouselItems.length > 0) {
+    if (prevButton && nextButton && carouselItems.length > 0) {
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : carouselItems.length - 1;
             showCarouselItem(currentIndex);
-        }
-    });
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex < carouselItems.length - 1) ? currentIndex + 1 : 0;
+            showCarouselItem(currentIndex);
+        });
+
+        // Initial display of the first carousel item
+        showCarouselItem(currentIndex);
+    } else {
+        console.warn("Carousel elements not found or no items to display.");
+    }
 </script>
 </body>
 </html>
