@@ -197,8 +197,10 @@ a:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--light-bg-card);
-    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
+    background-color: rgba(var(--light-bg-card-rgb), 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(var(--primary-accent-rgb), 0.15);
     z-index: 1000;
     box-sizing: border-box;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
