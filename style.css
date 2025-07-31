@@ -89,7 +89,8 @@
     --primary-accent-rgb: 123, 156, 255;
     --secondary-accent-rgb: 92, 130, 224;
     --tertiary-accent-rgb: 170, 191, 255;
-    --light-bg-card-rgb: 44, 49, 58;
+    --light-bg-card-rgb: 44, 49, 58
+    --dark-mode-bg-color-rgb: 26, 26, 26;
 }
 
 /* 2. Global & Default Styles */
@@ -115,6 +116,7 @@
 .homepage-background .header,
 .homepage-background .content-wrapper {
     background-color: rgba(var(--bg-color-rgb), 0.95);
+    background-color: rgba(var(--dark-mode-bg-color-rgb), 0.95);
 }
 
 body {
