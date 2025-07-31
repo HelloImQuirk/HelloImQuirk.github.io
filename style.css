@@ -110,6 +110,25 @@ main#homepage-main {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* --- New: P5.js Canvas Background Styling --- */
+canvas {
+    display: block; /* Remove default inline margin/padding */
+    position: fixed; /* Fix it to the viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Occupy full viewport width */
+    height: 100vh; /* Occupy full viewport height */
+    z-index: -1; /* Place it behind all other content */
+    pointer-events: none; /* Crucial: Allows clicks/interactions to pass through to content below */
+}
+
+/* Ensure your main content sits on top of the background */
+body {
+    position: relative; /* Establish a stacking context if needed for elements with z-index */
+    z-index: 0; /* Ensures body content is above the -1 z-index canvas */
+    min-height: 100vh; /* Ensures body takes full height for content scroll if needed */
+}
+
 /* 3. Typography */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--serif-font);
