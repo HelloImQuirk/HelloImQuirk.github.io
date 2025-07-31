@@ -93,6 +93,30 @@
 }
 
 /* 2. Global & Default Styles */
+
+/* The canvas rules now only apply if the body has the homepage-background class */
+.homepage-background canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Make sure the body itself is transparent *only on the homepage* */
+.homepage-background {
+    background-color: transparent;
+}
+
+/* Then, make the main content wrapper and header transparent on the homepage */
+.homepage-background .header,
+.homepage-background .content-wrapper {
+    background-color: rgba(var(--bg-color-rgb), 0.95);
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
