@@ -84,7 +84,7 @@
     --tag-color-misc-dark-border: #666666;
 
     /* RGB values for rgba() functions (Dark Mode) */
-    --bg-color-rgb: 26, 26, 26;
+    --bg-color-rgb: 26, 30, 38; /* I corrected the RGB value for a better dark background */
     --text-color-rgb: 224, 224, 224;
     --primary-accent-rgb: 123, 156, 255;
     --secondary-accent-rgb: 92, 130, 224;
@@ -352,14 +352,27 @@ body[data-theme="dark"] .icon-light-mode {
 }
 
 .hero-text-content {
-    background-color: var(--light-bg-card);
+    background-color: rgba(var(--light-bg-card-rgb), 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 2.5rem 3rem;
+    border: 1px solid rgba(var(--primary-accent-rgb), 0.15);
     border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
+    box-shadow: 
+        0 8px 30px rgba(var(--primary-accent-rgb), 0.2), /* Vibrant, colored shadow */
+        0 0 20px rgba(var(--primary-accent-rgb), 0.1) inset; /* Soft inner glow */
+    transition: all 0.5s ease;
     max-width: 700px;
     margin: 0 auto;
     text-align: center;
-    transition: all 0.3s ease;
+}
+
+.hero-text-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 12px 40px rgba(var(--primary-accent-rgb), 0.4), /* Brighter, higher shadow on hover */
+        0 0 30px rgba(var(--primary-accent-rgb), 0.2) inset;
+    border-color: rgba(var(--primary-accent-rgb), 0.4);
 }
 
 .hero h1 {
@@ -386,10 +399,14 @@ body[data-theme="dark"] .icon-light-mode {
     margin: 4em auto;
     padding: 2em;
     text-align: center;
-    background-color: var(--light-bg-card);
+    background-color: rgba(var(--light-bg-card-rgb), 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--primary-accent-rgb), 0.15);
     border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        0 8px 30px rgba(var(--primary-accent-rgb), 0.2),
+        0 0 20px rgba(var(--primary-accent-rgb), 0.1) inset;
+    transition: all 0.5s ease;
 }
 
 .compass-heading {
@@ -444,7 +461,7 @@ body[data-theme="dark"] .icon-light-mode {
     border: 2px solid var(--primary-accent);
     border-radius: 15px;
     min-height: 200px;
-    transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(var(--text-color-rgb), 0.08);
 }
 
@@ -479,9 +496,9 @@ body[data-theme="dark"] .icon-light-mode {
 /* Hover/Focus/Active Effects */
 .compass-point:hover .compass-bubble {
     background-color: var(--secondary-accent);
-    border-color: var(--secondary-accent);
+    border-color: var(--primary-accent);
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 6px 20px rgba(var(--text-color-rgb), 0.1);
+    box-shadow: 0 6px 20px rgba(var(--primary-accent-rgb), 0.2);
 }
 
 .compass-point:hover .compass-icon {
@@ -588,15 +605,20 @@ body[data-theme="dark"] .icon-light-mode {
 .manifesto {
     max-width: 700px;
     margin: 4rem auto;
-    background: var(--light-bg-card);
-    box-shadow: 0 8px 30px rgba(var(--text-color-rgb), 0.08);
+    background: rgba(var(--light-bg-card-rgb), 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--primary-accent-rgb), 0.15);
+    box-shadow: 
+        0 8px 30px rgba(var(--primary-accent-rgb), 0.2),
+        0 0 20px rgba(var(--primary-accent-rgb), 0.1) inset;
     text-align: center;
     padding: 2rem;
     border-radius: 8px;
     line-height: 1.5;
     position: relative;
     z-index: 2;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 .manifesto h2 {
