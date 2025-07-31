@@ -2668,6 +2668,109 @@ body[data-theme="dark"] .tag-misc { /* Add this block only if you use a 'misc' t
         grid-column: 1 / 2;
     }
 }
+/*9i. About Page */
+/* style-3.css additions for About Page */
+
+/* Basic spacing and alignment for the about page content */
+.about-page-content {
+    max-width: 800px; /* Or a width that fits your content */
+    margin: 4rem auto 2rem auto; /* Top, right/left, bottom margins */
+    padding: 0 1.5rem; /* Padding for smaller screens */
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.about-section {
+    margin-bottom: 2.5rem; /* Space between sections */
+}
+
+.about-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.about-hero .section-title {
+    font-size: 2.5rem;
+    color: var(--primary-accent);
+    margin-bottom: 1.5rem;
+}
+
+.about-image-wrapper {
+    margin: 2rem auto;
+    width: 200px; /* Adjust size */
+    height: 200px; /* Adjust size */
+    border-radius: 50%; /* Make it circular */
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(var(--text-color-rgb), 0.15); /* Soft shadow */
+}
+
+.about-headshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills the circle */
+    display: block;
+}
+
+.about-section .section-subtitle {
+    font-size: 1.8rem;
+    color: var(--tertiary-accent);
+    margin-bottom: 1rem;
+    text-align: left; /* Align subtitles to the left */
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.about-section p:last-child {
+    margin-bottom: 0; /* No margin after the last paragraph in a section */
+}
+
+.call-to-action-section {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.call-to-action-section .section-subtitle {
+    text-align: center;
+}
+
+.call-to-action-section .button {
+    display: inline-block;
+    background-color: var(--primary-accent);
+    color: var(--bg-color); /* Assuming your text needs to contrast with primary-accent */
+    padding: 0.8rem 1.8rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0.5rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.call-to-action-section .button:hover {
+    background-color: var(--tertiary-accent);
+    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.15);
+    transform: translateY(-2px);
+}
+
+/* Media Queries for About Page */
+@media (max-width: 768px) {
+    .about-page-content {
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    .about-hero .section-title {
+        font-size: 2rem;
+    }
+    .about-section .section-subtitle {
+        font-size: 1.5rem;
+        text-align: center; /* Center on mobile if preferred */
+    }
+    .about-section p {
+        font-size: 1rem;
+    }
+}
 
 /* 10. Footer */
 .footer, footer {
