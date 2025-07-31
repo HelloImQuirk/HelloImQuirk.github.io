@@ -588,6 +588,17 @@ body[data-theme="dark"] .icon-light-mode {
 }
 
 /* 8. Layout & General Content */
+
+.header {
+    background-color: rgba(var(--bg-color-rgb), 0.98); /* Slightly less transparent */
+    transition: var(--theme-transition);
+}
+
+.footer {
+    background-color: rgba(var(--bg-color-rgb), 0.98); /* Slightly less transparent */
+    transition: var(--theme-transition);
+}
+
 main {
     padding-top: 8rem;
     padding-left: 5%;
@@ -595,6 +606,7 @@ main {
     position: relative;
     z-index: 2;
     transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: rgba(var(--bg-color-rgb), 0.95); /* Example: 95% opaque version of your main background color */
 }
 
 .content-wrapper {
