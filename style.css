@@ -109,7 +109,7 @@
 
 /* Make sure the body itself is transparent *only on the homepage* */
 .homepage-background {
-    background-color: transparent;
+    background-color: transparent !important; 
 }
 
 /* Then, make the main content wrapper and header transparent on the homepage */
