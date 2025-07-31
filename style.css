@@ -111,16 +111,16 @@ main#homepage-main {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- New: P5.js Canvas Background Styling --- */
+/* Styling for the p5.js canvas background */
 canvas {
-    display: block; /* Remove default inline margin/padding */
-    position: fixed; /* Fix it to the viewport */
+    display: block; /* Removes any default margins/padding around the canvas */
+    position: fixed; /* Positions it relative to the viewport, keeping it fixed when scrolling */
     top: 0;
     left: 0;
-    width: 100vw; /* Occupy full viewport width */
-    height: 100vh; /* Occupy full viewport height */
-    z-index: -1; /* Place it behind all other content */
-    pointer-events: none; /* Crucial: Allows clicks/interactions to pass through to content below */
+    width: 100vw; /* Makes it span the full viewport width */
+    height: 100vh; /* Makes it span the full viewport height */
+    z-index: -1; /* CRITICAL: Puts the canvas behind all other content */
+    pointer-events: none; /* CRITICAL: Allows mouse clicks/interactions to pass through to elements beneath */
 }
 
 /* Ensure your main content sits on top of the background */
