@@ -84,8 +84,8 @@
     --tag-color-misc-dark-border: #666666;
 
     /* RGB values for rgba() functions (Dark Mode) */
-    --bg-color-rgb: 26, 30, 38;
-    --text-color-rgb: 240, 240, 240;
+    --bg-color-rgb: 26, 26, 26;
+    --text-color-rgb: 224, 224, 224;
     --primary-accent-rgb: 123, 156, 255;
     --secondary-accent-rgb: 92, 130, 224;
     --tertiary-accent-rgb: 170, 191, 255;
@@ -595,7 +595,7 @@ body[data-theme="dark"] .icon-light-mode {
 }
 
 .footer {
-    background-color: rgba(var(--bg-color-rgb), 0.98); /* Slightly less transparent */
+    background-color: rgba(var(--bg-color-rgb), 0.95); /* Make it semi-transparent */
     transition: var(--theme-transition);
 }
 
@@ -618,7 +618,7 @@ main {
     border-bottom: 2px solid var(--primary-accent);
     padding-bottom: 0.5rem;
     display: inline-block;
-    color: var(--primary-accent);
+    background-color: rgba(var(--bg-color-rgb), 0.9); /* Make the main content area semi-transparent */
     transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
