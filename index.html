@@ -206,92 +206,149 @@
         });
     });
 </script>
-    <script>
-    // --- FLOW FIELD SKETCH FOR READING LIST COVERS ---
-    // (Copy and paste your ENTIRE working p5.js sketch code here)
+<script> 
+ // --- FLOW FIELD SKETCH FOR WEBSITE BACKGROUND ---
 
-    // Adjustable Parameters: Play with these values!
-    let numParticles = 3000;
-    let particleSpeed = 2;
-    let noiseScale = 0.005;
-    let strokeWidth = 1;
-    let myColorModeChoice = 'HSL';
-    let hueStart = 200;
-    let hueRange = 60;
-    let saturation = 70;
-    let lightness = 50;
-    let lineAlpha = 0.1;
-    let backgroundBrightness = 95;
-    let backgroundFadeAlpha = 0.05;
+// --- Core Flow Field Parameters ---
+let numParticles = 3000;
+let particleSpeed = 2;
+let noiseScale = 0.005;
+let strokeWidth = 1;
+let backgroundFadeAlpha = 0.05; // How much the background fades each frame. Lower = more trail/smear.
 
-    let seed = Date.now();
-    let particles = [];
+// --- Color Mode and Parameters for Light/Dark Mode ---
+let myColorModeChoice = 'HSL'; // Always HSL for easier color control
+let currentHueStart, currentHueRange, currentSaturation, currentLightness, currentBackgroundBrightness;
 
-    function setup() {
-        // Adjust createCanvas to fill the entire window
-        createCanvas(windowWidth, windowHeight);
+// Define specific color parameter sets for Light and Dark themes
+const lightThemeColors = {
+    hueStart: 200,    // Blue
+    hueRange: 60,     // Range around blue (e.g., cyan to purple)
+    saturation: 70,   // Vividness
+    lightness: 50,    // Brightness of lines
+    backgroundBrightness: 95 // Very light background
+};
 
-        if (myColorModeChoice === 'HSL') {
-            colorMode(HSL, 360, 100, 100, 1);
-        } else {
-            colorMode(RGB, 255, 255, 255, 1);
-        }
+const darkThemeColors = {
+    hueStart: 240,    // A darker blue/purple
+    hueRange: 60,
+    saturation: 80,   // Slightly more saturation to stand out on dark
+    lightness: 30,    // Darker lines
+    backgroundBrightness: 10 // Very dark background
+};
 
-        if (myColorModeChoice === 'HSL') {
-            background(0, 0, backgroundBrightness);
-        } else {
-            background(backgroundBrightness * 2.55);
-        }
+// Global variable to hold particles
+let particles = [];
 
-        for (let i = 0; i < numParticles; i++) {
-            particles[i] = createVector(random(width), random(height));
-        }
-        noiseSeed(seed);
+function setup() {
+    // Create a canvas that fills the entire browser window
+    createCanvas(windowWidth, windowHeight);
+
+    // Always use HSL color mode for consistency with theme color definitions
+    colorMode(HSL, 360, 100, 100, 1);
+
+    // Initialize particles at random positions across the canvas
+    for (let i = 0; i < numParticles; i++) {
+        particles[i] = createVector(random(width), random(height));
     }
 
-    function draw() {
-        if (myColorModeChoice === 'HSL') {
-            background(0, 0, backgroundBrightness, backgroundFadeAlpha);
-        } else {
-            background(backgroundBrightness * 2.55, backgroundFadeAlpha * 255);
-        }
+    // Set the initial noise seed for a unique pattern on each load
+    noiseSeed(Date.now());
 
-        for (let i = 0; i < numParticles; i++) {
-            let p = particles[i];
-            let noiseVal = noise(p.x * noiseScale, p.y * noiseScale);
-            let angle = noiseVal * TWO_PI * 4;
-            let v = p5.Vector.fromAngle(angle);
-            v.mult(particleSpeed);
+    // Apply the correct theme colors initially
+    applyThemeColors();
 
-            let currentHue = (hueStart + map(noiseVal, 0, 1, 0, hueRange)) % 360;
-            stroke(currentHue, saturation, lightness, lineAlpha);
-            strokeWeight(strokeWidth);
-
-            line(p.x, p.y, p.x + v.x, p.y + v.y);
-            p.add(v);
-
-            if (p.x < 0 || p.x > width || p.y < 0 || p.y > height) {
-                p.x = random(width);
-                p.y = random(height);
-            }
-        }
+    // Listen for changes to the theme toggle button
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', applyThemeColors);
     }
 
-    // Handle window resizing
-    function windowResized() {
-        resizeCanvas(windowWidth, windowHeight);
-        // Re-initialize particles to spread them across the new canvas size
-        particles = [];
-        for (let i = 0; i < numParticles; i++) {
-            particles[i] = createVector(random(width), random(height));
+    // Also listen for changes in the prefers-color-scheme media query
+    // (for users who change their system theme preference)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        // Only apply if user hasn't explicitly set a theme via toggle (localStorage)
+        if (!localStorage.getItem('theme')) {
+            applyThemeColors();
         }
-        // Clear the background to avoid artifacts from resize
-        if (myColorModeChoice === 'HSL') {
-            background(0, 0, backgroundBrightness);
-        } else {
-            background(backgroundBrightness * 2.55);
+    });
+}
+
+function draw() {
+    // Apply a semi-transparent background overlay to create the fading/smear effect
+    background(0, 0, currentBackgroundBrightness, backgroundFadeAlpha);
+
+    // Loop through each particle
+    for (let i = 0; i < numParticles; i++) {
+        let p = particles[i];
+
+        // Get the noise value at the particle's current position
+        let noiseVal = noise(p.x * noiseScale, p.y * noiseScale);
+
+        // Map the noise value (0-1) to an angle (0 to TWO_PI * 4, creating swirls)
+        let angle = noiseVal * TWO_PI * 4;
+
+        // Calculate the step to move in that direction
+        let v = p5.Vector.fromAngle(angle);
+        v.mult(particleSpeed);
+
+        // Set stroke color and transparency
+        let currentHue = (currentHueStart + map(noiseVal, 0, 1, 0, currentHueRange)) % 360;
+        stroke(currentHue, currentSaturation, currentLightness, lineAlpha);
+        strokeWeight(strokeWidth);
+
+        // Draw the line segment
+        line(p.x, p.y, p.x + v.x, p.y + v.y);
+
+        // Move the particle
+        p.add(v);
+
+        // Wrap particle around if it goes off canvas
+        if (p.x < 0 || p.x > width || p.y < 0 || p.y > height) {
+            p.x = random(width);
+            p.y = random(height);
         }
     }
-    </script>
+}
+
+// Function to update color parameters based on the current theme
+function applyThemeColors() {
+    // Get the current theme from the body's data-theme attribute or localStorage
+    const bodyTheme = document.body.getAttribute('data-theme') || localStorage.getItem('theme') || 'light';
+
+    let selectedColors;
+    if (bodyTheme === 'dark') {
+        selectedColors = darkThemeColors;
+    } else {
+        selectedColors = lightThemeColors;
+    }
+
+    currentHueStart = selectedColors.hueStart;
+    currentHueRange = selectedColors.hueRange;
+    currentSaturation = selectedColors.saturation;
+    currentLightness = selectedColors.lightness;
+    currentBackgroundBrightness = selectedColors.backgroundBrightness;
+
+    // Apply the new background color immediately when theme changes
+    background(0, 0, currentBackgroundBrightness);
+}
+
+
+// Handle window resizing (important for mobile orientation changes)
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    // Re-initialize particles to spread them across the new canvas size
+    particles = [];
+    for (let i = 0; i < numParticles; i++) {
+        particles[i] = createVector(random(width), random(height));
+    }
+    // Clear the background to avoid artifacts from resize
+    background(0, 0, currentBackgroundBrightness);
+}
+
+// Removed keyPressed and mousePressed functions as they are not needed for a continuous background
+// The p5.js background will now generate uniquely on page load and animate continuously.
+// Theme changes will update colors without regenerating the pattern from scratch.
+</script>
 </body>
 </html>
