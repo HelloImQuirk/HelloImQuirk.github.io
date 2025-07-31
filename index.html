@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
     <title>Quirk - A Life-in-Progress Log</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,5 +206,92 @@
         });
     });
 </script>
+    <script>
+    // --- FLOW FIELD SKETCH FOR READING LIST COVERS ---
+    // (Copy and paste your ENTIRE working p5.js sketch code here)
+
+    // Adjustable Parameters: Play with these values!
+    let numParticles = 3000;
+    let particleSpeed = 2;
+    let noiseScale = 0.005;
+    let strokeWidth = 1;
+    let myColorModeChoice = 'HSL';
+    let hueStart = 200;
+    let hueRange = 60;
+    let saturation = 70;
+    let lightness = 50;
+    let lineAlpha = 0.1;
+    let backgroundBrightness = 95;
+    let backgroundFadeAlpha = 0.05;
+
+    let seed = Date.now();
+    let particles = [];
+
+    function setup() {
+        // Adjust createCanvas to fill the entire window
+        createCanvas(windowWidth, windowHeight);
+
+        if (myColorModeChoice === 'HSL') {
+            colorMode(HSL, 360, 100, 100, 1);
+        } else {
+            colorMode(RGB, 255, 255, 255, 1);
+        }
+
+        if (myColorModeChoice === 'HSL') {
+            background(0, 0, backgroundBrightness);
+        } else {
+            background(backgroundBrightness * 2.55);
+        }
+
+        for (let i = 0; i < numParticles; i++) {
+            particles[i] = createVector(random(width), random(height));
+        }
+        noiseSeed(seed);
+    }
+
+    function draw() {
+        if (myColorModeChoice === 'HSL') {
+            background(0, 0, backgroundBrightness, backgroundFadeAlpha);
+        } else {
+            background(backgroundBrightness * 2.55, backgroundFadeAlpha * 255);
+        }
+
+        for (let i = 0; i < numParticles; i++) {
+            let p = particles[i];
+            let noiseVal = noise(p.x * noiseScale, p.y * noiseScale);
+            let angle = noiseVal * TWO_PI * 4;
+            let v = p5.Vector.fromAngle(angle);
+            v.mult(particleSpeed);
+
+            let currentHue = (hueStart + map(noiseVal, 0, 1, 0, hueRange)) % 360;
+            stroke(currentHue, saturation, lightness, lineAlpha);
+            strokeWeight(strokeWidth);
+
+            line(p.x, p.y, p.x + v.x, p.y + v.y);
+            p.add(v);
+
+            if (p.x < 0 || p.x > width || p.y < 0 || p.y > height) {
+                p.x = random(width);
+                p.y = random(height);
+            }
+        }
+    }
+
+    // Handle window resizing
+    function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+        // Re-initialize particles to spread them across the new canvas size
+        particles = [];
+        for (let i = 0; i < numParticles; i++) {
+            particles[i] = createVector(random(width), random(height));
+        }
+        // Clear the background to avoid artifacts from resize
+        if (myColorModeChoice === 'HSL') {
+            background(0, 0, backgroundBrightness);
+        } else {
+            background(backgroundBrightness * 2.55);
+        }
+    }
+    </script>
 </body>
 </html>
