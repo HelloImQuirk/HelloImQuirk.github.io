@@ -632,7 +632,7 @@ main {
     position: relative;
     z-index: 2;
     transition: background-color 0.3s ease, color 0.3s ease;
-    background-color: rgba(var(--bg-color-rgb), 0.95); /* Example: 95% opaque version of your main background color */
+    background-color: transparent;
 }
 
 .content-wrapper {
@@ -1182,7 +1182,7 @@ blockquote.final-quote cite {
 
 /* --- Adaptive Idea Card Original Styles (modified for accordion) --- */
 .adaptive-idea-card {
-    background-color: transparent;
+    ;
     box-shadow: none;
     border: none;
     padding: 0;
