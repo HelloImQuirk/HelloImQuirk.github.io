@@ -188,113 +188,213 @@ a:focus {
 }
 
 /* 4. Header & Navigation (Mobile First) */
+/* Desktop styles first */
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4.5rem; /* or your preferred height */
+    padding: 0 3rem;
+    background-color: var(--bg-color); /* Light mode */
+    box-shadow: 0 4px 15px rgba(var(--primary-accent-rgb), 0.08);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0.8rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(var(--light-bg-card-rgb), 0.75);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(var(--primary-accent-rgb), 0.15);
     z-index: 1000;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .logo {
     font-family: var(--serif-font);
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--primary-accent);
-    z-index: 1001;
-    letter-spacing: 0.05em;
-    transition: color 0.3s ease;
+    letter-spacing: 0.03em;
 }
 
-.nav-toggle {
-    display: none;
-}
-
-.nav-toggle-label {
-    cursor: pointer;
-    width: 30px;
-    height: 25px;
+.header-nav-group {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 1001;
-    margin-left: auto;
-}
-
-.nav-toggle-label span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--text-color);
-    border-radius: 3px;
-    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
-}
-
-.nav-toggle:checked ~ .nav-menu {
-    transform: translateX(0);
-}
-
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-}
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
-    opacity: 0;
-}
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    align-items: center;
+    gap: 2.5rem;
 }
 
 .nav-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease;
+    margin-right: 1rem;
 }
 
 .nav-menu ul {
-    list-style: none;
+    display: flex;
+    gap: 2.2rem;
+    align-items: center;
+    margin: 0;
     padding: 0;
-    text-align: center;
-}
-
-.nav-menu li {
-    margin: 2rem 0;
+    list-style: none;
 }
 
 .nav-menu a,
 .nav-link {
-    font-size: 1.8rem;
-    font-family: var(--serif-font);
-    color: var(--primary-accent);
+    color: var(--text-color);
+    font-family: var(--sans-font);
+    font-size: 1.1rem;
     text-decoration: none;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+    transition: color 0.2s;
+    padding: 0.1em 0.2em;
 }
 
 .nav-menu a:hover,
-.nav-menu a:focus,
-.nav-link:hover,
-.nav-link:focus {
-    color: var(--tertiary-accent);
+.nav-menu a:focus {
+    color: var(--primary-accent);
     text-decoration: underline;
 }
+
+/* Dark mode nav link color */
+body[data-theme="dark"] .nav-menu a,
+body[data-theme="dark"] .nav-link {
+    color: var(--bg-color);
+}
+
+/* --- Dark Mode Toggle Button Styling --- */
+#theme-toggle {
+    background-color: var(--secondary-accent);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(var(--text-color-rgb), 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-left: 1rem;
+    flex-shrink: 0;
+    color: var(--bg-color);
+    position: relative;
+}
+
+#theme-toggle:hover {
+    background-color: var(--primary-accent);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(var(--text-color-rgb), 0.15);
+}
+
+#theme-toggle .icon-light-mode,
+#theme-toggle .icon-dark-mode {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+body[data-theme="light"] .icon-dark-mode,
+body:not([data-theme]) .icon-dark-mode {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+body[data-theme="dark"] .icon-light-mode {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+/* Mobile styles after, in one block */
+@media (max-width: 768px) {
+    .header {
+        padding: 1.2rem 1rem;
+        height: auto;
+    }
+
+    .header-nav-group {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .nav-toggle {
+        display: block;
+        position: absolute;
+        top: 1.4rem;
+        right: 2.8rem;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        z-index: 1101;
+    }
+
+    .nav-toggle-label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        z-index: 1102;
+        margin-left: 1rem;
+    }
+
+    .nav-toggle-label span {
+        width: 26px;
+        height: 3px;
+        background: var(--text-color);
+        margin: 3px 0;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1100;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .nav-toggle:checked ~ .nav-menu {
+        transform: translateX(0);
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 2.2rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-menu a {
+        font-size: 2rem;
+        color: var(--primary-accent);
+        font-family: var(--serif-font);
+        text-align: center;
+    }
+
+    /* Hamburger animation when menu open */
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+}
+
 
 /* --- Dark Mode Toggle Button Styling --- */
 #theme-toggle {
