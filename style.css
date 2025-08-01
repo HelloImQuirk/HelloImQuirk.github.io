@@ -250,6 +250,70 @@ a:focus {
     display: none;
 }
 
+/* 4. Header & Navigation (Final Corrected Solution) */
+
+/* --- Desktop Styles (Applies to all screen sizes by default) --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(var(--light-bg-card-rgb), 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(var(--primary-accent-rgb), 0.15);
+    z-index: 1000;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo {
+    font-family: var(--serif-font);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-accent);
+    z-index: 1001;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+}
+
+/* These styles make the navigation links appear horizontally on desktop */
+.nav-menu {
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu a {
+    font-family: var(--sans-font);
+    font-size: 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus {
+    color: var(--tertiary-accent);
+    text-decoration: underline;
+}
+
+/* Hide the hamburger icon and toggle on desktop */
+.nav-toggle-label, .nav-toggle {
+    display: none;
+}
 
 /* --- Mobile Styles (Overrides desktop styles on small screens) --- */
 @media screen and (max-width: 768px) {
