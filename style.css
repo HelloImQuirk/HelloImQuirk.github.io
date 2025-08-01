@@ -229,6 +229,8 @@ a:focus {
     justify-content: space-between;
     z-index: 1001;
     margin-left: auto;
+    position: relative;
+    z-index: 10000;
 }
 
 .nav-toggle-label span {
@@ -259,14 +261,14 @@ a:focus {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: var(--bg-color);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease;
+    z-index: 9999;
 }
 
 .nav-menu ul {
