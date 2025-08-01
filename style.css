@@ -217,7 +217,6 @@ a:focus {
 .nav-menu {
     display: flex;
     align-items: center;
-    margin-right: 2.5rem;
 }
 
 .nav-menu ul {
@@ -245,7 +244,7 @@ a:focus {
     text-decoration: underline;
 }
 
-/* Fix for desktop dark mode link color */
+/* Correctly handle desktop dark mode link color */
 body[data-theme="dark"] .nav-menu a,
 body[data-theme="dark"] .nav-link {
     color: var(--bg-color);
@@ -273,6 +272,7 @@ body[data-theme="dark"] .nav-link {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     flex-shrink: 0;
     color: var(--bg-color);
+    margin-left: 2.5rem; /* Separates the toggle from the nav menu */
 }
 
 /* --- Mobile Styles --- */
@@ -287,29 +287,36 @@ body[data-theme="dark"] .nav-link {
 
     .logo {
         font-size: 1.5rem;
+        order: 1;
     }
 
     /* Hide desktop nav on mobile */
     .nav-menu {
         display: none;
-        margin: 0;
     }
 
-    /* Show the hamburger menu and toggle */
-    .nav-toggle-label,
-    #theme-toggle {
+    /* Group the hamburger menu and toggle */
+    .header-icons {
         display: flex;
-        z-index: 1102;
+        align-items: center;
+        gap: 1rem;
+        order: 2;
+    }
+
+    .nav-toggle,
+    .nav-toggle-label {
+        display: block;
     }
 
     .nav-toggle-label {
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: pointer;
         width: 32px;
         height: 32px;
-        margin-left: 1rem;
+        z-index: 1102;
     }
 
     .nav-toggle-label span {
@@ -321,14 +328,11 @@ body[data-theme="dark"] .nav-link {
         transition: 0.3s;
     }
 
-    /* New CSS to group icons on the right */
-    .header .nav-toggle-label,
-    .header #theme-toggle {
-        margin-left: 1rem; /* Space between the two icons */
-    }
-    
-    .header a.logo {
-        margin-right: auto; /* Pushes the logo to the left, and the others to the right */
+    /* Ensure the theme toggle is visible and correctly positioned */
+    #theme-toggle {
+        display: flex;
+        z-index: 1102;
+        margin: 0; /* Remove conflicting margin */
     }
 
     /* Mobile nav menu full-screen overlay */
@@ -346,7 +350,7 @@ body[data-theme="dark"] .nav-link {
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         display: flex;
-        width: 100%; /* Fixes the overflow/black bar issue */
+        width: 100%;
         height: 100vh;
         overflow-x: hidden;
     }
@@ -369,13 +373,11 @@ body[data-theme="dark"] .nav-link {
         text-align: center;
     }
 
-    /* Override dark mode link color for mobile menu to ensure visibility */
     body[data-theme="dark"] .nav-menu a,
     body[data-theme="dark"] .nav-link {
         color: var(--text-color);
     }
 
-    /* Hamburger animation when menu open */
     .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
         transform: rotate(45deg) translate(6px, 6px);
     }
