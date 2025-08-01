@@ -254,6 +254,7 @@ body[data-theme="dark"] .nav-link {
 /* Hamburger hidden on desktop */
 .nav-toggle,
 .nav-toggle-label {
+    margin-left: 1.5rem;
     display: none;
 }
 
@@ -311,6 +312,7 @@ body[data-theme="dark"] .nav-link {
         cursor: pointer;
         width: 32px;
         height: 32px;
+        margin-left: 1.5rem;
     }
 
     .nav-toggle-label span {
