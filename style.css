@@ -185,8 +185,8 @@ a:focus {
     text-decoration: underline;
 }
 
-/* 4. Header & Navigation (Mobile First) */
-/* Base styles for the header - applies to both desktop and mobile */
+/* 4. Header & Navigation (Final Corrected Solution) */
+/* --- Desktop Styles (Applies to all screen sizes by default) --- */
 .header {
     position: fixed;
     top: 0;
@@ -239,8 +239,10 @@ a:focus {
     transition: color 0.3s ease;
 }
 
-.nav-menu a:hover {
-    color: var(--primary-accent);
+.nav-menu a:hover,
+.nav-menu a:focus {
+    color: var(--tertiary-accent);
+    text-decoration: underline;
 }
 
 /* Hide the hamburger icon and toggle on desktop */
@@ -248,9 +250,10 @@ a:focus {
     display: none;
 }
 
+
 /* --- Mobile Styles (Overrides desktop styles on small screens) --- */
 @media screen and (max-width: 768px) {
-    /* Hides the horizontal navigation links by default on mobile */
+    /* Hide the desktop nav menu initially on mobile */
     .nav-menu {
         display: none;
     }
@@ -275,7 +278,7 @@ a:focus {
         transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
     }
     
-    /* Styles for the full-screen mobile menu that is hidden by default */
+    /* Styles for the full-screen mobile menu when it is toggled on */
     .nav-toggle:checked ~ .nav-menu {
         display: flex;
         flex-direction: column;
@@ -318,73 +321,6 @@ a:focus {
         transform: rotate(-45deg) translate(7px, -7px);
     }
 }
-
-/* Media query for mobile devices */
-@media screen and (max-width: 768px) {
-    .nav-toggle-label {
-        cursor: pointer;
-        width: 30px;
-        height: 25px;
-        display: flex; /* Show on mobile */
-        flex-direction: column;
-        justify-content: space-between;
-        z-index: 1001;
-        margin-left: auto;
-    }
-    .nav-toggle-label span {
-        display: block;
-        width: 100%;
-        height: 3px;
-        background-color: var(--text-color);
-        border-radius: 3px;
-        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
-    }
-    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
-        transform: rotate(45deg) translate(7px, 7px);
-    }
-    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
-        opacity: 0;
-    }
-    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -7px);
-    }
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--bg-color);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        box-sizing: border-box;
-        padding-top: 5rem; 
-    }
-    .nav-toggle:checked ~ .nav-menu {
-        transform: translateX(0);
-    }
-    .nav-menu ul {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    .nav-menu a {
-        font-size: 1.8rem;
-        font-family: var(--serif-font);
-        color: var(--primary-accent);
-    }
-}
-
-.nav-menu a:hover,
-.nav-menu a:focus,
-.nav-link:hover,
-.nav-link:focus {
-    color: var(--tertiary-accent);
-    text-decoration: underline;
-}
-
 /* --- Dark Mode Toggle Button Styling --- */
 #theme-toggle {
     background-color: var(--secondary-accent);
