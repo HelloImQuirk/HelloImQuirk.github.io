@@ -217,7 +217,7 @@ a:focus {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    margin-right: 2.5rem; /* Separates nav from toggle */
 }
 
 .nav-menu ul {
@@ -245,7 +245,7 @@ a:focus {
     text-decoration: underline;
 }
 
-/* Fix desktop dark mode link color for better visibility */
+/* Correctly handle desktop dark mode link color */
 body[data-theme="dark"] .nav-menu a,
 body[data-theme="dark"] .nav-link {
     color: var(--tertiary-accent);
@@ -288,6 +288,8 @@ body[data-theme="dark"] .nav-link {
 
     .logo {
         font-size: 1.5rem;
+        /* Pushes the logo to the far left and other elements to the far right */
+        margin-right: auto;
     }
 
     /* Hide desktop nav on mobile */
@@ -301,7 +303,7 @@ body[data-theme="dark"] .nav-link {
         display: flex;
         z-index: 1102;
     }
-    
+
     .nav-toggle-label {
         flex-direction: column;
         justify-content: center;
@@ -309,7 +311,6 @@ body[data-theme="dark"] .nav-link {
         cursor: pointer;
         width: 32px;
         height: 32px;
-        margin-left: 1rem; /* Space between toggle and hamburger */
     }
 
     .nav-toggle-label span {
@@ -324,7 +325,7 @@ body[data-theme="dark"] .nav-link {
     #theme-toggle {
         display: flex;
         z-index: 1102;
-        margin: 0;
+        margin-left: 1rem; /* Space between the toggle and hamburger */
     }
 
     /* Mobile nav menu full-screen overlay */
