@@ -187,7 +187,7 @@ a:focus {
     text-decoration: underline;
 }
 
-/* ========== HEADER & NAVIGATION ========== */
+/* ========== 4. HEADER & NAVIGATION ========== */
 
 /* --- Desktop Styles First --- */
 
@@ -304,7 +304,7 @@ body[data-theme="dark"] .nav-link {
         z-index: 1103; /* Ensure toggle is on top when active */
     }
 
-    .nav-menu {
+     .nav-menu {
         position: fixed;
         top: 0;
         left: 0;
@@ -318,8 +318,9 @@ body[data-theme="dark"] .nav-link {
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         display: flex;
-        width: 100vw;
+        width: 100%; /* Use 100% instead of 100vw to avoid overflow */
         height: 100vh;
+        overflow-x: hidden; /* Prevents the horizontal scrollbar */
     }
 
     .nav-toggle:checked ~ .nav-menu {
