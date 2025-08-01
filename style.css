@@ -218,7 +218,6 @@ a:focus {
 .nav-menu {
     display: flex;
     align-items: center;
-    margin-left: auto; /* Pushes the nav to the right */
     margin-right: 2.5rem; /* Space between nav and toggle */
 }
 
@@ -262,14 +261,30 @@ body[data-theme="dark"] .nav-link {
 /* --- Mobile Styles --- */
 
 @media (max-width: 768px) {
-    /* Main header layout for mobile */
+    /* Correctly position all elements inside the header */
     .header {
         height: 60px;
         padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .logo {
         font-size: 1.5rem;
+    }
+
+    /* Group the toggle and hamburger on the right */
+    .header-icons {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .nav-toggle,
+    .nav-toggle-label,
+    #theme-toggle {
+        order: 2; /* Ensure the hamburger and toggle come after the nav links in the DOM order */
     }
 
     /* Show the hamburger menu toggle */
@@ -297,14 +312,10 @@ body[data-theme="dark"] .nav-link {
     #theme-toggle {
         display: flex;
         z-index: 1102;
-        margin-left: auto; /* Pushes the toggle and label to the far right */
-    }
-    
-    .nav-toggle:checked ~ .nav-toggle-label {
-        z-index: 1103; /* Ensure toggle is on top when active */
+        margin: 0;
     }
 
-     .nav-menu {
+    .nav-menu {
         position: fixed;
         top: 0;
         left: 0;
@@ -318,9 +329,9 @@ body[data-theme="dark"] .nav-link {
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         display: flex;
-        width: 100%; /* Use 100% instead of 100vw to avoid overflow */
+        width: 100%; /* Use 100% to avoid overflow issues */
         height: 100vh;
-        overflow-x: hidden; /* Prevents the horizontal scrollbar */
+        overflow-x: hidden; /* Hide any accidental horizontal overflow */
     }
 
     .nav-toggle:checked ~ .nav-menu {
@@ -376,43 +387,6 @@ body[data-theme="dark"] .nav-link {
     margin-left: 1rem;
 }
 
-/* --- Dark Mode Toggle Button Styling (Revised) --- */
-#theme-toggle {
-    background-color: var(--secondary-accent);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 5px rgba(var(--text-color-rgb), 0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    flex-shrink: 0;
-    color: var(--bg-color);
-}
-
-/* --- Dark Mode Toggle Button Styling --- */
-#theme-toggle {
-    background-color: var(--secondary-accent);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 5px rgba(var(--text-color-rgb), 0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    margin-left: 1rem;
-    flex-shrink: 0;
-    color: var(--bg-color);
-    position: relative;
-}
 
 #theme-toggle:hover {
     background-color: var(--primary-accent);
