@@ -193,7 +193,7 @@ a:focus {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 10px 0; 
+    padding: 0.8rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -201,7 +201,7 @@ a:focus {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(var(--primary-accent-rgb), 0.15);
-    z-index: 100;
+    z-index: 1000;
     box-sizing: border-box;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -227,9 +227,8 @@ a:focus {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1001;
     margin-left: auto;
-    position: relative;
-    z-index: 9999;
 }
 
 .nav-toggle-label span {
