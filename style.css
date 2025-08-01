@@ -3111,15 +3111,15 @@ footer a:focus {
     .hero .tagline { font-size: 1.2rem; }
 }
 
-/* Final targeted fix for desktop header styling */
+/* Final targeted fix to force correct desktop header styling */
 @media screen and (min-width: 769px) {
-    .nav-menu {
+    .nav-menu ul {
+        display: flex !important;
         flex-direction: row !important;
         justify-content: flex-end !important;
         align-items: center !important;
     }
     .nav-menu a {
         color: var(--text-color) !important;
-        text-decoration: none !important;
     }
 }
