@@ -188,6 +188,7 @@ a:focus {
 }
 
 /* ========== 4. HEADER & NAVIGATION ========== */
+
 /* --- Desktop Styles First --- */
 
 .header {
@@ -266,21 +267,24 @@ body[data-theme="dark"] .nav-link {
 /* --- Mobile Styles --- */
 
 @media (max-width: 768px) {
+    /* Main header layout for mobile */
     .header {
         height: 60px;
         padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .logo {
         font-size: 1.5rem;
     }
 
+    /* Group the toggle and hamburger on the right */
     .header-nav-group {
-        width: auto;
         display: flex;
         align-items: center;
         gap: 1rem;
-        margin-left: auto; /* Push the group to the far right */
     }
 
     /* Show the hamburger menu toggle */
@@ -308,7 +312,7 @@ body[data-theme="dark"] .nav-link {
     #theme-toggle {
         display: flex;
         z-index: 1102;
-        margin: 0; /* Remove any conflicting margins */
+        margin: 0;
     }
 
     .nav-menu {
@@ -347,7 +351,7 @@ body[data-theme="dark"] .nav-link {
         text-align: center;
     }
 
-    /* Important: Override dark mode link color for mobile menu to ensure visibility */
+    /* Override dark mode link color for mobile menu to ensure visibility */
     body[data-theme="dark"] .nav-menu a,
     body[data-theme="dark"] .nav-link {
         color: var(--text-color);
