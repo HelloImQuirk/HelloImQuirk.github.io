@@ -220,7 +220,7 @@ a:focus {
 .nav-menu {
     display: flex;
     align-items: center;
-    transform: translateX(0); /* CRITICAL FIX: Ensures menu is visible on desktop */
+    transform: translateX(0) !important;
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
@@ -247,8 +247,9 @@ a:focus {
 }
 
 /* Hide the hamburger icon and toggle on desktop */
-.nav-toggle-label, .nav-toggle {
-    display: none;
+.nav-toggle-label, 
+.nav-toggle {
+    display: none !important;
 }
 
 
