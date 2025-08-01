@@ -186,6 +186,7 @@ a:focus {
 }
 
 /* 4. Header & Navigation (Mobile First) */
+/* Base styles for the header - applies to both desktop and mobile */
 .header {
     position: fixed;
     top: 0;
@@ -214,24 +215,19 @@ a:focus {
     transition: color 0.3s ease;
 }
 
-/* Hide the checkbox input visually */
+/* Hide the hamburger menu elements by default on desktop */
 .nav-toggle {
     display: none;
 }
 
-/* This is the hamburger icon. We will hide it on desktop. */
 .nav-toggle-label {
-    display: none; /* Hide on desktop */
+    display: none;
 }
 
-/* This is the mobile menu itself. It's the same as the desktop menu. */
-.nav-menu {
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-}
-
+/* Style the desktop navigation links */
 .nav-menu ul {
     display: flex;
-    gap: 1.5rem; /* Space between desktop links */
+    gap: 1.5rem; /* Space between links on desktop */
     list-style: none;
     padding: 0;
     margin: 0;
@@ -239,9 +235,15 @@ a:focus {
 
 .nav-menu a {
     font-family: var(--sans-font);
+    font-size: 1rem;
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
+}
+
+/* Hover effect for links */
+.nav-menu a:hover {
+    color: var(--primary-accent);
 }
 
 /* Media query for mobile devices */
@@ -286,6 +288,7 @@ a:focus {
         align-items: center;
         transform: translateX(100%);
         box-sizing: border-box;
+        padding-top: 5rem; 
     }
     .nav-toggle:checked ~ .nav-menu {
         transform: translateX(0);
@@ -293,7 +296,6 @@ a:focus {
     .nav-menu ul {
         flex-direction: column;
         gap: 2rem;
-        padding-top: 5rem;
     }
     .nav-menu a {
         font-size: 1.8rem;
