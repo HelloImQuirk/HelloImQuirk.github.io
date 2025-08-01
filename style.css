@@ -139,6 +139,7 @@ main#homepage-main {
     overflow: visible;
     min-height: calc(100vh - 4.5rem);
     transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
 }
 
 /* Styling for the p5.js canvas background */
@@ -147,8 +148,8 @@ canvas {
     position: fixed; /* Positions it relative to the viewport, keeping it fixed when scrolling */
     top: 0;
     left: 0;
-    width: 100vw; /* Makes it span the full viewport width */
-    height: 100vh; /* Makes it span the full viewport height */
+    width: 100%;  /* CHANGE: Use a percentage for seamless resizing */
+    height: 100%;
     z-index: -1; /* CRITICAL: Puts the canvas behind all other content */
     pointer-events: none; /* CRITICAL: Allows mouse clicks/interactions to pass through to elements beneath */
 }
@@ -271,6 +272,13 @@ a:focus {
     list-style: none;
     padding: 0;
     text-align: center;
+    /* New CSS to ensure vertical centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* This padding prevents the top menu item from being clipped */
+    padding-top: 5rem;
 }
 
 .nav-menu li {
