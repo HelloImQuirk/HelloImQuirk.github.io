@@ -186,6 +186,7 @@ a:focus {
 }
 
 /* 4. Header & Navigation (Final Corrected Solution) */
+
 /* --- Desktop Styles (Applies to all screen sizes by default) --- */
 .header {
     position: fixed;
@@ -217,10 +218,9 @@ a:focus {
 
 /* These styles make the navigation links appear horizontally on desktop */
 .nav-menu {
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-    /* For desktop, we want this to be a simple flex container */
-    display: flex;
+    display: flex; /* The default state is a flex container for desktop */
     align-items: center;
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .nav-menu ul {
@@ -256,9 +256,22 @@ a:focus {
     /* Hide the desktop nav menu initially on mobile */
     .nav-menu {
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        z-index: 999;
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        padding: 0;
     }
-
-    /* Shows the hamburger icon */
+    
+    /* This rule shows the hamburger menu itself */
     .nav-toggle-label {
         display: flex;
         cursor: pointer;
@@ -280,20 +293,8 @@ a:focus {
     
     /* Styles for the full-screen mobile menu when it is toggled on */
     .nav-toggle:checked ~ .nav-menu {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: var(--bg-color);
+        display: flex; /* Show the full-screen menu when checked */
         transform: translateX(0);
-        z-index: 999;
-        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        padding: 0;
     }
     
     .nav-menu ul {
