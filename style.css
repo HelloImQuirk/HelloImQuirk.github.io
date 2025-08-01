@@ -3112,9 +3112,15 @@ footer a:focus {
     .hero .tagline { font-size: 1.2rem; }
 }
 
-/* Final fix for header text disappearing on desktop */
+/* Final targeted fix for desktop header styling */
 @media screen and (min-width: 769px) {
     .nav-menu {
-        transform: translateX(0) !important;
+        flex-direction: row !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+    }
+    .nav-menu a {
+        color: var(--text-color) !important;
+        text-decoration: none !important;
     }
 }
