@@ -185,7 +185,7 @@ a:focus {
     text-decoration: underline;
 }
 
-/* 4. Header & Navigation (Final Corrected Solution) */
+/* 4. Header & Navigation */
 
 /* --- Desktop Styles (Applies to all screen sizes by default) --- */
 .header {
@@ -272,7 +272,7 @@ a:focus {
         border-radius: 3px;
         transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
     }
-    
+
     /* The nav menu is hidden by default using transform: translateX */
     .nav-menu {
         display: flex;
@@ -295,7 +295,7 @@ a:focus {
     .nav-toggle:checked ~ .nav-menu {
         transform: translateX(0); /* Slide into view */
     }
-    
+
     .nav-menu ul {
         flex-direction: column;
         gap: 2rem;
@@ -303,13 +303,13 @@ a:focus {
         align-items: center;
         justify-content: center;
     }
-    
+
     .nav-menu a {
         font-size: 1.8rem;
         font-family: var(--serif-font);
         color: var(--primary-accent);
     }
-    
+
     /* Hamburger icon animation */
     .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
         transform: rotate(45deg) translate(7px, 7px);
