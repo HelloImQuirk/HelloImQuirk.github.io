@@ -3204,35 +3204,85 @@ footer a:focus {
   }
 }
 
-/* 2. MOBILE FIX: Ensure toggle is fully visible (not cut off on mobile) */
-@media (max-width: 768px) {
+/* --- Targeted Desktop Fix: Place Toggle Next to Nav Links --- */
+@media (min-width: 769px) {
   .header {
-    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    gap: 0;
+  }
+  /* Group nav-menu and toggle visually as a flex row */
+  .header > .nav-menu,
+  .header > #theme-toggle {
+    position: static;
+    float: none;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .nav-menu {
+    /* Remove margin-left: auto so it doesn't push toggle away */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    /* Instead, use a flex row for menu and toggle */
+    display: flex !important;
+    align-items: center;
+    gap: 0;
+  }
+  .nav-menu ul {
+    gap: 2.2rem;
   }
   #theme-toggle {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    position: static;
+    margin-left: 2rem !important; /* Gap from last link */
+    margin-right: 0 !important;
+    position: static !important;
     align-self: center;
-    /* Add shadow to ensure visibility over nav overlay if used */
-    z-index: 1200;
+    order: 2;
   }
-  /* If .nav-menu is open, make sure the toggle is above it */
+}
+
+/* --- Mobile Fix: Toggle Not Cut Off --- */
+@media (max-width: 768px) {
+  .header {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  #theme-toggle {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+    position: relative !important;
+    z-index: 1201 !important; /* Above nav overlay */
+  }
+  /* If nav-menu overlay is open, keep toggle visible above it */
   .nav-menu {
-    padding-right: 1.5rem;
+    padding-right: 1.5rem !important;
   }
 }
 
-/* 3. THEME TOGGLE: Prevent from being cut off on any screen */
 #theme-toggle {
+  max-width: 48px;
+  min-width: 40px;
   box-sizing: border-box;
-  max-width: calc(100vw - 2rem);
-  /* Ensure it never bleeds outside even in extreme cases */
-  overflow: visible;
-}
-
-/* 4. Remove any accidental absolute/fixed/float for the toggle */
-#theme-toggle {
   position: static !important;
   float: none !important;
+  overflow: visible !important;
+}
+
+@media (min-width: 769px) {
+  .header {
+    /* group nav-menu and toggle right */
+    justify-content: flex-end;
+  }
+  .logo {
+    margin-right: auto;
+  }
+  .nav-menu {
+    /* Remove margin-left:auto */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  #theme-toggle {
+    margin-left: 2rem !important;
+    margin-right: 0 !important;
+  }
 }
