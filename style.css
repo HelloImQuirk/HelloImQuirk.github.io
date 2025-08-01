@@ -191,7 +191,7 @@ a:focus {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0.8rem 5%;
+    padding: 1.5rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -259,7 +259,7 @@ a:focus {
     width: 100%;
     height: 100%;
     background-color: var(--bg-color);
-    display: flex;
+    display: none; /* Hide on desktop */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -2919,24 +2919,32 @@ footer a:focus {
 
     .nav-toggle-label { display: none; }
     .nav-menu {
-        position: static;
-        transform: none;
-        flex-direction: row;
-        width: auto;
-        height: auto;
-        background: none;
-        display: flex;
+        display: flex; /* Show on mobile */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        margin-left: auto;
-        transition: background-color 0.3s ease;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease;
+        box-sizing: border-box;
     }
 
     .nav-menu ul {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        justify-content: flex-end;
+        list-style: none;
+        padding: 0;
         margin: 0;
+        text-align: center;
+        /* Vertical centering for mobile nav */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 5rem;
     }
 
     .nav-menu li { margin: 0; }
