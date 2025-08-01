@@ -214,84 +214,92 @@ a:focus {
     transition: color 0.3s ease;
 }
 
+/* Hide the checkbox input visually */
 .nav-toggle {
     display: none;
 }
 
+/* This is the hamburger icon. We will hide it on desktop. */
 .nav-toggle-label {
-    cursor: pointer;
-    width: 30px;
-    height: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 1001;
-    margin-left: auto;
-}
-
-.nav-toggle-label span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--text-color);
-    border-radius: 3px;
-    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
-}
-
-.nav-toggle:checked ~ .nav-menu {
-    transform: translateX(0);
-}
-
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-}
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
-    opacity: 0;
-}
-.nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-.nav-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
     display: none; /* Hide on desktop */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), background-color 0.3s ease;
-    box-sizing: border-box; /* ADD THIS LINE */
+}
+
+/* This is the mobile menu itself. It's the same as the desktop menu. */
+.nav-menu {
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .nav-menu ul {
+    display: flex;
+    gap: 1.5rem; /* Space between desktop links */
     list-style: none;
     padding: 0;
-    text-align: center;
-    /* New CSS to ensure vertical centering */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* This padding prevents the top menu item from being clipped */
-    padding-top: 5rem;
+    margin: 0;
 }
 
-.nav-menu li {
-    margin: 2rem 0;
-}
-
-.nav-menu a,
-.nav-link {
-    font-size: 1.8rem;
-    font-family: var(--serif-font);
-    color: var(--primary-accent);
+.nav-menu a {
+    font-family: var(--sans-font);
+    color: var(--text-color);
     text-decoration: none;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+    transition: color 0.3s ease;
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+    .nav-toggle-label {
+        cursor: pointer;
+        width: 30px;
+        height: 25px;
+        display: flex; /* Show on mobile */
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 1001;
+        margin-left: auto;
+    }
+    .nav-toggle-label span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--text-color);
+        border-radius: 3px;
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        box-sizing: border-box;
+    }
+    .nav-toggle:checked ~ .nav-menu {
+        transform: translateX(0);
+    }
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 2rem;
+        padding-top: 5rem;
+    }
+    .nav-menu a {
+        font-size: 1.8rem;
+        font-family: var(--serif-font);
+        color: var(--primary-accent);
+    }
 }
 
 .nav-menu a:hover,
