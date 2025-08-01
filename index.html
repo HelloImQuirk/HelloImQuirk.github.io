@@ -332,6 +332,22 @@ function applyThemeColors() {
     background(0, 0, currentBackgroundBrightness);
 }
 
+    // This is a simple debounce function to prevent rapid resizing from causing a flash.
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
+// The new, debounced resize function
+const handleResize = debounce(() => {
+    resizeCanvas(windowWidth, windowHeight);
+}, 250); // Wait 250ms after the user stops resizing before resizing the canvas
+
+window.addEventListener('resize', handleResize);
 // Removed keyPressed and mousePressed functions as they are not needed for a continuous background
 // The p5.js background will now generate uniquely on page load and animate continuously.
 // Theme changes will update colors without regenerating the pattern from scratch.
