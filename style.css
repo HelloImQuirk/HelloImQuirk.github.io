@@ -190,7 +190,6 @@ a:focus {
 /* ========== 4. HEADER & NAVIGATION ========== */
 
 /* --- Desktop Styles First --- */
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -218,7 +217,7 @@ a:focus {
 .nav-menu {
     display: flex;
     align-items: center;
-    margin-right: 2.5rem; /* Space between nav and toggle */
+    margin-right: 2.5rem;
 }
 
 .nav-menu ul {
@@ -246,7 +245,7 @@ a:focus {
     text-decoration: underline;
 }
 
-/* Dark mode nav link color override for desktop */
+/* Fix for desktop dark mode link color */
 body[data-theme="dark"] .nav-menu a,
 body[data-theme="dark"] .nav-link {
     color: var(--bg-color);
@@ -274,13 +273,10 @@ body[data-theme="dark"] .nav-link {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     flex-shrink: 0;
     color: var(--bg-color);
-    margin-left: 1rem;
 }
 
 /* --- Mobile Styles --- */
-
 @media (max-width: 768px) {
-    /* Correctly position all elements inside the header */
     .header {
         height: 60px;
         padding: 0 1rem;
@@ -293,21 +289,26 @@ body[data-theme="dark"] .nav-link {
         font-size: 1.5rem;
     }
 
-    /* Hide desktop nav */
+    /* Hide desktop nav on mobile */
     .nav-menu {
         display: none;
+        margin: 0;
     }
 
-    /* Show the hamburger menu toggle */
-    .nav-toggle-label {
+    /* Show the hamburger menu and toggle */
+    .nav-toggle-label,
+    #theme-toggle {
         display: flex;
+        z-index: 1102;
+    }
+
+    .nav-toggle-label {
         flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: pointer;
         width: 32px;
         height: 32px;
-        z-index: 1102;
         margin-left: 1rem;
     }
 
@@ -320,12 +321,14 @@ body[data-theme="dark"] .nav-link {
         transition: 0.3s;
     }
 
-    /* Ensure the theme toggle is visible and correctly positioned */
-    #theme-toggle {
-        display: flex;
-        z-index: 1102;
-        margin-left: auto; /* Pushes the toggle and label to the far right */
-        order: -1; /* Ensures it's positioned before the hamburger in the flexbox flow */
+    /* New CSS to group icons on the right */
+    .header .nav-toggle-label,
+    .header #theme-toggle {
+        margin-left: 1rem; /* Space between the two icons */
+    }
+    
+    .header a.logo {
+        margin-right: auto; /* Pushes the logo to the left, and the others to the right */
     }
 
     /* Mobile nav menu full-screen overlay */
@@ -343,9 +346,9 @@ body[data-theme="dark"] .nav-link {
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         display: flex;
-        width: 100%; /* Use 100% to avoid overflow issues */
+        width: 100%; /* Fixes the overflow/black bar issue */
         height: 100vh;
-        overflow-x: hidden; /* Hide any accidental horizontal overflow */
+        overflow-x: hidden;
     }
 
     .nav-toggle:checked ~ .nav-menu {
@@ -366,11 +369,13 @@ body[data-theme="dark"] .nav-link {
         text-align: center;
     }
 
+    /* Override dark mode link color for mobile menu to ensure visibility */
     body[data-theme="dark"] .nav-menu a,
     body[data-theme="dark"] .nav-link {
         color: var(--text-color);
     }
 
+    /* Hamburger animation when menu open */
     .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
         transform: rotate(45deg) translate(6px, 6px);
     }
