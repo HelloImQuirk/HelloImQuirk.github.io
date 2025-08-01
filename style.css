@@ -253,25 +253,7 @@ a:focus {
 
 /* --- Mobile Styles (Overrides desktop styles on small screens) --- */
 @media screen and (max-width: 768px) {
-    /* Hide the desktop nav menu initially on mobile */
-    .nav-menu {
-        display: flex;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: var(--bg-color);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        z-index: 999;
-        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        padding: 0;
-    }
-    
-    /* This rule shows the hamburger menu itself */
+    /* Shows the hamburger icon on mobile */
     .nav-toggle-label {
         display: flex;
         cursor: pointer;
@@ -291,10 +273,27 @@ a:focus {
         transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
     }
     
-    /* Styles for the full-screen mobile menu when it is toggled on */
-    .nav-toggle:checked ~ .nav-menu {
+    /* The nav menu is hidden by default using transform: translateX */
+    .nav-menu {
         display: flex;
-        transform: translateX(0);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--bg-color);
+        transform: translateX(100%); /* Start off-screen to the right */
+        z-index: 999;
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        padding: 0;
+    }
+
+    /* This rule brings the mobile menu into view when the checkbox is checked */
+    .nav-toggle:checked ~ .nav-menu {
+        transform: translateX(0); /* Slide into view */
     }
     
     .nav-menu ul {
@@ -322,6 +321,7 @@ a:focus {
         transform: rotate(-45deg) translate(7px, -7px);
     }
 }
+
 /* --- Dark Mode Toggle Button Styling --- */
 #theme-toggle {
     background-color: var(--secondary-accent);
