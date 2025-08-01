@@ -192,7 +192,6 @@ a:focus {
 /* --- Desktop Styles First --- */
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 4.5rem;
     padding: 0 3rem;
@@ -216,7 +215,9 @@ a:focus {
 
 .nav-menu {
     display: flex;
-    align-items: center;
+    align-items: center
+    margin-left: auto; /* Pushes the nav menu and toggle to the right */
+
 }
 
 .nav-menu ul {
@@ -279,10 +280,11 @@ body[data-theme="dark"] .nav-link {
 @media (max-width: 768px) {
     .header {
         height: 60px;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
     }
 
     .logo {
@@ -309,7 +311,6 @@ body[data-theme="dark"] .nav-link {
         cursor: pointer;
         width: 32px;
         height: 32px;
-        margin-right: 1rem; /* Adjust this to move it from the edge */
     }
 
     .nav-toggle-label span {
