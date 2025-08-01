@@ -187,7 +187,7 @@ a:focus {
     text-decoration: underline;
 }
 
-/* ========== 4. HEADER & NAVIGATION ========== */
+/* ========== HEADER & NAVIGATION ========== */
 
 /* --- Desktop Styles First --- */
 
@@ -215,16 +215,11 @@ a:focus {
     letter-spacing: 0.03em;
 }
 
-.header-nav-group {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-}
-
 .nav-menu {
     display: flex;
     align-items: center;
-    margin-right: 1rem;
+    margin-left: auto; /* Pushes the nav to the right */
+    margin-right: 2.5rem; /* Space between nav and toggle */
 }
 
 .nav-menu ul {
@@ -267,24 +262,17 @@ body[data-theme="dark"] .nav-link {
 /* --- Mobile Styles --- */
 
 @media (max-width: 768px) {
+    /* Main header layout for mobile */
     .header {
         height: 60px;
         padding: 0 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
     .logo {
         font-size: 1.5rem;
     }
 
-    .header-nav-group {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-    
+    /* Show the hamburger menu toggle */
     .nav-toggle-label {
         display: flex;
         flex-direction: column;
@@ -304,12 +292,16 @@ body[data-theme="dark"] .nav-link {
         border-radius: 2px;
         transition: 0.3s;
     }
-    
+
+    /* Ensure the theme toggle is visible and correctly positioned */
     #theme-toggle {
         display: flex;
         z-index: 1102;
-        position: static; /* Override the desktop rule */
-        margin: 0; /* Override the desktop rule */
+        margin-left: auto; /* Pushes the toggle and label to the far right */
+    }
+    
+    .nav-toggle:checked ~ .nav-toggle-label {
+        z-index: 1103; /* Ensure toggle is on top when active */
     }
 
     .nav-menu {
@@ -329,7 +321,7 @@ body[data-theme="dark"] .nav-link {
         width: 100vw;
         height: 100vh;
     }
-    
+
     .nav-toggle:checked ~ .nav-menu {
         transform: translateX(0);
     }
@@ -362,6 +354,25 @@ body[data-theme="dark"] .nav-link {
     .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -7px);
     }
+}
+
+/* --- Dark Mode Toggle Button Styling (Revised) --- */
+#theme-toggle {
+    background-color: var(--secondary-accent);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(var(--text-color-rgb), 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+    color: var(--bg-color);
+    margin-left: 1rem;
 }
 
 /* --- Dark Mode Toggle Button Styling (Revised) --- */
