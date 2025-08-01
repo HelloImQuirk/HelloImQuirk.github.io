@@ -332,19 +332,6 @@ function applyThemeColors() {
     background(0, 0, currentBackgroundBrightness);
 }
 
-
-// Handle window resizing (important for mobile orientation changes)
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-    // Re-initialize particles to spread them across the new canvas size
-    particles = [];
-    for (let i = 0; i < numParticles; i++) {
-        particles[i] = createVector(random(width), random(height));
-    }
-    // Clear the background to avoid artifacts from resize
-    background(0, 0, currentBackgroundBrightness);
-}
-
 // Removed keyPressed and mousePressed functions as they are not needed for a continuous background
 // The p5.js background will now generate uniquely on page load and animate continuously.
 // Theme changes will update colors without regenerating the pattern from scratch.
