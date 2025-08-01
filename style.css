@@ -218,9 +218,9 @@ a:focus {
 
 /* These styles make the navigation links appear horizontally on desktop */
 .nav-menu {
-    display: flex !important;/* The default state is a flex container for desktop */
-    align-items: center;
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    display: flex;
+    align-items: center;
 }
 
 .nav-menu ul {
@@ -293,7 +293,7 @@ a:focus {
     
     /* Styles for the full-screen mobile menu when it is toggled on */
     .nav-toggle:checked ~ .nav-menu {
-        display: flex; /* Show the full-screen menu when checked */
+        display: flex;
         transform: translateX(0);
     }
     
