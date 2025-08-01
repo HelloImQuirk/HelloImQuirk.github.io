@@ -187,8 +187,9 @@ a:focus {
     text-decoration: underline;
 }
 
-/* 4. Header & Navigation (Mobile First) */
+/* ========== 4. HEADER & NAVIGATION ========== */
 /* --- Desktop Styles First --- */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -266,8 +267,8 @@ body[data-theme="dark"] .nav-link {
 
 @media (max-width: 768px) {
     .header {
-        padding: 1.2rem 1rem;
         height: 60px;
+        padding: 0 1rem;
     }
 
     .logo {
@@ -276,7 +277,10 @@ body[data-theme="dark"] .nav-link {
 
     .header-nav-group {
         width: auto;
-        gap: 1rem; /* Space between the toggle and hamburger */
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: auto; /* Push the group to the far right */
     }
 
     /* Show the hamburger menu toggle */
@@ -304,8 +308,7 @@ body[data-theme="dark"] .nav-link {
     #theme-toggle {
         display: flex;
         z-index: 1102;
-        /* The margin on the right of the nav group will handle spacing */
-        margin-left: 0;
+        margin: 0; /* Remove any conflicting margins */
     }
 
     .nav-menu {
@@ -325,7 +328,7 @@ body[data-theme="dark"] .nav-link {
         width: 100vw;
         height: 100vh;
     }
-    
+
     .nav-toggle:checked ~ .nav-menu {
         transform: translateX(0);
     }
