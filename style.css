@@ -218,6 +218,9 @@ a:focus {
 /* These styles make the navigation links appear horizontally on desktop */
 .nav-menu {
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    /* For desktop, we want this to be a simple flex container */
+    display: flex;
+    align-items: center;
 }
 
 .nav-menu ul {
@@ -236,15 +239,20 @@ a:focus {
     transition: color 0.3s ease;
 }
 
+.nav-menu a:hover {
+    color: var(--primary-accent);
+}
+
+/* Hide the hamburger icon and toggle on desktop */
 .nav-toggle-label, .nav-toggle {
     display: none;
 }
 
 /* --- Mobile Styles (Overrides desktop styles on small screens) --- */
 @media screen and (max-width: 768px) {
-    /* Hides the horizontal navigation links */
+    /* Hides the horizontal navigation links by default on mobile */
     .nav-menu {
-        display: none; /* Hide the desktop menu links */
+        display: none;
     }
 
     /* Shows the hamburger icon */
@@ -266,10 +274,10 @@ a:focus {
         border-radius: 3px;
         transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
     }
-
+    
     /* Styles for the full-screen mobile menu that is hidden by default */
     .nav-toggle:checked ~ .nav-menu {
-        display: flex; /* Show the mobile menu when the toggle is checked */
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -277,17 +285,18 @@ a:focus {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh; /* Use 100vh to fill the full viewport */
+        height: 100vh;
         background-color: var(--bg-color);
-        transform: translateX(0); /* Animate into view */
-        z-index: 999; /* Ensure it's behind the hamburger but in front of content */
+        transform: translateX(0);
+        z-index: 999;
         transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        padding: 0;
     }
     
     .nav-menu ul {
         flex-direction: column;
         gap: 2rem;
-        padding-top: 0; /* Remove top padding to fix the cut-off issue */
+        padding-top: 0;
         align-items: center;
         justify-content: center;
     }
@@ -297,7 +306,7 @@ a:focus {
         font-family: var(--serif-font);
         color: var(--primary-accent);
     }
-
+    
     /* Hamburger icon animation */
     .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
         transform: rotate(45deg) translate(7px, 7px);
