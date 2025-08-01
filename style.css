@@ -218,7 +218,7 @@ a:focus {
 
 /* These styles make the navigation links appear horizontally on desktop */
 .nav-menu {
-    display: flex; /* The default state is a flex container for desktop */
+    display: flex !important;/* The default state is a flex container for desktop */
     align-items: center;
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
 }
