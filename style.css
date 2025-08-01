@@ -257,7 +257,7 @@ body[data-theme="dark"] .nav-link {
     display: none;
 }
 
-/* --- Dark Mode Toggle Button Styling --- */
+/* --- Dark Mode Toggle Button Styling (Revised) --- */
 #theme-toggle {
     background-color: var(--secondary-accent);
     border: none;
@@ -296,8 +296,8 @@ body[data-theme="dark"] .nav-link {
     .nav-menu {
         display: none;
     }
-
-    /* Show the hamburger menu and toggle */
+    
+    /* Ensure icons are displayed and grouped on the right */
     .nav-toggle-label,
     #theme-toggle {
         display: flex;
@@ -311,6 +311,7 @@ body[data-theme="dark"] .nav-link {
         cursor: pointer;
         width: 32px;
         height: 32px;
+        margin-left: 1rem; /* Space between toggle and hamburger */
     }
 
     .nav-toggle-label span {
@@ -323,9 +324,7 @@ body[data-theme="dark"] .nav-link {
     }
 
     #theme-toggle {
-        display: flex;
-        z-index: 1102;
-        margin-left: 1rem; /* Space between the toggle and hamburger */
+        margin: 0; /* Remove conflicting margin */
     }
 
     /* Mobile nav menu full-screen overlay */
