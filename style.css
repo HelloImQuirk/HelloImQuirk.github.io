@@ -214,7 +214,7 @@ a:focus {
     letter-spacing: 0.03em;
 }
 
-.nav-menu {
+ {
     display: flex;
     align-items: center
     margin-left: auto; /* Pushes the nav menu and toggle to the right */
@@ -340,7 +340,7 @@ body[data-theme="dark"] .nav-link {
         left: 0;
         right: 0;
         bottom: 0;
-        padding-right: 1.5rem;
+        padding-right: 12px;
         background: var(--bg-color);
         flex-direction: column;
         justify-content: center;
@@ -351,7 +351,7 @@ body[data-theme="dark"] .nav-link {
         display: flex;
         width: 100%;
         height: 100vh;
-        overflow-x: hidden;
+        overflow-x: visible;
     }
 
     .nav-toggle:checked ~ .nav-menu {
