@@ -203,6 +203,7 @@ a:focus {
     width: 100%;
     z-index: 1000;
     transition: background-color 0.3s, box-shadow 0.3s;
+    gap: 0;
 }
 
 .logo {
@@ -217,7 +218,7 @@ a:focus {
     display: flex;
     align-items: center
     margin-left: auto; /* Pushes the nav menu and toggle to the right */
-
+    padding-right: 0; /* Remove padding that might push the toggle too far */
 }
 
 .nav-menu ul {
@@ -274,14 +275,16 @@ body[data-theme="dark"] .nav-link {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     flex-shrink: 0;
     color: var(--bg-color);
-    margin-left: 2.5rem;
+    margin-left: 2rem;
+    margin-right: 0;
+    z-index: 1001; /* Ensure it's above nav if needed */
 }
 
 /* --- Mobile Styles --- */
 @media (max-width: 768px) {
     .header {
         height: 60px;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -301,6 +304,8 @@ body[data-theme="dark"] .nav-link {
     /* Show the hamburger menu and toggle */
     .nav-toggle-label,
     #theme-toggle {
+        margin-left: 1rem;
+        margin-right: 1rem;
         display: flex;
         z-index: 1102;
     }
@@ -335,6 +340,7 @@ body[data-theme="dark"] .nav-link {
         left: 0;
         right: 0;
         bottom: 0;
+        padding-right: 1.5rem;
         background: var(--bg-color);
         flex-direction: column;
         justify-content: center;
@@ -400,6 +406,8 @@ body[data-theme="dark"] .nav-link {
     flex-shrink: 0;
     color: var(--bg-color);
     margin-left: 1rem;
+    box-sizing: border-box;
+    max-width: calc(100vw - 2rem);
 }
 
 
