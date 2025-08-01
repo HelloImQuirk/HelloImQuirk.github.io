@@ -3111,3 +3111,10 @@ footer a:focus {
     .hero h1 { font-size: 5.5rem; }
     .hero .tagline { font-size: 1.2rem; }
 }
+
+/* Final fix for header text disappearing on desktop */
+@media screen and (min-width: 769px) {
+    .nav-menu {
+        transform: translateX(0) !important;
+    }
+}
