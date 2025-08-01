@@ -204,6 +204,7 @@ a:focus {
     z-index: 1000;
     box-sizing: border-box;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    line-height: 50px; /* Adjust this value as needed for your design */
 }
 
 .logo {
