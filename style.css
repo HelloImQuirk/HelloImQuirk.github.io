@@ -263,7 +263,7 @@ body[data-theme="dark"] .nav-link {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    display: flex !important; /* Ensure it is always visible on desktop */
+    display: flex; /* Ensure it is always visible on desktop */
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -272,7 +272,7 @@ body[data-theme="dark"] .nav-link {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     flex-shrink: 0;
     color: var(--bg-color);
-    margin-left: 2.5rem; /* Separates the toggle from the nav menu */
+    margin-left: 2.5rem;
 }
 
 /* --- Mobile Styles --- */
@@ -294,8 +294,8 @@ body[data-theme="dark"] .nav-link {
     .nav-menu {
         display: none;
     }
-    
-    /* Ensure icons are displayed and grouped on the right */
+
+    /* Show the hamburger menu and toggle */
     .nav-toggle-label,
     #theme-toggle {
         display: flex;
@@ -309,7 +309,7 @@ body[data-theme="dark"] .nav-link {
         cursor: pointer;
         width: 32px;
         height: 32px;
-        margin-left: 1rem; /* Space between toggle and hamburger */
+        margin-right: 1rem; /* Adjust this to move it from the edge */
     }
 
     .nav-toggle-label span {
@@ -322,7 +322,7 @@ body[data-theme="dark"] .nav-link {
     }
 
     #theme-toggle {
-        margin: 0 0.5rem 0 auto; /* Correct margin to push it to the right and provide a small gap from the edge */
+        margin: 0; /* Remove conflicting margin */
     }
 
     /* Mobile nav menu full-screen overlay */
