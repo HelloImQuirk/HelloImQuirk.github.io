@@ -217,6 +217,7 @@ a:focus {
 .nav-menu {
     display: flex;
     align-items: center;
+    gap: 2.5rem;
 }
 
 .nav-menu ul {
@@ -244,10 +245,10 @@ a:focus {
     text-decoration: underline;
 }
 
-/* Correctly handle desktop dark mode link color */
+/* Fix desktop dark mode link color for better visibility */
 body[data-theme="dark"] .nav-menu a,
 body[data-theme="dark"] .nav-link {
-    color: var(--bg-color);
+    color: var(--tertiary-accent);
 }
 
 /* Hamburger hidden on desktop */
@@ -272,7 +273,7 @@ body[data-theme="dark"] .nav-link {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     flex-shrink: 0;
     color: var(--bg-color);
-    margin-left: 2.5rem; /* Separates the toggle from the nav menu */
+    margin-left: 2.5rem;
 }
 
 /* --- Mobile Styles --- */
@@ -287,7 +288,6 @@ body[data-theme="dark"] .nav-link {
 
     .logo {
         font-size: 1.5rem;
-        order: 1;
     }
 
     /* Hide desktop nav on mobile */
@@ -295,28 +295,21 @@ body[data-theme="dark"] .nav-link {
         display: none;
     }
 
-    /* Group the hamburger menu and toggle */
-    .header-icons {
+    /* Show the hamburger menu and toggle */
+    .nav-toggle-label,
+    #theme-toggle {
         display: flex;
-        align-items: center;
-        gap: 1rem;
-        order: 2;
+        z-index: 1102;
     }
-
-    .nav-toggle,
+    
     .nav-toggle-label {
-        display: block;
-    }
-
-    .nav-toggle-label {
-        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: pointer;
         width: 32px;
         height: 32px;
-        z-index: 1102;
+        margin-left: 1rem; /* Space between toggle and hamburger */
     }
 
     .nav-toggle-label span {
@@ -328,11 +321,10 @@ body[data-theme="dark"] .nav-link {
         transition: 0.3s;
     }
 
-    /* Ensure the theme toggle is visible and correctly positioned */
     #theme-toggle {
         display: flex;
         z-index: 1102;
-        margin: 0; /* Remove conflicting margin */
+        margin: 0;
     }
 
     /* Mobile nav menu full-screen overlay */
@@ -378,6 +370,7 @@ body[data-theme="dark"] .nav-link {
         color: var(--text-color);
     }
 
+    /* Hamburger animation when menu open */
     .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
         transform: rotate(45deg) translate(6px, 6px);
     }
