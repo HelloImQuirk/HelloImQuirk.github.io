@@ -217,7 +217,6 @@ a:focus {
 .nav-menu {
     display: flex;
     align-items: center;
-    margin-right: 2.5rem;
 }
 
 .nav-menu ul {
@@ -273,7 +272,7 @@ body[data-theme="dark"] .nav-link {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
     flex-shrink: 0;
     color: var(--bg-color);
-    margin-left: 2.5rem;
+    margin-left: 2.5rem; /* Separates the toggle from the nav menu */
 }
 
 /* --- Mobile Styles --- */
@@ -295,8 +294,8 @@ body[data-theme="dark"] .nav-link {
     .nav-menu {
         display: none;
     }
-
-    /* Show the hamburger menu and toggle */
+    
+    /* Ensure icons are displayed and grouped on the right */
     .nav-toggle-label,
     #theme-toggle {
         display: flex;
@@ -310,6 +309,7 @@ body[data-theme="dark"] .nav-link {
         cursor: pointer;
         width: 32px;
         height: 32px;
+        margin-left: 1rem; /* Space between toggle and hamburger */
     }
 
     .nav-toggle-label span {
@@ -322,7 +322,7 @@ body[data-theme="dark"] .nav-link {
     }
 
     #theme-toggle {
-        margin-right: 1rem; /* Adjust margin to ensure it's not cut off */
+        margin: 0 0.5rem 0 auto; /* Correct margin to push it to the right and provide a small gap from the edge */
     }
 
     /* Mobile nav menu full-screen overlay */
